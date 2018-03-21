@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Tiger Hacks</string>
+    <string name="title_map">Map</string>
+    <string name="title_prizes">Prizes</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_tigertalks">TigerTalks</string>
+    <string name="title_sponsors">Sponsors</string>
+
+</resources>
