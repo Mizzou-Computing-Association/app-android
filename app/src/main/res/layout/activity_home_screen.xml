@@ -9,12 +9,12 @@
     tools:context="tigerhacks.android.tigerhacksapp.HomeScreenActivity">
 
     <android.support.design.widget.BottomNavigationView
-        app:itemIconTint="@color/navBarItemColor"
-        app:itemTextColor="@color/navBarItemColor"
         android:id="@+id/navigation"
         android:layout_width="0dp"
-        android:layout_height="105dp"
+        android:layout_height="75dp"
         android:background="@color/colorPrimary"
+        app:itemIconTint="@color/navBarItemColor"
+        app:itemTextColor="@color/navBarItemColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

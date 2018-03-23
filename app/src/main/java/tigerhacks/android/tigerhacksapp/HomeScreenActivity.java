@@ -1,5 +1,6 @@
 package tigerhacks.android.tigerhacksapp;
 
+import android.app.ActionBar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,6 +29,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            //this switch will show the proper fragment depending on which navigation item is clicked
             switch (item.getItemId()) {
                 case R.id.navigation_map:
                     FragmentTransaction mapFragmentTransaction = fragmentManager.beginTransaction()
@@ -67,12 +69,26 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //action bar can be called differently depending on SDK version, so this checks that
+        //and sets up the action bar custom xml layout (layout/action_bar_layout.xml)
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+        }
+        else if(getActionBar() != null)
+        {
+            getActionBar().setCustomView(R.layout.action_bar_layout);
+            getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+        }
+
         setContentView(R.layout.activity_home_screen);
 
+        //test text message (will be removed)
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        //initalize fragments and the fragment manager, then add the map fragment as the default on app start
         mapFragment = new MapFragment();
         prizesFragment = new PrizesFragment();
         sponsorsFragment = new SponsorsFragment();
