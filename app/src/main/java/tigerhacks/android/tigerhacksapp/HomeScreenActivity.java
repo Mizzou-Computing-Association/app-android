@@ -7,8 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -23,6 +27,9 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     private ScheduleFragment scheduleFragment;
     private SponsorsFragment sponsorsFragment;
     private TigerTalksFragment tigerTalksFragment;
+    private GestureDetectorCompat mDetector;
+    private int currentTab = 1;
+    private BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,32 +40,27 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             switch (item.getItemId()) {
                 case R.id.navigation_map:
                     FragmentTransaction mapFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, mapFragment)
-                            .addToBackStack(null);
+                            .replace(R.id.container, mapFragment);
                     mapFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_prizes:
                     FragmentTransaction prizesFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, prizesFragment)
-                            .addToBackStack(null);
+                            .replace(R.id.container, prizesFragment);
                     prizesFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_schedule:
                     FragmentTransaction scheduleFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, scheduleFragment)
-                            .addToBackStack(null);
+                            .replace(R.id.container, scheduleFragment);
                     scheduleFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_sponsors:
                     FragmentTransaction sponsorsFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, sponsorsFragment)
-                            .addToBackStack(null);
+                            .replace(R.id.container, sponsorsFragment);
                     sponsorsFragmentTransaction.commit();
                     return true;
                 case R.id.navigation_tigertalks:
                     FragmentTransaction tigerTalksFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, tigerTalksFragment)
-                            .addToBackStack(null);
+                            .replace(R.id.container, tigerTalksFragment);
                     tigerTalksFragmentTransaction.commit();
                     return true;
             }
@@ -80,12 +82,13 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             getActionBar().setCustomView(R.layout.action_bar_layout);
             getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
         }
+        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
         setContentView(R.layout.activity_home_screen);
 
         //test text message (will be removed)
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //initalize fragments and the fragment manager, then add the map fragment as the default on app start
@@ -102,6 +105,65 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         initialFragmentTransaction.commit();
 
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        @Override
+        public boolean onDown(MotionEvent event) {
+            Log.i("DOWNEVENT","onDown: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY){
+            if(velocityX > 3000)
+            {
+                Log.i("FLINGEVENT", "Left swipe");
+                currentTab -= 1;
+            }
+            else if(velocityX < -3000)
+            {
+                Log.i("FLINGEVENT", "Right swipe");
+                currentTab += 1;
+            }
+
+            switch(currentTab)
+            {
+                case 0:
+                    currentTab += 1;
+                    return true;
+                case 1:
+                    navigation.setSelectedItemId(R.id.navigation_map);
+                    return true;
+                case 2:
+                    navigation.setSelectedItemId(R.id.navigation_prizes);
+                    return true;
+                case 3:
+                    navigation.setSelectedItemId(R.id.navigation_schedule);
+                    return true;
+                case 4:
+                    navigation.setSelectedItemId(R.id.navigation_sponsors);
+                    return true;
+                case 5:
+                    navigation.setSelectedItemId(R.id.navigation_tigertalks);
+                    return true;
+                case 6:
+                    currentTab -= 1;
+                    return true;
+            }
+
+            return true;
+        }
+    }
+
 
     public void onFragmentInteraction(Uri uri)
     {}
