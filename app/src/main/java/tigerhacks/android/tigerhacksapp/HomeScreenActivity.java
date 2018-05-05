@@ -20,7 +20,6 @@ import java.net.URI;
 
 public class HomeScreenActivity extends AppCompatActivity implements MapFragment.OnFragmentInteractionListener, PrizesFragment.OnFragmentInteractionListener, SponsorsFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener, TigerTalksFragment.OnFragmentInteractionListener {
 
-    private TextView mTextMessage;
     private FragmentManager fragmentManager;
     private MapFragment mapFragment;
     private PrizesFragment prizesFragment;
@@ -86,8 +85,6 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
         setContentView(R.layout.activity_home_screen);
 
-        //test text message (will be removed)
-        mTextMessage = (TextView) findViewById(R.id.message);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -106,35 +103,39 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
     }
 
+    //registers the MyGestureListener for handling touch gestures
     @Override
     public boolean onTouchEvent(MotionEvent event){
         this.mDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
 
+    //this class handles gesture recognition, mainly for swiping between tabs on the app
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
 
         @Override
         public boolean onDown(MotionEvent event) {
-            Log.i("DOWNEVENT","onDown: " + event.toString());
             return true;
         }
 
+        //detect fling motion
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY){
+            //on left swipe
             if(velocityX > 3000)
             {
-                Log.i("FLINGEVENT", "Left swipe");
                 currentTab -= 1;
             }
+            //on right swipe
             else if(velocityX < -3000)
             {
-                Log.i("FLINGEVENT", "Right swipe");
                 currentTab += 1;
             }
 
+            //basically, currentTab is used to keep track of which tab the app is on.
+            //When swipes are detected, the currentTab is inc/dec accordingly
             switch(currentTab)
             {
                 case 0:
@@ -164,7 +165,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         }
     }
 
-
+    //this is here to allow the use of the Fragment interfaces
     public void onFragmentInteraction(Uri uri)
     {}
 
