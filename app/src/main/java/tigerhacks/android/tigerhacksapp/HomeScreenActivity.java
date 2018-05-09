@@ -5,14 +5,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -26,9 +32,10 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     private ScheduleFragment scheduleFragment;
     private SponsorsFragment sponsorsFragment;
     private TigerTalksFragment tigerTalksFragment;
-    private GestureDetectorCompat mDetector;
     private int currentTab = 1;
     private BottomNavigationView navigation;
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -38,29 +45,19 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             //this switch will show the proper fragment depending on which navigation item is clicked
             switch (item.getItemId()) {
                 case R.id.navigation_map:
-                    FragmentTransaction mapFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, mapFragment);
-                    mapFragmentTransaction.commit();
+                    mPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_prizes:
-                    FragmentTransaction prizesFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, prizesFragment);
-                    prizesFragmentTransaction.commit();
+                    mPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_schedule:
-                    FragmentTransaction scheduleFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, scheduleFragment);
-                    scheduleFragmentTransaction.commit();
+                    mPager.setCurrentItem(2);
                     return true;
                 case R.id.navigation_sponsors:
-                    FragmentTransaction sponsorsFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, sponsorsFragment);
-                    sponsorsFragmentTransaction.commit();
+                    mPager.setCurrentItem(3);
                     return true;
                 case R.id.navigation_tigertalks:
-                    FragmentTransaction tigerTalksFragmentTransaction = fragmentManager.beginTransaction()
-                            .replace(R.id.container, tigerTalksFragment);
-                    tigerTalksFragmentTransaction.commit();
+                    mPager.setCurrentItem(4);
                     return true;
             }
             return false;
@@ -81,7 +78,6 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             getActionBar().setCustomView(R.layout.action_bar_layout);
             getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
         }
-        mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 
         setContentView(R.layout.activity_home_screen);
 
@@ -96,73 +92,81 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         tigerTalksFragment = new TigerTalksFragment();
 
         fragmentManager = getSupportFragmentManager();
-        FragmentTransaction initialFragmentTransaction = fragmentManager.beginTransaction()
+        /*FragmentTransaction initialFragmentTransaction = fragmentManager.beginTransaction()
                 .add(R.id.container, mapFragment)
                 .addToBackStack(null);
-        initialFragmentTransaction.commit();
+        initialFragmentTransaction.commit();*/
 
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+        mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            public void onPageSelected(int position) {
+                switch(position)
+                {
+                    case 0:
+                        navigation.setSelectedItemId(R.id.navigation_map);
+                        break;
+                    case 1:
+                        navigation.setSelectedItemId(R.id.navigation_prizes);
+                        break;
+                    case 2:
+                        navigation.setSelectedItemId(R.id.navigation_schedule);
+                        break;
+                    case 3:
+                        navigation.setSelectedItemId(R.id.navigation_sponsors);
+                        break;
+                    case 4:
+                        navigation.setSelectedItemId(R.id.navigation_tigertalks);
+                        break;
+                }
+            }
+        });
+
+        //set initial page/tab state
+        mPager.setCurrentItem(0);
+        navigation.setSelectedItemId(R.id.navigation_map);
     }
 
     //registers the MyGestureListener for handling touch gestures
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
-        this.mDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
 
     //this class handles gesture recognition, mainly for swiping between tabs on the app
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
 
-        @Override
-        public boolean onDown(MotionEvent event) {
-            return true;
+
+    private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        //detect fling motion
         @Override
-        public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY){
-            //on left swipe
-            if(velocityX > 3000)
-            {
-                currentTab -= 1;
-            }
-            //on right swipe
-            else if(velocityX < -3000)
-            {
-                currentTab += 1;
-            }
-
-            //basically, currentTab is used to keep track of which tab the app is on.
-            //When swipes are detected, the currentTab is inc/dec accordingly
-            switch(currentTab)
+        public Fragment getItem(int position) {
+            switch(position)
             {
                 case 0:
-                    currentTab += 1;
-                    return true;
+                    return new MapFragment();
                 case 1:
-                    navigation.setSelectedItemId(R.id.navigation_map);
-                    return true;
+                    return new PrizesFragment();
                 case 2:
-                    navigation.setSelectedItemId(R.id.navigation_prizes);
-                    return true;
+                    return new ScheduleFragment();
                 case 3:
-                    navigation.setSelectedItemId(R.id.navigation_schedule);
-                    return true;
+                    return new SponsorsFragment();
                 case 4:
-                    navigation.setSelectedItemId(R.id.navigation_sponsors);
-                    return true;
-                case 5:
-                    navigation.setSelectedItemId(R.id.navigation_tigertalks);
-                    return true;
-                case 6:
-                    currentTab -= 1;
-                    return true;
+                    return new TigerTalksFragment();
+                default:
+                    return new ScheduleFragment();
             }
-
-            return true;
         }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
+        /*
+        @Override
+        public void finishUpdate(ViewGroup container)
+        {
+            Log.d("TEST", "UPDATE");
+        }*/
     }
 
     //this is here to allow the use of the Fragment interfaces
