@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_border"
+                android:background="@color/colorPrimary"
                 android:text="Floor 1"
                 android:textColor="@color/colorPrimaryDark" />
 
@@ -37,8 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_border"
-                android:text="Floor 2" />
+                android:background="@color/colorPrimary"
+                android:text="Floor 2"
+                android:textColor="@color/colorPrimaryDark" />
 
             <Button
                 android:id="@+id/Floor3Btn"
@@ -46,13 +47,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_border"
-                android:text="Floor 3" />
+                android:background="@color/colorPrimary"
+                android:text="Floor 3"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <Button
+                android:id="@+id/Floor4Btn"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="Floor 4"
+                android:textColor="@color/colorPrimaryDark"/>
 
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="291dp"
             android:cropToPadding="false"

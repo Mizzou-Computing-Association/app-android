@@ -1,12 +1,15 @@
 package tigerhacks.android.tigerhacksapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 
 /**
@@ -27,6 +30,9 @@ public class MapFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private View layoutView;
+    private ImageView mapView;
+    private Button btn1, btn2, btn3, btn4;
     private OnFragmentInteractionListener mListener;
 
     public MapFragment() {
@@ -64,7 +70,61 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        layoutView = inflater.inflate(R.layout.fragment_map, container, false);
+        return layoutView;
+    }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        btn1 = layoutView.findViewById(R.id.Floor1Btn);
+        btn2 = layoutView.findViewById(R.id.Floor2Btn);
+        btn3 = layoutView.findViewById(R.id.Floor3Btn);
+        btn4 = layoutView.findViewById(R.id.Floor4Btn);
+        mapView = layoutView.findViewById(R.id.mapView);
+
+        btn1.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                btn1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                btn2.setBackgroundColor(Color.GRAY);
+                btn3.setBackgroundColor(Color.GRAY);
+                btn4.setBackgroundColor(Color.GRAY);
+                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_1));
+            }
+        });
+        btn2.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                btn1.setBackgroundColor(Color.GRAY);
+                btn2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                btn3.setBackgroundColor(Color.GRAY);
+                btn4.setBackgroundColor(Color.GRAY);
+                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_2));
+            }
+        });
+        btn3.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                btn1.setBackgroundColor(Color.GRAY);
+                btn2.setBackgroundColor(Color.GRAY);
+                btn3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                btn4.setBackgroundColor(Color.GRAY);
+                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_3));
+            }
+        });
+        btn4.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                btn1.setBackgroundColor(Color.GRAY);
+                btn2.setBackgroundColor(Color.GRAY);
+                btn3.setBackgroundColor(Color.GRAY);
+                btn4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_4));
+            }
+        });
+
+        btn1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        btn2.setBackgroundColor(Color.GRAY);
+        btn3.setBackgroundColor(Color.GRAY);
+        btn4.setBackgroundColor(Color.GRAY);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
