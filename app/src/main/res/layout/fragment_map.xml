@@ -71,6 +71,21 @@
             android:scaleType="fitXY"
             android:src="@drawable/im_laf_map_1" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:gravity="center"
+            android:text="Events"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </FrameLayout>

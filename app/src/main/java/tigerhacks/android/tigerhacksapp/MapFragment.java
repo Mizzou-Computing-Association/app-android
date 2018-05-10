@@ -8,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 
 /**
@@ -125,6 +127,12 @@ public class MapFragment extends Fragment {
         btn2.setBackgroundColor(Color.GRAY);
         btn3.setBackgroundColor(Color.GRAY);
         btn4.setBackgroundColor(Color.GRAY);
+
+        String[] list = {"test","test2","test3","test4","test5","test6","test7","test8"};
+        ArrayAdapter adapter = new ArrayAdapter<String>(this.getContext(), R.layout.text_view, list);
+
+        ListView listView = (ListView) layoutView.findViewById(R.id.listView);
+        listView.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
