@@ -2,16 +2,28 @@ package tigerhacks.android.tigerhacksapp;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.internal.BottomNavigationMenu;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 
 /**
@@ -66,6 +78,7 @@ public class MapFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -80,12 +93,36 @@ public class MapFragment extends Fragment {
     public void onStart()
     {
         super.onStart();
+
+        //this section fixes the events list layout and prevents it from
+        //rendering events under the bottom navigation bar
+        final ListView lv = layoutView.findViewById(R.id.listView);
+        ViewTreeObserver vto = lv.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                lv.setLayoutParams(
+                        new LinearLayout.LayoutParams(lv.getLayoutParams().width, lv.getHeight() - getActivity().findViewById(R.id.navigation).getHeight()));
+                ViewTreeObserver obs = lv.getViewTreeObserver();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    obs.removeOnGlobalLayoutListener(this);
+                } else {
+                    obs.removeGlobalOnLayoutListener(this);
+                }
+            }
+
+        });
+
+
         btn1 = layoutView.findViewById(R.id.Floor1Btn);
         btn2 = layoutView.findViewById(R.id.Floor2Btn);
         btn3 = layoutView.findViewById(R.id.Floor3Btn);
         btn4 = layoutView.findViewById(R.id.Floor4Btn);
         mapView = layoutView.findViewById(R.id.mapView);
 
+        //add button onclick events. Handles button visuals and map changing
         btn1.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 btn1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -123,14 +160,15 @@ public class MapFragment extends Fragment {
             }
         });
 
+        //default button setup
         btn1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         btn2.setBackgroundColor(Color.GRAY);
         btn3.setBackgroundColor(Color.GRAY);
         btn4.setBackgroundColor(Color.GRAY);
 
+        //this bit sets up an adapter for the ListView to use to display events
         String[] list = {"test","test2","test3","test4","test5","test6","test7","test8"};
         ArrayAdapter adapter = new ArrayAdapter<String>(this.getContext(), R.layout.text_view, list);
-
         ListView listView = (ListView) layoutView.findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
