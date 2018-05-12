@@ -86,13 +86,6 @@ public class MapFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layoutView = inflater.inflate(R.layout.fragment_map, container, false);
-        return layoutView;
-    }
-
-    @Override
-    public void onStart()
-    {
-        super.onStart();
 
         //this section fixes the events list layout and prevents it from
         //rendering events under the bottom navigation bar
@@ -102,6 +95,8 @@ public class MapFragment extends Fragment {
 
             @Override
             public void onGlobalLayout() {
+                Log.d("TEST", Integer.toString(getActivity().findViewById(R.id.navigation).getHeight()));
+                Log.d("TEST2", Integer.toString(lv.getHeight()));
                 lv.setLayoutParams(
                         new LinearLayout.LayoutParams(lv.getLayoutParams().width, lv.getHeight() - getActivity().findViewById(R.id.navigation).getHeight()));
                 ViewTreeObserver obs = lv.getViewTreeObserver();
@@ -114,7 +109,6 @@ public class MapFragment extends Fragment {
             }
 
         });
-
 
         btn1 = layoutView.findViewById(R.id.Floor1Btn);
         btn2 = layoutView.findViewById(R.id.Floor2Btn);
@@ -171,6 +165,14 @@ public class MapFragment extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter<String>(this.getContext(), R.layout.text_view, list);
         ListView listView = (ListView) layoutView.findViewById(R.id.listView);
         listView.setAdapter(adapter);
+
+        return layoutView;
+    }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
