@@ -116,6 +116,7 @@ public class MapFragment extends Fragment {
         //this section fixes the events list layout and prevents it from
         //rendering events under the bottom navigation bar
         final ExpandableListView lv = layoutView.findViewById(R.id.listView);
+        /*
         ViewTreeObserver vto = lv.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -134,7 +135,8 @@ public class MapFragment extends Fragment {
                 }
             }
 
-        });
+        });*/
+        NavBarFix.fixNavBarOverlap(lv);
 
         btn1 = layoutView.findViewById(R.id.Floor1Btn);
         btn2 = layoutView.findViewById(R.id.Floor2Btn);
