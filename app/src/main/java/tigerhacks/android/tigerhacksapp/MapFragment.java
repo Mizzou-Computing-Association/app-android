@@ -6,6 +6,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.internal.BottomNavigationMenu;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -19,11 +20,19 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleExpandableListAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -37,6 +46,7 @@ import android.widget.RelativeLayout;
 public class MapFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -48,6 +58,13 @@ public class MapFragment extends Fragment {
     private ImageView mapView;
     private Button btn1, btn2, btn3, btn4;
     private OnFragmentInteractionListener mListener;
+
+    private static final String NAME = "NAME";
+
+    private ExpandableListAdapter mAdapter;
+
+    private String group[] = {"How To Use StackOverflow" , "Fortran 101", "Neopets Fall Invitational"};
+    private String[][] child = { { "John", "Bill" }, { "Alice", "David" }, {} };
 
     public MapFragment() {
         // Required empty public constructor
@@ -89,7 +106,7 @@ public class MapFragment extends Fragment {
 
         //this section fixes the events list layout and prevents it from
         //rendering events under the bottom navigation bar
-        final ListView lv = layoutView.findViewById(R.id.listView);
+        final ExpandableListView lv = layoutView.findViewById(R.id.listView);
         ViewTreeObserver vto = lv.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
@@ -161,10 +178,31 @@ public class MapFragment extends Fragment {
         btn4.setBackgroundColor(Color.GRAY);
 
         //this bit sets up an adapter for the ListView to use to display events
-        String[] list = {"test","test2","test3","test4","test5","test6","test7","test8"};
-        ArrayAdapter adapter = new ArrayAdapter<String>(this.getContext(), R.layout.text_view, list);
-        ListView listView = (ListView) layoutView.findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+
+
+        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
+        List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
+        for (int i = 0; i < group.length; i++) {
+            Map<String, String> curGroupMap = new HashMap<String, String>();
+            groupData.add(curGroupMap);
+            curGroupMap.put(NAME, group[i]);
+
+            List<Map<String, String>> children = new ArrayList<Map<String, String>>();
+            for (int j = 0; j < child[i].length; j++) {
+                Map<String, String> curChildMap = new HashMap<String, String>();
+                children.add(curChildMap);
+                curChildMap.put(NAME, child[i][j]);
+            }
+            childData.add(children);
+        }
+
+        // Set up our adapter
+        mAdapter = new SimpleExpandableListAdapter(this.getContext(), groupData,
+                R.layout.expandable_list_item,
+                new String[] { NAME }, new int[] { R.id.expandable_text_view },
+                childData, R.layout.expanded_list_item,
+                new String[] { NAME }, new int[] { R.id.expanded_text_view });
+        lv.setAdapter(mAdapter);
 
         return layoutView;
     }
