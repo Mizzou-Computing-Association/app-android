@@ -59,12 +59,21 @@ public class MapFragment extends Fragment {
     private Button btn1, btn2, btn3, btn4;
     private OnFragmentInteractionListener mListener;
 
-    private static final String NAME = "NAME";
-
     private ExpandableListAdapter mAdapter;
 
-    private String group[] = {"How To Use StackOverflow" , "Fortran 101", "Neopets Fall Invitational"};
-    private String[][] child = { { "John", "Bill" }, { "Alice", "David" }, {} };
+    private String group[] = {"How To Use StackOverflow" , "Fortran 101", "2007Runescape PK Invitational", "To Catch A Mac User with Chris Hansen"};
+    private String[][][] child = {
+            {{"Ever wanted to know how a programmer does their job? Join me for a comprehensive" +
+                    " look at using the programmer's most important tool.","Ikant Koad"}},
+            {{"Take a deep dive into one of today's most innovative languages: Fortran.","Big Richard"}},
+            {{"buying gf 2k", "Zezima"}},
+            {{"'How do you even use that stupid mouse?'","The Woz"}}
+    };
+    private String group2[] = {"This Is On Floor 2"};
+    private String[][][] child2 = {
+            {{"Wow, you have no idea how long this bit took to code.", "Swear to God this took longer than the rest of the app combined."}}
+    };
+
 
     public MapFragment() {
         // Required empty public constructor
@@ -141,6 +150,7 @@ public class MapFragment extends Fragment {
                 btn3.setBackgroundColor(Color.GRAY);
                 btn4.setBackgroundColor(Color.GRAY);
                 mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_1));
+                populateEventList(group, child);
             }
         });
         btn2.setOnClickListener(new Button.OnClickListener() {
@@ -150,6 +160,7 @@ public class MapFragment extends Fragment {
                 btn3.setBackgroundColor(Color.GRAY);
                 btn4.setBackgroundColor(Color.GRAY);
                 mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_2));
+                populateEventList(group2, child2);
             }
         });
         btn3.setOnClickListener(new Button.OnClickListener() {
@@ -177,34 +188,46 @@ public class MapFragment extends Fragment {
         btn3.setBackgroundColor(Color.GRAY);
         btn4.setBackgroundColor(Color.GRAY);
 
+        //initial setup of event list
+        populateEventList(group, child);
+
+        //return fragment layout to main activity
+        return layoutView;
+    }
+
+    private void populateEventList(String eventList[], String eventDetails[][][])
+    {
         //this bit sets up an adapter for the ListView to use to display events
-
-
+        //first we set up the parameters for the very confusing SimpleExpandableListAdapter class
         List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
         List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
-        for (int i = 0; i < group.length; i++) {
+        for (int i = 0; i < eventList.length; i++) {
             Map<String, String> curGroupMap = new HashMap<String, String>();
             groupData.add(curGroupMap);
-            curGroupMap.put(NAME, group[i]);
+            curGroupMap.put("GROUP_NAME", eventList[i]);
 
             List<Map<String, String>> children = new ArrayList<Map<String, String>>();
-            for (int j = 0; j < child[i].length; j++) {
+            for (int j = 0; j < eventDetails[i].length; j++) {
                 Map<String, String> curChildMap = new HashMap<String, String>();
+                Map<String, String> curChildMap2 = new HashMap<String, String>();
                 children.add(curChildMap);
-                curChildMap.put(NAME, child[i][j]);
+                //children.add(curChildMap2);
+                curChildMap.put("CHILD_NAME1", eventDetails[i][j][0]);
+                curChildMap.put("CHILD_NAME2", "Speaker: " + eventDetails[i][j][1]);
             }
+
             childData.add(children);
+
         }
 
-        // Set up our adapter
+        // set up expandable event list
         mAdapter = new SimpleExpandableListAdapter(this.getContext(), groupData,
                 R.layout.expandable_list_item,
-                new String[] { NAME }, new int[] { R.id.expandable_text_view },
+                new String[] { "GROUP_NAME" }, new int[] { R.id.expandable_text_view },
                 childData, R.layout.expanded_list_item,
-                new String[] { NAME }, new int[] { R.id.expanded_text_view });
+                new String[] { "CHILD_NAME1", "CHILD_NAME2" }, new int[] { R.id.expanded_text_view, R.id.expanded_text_view2});
+        ExpandableListView lv = layoutView.findViewById(R.id.listView);
         lv.setAdapter(mAdapter);
-
-        return layoutView;
     }
 
     @Override
