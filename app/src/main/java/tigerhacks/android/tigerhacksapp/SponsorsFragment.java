@@ -72,6 +72,7 @@ public class SponsorsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View layout = inflater.inflate(R.layout.fragment_sponsors, container, false);
 
+        //setup onclick functinality for sponsor banners
         im1 = layout.findViewById(R.id.sponsor_img1);
         im1.setOnClickListener(new View.OnClickListener() {
             //@Override
