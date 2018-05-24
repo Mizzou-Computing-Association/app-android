@@ -49,15 +49,18 @@ public final class NavBarFix {
                 {
                     view.setLayoutParams(
                             new LinearLayout.LayoutParams(view.getLayoutParams().width, view.getHeight() - finalAct.findViewById(R.id.navigation).getHeight()));
+                    Log.d("TEST1", view.getLayoutParams().toString());
+
                 }
                 else if(view.getLayoutParams() instanceof FrameLayout.LayoutParams)
                 {
                     view.setLayoutParams(
                             new ScrollView.LayoutParams(view.getLayoutParams().width, view.getHeight() - finalAct.findViewById(R.id.navigation).getHeight()));
+                    Log.d("TEST2", view.getLayoutParams().toString());
                 }
                 else
                 {
-                    Log.d("TEST", view.getLayoutParams().toString());
+                    Log.d("TEST3", view.getLayoutParams().toString());
                 }
 
                 ViewTreeObserver obs = view.getViewTreeObserver();

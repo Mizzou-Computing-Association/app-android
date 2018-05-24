@@ -84,8 +84,16 @@ public class SponsorsFragment extends Fragment {
 
         //fix nav bar
         final LinearLayout ll = layout.findViewById(R.id.sponsorVerticalLayout);
-        NavBarFix.fixNavBarOverlap(ll);
-
+        int result = NavBarFix.fixNavBarOverlap(ll);
+        if(result == -1)
+        {
+            Log.i("TEST4", "NavFix failed");
+        }
+        else
+        {
+            Log.i("TEST5", "NavFix worked, somewhat.");
+        }
+        Log.i("WTF", "WTF is happening.");
         return layout;
     }
 

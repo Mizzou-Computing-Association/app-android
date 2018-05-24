@@ -61,7 +61,7 @@ public class MapFragment extends Fragment {
 
     private ExpandableListAdapter mAdapter;
 
-    private String group[] = {"How To Use StackOverflow" , "Fortran 101", "2007Runescape PK Invitational", "To Catch A Mac User with Chris Hansen"};
+    private String group[] = {"How To Use StackOverflow" , "Fortran 101", "2007 Runescape LAN Party", "To Catch A Mac User with Chris Hansen"};
     private String[][][] child = {
             {{"Ever wanted to know how a programmer does their job? Join me for a comprehensive" +
                     " look at using the programmer's most important tool.","Ikant Koad"}},
@@ -116,26 +116,7 @@ public class MapFragment extends Fragment {
         //this section fixes the events list layout and prevents it from
         //rendering events under the bottom navigation bar
         final ExpandableListView lv = layoutView.findViewById(R.id.listView);
-        /*
-        ViewTreeObserver vto = lv.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
-            @Override
-            public void onGlobalLayout() {
-                Log.d("TEST", Integer.toString(getActivity().findViewById(R.id.navigation).getHeight()));
-                Log.d("TEST2", Integer.toString(lv.getHeight()));
-                lv.setLayoutParams(
-                        new LinearLayout.LayoutParams(lv.getLayoutParams().width, lv.getHeight() - getActivity().findViewById(R.id.navigation).getHeight()));
-                ViewTreeObserver obs = lv.getViewTreeObserver();
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    obs.removeOnGlobalLayoutListener(this);
-                } else {
-                    obs.removeGlobalOnLayoutListener(this);
-                }
-            }
-
-        });*/
         NavBarFix.fixNavBarOverlap(lv);
 
         btn1 = layoutView.findViewById(R.id.Floor1Btn);
