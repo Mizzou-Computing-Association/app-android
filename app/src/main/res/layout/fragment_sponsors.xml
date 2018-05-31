@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tigerhacks.android.tigerhacksapp.SponsorsFragment"
-    android:background="@color/colorSecondary">
+    android:background="@color/colorSecondary"
+    tools:context="tigerhacks.android.tigerhacksapp.SponsorsFragment">
     <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
+        android:id="@+id/sponsorScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

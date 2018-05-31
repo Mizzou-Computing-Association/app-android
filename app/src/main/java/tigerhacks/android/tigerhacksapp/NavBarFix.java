@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.os.Build;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,7 +19,15 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * Created by Conno on 5/11/2018.
+ * This class only contains a static method that keeps the bottom navigation bar
+ * from overlapping UI elements on the phone screen. It takes in the view that is
+ * being overlapped, and simply trims off the view's height a value equal to the
+ * height of the navigation bar.
+ *
+ * Note: In order to programmatically change a layout's dimensions, you have to use a
+ * ViewTreeObserver's addOnGlobalLayoutListener function, which requires all
+ * variables inside to be final. Hence the reason you can only pass in a final
+ * view variable
  */
 
 public final class NavBarFix {
@@ -43,24 +52,22 @@ public final class NavBarFix {
             @Override
             public void onGlobalLayout() {
 
-                //get LayoutParam class of view
+                //perform appropriate setLayoutParam for different kind of LayoutParams.
+                //I was incapable of detecting the specific LayoutParam programmatically
+                //and so I simply add a new instanceof check for each new LayoutParam I
+                //need to fix.
 
+                //layout fix for Map page
                 if(view.getLayoutParams() instanceof LinearLayout.LayoutParams)
                 {
                     view.setLayoutParams(
                             new LinearLayout.LayoutParams(view.getLayoutParams().width, view.getHeight() - finalAct.findViewById(R.id.navigation).getHeight()));
-                    Log.d("TEST1", view.getLayoutParams().toString());
-
                 }
+                //layout fix for Sponsors page
                 else if(view.getLayoutParams() instanceof FrameLayout.LayoutParams)
                 {
                     view.setLayoutParams(
-                            new ScrollView.LayoutParams(view.getLayoutParams().width, view.getHeight() - finalAct.findViewById(R.id.navigation).getHeight()));
-                    Log.d("TEST2", view.getLayoutParams().toString());
-                }
-                else
-                {
-                    Log.d("TEST3", view.getLayoutParams().toString());
+                            new FrameLayout.LayoutParams(view.getLayoutParams().width, view.getHeight() - finalAct.findViewById(R.id.navigation).getHeight());
                 }
 
                 ViewTreeObserver obs = view.getViewTreeObserver();

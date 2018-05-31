@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 
 /**
@@ -83,16 +84,9 @@ public class SponsorsFragment extends Fragment {
         });
 
         //fix nav bar
-        final LinearLayout ll = layout.findViewById(R.id.sponsorVerticalLayout);
-        int result = NavBarFix.fixNavBarOverlap(ll);
-        if(result == -1)
-        {
-            Log.i("TEST4", "NavFix failed");
-        }
-        else
-        {
-            Log.i("TEST5", "NavFix worked, somewhat.");
-        }
+        final ScrollView scrollView = layout.findViewById(R.id.sponsorScrollView);
+        int result = NavBarFix.fixNavBarOverlap(scrollView);
+
         return layout;
     }
 
