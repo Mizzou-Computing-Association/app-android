@@ -67,7 +67,7 @@ public final class NavBarFix {
                 else if(view.getLayoutParams() instanceof FrameLayout.LayoutParams)
                 {
                     view.setLayoutParams(
-                            new FrameLayout.LayoutParams(view.getLayoutParams().width, view.getHeight() - finalAct.findViewById(R.id.navigation).getHeight());
+                            new FrameLayout.LayoutParams(view.getLayoutParams().width, view.getHeight() - finalAct.findViewById(R.id.navigation).getHeight()));
                 }
 
                 ViewTreeObserver obs = view.getViewTreeObserver();
