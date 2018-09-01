@@ -32,6 +32,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleExpandableListAdapter;
+import com.jsibbold.zoomage.ZoomageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +60,7 @@ public class MapFragment extends Fragment {
     private String mParam2;
 
     private View layoutView;
-    private ImageView mapView;
+    private ZoomageView mapView;
     private TabLayout tabLayout;
     private OnFragmentInteractionListener mListener;
 

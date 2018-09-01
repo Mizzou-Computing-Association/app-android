@@ -41,26 +41,30 @@
             android:text="Floor 4" />
     </android.support.design.widget.TabLayout>
 
-    <ImageView
+    <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_margin="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:adjustViewBounds="true"
-        android:cropToPadding="false"
-        android:scaleType="centerInside"
+
+        android:padding="8dp"
         android:src="@drawable/im_laf_map_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:zoomage_animateOnReset="true"
+        app:zoomage_autoCenter="true"
+        app:zoomage_autoResetMode="UNDER"
+        app:zoomage_maxScale="8"
+
+        app:zoomage_minScale="0.6"
+        app:zoomage_restrictBounds="false"
+        app:zoomage_translatable="true"
+        app:zoomage_zoomable="true" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:padding="4dp"
