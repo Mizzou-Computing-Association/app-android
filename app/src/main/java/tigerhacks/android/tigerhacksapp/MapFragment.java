@@ -1,37 +1,16 @@
 package tigerhacks.android.tigerhacksapp;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.support.design.internal.BottomNavigationMenu;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleExpandableListAdapter;
+
 import com.jsibbold.zoomage.ZoomageView;
 
 import java.util.ArrayList;
@@ -61,10 +40,6 @@ public class MapFragment extends Fragment {
 
     private View layoutView;
     private ZoomageView mapView;
-    private TabLayout tabLayout;
-    private OnFragmentInteractionListener mListener;
-
-    private ExpandableListAdapter mAdapter;
 
     private String group[] = {"How To Use StackOverflow" , "Fortran 101", "2007 Runescape LAN Party", "To Catch A Mac User with Chris Hansen"};
     private String[][][] child = {
@@ -124,7 +99,7 @@ public class MapFragment extends Fragment {
         // Inflate the layout for this fragment
         layoutView = inflater.inflate(R.layout.fragment_map, container, false);
 
-        tabLayout = layoutView.findViewById(R.id.tabLayout);
+        TabLayout tabLayout = layoutView.findViewById(R.id.tabLayout);
         mapView = layoutView.findViewById(R.id.mapView);
 
         //add button onclick events. Handles button visuals and map changing
@@ -188,11 +163,11 @@ public class MapFragment extends Fragment {
         }
 
         // set up expandable event list
-        mAdapter = new SimpleExpandableListAdapter(this.getContext(), groupData,
+        ExpandableListAdapter mAdapter = new SimpleExpandableListAdapter(this.getContext(), groupData,
                 R.layout.expandable_list_item,
-                new String[] { "GROUP_NAME" }, new int[] { R.id.expandable_text_view },
+                new String[]{"GROUP_NAME"}, new int[]{R.id.expandable_text_view},
                 childData, R.layout.expanded_list_item,
-                new String[] { "CHILD_NAME1", "CHILD_NAME2" }, new int[] { R.id.expanded_text_view, R.id.expanded_text_view2});
+                new String[]{"CHILD_NAME1", "CHILD_NAME2"}, new int[]{R.id.expanded_text_view, R.id.expanded_text_view2});
         ExpandableListView lv = layoutView.findViewById(R.id.listView);
         lv.setChildDivider(getResources().getDrawable(R.color.transparent));
         lv.setAdapter(mAdapter);
@@ -208,7 +183,6 @@ public class MapFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -218,7 +192,6 @@ public class MapFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**
@@ -231,8 +204,5 @@ public class MapFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+    interface OnFragmentInteractionListener {}
 }

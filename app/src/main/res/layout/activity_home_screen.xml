@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/tigerhacks_logo_horizontal" />
+        app:srcCompat="@mipmap/tigerhacks_logo_horizontal"
+        android:contentDescription="@string/tiger_hacks_logo" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

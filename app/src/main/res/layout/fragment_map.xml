@@ -17,28 +17,28 @@
         app:tabIndicatorColor="@color/colorPrimary">
 
         <android.support.design.widget.TabItem
-            android:id="@+id/Floor1Btn"
+            android:id="@+id/tabFloor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Floor 1" />
+            android:text="@string/floor_1" />
 
         <android.support.design.widget.TabItem
-            android:id="@+id/Floor2Btn"
+            android:id="@+id/tabFloor2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Floor 2" />
+            android:text="@string/floor_2" />
 
         <android.support.design.widget.TabItem
-            android:id="@+id/Floor3Btn"
+            android:id="@+id/tabFloor3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Floor 3" />
+            android:text="@string/floor_3" />
 
         <android.support.design.widget.TabItem
-            android:id="@+id/Floor4Btn"
+            android:id="@+id/tabFloor4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Floor 4" />
+            android:text="@string/floor_4" />
     </android.support.design.widget.TabLayout>
 
     <com.jsibbold.zoomage.ZoomageView
@@ -62,13 +62,13 @@
         app:zoomage_zoomable="true" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/eventsHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:padding="4dp"
-        android:text="Events"
+        android:text="@string/events"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +81,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/eventsHeading" />
 
 </android.support.constraint.ConstraintLayout>

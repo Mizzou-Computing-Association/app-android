@@ -7,5 +7,13 @@
     <string name="title_sponsors">Sponsors</string>
     <string name="test">Test String</string>
     <string name="sponsors">Sponsors</string>
+    <string name="events">Events</string>
+    <string name="floor_1">Floor 1</string>
+    <string name="floor_2">Floor 2</string>
+    <string name="floor_3">Floor 3</string>
+    <string name="floor_4">Floor 4</string>
+    <string name="tiger_hacks_logo">Tiger Hacks Logo</string>
+    <string name="sponsor_1">Sponsor 1</string>
+    <string name="sponsor_2">Sponsor 2</string>
 
 </resources>

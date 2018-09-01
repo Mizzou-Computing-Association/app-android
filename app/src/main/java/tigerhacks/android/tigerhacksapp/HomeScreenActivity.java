@@ -8,21 +8,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.TextView;
-
-import java.net.URI;
 
 public class HomeScreenActivity extends AppCompatActivity implements MapFragment.OnFragmentInteractionListener, PrizesFragment.OnFragmentInteractionListener, SponsorsFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener, TigerTalksFragment.OnFragmentInteractionListener {
 
@@ -69,15 +58,15 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         super.onCreate(savedInstanceState);
         //action bar can be called differently depending on SDK version, so this checks that
         //and sets up the action bar custom xml layout (layout/action_bar_layout.xml)
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setCustomView(R.layout.action_bar_layout);
-            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
-        }
-        else if(getActionBar() != null)
-        {
-            getActionBar().setCustomView(R.layout.action_bar_layout);
-            getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
-        }
+//        if(getSupportActionBar() != null) {
+//            getSupportActionBar().setCustomView(R.layout.action_bar_layout);
+//            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+//        }
+//        else if(getActionBar() != null)
+//        {
+//            getActionBar().setCustomView(R.layout.action_bar_layout);
+//            getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+//        }
 
         setContentView(R.layout.activity_home_screen);
 
@@ -97,7 +86,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
                 .addToBackStack(null);
         initialFragmentTransaction.commit();*/
 
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
@@ -134,9 +123,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
 
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
+        ScreenSlidePagerAdapter(FragmentManager fm) { super(fm); }
 
         @Override
         public Fragment getItem(int position) {
