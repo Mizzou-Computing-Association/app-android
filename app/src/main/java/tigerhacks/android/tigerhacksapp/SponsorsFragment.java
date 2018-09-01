@@ -83,10 +83,6 @@ public class SponsorsFragment extends Fragment {
             }
         });
 
-        //fix nav bar
-        final ScrollView scrollView = layout.findViewById(R.id.sponsorScrollView);
-        int result = NavBarFix.fixNavBarOverlap(scrollView);
-
         return layout;
     }
 

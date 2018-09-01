@@ -3,8 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorSecondary">
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/expanded_text_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:text="@string/test"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/expanded_text_view"
@@ -12,16 +25,17 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:text="PLACEHOLDER"
+        android:text="@string/test"
         android:textAppearance="?android:attr/textAppearanceListItem" />
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/expanded_text_view2"
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:text="Speaker: Dave"
-        android:textAppearance="?android:attr/textAppearanceListItem" />
+        android:layout_height="16dp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

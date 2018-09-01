@@ -5,5 +5,7 @@
     <string name="title_schedule">Schedule</string>
     <string name="title_tigertalks">TigerTalks</string>
     <string name="title_sponsors">Sponsors</string>
+    <string name="test">Test String</string>
+    <string name="sponsors">Sponsors</string>
 
 </resources>
