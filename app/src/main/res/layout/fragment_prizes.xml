@@ -2,12 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tigerhacks.android.tigerhacksapp.PrizesFragment"
-    android:background="@color/colorSecondary">
+    tools:context="tigerhacks.android.tigerhacksapp.PrizesFragment">
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="woah looks like you win" />
+        android:text="@string/test" />
 
 </FrameLayout>

@@ -1,33 +1,17 @@
 package tigerhacks.android.tigerhacksapp;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.support.design.internal.BottomNavigationMenu;
-import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleExpandableListAdapter;
+
+import com.jsibbold.zoomage.ZoomageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,11 +39,7 @@ public class MapFragment extends Fragment {
     private String mParam2;
 
     private View layoutView;
-    private ImageView mapView;
-    private Button btn1, btn2, btn3, btn4;
-    private OnFragmentInteractionListener mListener;
-
-    private ExpandableListAdapter mAdapter;
+    private ZoomageView mapView;
 
     private String group[] = {"How To Use StackOverflow" , "Fortran 101", "2007 Runescape LAN Party", "To Catch A Mac User with Chris Hansen"};
     private String[][][] child = {
@@ -71,6 +51,14 @@ public class MapFragment extends Fragment {
     };
     private String group2[] = {"This Is On Floor 2"};
     private String[][][] child2 = {
+            {{"Wow, you have no idea how long this bit took to code.", "Swear to God this took longer than the rest of the app combined."}}
+    };
+    private String group3[] = {"This Is On Floor 2"};
+    private String[][][] child3 = {
+            {{"Wow, you have no idea how long this bit took to code.", "Swear to God this took longer than the rest of the app combined."}}
+    };
+    private String group4[] = {"This Is On Floor 2"};
+    private String[][][] child4 = {
             {{"Wow, you have no idea how long this bit took to code.", "Swear to God this took longer than the rest of the app combined."}}
     };
 
@@ -104,72 +92,43 @@ public class MapFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layoutView = inflater.inflate(R.layout.fragment_map, container, false);
 
-        //this section fixes the events list layout and prevents it from
-        //rendering events under the bottom navigation bar
-        final ExpandableListView lv = layoutView.findViewById(R.id.listView);
-
-        NavBarFix.fixNavBarOverlap(lv);
-
-        btn1 = layoutView.findViewById(R.id.Floor1Btn);
-        btn2 = layoutView.findViewById(R.id.Floor2Btn);
-        btn3 = layoutView.findViewById(R.id.Floor3Btn);
-        btn4 = layoutView.findViewById(R.id.Floor4Btn);
+        TabLayout tabLayout = layoutView.findViewById(R.id.tabLayout);
         mapView = layoutView.findViewById(R.id.mapView);
 
         //add button onclick events. Handles button visuals and map changing
-        btn1.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                btn1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                btn2.setBackgroundColor(Color.GRAY);
-                btn3.setBackgroundColor(Color.GRAY);
-                btn4.setBackgroundColor(Color.GRAY);
-                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_1));
-                populateEventList(group, child);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch(tab.getPosition()) {
+                    case 0:
+                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_1));
+                        populateEventList(group, child);
+                        break;
+                    case 1:
+                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_2));
+                        populateEventList(group2, child2);
+                        break;
+                    case 2:
+                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_3));
+                        populateEventList(group3, child3);
+                        break;
+                    case 3:
+                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_4));
+                        populateEventList(group4, child4);
+                        break;
+                }
             }
-        });
-        btn2.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                btn1.setBackgroundColor(Color.GRAY);
-                btn2.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                btn3.setBackgroundColor(Color.GRAY);
-                btn4.setBackgroundColor(Color.GRAY);
-                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_2));
-                populateEventList(group2, child2);
-            }
-        });
-        btn3.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                btn1.setBackgroundColor(Color.GRAY);
-                btn2.setBackgroundColor(Color.GRAY);
-                btn3.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                btn4.setBackgroundColor(Color.GRAY);
-                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_3));
-            }
-        });
-        btn4.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                btn1.setBackgroundColor(Color.GRAY);
-                btn2.setBackgroundColor(Color.GRAY);
-                btn3.setBackgroundColor(Color.GRAY);
-                btn4.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_4));
-            }
-        });
 
-        //default button setup
-        btn1.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        btn2.setBackgroundColor(Color.GRAY);
-        btn3.setBackgroundColor(Color.GRAY);
-        btn4.setBackgroundColor(Color.GRAY);
+            @Override public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override public void onTabReselected(TabLayout.Tab tab) {}
+        });
 
         //initial setup of event list
         populateEventList(group, child);
@@ -204,12 +163,13 @@ public class MapFragment extends Fragment {
         }
 
         // set up expandable event list
-        mAdapter = new SimpleExpandableListAdapter(this.getContext(), groupData,
+        ExpandableListAdapter mAdapter = new SimpleExpandableListAdapter(this.getContext(), groupData,
                 R.layout.expandable_list_item,
-                new String[] { "GROUP_NAME" }, new int[] { R.id.expandable_text_view },
+                new String[]{"GROUP_NAME"}, new int[]{R.id.expandable_text_view},
                 childData, R.layout.expanded_list_item,
-                new String[] { "CHILD_NAME1", "CHILD_NAME2" }, new int[] { R.id.expanded_text_view, R.id.expanded_text_view2});
+                new String[]{"CHILD_NAME1", "CHILD_NAME2"}, new int[]{R.id.expanded_text_view, R.id.expanded_text_view2});
         ExpandableListView lv = layoutView.findViewById(R.id.listView);
+        lv.setChildDivider(getResources().getDrawable(R.color.transparent));
         lv.setAdapter(mAdapter);
     }
 
@@ -219,18 +179,10 @@ public class MapFragment extends Fragment {
         super.onStart();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -240,7 +192,6 @@ public class MapFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**
@@ -253,8 +204,5 @@ public class MapFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+    interface OnFragmentInteractionListener {}
 }

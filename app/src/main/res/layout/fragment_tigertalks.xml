@@ -2,12 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tigerhacks.android.tigerhacksapp.TigerTalksFragment"
-    android:background="@color/colorSecondary">
+    tools:context="tigerhacks.android.tigerhacksapp.TigerTalksFragment">
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="here's all the tiger talks happening" />
+        android:text="@string/test" />
 
 </FrameLayout>

@@ -1,91 +1,86 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="tigerhacks.android.tigerhacksapp.MapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabIndicatorColor="@color/colorPrimary">
 
-    <LinearLayout
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabFloor1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/floor_1" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabFloor2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/floor_2" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabFloor3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/floor_3" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tabFloor4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/floor_4" />
+    </android.support.design.widget.TabLayout>
+
+    <com.jsibbold.zoomage.ZoomageView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorSecondary">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:orientation="horizontal">
+        android:layout_height="250dp"
 
-            <Button
-                android:id="@+id/Floor1Btn"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Floor 1"
-                android:textColor="@color/colorPrimaryDark" />
+        android:padding="8dp"
+        android:src="@drawable/im_laf_map_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:zoomage_animateOnReset="true"
+        app:zoomage_autoCenter="true"
+        app:zoomage_autoResetMode="UNDER"
+        app:zoomage_maxScale="8"
 
-            <Button
-                android:id="@+id/Floor2Btn"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Floor 2"
-                android:textColor="@color/colorPrimaryDark" />
+        app:zoomage_minScale="0.6"
+        app:zoomage_restrictBounds="false"
+        app:zoomage_translatable="true"
+        app:zoomage_zoomable="true" />
 
-            <Button
-                android:id="@+id/Floor3Btn"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Floor 3"
-                android:textColor="@color/colorPrimaryDark" />
+    <TextView
+        android:id="@+id/eventsHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/events"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
-            <Button
-                android:id="@+id/Floor4Btn"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Floor 4"
-                android:textColor="@color/colorPrimaryDark"/>
+    <ExpandableListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventsHeading" />
 
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="291dp"
-            android:cropToPadding="false"
-            android:scaleType="fitXY"
-            android:src="@drawable/im_laf_map_1" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_border"
-            android:gravity="center"
-            android:text="Events"
-            android:textColor="@android:color/black"
-            android:textSize="25sp" />
-
-        <ExpandableListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

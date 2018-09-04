@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 
 /**
@@ -73,7 +70,7 @@ public class SponsorsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View layout = inflater.inflate(R.layout.fragment_sponsors, container, false);
 
-        //setup onclick functinality for sponsor banners
+        //setup onclick functionality for sponsor banners
         im1 = layout.findViewById(R.id.sponsor_img1);
         im1.setOnClickListener(new View.OnClickListener() {
             //@Override
@@ -82,10 +79,6 @@ public class SponsorsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        //fix nav bar
-        final ScrollView scrollView = layout.findViewById(R.id.sponsorScrollView);
-        int result = NavBarFix.fixNavBarOverlap(scrollView);
 
         return layout;
     }

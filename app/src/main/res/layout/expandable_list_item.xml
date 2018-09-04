@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorSecondary">
+    android:orientation="vertical">
+
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/expandable_text_view"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/listPreferredItemHeight"
+        android:gravity="center_vertical"
         android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textAppearance="?android:attr/textAppearanceListItem"
-        android:gravity="center_vertical" />
+        android:paddingEnd="8dp"
+        android:text="@string/test"
+        android:textAppearance="?android:attr/textAppearanceListItem" />
 
 </LinearLayout>
