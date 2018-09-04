@@ -25,7 +25,7 @@
                 android:text="@string/sponsors"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorGrey"
                 android:textStyle="bold" />
 
             <LinearLayout
