@@ -55,6 +55,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         //action bar can be called differently depending on SDK version, so this checks that
         //and sets up the action bar custom xml layout (layout/action_bar_layout.xml)

@@ -12,4 +12,9 @@
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
 </resources>
