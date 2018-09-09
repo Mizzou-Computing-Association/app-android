@@ -3,10 +3,13 @@ package tigerhacks.android.tigerhacksapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -26,6 +29,8 @@ public class PrizesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private CardView card1;
+    private View layoutView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +69,24 @@ public class PrizesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_prizes, container, false);
+        layoutView = inflater.inflate(R.layout.fragment_prizes, container, false);
+
+        card1 = layoutView.findViewById(R.id.card1);
+
+
+        card1.setOnClickListener(new View.OnClickListener() {
+            TextView criteria = layoutView.findViewById(R.id.Criteria);
+            TextView prize = layoutView.findViewById(R.id.Prize);
+            int count = 0;
+            @Override
+            public void onClick(View view) {
+                TransitionManager.beginDelayedTransition((ViewGroup)layoutView);
+                criteria.setVisibility(View.VISIBLE);
+                prize.setVisibility(View.VISIBLE);
+            }
+        });
+
+        return layoutView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
