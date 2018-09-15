@@ -3,10 +3,17 @@ package tigerhacks.android.tigerhacksapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,6 +33,8 @@ public class PrizesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private PrizeCardView card1;
+    private View layoutView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +72,41 @@ public class PrizesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_prizes, container, false);
+
+        layoutView = inflater.inflate(R.layout.fragment_prizes, container, false);
+        LinearLayout ll = layoutView.findViewById(R.id.linearView);
+
+        //create cards. This is static, and will be replaced by dynamic creation through the API
+        PrizeCardView card1 = (PrizeCardView)LayoutInflater.from(ll.getContext()).inflate(R.layout.prize_card_layout, ll, false);
+        PrizeCardView card2 = (PrizeCardView)LayoutInflater.from(ll.getContext()).inflate(R.layout.prize_card_layout, ll, false);
+        PrizeCardView card3 = (PrizeCardView)LayoutInflater.from(ll.getContext()).inflate(R.layout.prize_card_layout, ll, false);
+        PrizeCardView card4 = (PrizeCardView)LayoutInflater.from(ll.getContext()).inflate(R.layout.prize_card_layout, ll, false);
+
+        card1.setTitle("A Great Test");
+        card2.setTitle("An Even Greater Test");
+
+        card1.setImage(R.drawable.im_laf_map_1);
+
+        card1.setDescription("A great description.");
+        card2.setDescription("An even better description.");
+        card1.setCriteria(new String[]{"Here's criteria one","Here's criteria two"});
+        card1.setPrizes(new String[]{"Here's prize one", "Here's prize two"});
+
+        ArrayList<PrizeCardView> cardList = new ArrayList<PrizeCardView>();
+        cardList.add(card1);
+        cardList.add(card2);
+        cardList.add(card3);
+        cardList.add(card4);
+
+        for(PrizeCardView p : cardList)
+        {
+            ll.addView(p);
+            p.onClickAction(layoutView);
+        }
+
+
+
+        return layoutView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

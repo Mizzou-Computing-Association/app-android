@@ -90,6 +90,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         mPager = findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        mPager.setOffscreenPageLimit(1);
         mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             public void onPageSelected(int position) {
                 switch(position)
