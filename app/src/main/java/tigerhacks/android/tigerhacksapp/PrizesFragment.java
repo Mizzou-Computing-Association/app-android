@@ -3,7 +3,9 @@ package tigerhacks.android.tigerhacksapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -55,6 +62,7 @@ public class PrizesFragment extends Fragment {
     private View layoutView;
     private LinearLayout ll;
     private ProgressBar progressBar;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -123,7 +131,6 @@ public class PrizesFragment extends Fragment {
                 Snackbar.make(layoutView, "TigerHacks API call failed. Make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
             }
         });
-
         return layoutView;
     }
 

@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     tools:context="tigerhacks.android.tigerhacksapp.ScheduleFragment">
     <!-- TODO: Update blank fragment layout -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/cardLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -40,6 +40,12 @@
                     android:layout_height="wrap_content"
                     android:text="Sunday" />
             </android.support.design.widget.TabLayout>
+
+            <LinearLayout
+                android:id="@+id/cardLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
