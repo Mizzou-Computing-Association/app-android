@@ -29,6 +29,10 @@ public class PrizeCardView extends CardView {
     private LinearLayout linear1View, linear2View;
     private ImageView imageView;
 
+    public enum Type {BEGINNER, MAIN};
+
+    private Type type;
+
     public PrizeCardView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -55,33 +59,15 @@ public class PrizeCardView extends CardView {
 
         outputViews.clear();
         outputViews = new ArrayList<>();
-        this.findViewsWithText(outputViews, "criteria", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
-        criteriaView = (TextView)outputViews.get(0);
-        criteriaView.setVisibility(View.GONE);
-
-        outputViews.clear();
-        outputViews = new ArrayList<>();
         this.findViewsWithText(outputViews, "prizes", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
         prizesView = (TextView)outputViews.get(0);
         prizesView.setVisibility(View.GONE);
 
         outputViews.clear();
         outputViews = new ArrayList<>();
-        this.findViewsWithText(outputViews, "subtitle1", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
-        subtitle1View = (TextView)outputViews.get(0);
-        subtitle1View.setVisibility(View.GONE);
-
-        outputViews.clear();
-        outputViews = new ArrayList<>();
         this.findViewsWithText(outputViews, "subtitle2", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
         subtitle2View = (TextView)outputViews.get(0);
         subtitle2View.setVisibility(View.GONE);
-
-        outputViews.clear();
-        outputViews = new ArrayList<>();
-        this.findViewsWithText(outputViews, "linear1", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
-        linear1View = (LinearLayout)outputViews.get(0);
-        linear1View.setVisibility(View.GONE);
 
         outputViews.clear();
         outputViews = new ArrayList<>();
@@ -104,24 +90,18 @@ public class PrizeCardView extends CardView {
                 if(clickCount++ % 2 == 0) //if handles expansion of card; else handles collapse
                 {
                     TransitionManager.beginDelayedTransition((ViewGroup) rootView);
-                    criteriaView.setVisibility(View.VISIBLE);
                     prizesView.setVisibility(View.VISIBLE);
                     descView.setVisibility(View.VISIBLE);
-                    subtitle1View.setVisibility(View.VISIBLE);
                     subtitle2View.setVisibility(View.VISIBLE);
-                    linear1View.setVisibility(View.VISIBLE);
                     linear2View.setVisibility(View.VISIBLE);
                     //ei.expand();
                 }
                 else
                 {
                     TransitionManager.beginDelayedTransition((ViewGroup) rootView);
-                    criteriaView.setVisibility(View.GONE);
                     prizesView.setVisibility(View.GONE);
                     descView.setVisibility(View.GONE);
-                    subtitle1View.setVisibility(View.GONE);
                     subtitle2View.setVisibility(View.GONE);
-                    linear1View.setVisibility(View.GONE);
                     linear2View.setVisibility(View.GONE);
                     //ci.collapse();
                 }
@@ -138,7 +118,7 @@ public class PrizeCardView extends CardView {
     {
         descView.setText(s);
     }
-    public void setCriteria(String list[])
+    /*public void setCriteria(String list[])
     {
         String newString = "";
         for(String criteria : list)
@@ -147,7 +127,7 @@ public class PrizeCardView extends CardView {
         }
         newString = newString.substring(0, newString.length()-1);
         criteriaView.setText(newString);
-    }
+    }*/
     public void setPrizes(ArrayList<String> list)
     {
         String newString = "";
@@ -163,4 +143,6 @@ public class PrizeCardView extends CardView {
     {
         imageView.setImageDrawable(getResources().getDrawable(id));
     }
+    public void setType(Type t){type = t;}
+    public Type getType(){return type;}
 }

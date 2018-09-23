@@ -20,8 +20,12 @@ import java.util.regex.Pattern;
  */
 
 public class ScheduleCardView extends CardView {
+
+    public enum Day {FRIDAY, SATURDAY, SUNDAY};
+
     private int clickCount = 0;
     private TextView titleView, locationView, timeView;
+    private Day day;
 
     public ScheduleCardView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -90,16 +94,21 @@ public class ScheduleCardView extends CardView {
     public void setTime(String s)
     {
         String hours, minutes, full, ampm;
-        Pattern searchPattern = Pattern.compile("T(\\d{2}):(\\d{2})");
+        Pattern searchPattern = Pattern.compile("(\\d{1})T(\\d{2}):(\\d{2})");
         Matcher matcher = searchPattern.matcher(s);
         if(matcher.find()){
-            hours = matcher.group(1);
+            hours = matcher.group(2);
             if(Integer.parseInt(hours) == 0)
             {
                 hours = "12";
                 ampm = "AM";
             }
-            else if(Integer.parseInt(hours) >= 12)
+            else if(Integer.parseInt(hours) == 12)
+            {
+                hours = "12";
+                ampm = "PM";
+            }
+            else if(Integer.parseInt(hours) > 12)
             {
                 hours = Integer.toString(Integer.parseInt(hours) - 12);
 
@@ -110,8 +119,24 @@ public class ScheduleCardView extends CardView {
                 ampm = "AM";
             }
 
-            minutes = matcher.group(2);
+            minutes = matcher.group(3);
             full = hours + ":" + minutes + " " + ampm;
+
+            switch(matcher.group(1))
+            {
+                case "2":
+                    day = Day.FRIDAY;
+                    break;
+                case "3":
+                    day = Day.SATURDAY;
+                    break;
+                case "4":
+                    day = Day.SUNDAY;
+                    break;
+                default:
+                    day = Day.FRIDAY;
+                    break;
+            }
         }
         else
         {
@@ -121,5 +146,10 @@ public class ScheduleCardView extends CardView {
             full = hours + ":" + minutes + " " + ampm;
         }
         timeView.setText(full);
+    }
+
+    public Day getDay()
+    {
+        return day;
     }
 }

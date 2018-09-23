@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tigerhacks.android.tigerhacksapp.ScheduleCardView.Day;
 
 
 /**
@@ -40,6 +42,9 @@ public class ScheduleFragment extends Fragment {
     private String mParam2;
     private LinearLayout cardLayoutView;
     private View layoutView;
+    private TabLayout tabLayout;
+    private Day currentDay = Day.FRIDAY;
+    private ArrayList<ScheduleItem> cardList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -79,6 +84,39 @@ public class ScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layoutView = inflater.inflate(R.layout.fragment_schedule, container, false);
+        tabLayout = layoutView.findViewById(R.id.tabLayout);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Log.e("TEST","Selected");
+                if(tab.getPosition() == 0)
+                {
+                    currentDay = Day.FRIDAY;
+                    addDayEvents(cardList);
+                }
+                else if(tab.getPosition() == 1)
+                {
+                    currentDay = Day.SATURDAY;
+                    addDayEvents(cardList);
+                }
+                else if(tab.getPosition() == 2)
+                {
+                    currentDay = Day.SUNDAY;
+                    addDayEvents(cardList);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         cardLayoutView = layoutView.findViewById(R.id.cardLinearLayout);
 
@@ -153,14 +191,22 @@ public class ScheduleFragment extends Fragment {
         {
             return;
         }
-        ArrayList<ScheduleItem> list = (ArrayList<ScheduleItem>)scheduleList.getSchedule();
+        cardList = (ArrayList<ScheduleItem>)scheduleList.getSchedule();
+        addDayEvents(cardList);
+    }
+    public void addDayEvents(ArrayList<ScheduleItem> list)
+    {
+        cardLayoutView.removeAllViews();
         for(ScheduleItem item : list)
         {
             ScheduleCardView card = (ScheduleCardView)LayoutInflater.from(cardLayoutView.getContext()).inflate(R.layout.schedule_card_layout, cardLayoutView, false);
             card.setTitle(item.getTitle());
             card.setLocation(item.getLocation());
             card.setTime(item.getTime());
-            cardLayoutView.addView(card);
+
+            if(card.getDay() == currentDay) {
+                cardLayoutView.addView(card);
+            }
         }
     }
 }

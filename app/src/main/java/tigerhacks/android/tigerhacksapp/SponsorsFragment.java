@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,16 +71,8 @@ public class SponsorsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View layout = inflater.inflate(R.layout.fragment_sponsors, container, false);
-
-        //setup onclick functionality for sponsor banners
-        im1 = layout.findViewById(R.id.sponsor_img1);
-        im1.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=vcpmBYfvF_I"));
-                startActivity(intent);
-            }
-        });
+        ImageView im = layout.findViewById(R.id.testImage);
+        Picasso.get().load("https://drive.google.com/file/d/1QWX_Q41MOjTKvD8n7N-Z6DyQ-44n8XHB/view?usp=sharing").into(im);
 
         return layout;
     }

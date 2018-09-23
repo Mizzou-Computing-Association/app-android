@@ -3,6 +3,7 @@ package tigerhacks.android.tigerhacksapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -60,9 +61,11 @@ public class PrizesFragment extends Fragment {
     private String mParam2;
     private PrizeCardView card1;
     private View layoutView;
-    private LinearLayout ll;
+    private LinearLayout ll, cardLinearLayout;
     private ProgressBar progressBar;
-
+    private PrizeCardView.Type currentType = PrizeCardView.Type.MAIN;
+    private TabLayout tabLayout;
+    private ArrayList<Prize> cardList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -103,6 +106,34 @@ public class PrizesFragment extends Fragment {
 
         layoutView = inflater.inflate(R.layout.fragment_prizes, container, false);
         ll = layoutView.findViewById(R.id.linearView);
+        tabLayout = layoutView.findViewById(R.id.typeTabLayout);
+        cardLinearLayout = layoutView.findViewById(R.id.prizeCardLinearLayout);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() == 0)
+                {
+                    currentType = PrizeCardView.Type.MAIN;
+                    addCardsByType(cardList);
+                }
+                else if(tab.getPosition() == 1)
+                {
+                    currentType = PrizeCardView.Type.BEGINNER;
+                    addCardsByType(cardList);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         progressBar = layoutView.findViewById(R.id.progressBar);
 
@@ -179,7 +210,13 @@ public class PrizesFragment extends Fragment {
         {
             return;
         }
-        ArrayList<Prize> list = (ArrayList<Prize>)prizeList.getPrizes();
+        cardList = (ArrayList<Prize>)prizeList.getPrizes();
+        addCardsByType(cardList);
+    }
+
+    public void addCardsByType(ArrayList<Prize> list)
+    {
+        cardLinearLayout.removeAllViews();
         for(Prize prize : list)
         {
             PrizeCardView card = (PrizeCardView)LayoutInflater.from(ll.getContext()).inflate(R.layout.prize_card_layout, ll, false);
@@ -187,7 +224,21 @@ public class PrizesFragment extends Fragment {
             card.setTitle(prize.getTitle());
             card.setPrizes(new ArrayList<String>(Arrays.asList(prize.getReward())));
             card.onClickAction(layoutView);
-            ll.addView(card);
+
+            if(prize.getPrizetype().equals("Beginner"))
+            {
+                Log.e("TEST","WORKS");
+                card.setType(PrizeCardView.Type.BEGINNER);
+            }
+            else if(prize.getPrizetype().equals("Main"))
+            {
+                card.setType(PrizeCardView.Type.MAIN);
+            }
+
+            if(card.getType() == currentType)
+            {
+                cardLinearLayout.addView(card);
+            }
         }
     }
 }
