@@ -4,9 +4,60 @@
     android:layout_height="match_parent"
     tools:context="tigerhacks.android.tigerhacksapp.TigerTalksFragment">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/test" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tigerTalksText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:background="@drawable/outline_background"
+            android:text="Tiger Talks"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/talk1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:text="Android Studio: The Greatest IDE On Earth" />
+
+            <Button
+                android:id="@+id/talk2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:text="Android Studio: The Greatest IDE On Earth" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/otherResourcesText"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:background="@drawable/outline_background"
+            android:text="Other Resources"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="24sp" />
+
+    </LinearLayout>
 
 </FrameLayout>

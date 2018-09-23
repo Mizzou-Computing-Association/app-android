@@ -7,6 +7,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.design.widget.Snackbar;
+import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -26,6 +51,10 @@ public class PrizesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private PrizeCardView card1;
+    private View layoutView;
+    private LinearLayout ll;
+    private ProgressBar progressBar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +92,39 @@ public class PrizesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_prizes, container, false);
+
+        layoutView = inflater.inflate(R.layout.fragment_prizes, container, false);
+        ll = layoutView.findViewById(R.id.linearView);
+
+        progressBar = layoutView.findViewById(R.id.progressBar);
+
+        //create cards. This is static, and will be replaced by dynamic creation through the API
+
+
+        Retrofit tigerHacksRetrofit = new Retrofit.Builder()
+                .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
+        Call<PrizeList> prizes = service.listPrizes("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes");
+        prizes.enqueue(new Callback<PrizeList>() {
+            @Override
+            public void onResponse(Call<PrizeList> call, Response<PrizeList> response) {
+                int statusCode = response.code();
+                PrizeList prizeList = response.body();
+                progressBar.setVisibility(View.GONE);
+                populatePrizes(prizeList);
+                Log.e("HEYERROR", "Called succeeded");
+            }
+
+            @Override
+            public void onFailure(Call<PrizeList> call, Throwable t) {
+                Log.e("HEYERROR", "Call failed");
+                Snackbar.make(layoutView, "TigerHacks API call failed. Make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+        return layoutView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,5 +164,23 @@ public class PrizesFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void populatePrizes(PrizeList prizeList)
+    {
+        if(prizeList == null)
+        {
+            return;
+        }
+        ArrayList<Prize> list = (ArrayList<Prize>)prizeList.getPrizes();
+        for(Prize prize : list)
+        {
+            PrizeCardView card = (PrizeCardView)LayoutInflater.from(ll.getContext()).inflate(R.layout.prize_card_layout, ll, false);
+            card.setDescription(prize.getDescription());
+            card.setTitle(prize.getTitle());
+            card.setPrizes(new ArrayList<String>(Arrays.asList(prize.getReward())));
+            card.onClickAction(layoutView);
+            ll.addView(card);
+        }
     }
 }

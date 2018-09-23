@@ -3,10 +3,22 @@ package tigerhacks.android.tigerhacksapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -26,6 +38,8 @@ public class ScheduleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private LinearLayout cardLayoutView;
+    private View layoutView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +78,34 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        layoutView = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        cardLayoutView = layoutView.findViewById(R.id.cardLinearLayout);
+
+        Retrofit tigerHacksRetrofit = new Retrofit.Builder()
+                .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
+        Call<ScheduleItemList> prizes = service.listItems("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSchedule");
+        prizes.enqueue(new Callback<ScheduleItemList>() {
+            @Override
+            public void onResponse(Call<ScheduleItemList> call, Response<ScheduleItemList> response) {
+                int statusCode = response.code();
+                ScheduleItemList scheduleList = response.body();
+                //progressBar.setVisibility(View.GONE);
+                populateSchedule(scheduleList);
+                Log.e("HEYERROR", "Called succeeded");
+            }
+
+            @Override
+            public void onFailure(Call<ScheduleItemList> call, Throwable t) {
+                Log.e("HEYERROR", "Call failed");
+                Snackbar.make(layoutView, "TigerHacks API call failed. Make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+        return layoutView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,5 +145,22 @@ public class ScheduleFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void populateSchedule(ScheduleItemList scheduleList)
+    {
+        if(scheduleList == null)
+        {
+            return;
+        }
+        ArrayList<ScheduleItem> list = (ArrayList<ScheduleItem>)scheduleList.getSchedule();
+        for(ScheduleItem item : list)
+        {
+            ScheduleCardView card = (ScheduleCardView)LayoutInflater.from(cardLayoutView.getContext()).inflate(R.layout.schedule_card_layout, cardLayoutView, false);
+            card.setTitle(item.getTitle());
+            card.setLocation(item.getLocation());
+            card.setTime(item.getTime());
+            cardLayoutView.addView(card);
+        }
     }
 }

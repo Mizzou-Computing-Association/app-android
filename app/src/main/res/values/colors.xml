@@ -13,4 +13,8 @@
     <color name="white">#FFF</color>
     <color name="black">#000</color>
     <color name="transparent">#0FFF</color>
+    <color name="platinum">#d4d4d4</color>
+    <color name="gold">#fdfa26</color>
+    <color name="silver">#acacac</color>
+    <color name="bronze">#de891a</color>
 </resources>
