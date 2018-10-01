@@ -1,28 +1,23 @@
 package tigerhacks.android.tigerhacksapp;
 
-/**
- * Created by Conno on 9/22/2018.
- */
-
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ScheduleItem {
 
-    @SerializedName("Time")
+    @SerializedName("time")
     @Expose
     private String time;
-    @SerializedName("Location")
+    @SerializedName("location")
     @Expose
     private String location;
-    @SerializedName("Floor")
+    @SerializedName("floor")
     @Expose
     private Integer floor;
-    @SerializedName("Title")
+    @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("Description")
+    @SerializedName("description")
     @Expose
     private String description;
 

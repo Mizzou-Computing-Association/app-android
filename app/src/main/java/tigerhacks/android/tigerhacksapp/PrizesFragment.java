@@ -153,15 +153,15 @@ public class PrizesFragment extends Fragment {
                 PrizeList prizeList = response.body();
                 progressBar.setVisibility(View.GONE);
                 populatePrizes(prizeList);
-                Log.e("HEYERROR", "Called succeeded");
             }
 
             @Override
             public void onFailure(Call<PrizeList> call, Throwable t) {
-                Log.e("HEYERROR", "Call failed");
                 Snackbar.make(layoutView, "TigerHacks API call failed. Make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
             }
         });
+
+
         return layoutView;
     }
 

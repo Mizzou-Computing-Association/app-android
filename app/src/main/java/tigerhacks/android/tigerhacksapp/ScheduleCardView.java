@@ -93,6 +93,11 @@ public class ScheduleCardView extends CardView {
     }
     public void setTime(String s)
     {
+        if(s == null)
+        {
+            return;
+        }
+
         String hours, minutes, full, ampm;
         Pattern searchPattern = Pattern.compile("(\\d{1})T(\\d{2}):(\\d{2})");
         Matcher matcher = searchPattern.matcher(s);

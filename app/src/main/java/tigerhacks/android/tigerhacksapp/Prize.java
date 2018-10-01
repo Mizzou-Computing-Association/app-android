@@ -3,21 +3,21 @@ package tigerhacks.android.tigerhacksapp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Prize {
+public class Prize{
 
-    @SerializedName("Sponsor")
+    @SerializedName("sponsor")
     @Expose
     private Integer sponsor;
-    @SerializedName("Title")
+    @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("Reward")
+    @SerializedName("reward")
     @Expose
     private String reward;
-    @SerializedName("Description")
+    @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("Prizetype")
+    @SerializedName("prizetype")
     @Expose
     private String prizetype;
 

@@ -72,7 +72,8 @@ public class SponsorsFragment extends Fragment {
         // Inflate the layout for this fragment
         final View layout = inflater.inflate(R.layout.fragment_sponsors, container, false);
         ImageView im = layout.findViewById(R.id.testImage);
-        Picasso.get().load("https://drive.google.com/file/d/1QWX_Q41MOjTKvD8n7N-Z6DyQ-44n8XHB/view?usp=sharing").into(im);
+        Picasso.get().load("https://png2.kisspng.com/sh/78e770c2bb419778173a27173fb53843/L0KzQYm3UsAzN5VwfZH0aYP2gLBuTfNmdqVqhtc2Y3B1gLF5ggRqd58ygNdqbITrPbTokvUubJp7feR8aYT8PbLAggJmdpZ4RdVuboTofra0jP9od146eak9MkfncbXrhcBnO189S6UANki8QYK8Ucc2PmI9SaoEMEi7PsH1h5==/kisspng-centene-corporation-health-care-diversity-awarenes-centene-logo-5a7427dadde0f3.8335689115175618189088.png")
+                .into(im);
 
         return layout;
     }

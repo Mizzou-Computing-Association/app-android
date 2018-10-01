@@ -120,6 +120,7 @@ public class ScheduleFragment extends Fragment {
 
         cardLayoutView = layoutView.findViewById(R.id.cardLinearLayout);
 
+
         Retrofit tigerHacksRetrofit = new Retrofit.Builder()
                 .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -142,7 +143,6 @@ public class ScheduleFragment extends Fragment {
                 Snackbar.make(layoutView, "TigerHacks API call failed. Make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
             }
         });
-
         return layoutView;
     }
 
@@ -176,7 +176,7 @@ public class ScheduleFragment extends Fragment {
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p>
-     * See the Android Training lesson <a href=
+     * See the Android Training lesson <a href
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
