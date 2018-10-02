@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +48,7 @@ public class ScheduleFragment extends Fragment {
     private TabLayout tabLayout;
     private Day currentDay = Day.FRIDAY;
     private ArrayList<ScheduleItem> cardList;
+    private ProgressBar progressBar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -120,29 +124,15 @@ public class ScheduleFragment extends Fragment {
 
         cardLayoutView = layoutView.findViewById(R.id.cardLinearLayout);
 
+        progressBar = layoutView.findViewById(R.id.progressBar2);
 
         Retrofit tigerHacksRetrofit = new Retrofit.Builder()
                 .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
-        Call<ScheduleItemList> prizes = service.listItems("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSchedule");
-        prizes.enqueue(new Callback<ScheduleItemList>() {
-            @Override
-            public void onResponse(Call<ScheduleItemList> call, Response<ScheduleItemList> response) {
-                int statusCode = response.code();
-                ScheduleItemList scheduleList = response.body();
-                //progressBar.setVisibility(View.GONE);
-                populateSchedule(scheduleList);
-                Log.e("HEYERROR", "Called succeeded");
-            }
-
-            @Override
-            public void onFailure(Call<ScheduleItemList> call, Throwable t) {
-                Log.e("HEYERROR", "Call failed");
-                Snackbar.make(layoutView, "TigerHacks API call failed. Make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        Call<ScheduleItemList> schedule = service.listItems("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSchedule");
+        callAPI(schedule);
         return layoutView;
     }
 
@@ -208,5 +198,28 @@ public class ScheduleFragment extends Fragment {
                 cardLayoutView.addView(card);
             }
         }
+    }
+    void callAPI(final Call<ScheduleItemList> schedule)
+    {
+        schedule.clone().enqueue(new Callback<ScheduleItemList>() {
+            @Override
+            public void onResponse(Call<ScheduleItemList> call, Response<ScheduleItemList> response) {
+                int statusCode = response.code();
+                ScheduleItemList scheduleList = response.body();
+                progressBar.setVisibility(View.GONE);
+                populateSchedule(scheduleList);
+            }
+
+            @Override
+            public void onFailure(Call<ScheduleItemList> call, Throwable t) {
+                Snackbar.make(layoutView, "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        callAPI(schedule);
+                    }
+                }, 10000);
+            }
+        });
     }
 }

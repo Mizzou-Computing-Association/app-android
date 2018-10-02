@@ -40,6 +40,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -146,20 +148,7 @@ public class PrizesFragment extends Fragment {
                 .build();
         TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
         Call<PrizeList> prizes = service.listPrizes("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes");
-        prizes.enqueue(new Callback<PrizeList>() {
-            @Override
-            public void onResponse(Call<PrizeList> call, Response<PrizeList> response) {
-                int statusCode = response.code();
-                PrizeList prizeList = response.body();
-                progressBar.setVisibility(View.GONE);
-                populatePrizes(prizeList);
-            }
-
-            @Override
-            public void onFailure(Call<PrizeList> call, Throwable t) {
-                Snackbar.make(layoutView, "TigerHacks API call failed. Make sure you are connected to the internet.", Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        callAPI(prizes);
 
 
         return layoutView;
@@ -227,7 +216,6 @@ public class PrizesFragment extends Fragment {
 
             if(prize.getPrizetype().equals("Beginner"))
             {
-                Log.e("TEST","WORKS");
                 card.setType(PrizeCardView.Type.BEGINNER);
             }
             else if(prize.getPrizetype().equals("Main"))
@@ -240,5 +228,29 @@ public class PrizesFragment extends Fragment {
                 cardLinearLayout.addView(card);
             }
         }
+    }
+
+    void callAPI(final Call<PrizeList> prizes)
+    {
+        prizes.clone().enqueue(new Callback<PrizeList>() {
+            @Override
+            public void onResponse(Call<PrizeList> call, Response<PrizeList> response) {
+                int statusCode = response.code();
+                PrizeList prizeList = response.body();
+                progressBar.setVisibility(View.GONE);
+                populatePrizes(prizeList);
+            }
+
+            @Override
+            public void onFailure(Call<PrizeList> call, Throwable t) {
+                Snackbar.make(layoutView, "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        callAPI(prizes);
+                    }
+                }, 10000);
+            }
+        });
     }
 }

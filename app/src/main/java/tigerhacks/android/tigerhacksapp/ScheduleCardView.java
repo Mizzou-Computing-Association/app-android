@@ -24,7 +24,7 @@ public class ScheduleCardView extends CardView {
     public enum Day {FRIDAY, SATURDAY, SUNDAY};
 
     private int clickCount = 0;
-    private TextView titleView, locationView, timeView;
+    private TextView titleView, locationView, timeView, descriptionView;
     private Day day;
 
     public ScheduleCardView(Context context, AttributeSet attrs) {
@@ -54,7 +54,9 @@ public class ScheduleCardView extends CardView {
         this.findViewsWithText(outputViews, "time", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
         timeView = (TextView)outputViews.get(0);
 
-
+        outputViews = new ArrayList<>();
+        this.findViewsWithText(outputViews, "description", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+        descriptionView = (TextView)outputViews.get(0);
         /*
         outputViews.clear();
         outputViews = new ArrayList<>();
@@ -74,11 +76,13 @@ public class ScheduleCardView extends CardView {
             {
                 if(clickCount++ % 2 == 0) //if handles expansion of card; else handles collapse
                 {
-                    //onexpand
+                    TransitionManager.beginDelayedTransition((ViewGroup) rootView);
+                    descriptionView.setVisibility(View.VISIBLE);
                 }
                 else
                 {
-                    //oncollapse
+                    TransitionManager.beginDelayedTransition((ViewGroup) rootView);
+                    descriptionView.setVisibility(View.GONE);
                 }
             }
         });
@@ -121,6 +125,7 @@ public class ScheduleCardView extends CardView {
             }
             else
             {
+                hours = Integer.toString(Integer.parseInt(hours)); //strips 0 off
                 ampm = "AM";
             }
 
