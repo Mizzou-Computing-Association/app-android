@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.support.transition.Fade;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -55,8 +56,9 @@ public class ScheduleCardView extends CardView {
         timeView = (TextView)outputViews.get(0);
 
         outputViews = new ArrayList<>();
-        this.findViewsWithText(outputViews, "description", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+        this.findViewsWithText(outputViews, "event_description", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
         descriptionView = (TextView)outputViews.get(0);
+        descriptionView.setVisibility(View.GONE);
         /*
         outputViews.clear();
         outputViews = new ArrayList<>();
@@ -74,6 +76,7 @@ public class ScheduleCardView extends CardView {
             @Override
             public void onClick(View view)
             {
+                Log.e("TEST", "clicked");
                 if(clickCount++ % 2 == 0) //if handles expansion of card; else handles collapse
                 {
                     TransitionManager.beginDelayedTransition((ViewGroup) rootView);
@@ -94,6 +97,9 @@ public class ScheduleCardView extends CardView {
     }
     public void setLocation(String s){
         locationView.setText(s);
+    }
+    public void setDescription(String s){
+        descriptionView.setText(s);
     }
     public void setTime(String s)
     {

@@ -193,7 +193,8 @@ public class ScheduleFragment extends Fragment {
             card.setTitle(item.getTitle());
             card.setLocation(item.getLocation());
             card.setTime(item.getTime());
-
+            card.setDescription(item.getDescription());
+            card.onClickAction(layoutView);
             if(card.getDay() == currentDay) {
                 cardLayoutView.addView(card);
             }
