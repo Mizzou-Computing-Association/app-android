@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,6 +13,16 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeScreenActivity extends AppCompatActivity implements MapFragment.OnFragmentInteractionListener, PrizesFragment.OnFragmentInteractionListener, SponsorsFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener, TigerTalksFragment.OnFragmentInteractionListener {
 
@@ -25,6 +36,8 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     private BottomNavigationView navigation;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
+
+    public SponsorList sponsorList = null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -117,6 +130,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         //set initial page/tab state
         mPager.setCurrentItem(0);
         navigation.setSelectedItemId(R.id.navigation_map);
+
     }
 
     //registers the MyGestureListener for handling touch gestures
@@ -162,4 +176,38 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     public void onFragmentInteraction(Uri uri)
     {}
 
+    public void onSponsorPageReady()
+    {
+        sponsorAPI();
+    }
+
+    private void sponsorAPI()
+    {
+        Retrofit tigerHacksRetrofit = new Retrofit.Builder()
+                .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSponsors/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
+        Call<SponsorList> sponsorCall = service.listSponsors("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSponsors");
+
+        sponsorCall.clone().enqueue(new Callback<SponsorList>() {
+            @Override
+            public void onResponse(Call<SponsorList> call, Response<SponsorList> response) {
+                int statusCode = response.code();
+                sponsorList = response.body();
+                sponsorsFragment.loadSponsorData(sponsorList);
+            }
+
+            @Override
+            public void onFailure(Call<SponsorList> call, Throwable t) {
+                Snackbar.make(mPager.getRootView(), "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        sponsorAPI();
+                    }
+                }, 10000);
+            }
+        });
+    }
 }

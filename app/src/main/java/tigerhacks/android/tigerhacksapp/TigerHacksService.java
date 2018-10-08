@@ -16,4 +16,7 @@ public interface TigerHacksService {
 
     @GET
     Call<ScheduleItemList> listItems(@Url String url);
+
+    @GET
+    Call<SponsorList> listSponsors(@Url String url);
 }

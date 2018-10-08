@@ -41,28 +41,6 @@ public class MapFragment extends Fragment {
     private View layoutView;
     private ZoomageView mapView;
 
-    private String group[] = {"How To Use StackOverflow" , "Fortran 101", "2007 Runescape LAN Party", "To Catch A Mac User with Chris Hansen"};
-    private String[][][] child = {
-            {{"Ever wanted to know how a programmer does their job? Join me for a comprehensive" +
-                    " look at using the programmer's most important tool.","Ikant Koad"}},
-            {{"Take a deep dive into one of today's most innovative languages: Fortran.","Big Richard"}},
-            {{"buying gf 2k", "Zezima"}},
-            {{"'How do you even use that stupid mouse?'","The Woz"}}
-    };
-    private String group2[] = {"This Is On Floor 2"};
-    private String[][][] child2 = {
-            {{"Wow, you have no idea how long this bit took to code.", "Swear to God this took longer than the rest of the app combined."}}
-    };
-    private String group3[] = {"This Is On Floor 2"};
-    private String[][][] child3 = {
-            {{"Wow, you have no idea how long this bit took to code.", "Swear to God this took longer than the rest of the app combined."}}
-    };
-    private String group4[] = {"This Is On Floor 2"};
-    private String[][][] child4 = {
-            {{"Wow, you have no idea how long this bit took to code.", "Swear to God this took longer than the rest of the app combined."}}
-    };
-
-
     public MapFragment() {
         // Required empty public constructor
     }
@@ -109,19 +87,19 @@ public class MapFragment extends Fragment {
                 switch(tab.getPosition()) {
                     case 0:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_1));
-                        populateEventList(group, child);
+                        populateEventList(null, null);
                         break;
                     case 1:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_2));
-                        populateEventList(group2, child2);
+                        populateEventList(null, null);
                         break;
                     case 2:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_3));
-                        populateEventList(group3, child3);
+                        populateEventList(null, null);
                         break;
                     case 3:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_4));
-                        populateEventList(group4, child4);
+                        populateEventList(null,null);
                         break;
                 }
             }
@@ -131,8 +109,6 @@ public class MapFragment extends Fragment {
         });
 
         //initial setup of event list
-        populateEventList(group, child);
-
         //return fragment layout to main activity
         return layoutView;
     }
@@ -140,37 +116,8 @@ public class MapFragment extends Fragment {
     private void populateEventList(String eventList[], String eventDetails[][][])
     {
         //this bit sets up an adapter for the ListView to use to display events
-        //first we set up the parameters for the very confusing SimpleExpandableListAdapter class
-        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
-        List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
-        for (int i = 0; i < eventList.length; i++) {
-            Map<String, String> curGroupMap = new HashMap<String, String>();
-            groupData.add(curGroupMap);
-            curGroupMap.put("GROUP_NAME", eventList[i]);
+        //first we set up the parameters for the very confusing SimpleExpandableListAdapter clas
 
-            List<Map<String, String>> children = new ArrayList<Map<String, String>>();
-            for (int j = 0; j < eventDetails[i].length; j++) {
-                Map<String, String> curChildMap = new HashMap<String, String>();
-                Map<String, String> curChildMap2 = new HashMap<String, String>();
-                children.add(curChildMap);
-                //children.add(curChildMap2);
-                curChildMap.put("CHILD_NAME1", eventDetails[i][j][0]);
-                curChildMap.put("CHILD_NAME2", "Speaker: " + eventDetails[i][j][1]);
-            }
-
-            childData.add(children);
-
-        }
-
-        // set up expandable event list
-        ExpandableListAdapter mAdapter = new SimpleExpandableListAdapter(this.getContext(), groupData,
-                R.layout.expandable_list_item,
-                new String[]{"GROUP_NAME"}, new int[]{R.id.expandable_text_view},
-                childData, R.layout.expanded_list_item,
-                new String[]{"CHILD_NAME1", "CHILD_NAME2"}, new int[]{R.id.expanded_text_view, R.id.expanded_text_view2});
-        ExpandableListView lv = layoutView.findViewById(R.id.listView);
-        lv.setChildDivider(getResources().getDrawable(R.color.transparent));
-        lv.setAdapter(mAdapter);
     }
 
     @Override
