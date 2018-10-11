@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.SimpleExpandableListAdapter;
 
 import com.jsibbold.zoomage.ZoomageView;
@@ -40,6 +41,9 @@ public class MapFragment extends Fragment {
 
     private View layoutView;
     private ZoomageView mapView;
+    private HomeScreenActivity home;
+    private LinearLayout eventLayout;
+    private ArrayList<ScheduleItem> eventList;
 
     public MapFragment() {
         // Required empty public constructor
@@ -80,6 +84,8 @@ public class MapFragment extends Fragment {
         TabLayout tabLayout = layoutView.findViewById(R.id.tabLayout);
         mapView = layoutView.findViewById(R.id.mapView);
 
+        eventLayout = layoutView.findViewById(R.id.eventLayout);
+
         //add button onclick events. Handles button visuals and map changing
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -108,6 +114,8 @@ public class MapFragment extends Fragment {
             @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
 
+        home = (HomeScreenActivity)getActivity();
+
         //initial setup of event list
         //return fragment layout to main activity
         return layoutView;
@@ -118,12 +126,6 @@ public class MapFragment extends Fragment {
         //this bit sets up an adapter for the ListView to use to display events
         //first we set up the parameters for the very confusing SimpleExpandableListAdapter clas
 
-    }
-
-    @Override
-    public void onStart()
-    {
-        super.onStart();
     }
 
     @Override
@@ -139,6 +141,41 @@ public class MapFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        home.onFragmentsReady();
+    }
+
+    public void loadSchedule(ScheduleItemList scheduleList)
+    {
+        if(scheduleList == null)
+        {
+            return;
+        }
+        //progressBar.setVisibility(View.GONE);
+        eventList = (ArrayList<ScheduleItem>)scheduleList.getSchedule();
+        addFloorEvents(eventList, 1);
+    }
+
+    public void addFloorEvents(ArrayList<ScheduleItem> list, int floor)
+    {
+        eventLayout.removeAllViews();
+        for(ScheduleItem item : list)
+        {
+            ScheduleCardView card = (ScheduleCardView)LayoutInflater.from(eventLayout.getContext()).inflate(R.layout.schedule_card_layout, eventLayout, false);
+            card.setTitle(item.getTitle());
+            card.setLocation(item.getLocation());
+            card.setTime(item.getTime());
+            card.setDescription(item.getDescription());
+            card.onClickAction(layoutView);
+            if(item.getFloor() == floor) {
+                eventLayout.addView(card);
+            }
+        }
     }
 
     /**

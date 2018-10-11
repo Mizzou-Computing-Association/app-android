@@ -68,6 +68,7 @@ public class PrizesFragment extends Fragment {
     private PrizeCardView.Type currentType = PrizeCardView.Type.MAIN;
     private TabLayout tabLayout;
     private ArrayList<Prize> cardList;
+    private HomeScreenActivity home;
 
     private OnFragmentInteractionListener mListener;
 
@@ -139,6 +140,8 @@ public class PrizesFragment extends Fragment {
 
         progressBar = layoutView.findViewById(R.id.progressBar);
 
+        home = (HomeScreenActivity)getActivity();
+
         //create cards. This is static, and will be replaced by dynamic creation through the API
 
 
@@ -201,6 +204,11 @@ public class PrizesFragment extends Fragment {
         }
         cardList = (ArrayList<Prize>)prizeList.getPrizes();
         addCardsByType(cardList);
+    }
+
+    public void onStart() {
+        super.onStart();
+        home.onFragmentsReady();
     }
 
     public void addCardsByType(ArrayList<Prize> list)

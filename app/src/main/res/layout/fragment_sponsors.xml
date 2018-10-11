@@ -61,8 +61,9 @@
                     <!--android:scaleType="fitXY"-->
                     <!--android:src="@drawable/ic_sponsors_24dp" />-->
             <!--</LinearLayout>-->
+
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/platinumText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="PLATINUM SPONSORS"
@@ -70,12 +71,65 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <ImageButton
-                android:id="@+id/testImage"
-                android:layout_width="350dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="fitXY" />
+            <LinearLayout
+                android:id="@+id/platinumLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/goldText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GOLD SPONSORS"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/goldLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/silverText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SILVER SPONSORS"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/silverLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/bronzeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BRONZE SPONSORS"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/bronzeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

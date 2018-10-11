@@ -49,6 +49,7 @@ public class ScheduleFragment extends Fragment {
     private Day currentDay = Day.FRIDAY;
     private ArrayList<ScheduleItem> cardList;
     private ProgressBar progressBar;
+    public HomeScreenActivity home;
 
     private OnFragmentInteractionListener mListener;
 
@@ -123,16 +124,8 @@ public class ScheduleFragment extends Fragment {
         });
 
         cardLayoutView = layoutView.findViewById(R.id.cardLinearLayout);
-
         progressBar = layoutView.findViewById(R.id.progressBar2);
-
-        Retrofit tigerHacksRetrofit = new Retrofit.Builder()
-                .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
-        Call<ScheduleItemList> schedule = service.listItems("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSchedule");
-        callAPI(schedule);
+        home = (HomeScreenActivity)getActivity();
         return layoutView;
     }
 
@@ -175,12 +168,19 @@ public class ScheduleFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void populateSchedule(ScheduleItemList scheduleList)
+    public void onStart()
+    {
+        super.onStart();
+        home.onFragmentsReady();
+    }
+
+    public void loadSchedule(ScheduleItemList scheduleList)
     {
         if(scheduleList == null)
         {
             return;
         }
+        progressBar.setVisibility(View.GONE);
         cardList = (ArrayList<ScheduleItem>)scheduleList.getSchedule();
         addDayEvents(cardList);
     }
@@ -199,28 +199,5 @@ public class ScheduleFragment extends Fragment {
                 cardLayoutView.addView(card);
             }
         }
-    }
-    void callAPI(final Call<ScheduleItemList> schedule)
-    {
-        schedule.clone().enqueue(new Callback<ScheduleItemList>() {
-            @Override
-            public void onResponse(Call<ScheduleItemList> call, Response<ScheduleItemList> response) {
-                int statusCode = response.code();
-                ScheduleItemList scheduleList = response.body();
-                progressBar.setVisibility(View.GONE);
-                populateSchedule(scheduleList);
-            }
-
-            @Override
-            public void onFailure(Call<ScheduleItemList> call, Throwable t) {
-                Snackbar.make(layoutView, "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        callAPI(schedule);
-                    }
-                }, 10000);
-            }
-        });
     }
 }

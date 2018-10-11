@@ -2,15 +2,22 @@ package tigerhacks.android.tigerhacksapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -32,6 +39,7 @@ public class SponsorsFragment extends Fragment {
     private String mParam2;
     private View layout;
     private HomeScreenActivity home;
+    private ImageView im;
 
     private ImageView im1;
 
@@ -73,13 +81,15 @@ public class SponsorsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         layout = inflater.inflate(R.layout.fragment_sponsors, container, false);
-        home = (HomeScreenActivity)getActivity();
+        home = (HomeScreenActivity) getActivity();
+        Log.e("TEST", "view loaded");
         return layout;
     }
+
     public void onStart()
     {
         super.onStart();
-        home.onSponsorPageReady();
+        home.onFragmentsReady();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -117,10 +127,42 @@ public class SponsorsFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void loadSponsorData(SponsorList list)
-    {
-        ImageView im = layout.findViewById(R.id.testImage);
-        Picasso.get().load(list.getSponsors().get(0).getImage())
-                .into(im);
+    public void loadSponsorData(final SponsorList list) {
+        LinearLayout pLayout = layout.findViewById(R.id.platinumLayout);
+        LinearLayout gLayout = layout.findViewById(R.id.goldLayout);
+        LinearLayout sLayout = layout.findViewById(R.id.silverLayout);
+        LinearLayout bLayout = layout.findViewById(R.id.bronzeLayout);
+
+        for(Sponsor sponsor : list.getSponsors())
+        {
+            ImageView image = new ImageView(getContext());
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)gLayout.getLayoutParams();
+            layoutParams.height = dpToPx(100);
+            image.setLayoutParams(layoutParams);
+            image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            Picasso.get().load(sponsor.getImage()).into(image);
+            switch(sponsor.getLevel())
+            {
+                case "Platinum":
+                    pLayout.addView(image);
+                    break;
+                case "Gold":
+                    gLayout.addView(image);
+                    break;
+                case "Silver":
+                    sLayout.addView(image);
+                    break;
+                case "Bronze":
+                    bLayout.addView(image);
+                    break;
+            }
+        }
+    }
+
+    private int dpToPx(int dp) {
+        float density = getContext().getResources()
+                .getDisplayMetrics()
+                .density;
+        return Math.round((float) dp * density);
     }
 }

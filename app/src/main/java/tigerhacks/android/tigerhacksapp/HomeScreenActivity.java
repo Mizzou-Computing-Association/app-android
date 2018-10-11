@@ -37,6 +37,11 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
 
+    static boolean sponsorsLoaded = false;
+    static boolean scheduleLoaded = false;
+    static boolean prizesLoaded = false;
+    private static int loadedCount = 0;
+
     public SponsorList sponsorList = null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -146,17 +151,17 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             switch(position)
             {
                 case 0:
-                    return new MapFragment();
+                    return mapFragment;
                 case 1:
-                    return new PrizesFragment();
+                    return prizesFragment;
                 case 2:
-                    return new ScheduleFragment();
+                    return scheduleFragment;
                 case 3:
-                    return new SponsorsFragment();
+                    return sponsorsFragment;
                 case 4:
-                    return new TigerTalksFragment();
+                    return tigerTalksFragment;
                 default:
-                    return new ScheduleFragment();
+                    return scheduleFragment;
             }
         }
 
@@ -178,11 +183,44 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
     public void onSponsorPageReady()
     {
+        if(sponsorsLoaded)
+        {
+            return;
+        }
         sponsorAPI();
+    }
+
+    public void onSchedulePageReady()
+    {
+        if(scheduleLoaded)
+        {
+            return;
+        }
+        scheduleAPI();
+    }
+
+    public void onMapReady()
+    {
+        if(scheduleLoaded)
+        {
+            return;
+        }
+        scheduleAPI();
+    }
+
+    public void onFragmentsReady()
+    {
+        loadedCount++;
+        if(loadedCount == 5)
+        {
+            sponsorAPI();
+            scheduleAPI();
+        }
     }
 
     private void sponsorAPI()
     {
+
         Retrofit tigerHacksRetrofit = new Retrofit.Builder()
                 .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSponsors/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -205,6 +243,37 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
                     @Override
                     public void run() {
                         sponsorAPI();
+                    }
+                }, 10000);
+            }
+        });
+    }
+    private void scheduleAPI()
+    {
+        Retrofit tigerHacksRetrofit = new Retrofit.Builder()
+                .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
+        Call<ScheduleItemList> schedule = service.listItems("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksSchedule");
+
+        schedule.clone().enqueue(new Callback<ScheduleItemList>() {
+            @Override
+            public void onResponse(Call<ScheduleItemList> call, Response<ScheduleItemList> response) {
+                int statusCode = response.code();
+                ScheduleItemList scheduleList = response.body();
+                //progressBar.setVisibility(View.GONE);
+                scheduleFragment.loadSchedule(scheduleList);
+                mapFragment.loadSchedule(scheduleList);
+            }
+
+            @Override
+            public void onFailure(Call<ScheduleItemList> call, Throwable t) {
+                Snackbar.make(scheduleFragment.getView(), "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        scheduleAPI();
                     }
                 }, 10000);
             }

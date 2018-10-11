@@ -27,6 +27,8 @@ public class TigerTalksFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private HomeScreenActivity home;
+
     private OnFragmentInteractionListener mListener;
 
     public TigerTalksFragment() {
@@ -64,6 +66,7 @@ public class TigerTalksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        home = (HomeScreenActivity)getActivity();
         return inflater.inflate(R.layout.fragment_tigertalks, container, false);
     }
 
@@ -89,6 +92,12 @@ public class TigerTalksFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void onStart()
+    {
+        super.onStart();
+        home.onFragmentsReady();
     }
 
     /**
