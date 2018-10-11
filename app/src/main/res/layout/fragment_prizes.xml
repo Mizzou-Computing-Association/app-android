@@ -20,16 +20,23 @@
             app:tabIndicatorColor="@color/colorPrimary">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/mainTab"
+                android:id="@+id/developerTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Main" />
+                android:text="Developer" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/startupTab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="StartUp" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/beginnerTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Beginner" />
+
         </android.support.design.widget.TabLayout>
 
         <ScrollView

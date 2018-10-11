@@ -9,6 +9,8 @@
     <!--Main Grey-->
     <color name="colorGrey">#323132</color>
 
+    <color name="transBackground">#ebfef8e2</color>
+
     <!--Utility Colors-->
     <color name="white">#FFF</color>
     <color name="black">#000</color>

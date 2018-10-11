@@ -44,6 +44,7 @@ public class MapFragment extends Fragment {
     private HomeScreenActivity home;
     private LinearLayout eventLayout;
     private ArrayList<ScheduleItem> eventList;
+    private boolean apiLoaded = false;
 
     public MapFragment() {
         // Required empty public constructor
@@ -94,18 +95,34 @@ public class MapFragment extends Fragment {
                     case 0:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_1));
                         populateEventList(null, null);
+                        if(apiLoaded)
+                        {
+                            addFloorEvents(eventList, 0);
+                        }
                         break;
                     case 1:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_2));
                         populateEventList(null, null);
+                        if(apiLoaded)
+                        {
+                            addFloorEvents(eventList, 1);
+                        }
                         break;
                     case 2:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_3));
                         populateEventList(null, null);
+                        if(apiLoaded)
+                        {
+                            addFloorEvents(eventList, 2);
+                        }
                         break;
                     case 3:
                         mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_4));
                         populateEventList(null,null);
+                        if(apiLoaded)
+                        {
+                            addFloorEvents(eventList, 3);
+                        }
                         break;
                 }
             }
@@ -152,6 +169,7 @@ public class MapFragment extends Fragment {
 
     public void loadSchedule(ScheduleItemList scheduleList)
     {
+        apiLoaded = true;
         if(scheduleList == null)
         {
             return;
@@ -166,12 +184,13 @@ public class MapFragment extends Fragment {
         eventLayout.removeAllViews();
         for(ScheduleItem item : list)
         {
-            ScheduleCardView card = (ScheduleCardView)LayoutInflater.from(eventLayout.getContext()).inflate(R.layout.schedule_card_layout, eventLayout, false);
+            ScheduleCardView card = (ScheduleCardView)LayoutInflater.from(eventLayout.getContext()).inflate(R.layout.schedule_card_layout_map, eventLayout, false);
             card.setTitle(item.getTitle());
             card.setLocation(item.getLocation());
             card.setTime(item.getTime());
             card.setDescription(item.getDescription());
             card.onClickAction(layoutView);
+            card.setDay("FRIDAY");
             if(item.getFloor() == floor) {
                 eventLayout.addView(card);
             }

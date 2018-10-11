@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tigerhacks.android.tigerhacksapp.ScheduleCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scheduleCard2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardCornerRadius="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp">
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="title"
+                    android:text="Pillow Fight"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="location"
+                    android:text="Time Capsule"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryLight" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:contentDescription="time"
+                    android:text="8:30 PM"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/dayText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:contentDescription="day"
+                    android:text="FRIDAY"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryLight"
+            android:contentDescription="event_description"
+            android:padding="8dp"
+            android:text="This is some description text for an event happening at TigerHacks"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+</tigerhacks.android.tigerhacksapp.ScheduleCardView>
+

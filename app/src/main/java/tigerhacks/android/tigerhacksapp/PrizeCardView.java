@@ -29,7 +29,7 @@ public class PrizeCardView extends CardView {
     private LinearLayout linear1View, linear2View;
     private ImageView imageView;
 
-    public enum Type {BEGINNER, MAIN};
+    public enum Type {BEGINNER, MAIN, STARTUP};
 
     private Type type;
 

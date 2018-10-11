@@ -4,15 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.squareup.picasso.Picasso;
 
@@ -128,7 +132,7 @@ public class SponsorsFragment extends Fragment {
     }
 
     public void loadSponsorData(final SponsorList list) {
-        LinearLayout pLayout = layout.findViewById(R.id.platinumLayout);
+        final LinearLayout pLayout = layout.findViewById(R.id.platinumLayout);
         LinearLayout gLayout = layout.findViewById(R.id.goldLayout);
         LinearLayout sLayout = layout.findViewById(R.id.silverLayout);
         LinearLayout bLayout = layout.findViewById(R.id.bronzeLayout);
@@ -156,6 +160,31 @@ public class SponsorsFragment extends Fragment {
                     bLayout.addView(image);
                     break;
             }
+
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.e("TEST", "clicked image");
+                    LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View popView = inflater.inflate(R.layout.fragment_sponsors_detail, null);
+                    final PopupWindow window = new PopupWindow(popView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                    /*if(Build.VERSION.SDK_INT>=21){
+                        window.setElevation(5.0f);
+                    }*/
+
+                    ImageView backButton = popView.findViewById(R.id.backButton);
+                    popView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            window.dismiss();
+                        }
+                    });
+                    window.showAtLocation(pLayout, Gravity.CENTER,10,10);
+                    window.update();
+                }
+            });
+
         }
     }
 

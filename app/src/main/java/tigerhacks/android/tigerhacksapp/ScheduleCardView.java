@@ -25,7 +25,7 @@ public class ScheduleCardView extends CardView {
     public enum Day {FRIDAY, SATURDAY, SUNDAY};
 
     private int clickCount = 0;
-    private TextView titleView, locationView, timeView, descriptionView;
+    private TextView titleView, locationView, timeView, descriptionView, dayView;
     private Day day;
 
     public ScheduleCardView(Context context, AttributeSet attrs) {
@@ -54,6 +54,12 @@ public class ScheduleCardView extends CardView {
         outputViews = new ArrayList<>();
         this.findViewsWithText(outputViews, "time", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
         timeView = (TextView)outputViews.get(0);
+
+        outputViews = new ArrayList<>();
+        this.findViewsWithText(outputViews, "day", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+        if(outputViews.isEmpty() == false) {
+            dayView = (TextView) outputViews.get(0);
+        }
 
         outputViews = new ArrayList<>();
         this.findViewsWithText(outputViews, "event_description", FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
@@ -100,6 +106,13 @@ public class ScheduleCardView extends CardView {
     }
     public void setDescription(String s){
         descriptionView.setText(s);
+    }
+    public void setDay(String s)
+    {
+        if(dayView != null)
+        {
+            dayView.setText(s);
+        }
     }
     public void setTime(String s)
     {

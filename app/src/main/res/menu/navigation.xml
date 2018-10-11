@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/navigation_prizes"
-        android:icon="@drawable/ic_prizes_24dp"
+        android:icon="@drawable/ic_outline_grade_24px"
         android:title="@string/title_prizes" />
 
     <item
@@ -17,7 +17,7 @@
 
     <item
         android:id="@+id/navigation_sponsors"
-        android:icon="@drawable/ic_sponsors_24dp"
+        android:icon="@drawable/ic_baseline_account_circle_24px"
         android:title="@string/title_sponsors" />
 
     <item

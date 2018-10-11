@@ -122,6 +122,11 @@ public class PrizesFragment extends Fragment {
                 }
                 else if(tab.getPosition() == 1)
                 {
+                    currentType = PrizeCardView.Type.STARTUP;
+                    addCardsByType(cardList);
+                }
+                else if(tab.getPosition() == 2)
+                {
                     currentType = PrizeCardView.Type.BEGINNER;
                     addCardsByType(cardList);
                 }
@@ -229,6 +234,10 @@ public class PrizesFragment extends Fragment {
             else if(prize.getPrizetype().equals("Main"))
             {
                 card.setType(PrizeCardView.Type.MAIN);
+            }
+            else if(prize.getPrizetype().equals("StartUp"))
+            {
+                card.setType(PrizeCardView.Type.STARTUP);
             }
 
             if(card.getType() == currentType)
