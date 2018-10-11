@@ -9,14 +9,15 @@
     <!--Main Grey-->
     <color name="colorGrey">#323132</color>
 
-    <color name="transBackground">#ebfef8e2</color>
+    <!--Sponsor Levels-->
+    <color name="platinum">#53aab7</color>
+    <color name="gold">#cab425</color>
+    <color name="silver">#acacac</color>
+    <color name="bronze">#c27836</color>
 
     <!--Utility Colors-->
     <color name="white">#FFF</color>
     <color name="black">#000</color>
     <color name="transparent">#0FFF</color>
-    <color name="platinum">#d4d4d4</color>
-    <color name="gold">#fdfa26</color>
-    <color name="silver">#acacac</color>
-    <color name="bronze">#de891a</color>
+
 </resources>

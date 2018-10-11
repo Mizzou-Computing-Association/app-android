@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeScreenActivity extends AppCompatActivity implements MapFragment.OnFragmentInteractionListener, PrizesFragment.OnFragmentInteractionListener, SponsorsFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener, TigerTalksFragment.OnFragmentInteractionListener {
 
-    private FragmentManager fragmentManager;
+    FragmentManager fragmentManager;
     private MapFragment mapFragment;
     private PrizesFragment prizesFragment;
     private ScheduleFragment scheduleFragment;
