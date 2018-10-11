@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,13 +24,7 @@ public class SponsorDetailDialog extends DialogFragment {
 
     private Sponsor sponsorData;
 
-    private ImageView mainImage;
-    private TextView nameText;
-    private TextView secondText;
     private TextView linkText;
-    private TextView descriptionText;
-    private ImageView backButton;
-    private LinearLayout mentorLayout;
 
     @SuppressLint("ValidFragment")
     public SponsorDetailDialog(Sponsor sponsor) {
@@ -45,13 +38,13 @@ public class SponsorDetailDialog extends DialogFragment {
 
         View view = inflater.inflate(R.layout.fragment_sponsors_detail, container, false);
 
-        mainImage = view.findViewById(R.id.mainImage);
-        nameText = view.findViewById(R.id.sponsorName);
-        secondText = view.findViewById(R.id.secondText);
+        ImageView mainImage = view.findViewById(R.id.mainImage);
+        TextView nameText = view.findViewById(R.id.sponsorName);
+        TextView secondText = view.findViewById(R.id.secondText);
         linkText = view.findViewById(R.id.linkText);
-        descriptionText = view.findViewById(R.id.descriptionText);
-        backButton = view.findViewById(R.id.backButton);
-        mentorLayout = view.findViewById(R.id.mentorLayout);
+        TextView descriptionText = view.findViewById(R.id.descriptionText);
+        ImageView backButton = view.findViewById(R.id.backButton);
+        LinearLayout mentorLayout = view.findViewById(R.id.mentorLayout);
 
         nameText.setText(sponsorData.getName());
         secondText.setText(sponsorData.getLocation());

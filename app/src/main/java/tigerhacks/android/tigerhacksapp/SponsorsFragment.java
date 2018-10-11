@@ -1,29 +1,19 @@
 package tigerhacks.android.tigerhacksapp;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -45,9 +35,6 @@ public class SponsorsFragment extends Fragment {
     private String mParam2;
     private View layout;
     private HomeScreenActivity home;
-    private ImageView im;
-
-    private ImageView im1;
 
     private OnFragmentInteractionListener mListener;
 
@@ -96,13 +83,6 @@ public class SponsorsFragment extends Fragment {
     {
         super.onStart();
         home.onFragmentsReady();
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -176,7 +156,7 @@ public class SponsorsFragment extends Fragment {
     }
 
     private int dpToPx(int dp) {
-        float density = getContext().getResources()
+        float density = Objects.requireNonNull(getContext()).getResources()
                 .getDisplayMetrics()
                 .density;
         return Math.round((float) dp * density);
