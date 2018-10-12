@@ -28,10 +28,9 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_margin="16dp"
             android:layout_marginTop="16dp"
             android:onClick="linkWebsite"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +39,7 @@
 
             <LinearLayout
                 android:id="@+id/websiteLink"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:gravity="center"
@@ -68,13 +67,11 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_margin="16dp"
             android:layout_marginTop="8dp"
-            android:foregroundGravity="center"
+            android:onClick="linkSlack"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,8 +110,9 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +122,7 @@
                 android:id="@+id/flask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="linkFlask"
                 android:padding="16dp"
                 android:text="Intro to Flask"
                 android:textAppearance="@android:style/TextAppearance.Material.Title"
@@ -132,8 +131,9 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +143,7 @@
                 android:id="@+id/webDev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="linkWebDev"
                 android:padding="16dp"
                 android:text="Intro to Web Dev"
                 android:textAlignment="center"
@@ -151,8 +152,9 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,6 +164,7 @@
                 android:id="@+id/iOSDev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="linkIOS"
                 android:padding="16dp"
                 android:text="Intro to iOS Dev"
                 android:textAppearance="@android:style/TextAppearance.Material.Title" />
