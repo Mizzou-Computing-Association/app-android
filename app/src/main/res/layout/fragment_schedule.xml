@@ -48,6 +48,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:visibility="visible" />
+
                 <ProgressBar
                     android:id="@+id/progressBar2"
                     style="?android:attr/progressBarStyle"
@@ -60,7 +65,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

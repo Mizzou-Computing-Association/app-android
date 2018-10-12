@@ -8,7 +8,7 @@
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="0dp">
 
     <LinearLayout
@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
+            android:background="@color/white"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingTop="15dp">
@@ -30,7 +30,8 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
 
                 <TextView
                     android:id="@+id/textView2"
@@ -38,9 +39,10 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="title"
                     android:text="Pillow Fight"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryLight"
-                    android:textSize="20sp" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -48,8 +50,8 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="location"
                     android:text="Time Capsule"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimaryLight" />
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
 
@@ -62,8 +64,9 @@
                 android:contentDescription="time"
                 android:text="8:30 PM"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="28sp" />
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
