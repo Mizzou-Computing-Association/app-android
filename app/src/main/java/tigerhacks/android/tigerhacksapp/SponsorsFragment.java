@@ -122,8 +122,9 @@ public class SponsorsFragment extends Fragment {
         for (final Sponsor sponsor : list.getSponsors())
         {
             ImageView image = new ImageView(getContext());
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)gLayout.getLayoutParams();
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100);
             layoutParams.height = dpToPx(100);
+            layoutParams.setMargins(0, 32, 0, 32);
             image.setLayoutParams(layoutParams);
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
             Picasso.get().load(sponsor.getImage()).into(image);

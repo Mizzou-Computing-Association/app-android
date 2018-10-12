@@ -16,8 +16,7 @@
             android:id="@+id/sponsorVerticalLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="32dp">
+            android:orientation="vertical">
 
             <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
@@ -66,66 +65,82 @@
             <TextView
                 android:id="@+id/platinum"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
+                android:background="@color/platinum"
                 android:gravity="center"
                 android:text="Platinum Sponsors"
                 android:textAlignment="center"
-                android:textColor="@color/platinum"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/platinumLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingEnd="32dp"
+                android:paddingStart="32dp"
+                android:paddingTop="16dp">
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/gold"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
+                android:background="@color/gold"
                 android:gravity="center"
                 android:text="Gold Sponsors"
                 android:textAllCaps="false"
-                android:textColor="@color/gold"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/goldLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingEnd="32dp"
+                android:paddingStart="32dp"
+                android:paddingTop="16dp">
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/silver"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
+                android:background="@color/silver"
                 android:gravity="center"
                 android:text="Silver Sponsors"
-                android:textColor="@color/silver"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/silverLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingEnd="32dp"
+                android:paddingStart="32dp"
+                android:paddingTop="16dp">
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/bronze"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
+                android:background="@color/bronze"
                 android:gravity="center"
                 android:text="Bronze Sponsors"
-                android:textColor="@color/bronze"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -133,7 +148,11 @@
                 android:id="@+id/bronzeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingEnd="32dp"
+                android:paddingStart="32dp"
+                android:paddingTop="16dp">
 
             </LinearLayout>
 
