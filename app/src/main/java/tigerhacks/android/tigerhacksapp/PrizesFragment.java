@@ -228,8 +228,8 @@ public class PrizesFragment extends Fragment {
             card.onClickAction(layoutView);
 
             if(sList != null) {
-                prize.setSponsor(1);
-                card.setImage(sList.get(prize.getSponsor()).getImage());
+                int n = prize.getSponsor() % sList.size();
+                card.setImage(sList.get(n).getImage());
             }
 
             if(prize.getPrizetype().equals("Beginner"))
