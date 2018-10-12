@@ -75,12 +75,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryLight"
+            android:background="@color/white"
             android:contentDescription="event_description"
-            android:padding="8dp"
+            android:padding="16dp"
             android:text="This is some description text for an event happening at TigerHacks"
-            android:textAlignment="center"
-            android:textSize="18sp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             android:visibility="visible" />
 
     </LinearLayout>
