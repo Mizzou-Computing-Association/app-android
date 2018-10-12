@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -233,6 +235,18 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             public void onResponse(Call<SponsorList> call, Response<SponsorList> response) {
                 int statusCode = response.code();
                 sponsorList = response.body();
+
+                //REMOVE
+                ArrayList<Mentor> l = new ArrayList<Mentor>();
+                for(int i = 0; i < 8; i++) {
+                    Mentor m = new Mentor();
+                    m.setContact("cfpvf9@mail.missouri.edu");
+                    m.setName("Connor Penrod");
+                    m.setSkills("I am a useless waste of space.");
+                    l.add(m);
+                }
+                sponsorList.getSponsors().get(0).setMentors(l);
+                //REMOVE
                 sponsorsFragment.loadSponsorData(sponsorList);
             }
 

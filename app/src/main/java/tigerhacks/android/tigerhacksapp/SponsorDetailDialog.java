@@ -2,13 +2,18 @@ package tigerhacks.android.tigerhacksapp;
 
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +75,18 @@ public class SponsorDetailDialog extends DialogFragment {
             TextView name = new TextView(getContext());
             name.setText(mentor.getName());
             name.setTypeface(null, Typeface.BOLD);
-            TextView contact = new TextView(getContext());
+            final TextView contact = new TextView(getContext());
+            //contact.setTextIsSelectable(true);
+            contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("something", contact.getText());
+                    clipboard.setPrimaryClip(clip);
+                    Snackbar.make(contact.getRootView(), "Contact copied to clipboard", Snackbar.LENGTH_SHORT).show();
+                }
+            });
+            contact.setTextColor(getResources().getColor(R.color.linkColor));
             contact.setText(mentor.getContact());
             TextView skills = new TextView(getContext());
             skills.setText(mentor.getSkills());
