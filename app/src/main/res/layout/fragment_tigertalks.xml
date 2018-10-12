@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -22,42 +23,35 @@
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/talk1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryLight"
+            android:onClick="linkWebDev"
+            android:text="Intro to Web Development" />
 
-            <Button
-                android:id="@+id/talk1"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryLight"
-                android:onClick="linkWebDev"
-                android:text="Intro to Web Development" />
+        <Button
+            android:id="@+id/talk3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryLight"
+            android:onClick="linkFlask"
+            android:text="Intro to Flask" />
 
-            <Button
-                android:id="@+id/talk2"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryLight"
-                android:onClick="linkIOS"
-                android:text="Intro to IOS Development" />
-
-            <Button
-                android:id="@+id/talk3"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryLight"
-                android:onClick="linkFlask"
-                android:text="Intro to Flask" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/talk2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryLight"
+            android:onClick="linkIOS"
+            android:text="Intro to IOS Development" />
 
         <TextView
             android:id="@+id/otherResourcesText"

@@ -7,17 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.SimpleExpandableListAdapter;
 
 import com.jsibbold.zoomage.ZoomageView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -85,44 +79,19 @@ public class MapFragment extends Fragment {
         TabLayout tabLayout = layoutView.findViewById(R.id.tabLayout);
         mapView = layoutView.findViewById(R.id.mapView);
 
-        eventLayout = layoutView.findViewById(R.id.eventLayout);
-
         //add button onclick events. Handles button visuals and map changing
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch(tab.getPosition()) {
                     case 0:
-                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_1));
-                        populateEventList(null, null);
-                        if(apiLoaded)
-                        {
-                            addFloorEvents(eventList, 0);
-                        }
+                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.floor1map));
                         break;
                     case 1:
-                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_2));
-                        populateEventList(null, null);
-                        if(apiLoaded)
-                        {
-                            addFloorEvents(eventList, 1);
-                        }
+                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.floor2map));
                         break;
                     case 2:
-                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_3));
-                        populateEventList(null, null);
-                        if(apiLoaded)
-                        {
-                            addFloorEvents(eventList, 2);
-                        }
-                        break;
-                    case 3:
-                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.im_laf_map_4));
-                        populateEventList(null,null);
-                        if(apiLoaded)
-                        {
-                            addFloorEvents(eventList, 3);
-                        }
+                        mapView.setImageDrawable(getResources().getDrawable(R.drawable.floor3map));
                         break;
                 }
             }
@@ -138,27 +107,16 @@ public class MapFragment extends Fragment {
         return layoutView;
     }
 
-    private void populateEventList(String eventList[], String eventDetails[][][])
-    {
-        //this bit sets up an adapter for the ListView to use to display events
-        //first we set up the parameters for the very confusing SimpleExpandableListAdapter clas
-
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        if (!(context instanceof OnFragmentInteractionListener)) {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-    }
+    public void onDetach() { super.onDetach(); }
 
     @Override
     public void onStart()
@@ -170,31 +128,9 @@ public class MapFragment extends Fragment {
     public void loadSchedule(ScheduleItemList scheduleList)
     {
         apiLoaded = true;
-        if(scheduleList == null)
-        {
-            return;
-        }
+        if(scheduleList == null) return;
         //progressBar.setVisibility(View.GONE);
         eventList = (ArrayList<ScheduleItem>)scheduleList.getSchedule();
-        addFloorEvents(eventList, 1);
-    }
-
-    public void addFloorEvents(ArrayList<ScheduleItem> list, int floor)
-    {
-        eventLayout.removeAllViews();
-        for(ScheduleItem item : list)
-        {
-            ScheduleCardView card = (ScheduleCardView)LayoutInflater.from(eventLayout.getContext()).inflate(R.layout.schedule_card_layout_map, eventLayout, false);
-            card.setTitle(item.getTitle());
-            card.setLocation(item.getLocation());
-            card.setTime(item.getTime());
-            card.setDescription(item.getDescription());
-            card.onClickAction(layoutView);
-            card.setDay("FRIDAY");
-            if(item.getFloor() == floor) {
-                eventLayout.addView(card);
-            }
-        }
     }
 
     /**
