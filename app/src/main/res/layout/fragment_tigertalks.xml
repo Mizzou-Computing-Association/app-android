@@ -114,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="8dp"
+            android:onClick="linkFlask"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView5">
@@ -122,7 +123,6 @@
                 android:id="@+id/flask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="linkFlask"
                 android:padding="16dp"
                 android:text="Intro to Flask"
                 android:textAppearance="@android:style/TextAppearance.Material.Title"
@@ -134,7 +134,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:onClick="linkWebDev"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView7">
@@ -143,7 +144,6 @@
                 android:id="@+id/webDev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="linkWebDev"
                 android:padding="16dp"
                 android:text="Intro to Web Dev"
                 android:textAlignment="center"
@@ -156,6 +156,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="16dp"
+            android:onClick="linkIOS"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8">
@@ -164,7 +165,6 @@
                 android:id="@+id/iOSDev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="linkIOS"
                 android:padding="16dp"
                 android:text="Intro to iOS Dev"
                 android:textAppearance="@android:style/TextAppearance.Material.Title" />

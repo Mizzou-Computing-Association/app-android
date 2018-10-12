@@ -5,10 +5,10 @@
     android:id="@+id/prizeCard1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="6dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:elevation="8dp"
+    android:layout_marginTop="2dp"
     app:cardBackgroundColor="@color/white">
 
     <LinearLayout
@@ -40,13 +40,13 @@
                 android:contentDescription="title"
                 android:text="Tech Company Prize"
                 android:textColor="@color/colorPrimary"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="8dp"
                 android:contentDescription="description"
                 android:text="Here's some content talking about the prize."
                 android:textAllCaps="false"
@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="subtitle2"
                 android:text="Prizes"
@@ -69,8 +69,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
                 android:contentDescription="linear2"
                 android:orientation="vertical">
 
