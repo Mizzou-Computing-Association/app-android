@@ -28,31 +28,14 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/talk3"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryLight"
-                android:text="Android Studio: The Greatest IDE On Earth" />
-
-            <Button
-                android:id="@+id/talk"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryLight"
-                android:text="Android Studio: The Greatest IDE On Earth" />
-
-            <Button
                 android:id="@+id/talk1"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="5dp"
                 android:background="@color/colorPrimaryLight"
-                android:text="Android Studio: The Greatest IDE On Earth" />
+                android:onClick="linkWebDev"
+                android:text="Intro to Web Development" />
 
             <Button
                 android:id="@+id/talk2"
@@ -61,7 +44,19 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="5dp"
                 android:background="@color/colorPrimaryLight"
-                android:text="Android Studio: The Greatest IDE On Earth" />
+                android:onClick="linkIOS"
+                android:text="Intro to IOS Development" />
+
+            <Button
+                android:id="@+id/talk3"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:onClick="linkFlask"
+                android:text="Intro to Flask" />
+
         </LinearLayout>
 
         <TextView
@@ -75,6 +70,26 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/webLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryLight"
+            android:onClick="linkWebsite"
+            android:text="TigerHacks Website" />
+
+        <Button
+            android:id="@+id/slackLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryLight"
+            android:onClick="linkSlack"
+            android:text="MCA Slack" />
 
     </LinearLayout>
 

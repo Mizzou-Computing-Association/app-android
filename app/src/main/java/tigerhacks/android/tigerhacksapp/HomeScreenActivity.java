@@ -1,5 +1,6 @@
 package tigerhacks.android.tigerhacksapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -276,5 +278,35 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
                 }, 10000);
             }
         });
+    }
+
+    public void linkWebDev(View v)
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s"));
+        startActivity(browserIntent);
+    }
+
+    public void linkIOS(View v)
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=kobP_rJAuyI"));
+        startActivity(browserIntent);
+    }
+
+    public void linkFlask(View v)
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=V0QmmrTTbY4"));
+        startActivity(browserIntent);
+    }
+
+    public void linkSlack(View v)
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mizzoumca.slack.com/"));
+        startActivity(browserIntent);
+    }
+
+    public void linkWebsite(View v)
+    {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://tiger-hacks.com/"));
+        startActivity(browserIntent);
     }
 }
