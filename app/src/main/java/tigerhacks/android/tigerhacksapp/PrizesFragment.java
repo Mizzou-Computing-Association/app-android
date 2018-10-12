@@ -225,6 +225,7 @@ public class PrizesFragment extends Fragment {
             card.setDescription(prize.getDescription());
             card.setTitle(prize.getTitle());
             card.setPrizes(new ArrayList<String>(Arrays.asList(prize.getReward())));
+            //card.setImage(prize.getSponsor())
             card.onClickAction(layoutView);
 
             if(prize.getPrizetype().equals("Beginner"))
