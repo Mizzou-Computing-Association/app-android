@@ -8,8 +8,8 @@
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    app:cardBackgroundColor="@color/colorPrimary"
-    app:cardCornerRadius="0dp">
+    android:elevation="8dp"
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,6 +21,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="160dp"
+            android:layout_margin="16dp"
             android:contentDescription="image"
             android:scaleType="fitCenter"
             android:src="@mipmap/ic_launcher_round" />

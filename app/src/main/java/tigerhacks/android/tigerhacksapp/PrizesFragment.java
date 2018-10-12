@@ -3,6 +3,7 @@ package tigerhacks.android.tigerhacksapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.design.widget.TabLayout;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
@@ -68,6 +69,7 @@ public class PrizesFragment extends Fragment {
     private PrizeCardView.Type currentType = PrizeCardView.Type.MAIN;
     private TabLayout tabLayout;
     private ArrayList<Prize> cardList;
+    private ArrayList<Sponsor> sponsorList;
     private HomeScreenActivity home;
 
     private OnFragmentInteractionListener mListener;
@@ -118,17 +120,17 @@ public class PrizesFragment extends Fragment {
                 if(tab.getPosition() == 0)
                 {
                     currentType = PrizeCardView.Type.MAIN;
-                    addCardsByType(cardList);
+                    addCardsByType(cardList, sponsorList);
                 }
                 else if(tab.getPosition() == 1)
                 {
                     currentType = PrizeCardView.Type.STARTUP;
-                    addCardsByType(cardList);
+                    addCardsByType(cardList, sponsorList);
                 }
                 else if(tab.getPosition() == 2)
                 {
                     currentType = PrizeCardView.Type.BEGINNER;
-                    addCardsByType(cardList);
+                    addCardsByType(cardList, sponsorList);
                 }
             }
 
@@ -148,15 +150,6 @@ public class PrizesFragment extends Fragment {
         home = (HomeScreenActivity)getActivity();
 
         //create cards. This is static, and will be replaced by dynamic creation through the API
-
-
-        Retrofit tigerHacksRetrofit = new Retrofit.Builder()
-                .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
-        Call<PrizeList> prizes = service.listPrizes("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes");
-        callAPI(prizes);
 
 
         return layoutView;
@@ -201,14 +194,16 @@ public class PrizesFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void populatePrizes(PrizeList prizeList)
+    public void loadData(PrizeList prizeList, SponsorList spList)
     {
-        if(prizeList == null)
+        if(prizeList == null || spList == null)
         {
             return;
         }
+        progressBar.setVisibility(View.GONE);
         cardList = (ArrayList<Prize>)prizeList.getPrizes();
-        addCardsByType(cardList);
+        sponsorList = (ArrayList<Sponsor>)spList.getSponsors();
+        addCardsByType(cardList, sponsorList);
     }
 
     public void onStart() {
@@ -216,8 +211,13 @@ public class PrizesFragment extends Fragment {
         home.onFragmentsReady();
     }
 
-    public void addCardsByType(ArrayList<Prize> list)
+    public void addCardsByType(ArrayList<Prize> list, ArrayList<Sponsor> sList)
     {
+        if(list == null || sList == null)
+        {
+            return;
+        }
+
         cardLinearLayout.removeAllViews();
         for(Prize prize : list)
         {
@@ -225,8 +225,12 @@ public class PrizesFragment extends Fragment {
             card.setDescription(prize.getDescription());
             card.setTitle(prize.getTitle());
             card.setPrizes(new ArrayList<String>(Arrays.asList(prize.getReward())));
-            //card.setImage(prize.getSponsor())
             card.onClickAction(layoutView);
+
+            if(sList != null) {
+                prize.setSponsor(1);
+                card.setImage(sList.get(prize.getSponsor()).getImage());
+            }
 
             if(prize.getPrizetype().equals("Beginner"))
             {
@@ -246,29 +250,5 @@ public class PrizesFragment extends Fragment {
                 cardLinearLayout.addView(card);
             }
         }
-    }
-
-    void callAPI(final Call<PrizeList> prizes)
-    {
-        prizes.clone().enqueue(new Callback<PrizeList>() {
-            @Override
-            public void onResponse(Call<PrizeList> call, Response<PrizeList> response) {
-                int statusCode = response.code();
-                PrizeList prizeList = response.body();
-                progressBar.setVisibility(View.GONE);
-                populatePrizes(prizeList);
-            }
-
-            @Override
-            public void onFailure(Call<PrizeList> call, Throwable t) {
-                Snackbar.make(layoutView, "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        callAPI(prizes);
-                    }
-                }, 10000);
-            }
-        });
     }
 }

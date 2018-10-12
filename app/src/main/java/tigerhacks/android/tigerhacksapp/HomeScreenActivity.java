@@ -43,8 +43,11 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     static boolean scheduleLoaded = false;
     static boolean prizesLoaded = false;
     private static int loadedCount = 0;
+    private static int apiCount = 0;
 
     public SponsorList sponsorList = null;
+    public PrizeList prizeList = null;
+    public ScheduleItemList scheduleList = null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -217,6 +220,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         {
             sponsorAPI();
             scheduleAPI();
+            prizesAPI();
         }
     }
 
@@ -235,7 +239,8 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             public void onResponse(Call<SponsorList> call, Response<SponsorList> response) {
                 int statusCode = response.code();
                 sponsorList = response.body();
-                sponsorsFragment.loadSponsorData(sponsorList);
+                apiCount++;
+                checkAPIReady();
             }
 
             @Override
@@ -263,10 +268,10 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
             @Override
             public void onResponse(Call<ScheduleItemList> call, Response<ScheduleItemList> response) {
                 int statusCode = response.code();
-                ScheduleItemList scheduleList = response.body();
+                scheduleList = response.body();
                 //progressBar.setVisibility(View.GONE);
-                scheduleFragment.loadSchedule(scheduleList);
-                mapFragment.loadSchedule(scheduleList);
+                apiCount++;
+                checkAPIReady();
             }
 
             @Override
@@ -280,6 +285,48 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
                 }, 10000);
             }
         });
+    }
+
+    public void prizesAPI()
+    {
+        Retrofit tigerHacksRetrofit = new Retrofit.Builder()
+                .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TigerHacksService service = tigerHacksRetrofit.create(TigerHacksService.class);
+        Call<PrizeList> prizes = service.listPrizes("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/tigerhacksPrizes");
+
+        prizes.clone().enqueue(new Callback<PrizeList>() {
+            @Override
+            public void onResponse(Call<PrizeList> call, Response<PrizeList> response) {
+                int statusCode = response.code();
+                prizeList = response.body();
+                apiCount++;
+                checkAPIReady();
+            }
+
+            @Override
+            public void onFailure(Call<PrizeList> call, Throwable t) {
+                Snackbar.make(mPager.getRootView(), "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        prizesAPI();
+                    }
+                }, 10000);
+            }
+        });
+
+    }
+
+    private void checkAPIReady()
+    {
+        if(apiCount >= 3) {
+            sponsorsFragment.loadSponsorData(sponsorList);
+            prizesFragment.loadData(prizeList, sponsorList);
+            scheduleFragment.loadSchedule(scheduleList);
+            mapFragment.loadSchedule(scheduleList);
+        }
     }
 
     public void linkWebDev(View v)

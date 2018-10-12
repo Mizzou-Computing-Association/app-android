@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -139,9 +141,9 @@ public class PrizeCardView extends CardView {
         prizesView.setText(newString);
     }
 
-    public void setImage(int id)
+    public void setImage(String s)
     {
-        imageView.setImageDrawable(getResources().getDrawable(id));
+        Picasso.get().load(s).into(imageView);
     }
     public void setType(Type t){type = t;}
     public Type getType(){return type;}
