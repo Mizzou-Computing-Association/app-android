@@ -88,4 +88,12 @@ public class SponsorDetailDialog extends DialogFragment {
 
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+        params.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+    }
 }

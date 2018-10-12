@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../../../Conno/Classes/SIGs/Android/app-android/TigerHacks.iml" filepath="$PROJECT_DIR$/../../../Conno/Classes/SIGs/Android/app-android/TigerHacks.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../Conno/Classes/Conno/Classes/SIGs/Android/app-android/.idea/TigerHacks.iml" filepath="$PROJECT_DIR$/../../../Conno/Classes/Conno/Classes/SIGs/Android/app-android/.idea/TigerHacks.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app-android.iml" filepath="$PROJECT_DIR$/app-android.iml" />
     </modules>

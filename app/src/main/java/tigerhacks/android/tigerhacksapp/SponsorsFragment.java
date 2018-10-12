@@ -149,6 +149,8 @@ public class SponsorsFragment extends Fragment {
                     Log.e("TEST", "clicked image");
                     SponsorDetailDialog dialog = new SponsorDetailDialog(sponsor);
                     dialog.show(Objects.requireNonNull(getActivity()).getFragmentManager(),"tag");
+
+                    //dialog.getDialog().getWindow().setAttributes();
                 }
             });
 
