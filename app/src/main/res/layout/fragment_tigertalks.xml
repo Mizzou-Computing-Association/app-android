@@ -1,90 +1,103 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tigerhacks.android.tigerhacksapp.TigerTalksFragment">
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tigerTalksText"
-            android:layout_width="200dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:background="@drawable/outline_background"
-            android:text="Tiger Talks"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="24sp" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/talk1"
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_icon_slack_hash_colored" />
+
+            <TextView
+                android:id="@+id/slackText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="MCA Slack"
+                android:textAppearance="@android:style/TextAppearance.Material.Title"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimaryLight"
-            android:onClick="linkWebDev"
-            android:text="Intro to Web Development" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/talk3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimaryLight"
-            android:onClick="linkFlask"
-            android:text="Intro to Flask" />
+            <Button
+                android:id="@+id/talk1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:onClick="linkWebDev"
+                android:text="Intro to Web Development" />
 
-        <Button
-            android:id="@+id/talk2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimaryLight"
-            android:onClick="linkIOS"
-            android:text="Intro to IOS Development" />
+            <Button
+                android:id="@+id/talk3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:onClick="linkFlask"
+                android:text="Intro to Flask" />
 
-        <TextView
-            android:id="@+id/otherResourcesText"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:background="@drawable/outline_background"
-            android:text="Other Resources"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="24sp" />
+            <Button
+                android:id="@+id/talk2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:onClick="linkIOS"
+                android:text="Intro to IOS Development" />
 
-        <Button
-            android:id="@+id/webLink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimaryLight"
-            android:onClick="linkWebsite"
-            android:text="TigerHacks Website" />
+            <Button
+                android:id="@+id/webLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:onClick="linkWebsite"
+                android:text="TigerHacks Website" />
 
-        <Button
-            android:id="@+id/slackLink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimaryLight"
-            android:onClick="linkSlack"
-            android:text="MCA Slack" />
+            <Button
+                android:id="@+id/slackLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimaryLight"
+                android:onClick="linkSlack"
+                android:text="MCA Slack" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
