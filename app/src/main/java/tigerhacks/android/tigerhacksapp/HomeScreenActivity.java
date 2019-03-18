@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,6 +45,7 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         //action bar can be called differently depending on SDK version, so this checks that
         //and sets up the action bar custom xml layout (layout/action_bar_layout.xml)
 
@@ -68,7 +71,6 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
         //set initial page/tab state
         mPager.setCurrentItem(0);
-
     }
 
     //registers the MyGestureListener for handling touch gestures
