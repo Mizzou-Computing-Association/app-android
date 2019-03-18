@@ -3,8 +3,7 @@ package tigerhacks.android.tigerhacksapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,11 +11,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,14 +30,8 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     private ScheduleFragment scheduleFragment;
     private SponsorsFragment sponsorsFragment;
     private TigerTalksFragment tigerTalksFragment;
-    private int currentTab = 1;
-    private BottomNavigationView navigation;
     private ViewPager mPager;
-    private PagerAdapter mPagerAdapter;
 
-    static boolean sponsorsLoaded = false;
-    static boolean scheduleLoaded = false;
-    static boolean prizesLoaded = false;
     private static int loadedCount = 0;
     private static int apiCount = 0;
 
@@ -49,53 +39,17 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
     public PrizeList prizeList = null;
     public ScheduleItemList scheduleList = null;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            //this switch will show the proper fragment depending on which navigation item is clicked
-            switch (item.getItemId()) {
-                case R.id.navigation_map:
-                    mPager.setCurrentItem(0);
-                    return true;
-                case R.id.navigation_prizes:
-                    mPager.setCurrentItem(1);
-                    return true;
-                case R.id.navigation_schedule:
-                    mPager.setCurrentItem(2);
-                    return true;
-                case R.id.navigation_sponsors:
-                    mPager.setCurrentItem(3);
-                    return true;
-                case R.id.navigation_tigertalks:
-                    mPager.setCurrentItem(4);
-                    return true;
-            }
-            return false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         //action bar can be called differently depending on SDK version, so this checks that
         //and sets up the action bar custom xml layout (layout/action_bar_layout.xml)
-//        if(getSupportActionBar() != null) {
-//            getSupportActionBar().setCustomView(R.layout.action_bar_layout);
-//            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
-//        }
-//        else if(getActionBar() != null)
-//        {
-//            getActionBar().setCustomView(R.layout.action_bar_layout);
-//            getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
-//        }
 
         setContentView(R.layout.activity_home_screen);
 
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        NavigationTabLayout navigation = findViewById(R.id.navigation);
+        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //initalize fragments and the fragment manager, then add the map fragment as the default on app start
         mapFragment = new MapFragment();
@@ -105,41 +59,15 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         tigerTalksFragment = new TigerTalksFragment();
 
         fragmentManager = getSupportFragmentManager();
-        /*FragmentTransaction initialFragmentTransaction = fragmentManager.beginTransaction()
-                .add(R.id.container, mapFragment)
-                .addToBackStack(null);
-        initialFragmentTransaction.commit();*/
 
         mPager = findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        navigation.setup(mPager);
+        PagerAdapter mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         mPager.setOffscreenPageLimit(4);
-        mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-            public void onPageSelected(int position) {
-                switch(position)
-                {
-                    case 0:
-                        navigation.setSelectedItemId(R.id.navigation_map);
-                        break;
-                    case 1:
-                        navigation.setSelectedItemId(R.id.navigation_prizes);
-                        break;
-                    case 2:
-                        navigation.setSelectedItemId(R.id.navigation_schedule);
-                        break;
-                    case 3:
-                        navigation.setSelectedItemId(R.id.navigation_sponsors);
-                        break;
-                    case 4:
-                        navigation.setSelectedItemId(R.id.navigation_tigertalks);
-                        break;
-                }
-            }
-        });
 
         //set initial page/tab state
         mPager.setCurrentItem(0);
-        navigation.setSelectedItemId(R.id.navigation_map);
 
     }
 
@@ -149,7 +77,9 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
 
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
-        ScreenSlidePagerAdapter(FragmentManager fm) { super(fm); }
+        ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
         @Override
         public Fragment getItem(int position) {
@@ -174,44 +104,30 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         public int getCount() {
             return 5;
         }
-        /*
+
+        @Nullable
         @Override
-        public void finishUpdate(ViewGroup container)
-        {
-            Log.d("TEST", "UPDATE");
-        }*/
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return getString(R.string.title_map);
+                case 1:
+                    return getString(R.string.title_prizes);
+                case 2:
+                    return getString(R.string.title_schedule);
+                case 3:
+                    return getString(R.string.title_sponsors);
+                case 4:
+                    return getString(R.string.title_tigertalks);
+                default:
+                    return getString(R.string.title_schedule);
+            }
+        }
     }
 
     //this is here to allow the use of the Fragment interfaces
     public void onFragmentInteraction(Uri uri)
     {}
-
-    public void onSponsorPageReady()
-    {
-        if(sponsorsLoaded)
-        {
-            return;
-        }
-        sponsorAPI();
-    }
-
-    public void onSchedulePageReady()
-    {
-        if(scheduleLoaded)
-        {
-            return;
-        }
-        scheduleAPI();
-    }
-
-    public void onMapReady()
-    {
-        if(scheduleLoaded)
-        {
-            return;
-        }
-        scheduleAPI();
-    }
 
     public void onFragmentsReady()
     {
@@ -236,15 +152,16 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
         sponsorCall.clone().enqueue(new Callback<SponsorList>() {
             @Override
-            public void onResponse(Call<SponsorList> call, Response<SponsorList> response) {
-                int statusCode = response.code();
-                sponsorList = response.body();
-                apiCount++;
-                checkAPIReady();
+            public void onResponse(@Nullable Call<SponsorList> call, @Nullable Response<SponsorList> response) {
+                if (response != null) {
+                    sponsorList = response.body();
+                    apiCount++;
+                    checkAPIReady();
+                }
             }
 
             @Override
-            public void onFailure(Call<SponsorList> call, Throwable t) {
+            public void onFailure(@Nullable Call<SponsorList> call, @Nullable Throwable t) {
                 Snackbar.make(mPager.getRootView(), "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
                 new Timer().schedule(new TimerTask() {
                     @Override
@@ -266,17 +183,20 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
         schedule.clone().enqueue(new Callback<ScheduleItemList>() {
             @Override
-            public void onResponse(Call<ScheduleItemList> call, Response<ScheduleItemList> response) {
-                int statusCode = response.code();
-                scheduleList = response.body();
-                //progressBar.setVisibility(View.GONE);
-                apiCount++;
-                checkAPIReady();
+            public void onResponse(@Nullable Call<ScheduleItemList> call, @Nullable Response<ScheduleItemList> response) {
+                if (response != null) {
+                    scheduleList = response.body();
+                    //progressBar.setVisibility(View.GONE);
+                    apiCount++;
+                    checkAPIReady();
+                }
             }
 
             @Override
-            public void onFailure(Call<ScheduleItemList> call, Throwable t) {
-                Snackbar.make(scheduleFragment.getView(), "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
+            public void onFailure(@Nullable Call<ScheduleItemList> call, @Nullable Throwable t) {
+                if (scheduleFragment != null && scheduleFragment.getView() != null) {
+                    Snackbar.make(scheduleFragment.getView(), "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
+                }
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -298,15 +218,16 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
 
         prizes.clone().enqueue(new Callback<PrizeList>() {
             @Override
-            public void onResponse(Call<PrizeList> call, Response<PrizeList> response) {
-                int statusCode = response.code();
-                prizeList = response.body();
-                apiCount++;
-                checkAPIReady();
+            public void onResponse(@Nullable Call<PrizeList> call, @Nullable Response<PrizeList> response) {
+                if (response != null) {
+                    prizeList = response.body();
+                    apiCount++;
+                    checkAPIReady();
+                }
             }
 
             @Override
-            public void onFailure(Call<PrizeList> call, Throwable t) {
+            public void onFailure(@Nullable Call<PrizeList> call, @Nullable Throwable t) {
                 Snackbar.make(mPager.getRootView(), "TigerHacks API call failed. Attempting to reconnect...", Snackbar.LENGTH_SHORT).show();
                 new Timer().schedule(new TimerTask() {
                     @Override
