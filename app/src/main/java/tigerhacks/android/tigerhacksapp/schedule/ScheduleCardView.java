@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.schedule;
 
 import android.content.Context;
 import android.support.transition.TransitionManager;

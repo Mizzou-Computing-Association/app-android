@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp
+package tigerhacks.android.tigerhacksapp.service.extensions
 
 import android.content.Context
 import android.support.annotation.ColorRes

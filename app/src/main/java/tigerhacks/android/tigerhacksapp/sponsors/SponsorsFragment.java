@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.sponsors;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
+
+import tigerhacks.android.tigerhacksapp.HomeScreenActivity;
+import tigerhacks.android.tigerhacksapp.R;
 
 
 /**

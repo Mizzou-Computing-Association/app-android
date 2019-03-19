@@ -1,8 +1,10 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.prizes;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import tigerhacks.android.tigerhacksapp.prizes.Prize;
 
 public class PrizeList {
 

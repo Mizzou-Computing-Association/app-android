@@ -4,6 +4,12 @@ import android.content.Context
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.util.AttributeSet
+import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
+import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
+
+/*
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 
 class NavigationTabLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : TabLayout(context, attrs, defStyleAttr) {
 

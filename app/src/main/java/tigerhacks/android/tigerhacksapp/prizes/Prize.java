@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.prizes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

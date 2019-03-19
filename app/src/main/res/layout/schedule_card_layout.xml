@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tigerhacks.android.tigerhacksapp.ScheduleCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<tigerhacks.android.tigerhacksapp.schedule.ScheduleCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scheduleCard1"
@@ -86,5 +86,5 @@
 
     </LinearLayout>
 
-</tigerhacks.android.tigerhacksapp.ScheduleCardView>
+</tigerhacks.android.tigerhacksapp.schedule.ScheduleCardView>
 

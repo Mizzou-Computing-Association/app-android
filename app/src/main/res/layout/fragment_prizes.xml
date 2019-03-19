@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tigerhacks.android.tigerhacksapp.PrizesFragment">
+    tools:context="tigerhacks.android.tigerhacksapp.prizes.PrizesFragment">
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:orientation="vertical"></LinearLayout>
 
                 <!--
-            <tigerhacks.android.tigerhacksapp.PrizeCardView
+            <tigerhacks.android.tigerhacksapp.prizes.PrizeCardView
                 android:id="@+id/prizeCard1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -145,7 +145,7 @@
                             android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
-            </tigerhacks.android.tigerhacksapp.PrizeCardView>
+            </tigerhacks.android.tigerhacksapp.prizes.PrizeCardView>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/card1"
