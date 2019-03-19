@@ -3,32 +3,27 @@ package tigerhacks.android.tigerhacksapp.sponsors.views
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.graphics.Typeface
+import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
 import android.util.AttributeSet
-import android.util.TypedValue
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.View
+import kotlinx.android.synthetic.main.view_mentor.view.contactTextView
+import kotlinx.android.synthetic.main.view_mentor.view.nameTextView
+import kotlinx.android.synthetic.main.view_mentor.view.skillsTextView
+import kotlinx.android.synthetic.main.view_mentors.view.mentorsEmptyTextView
+import kotlinx.android.synthetic.main.view_mentors.view.mentorsLayout
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
-import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
 import tigerhacks.android.tigerhacksapp.sponsors.Mentor
 
 /*
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 
-private const val infoTextSize = 16f
-private const val infoStartMargin = 16
-private const val topMargin = 8
-
-class MentorsView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+class MentorsView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
-        orientation = VERTICAL
+        LayoutInflater.from(context).inflate(R.layout.view_mentors, this, true)
     }
-
-    private val infoStartMarginDp = context.dpToPx(infoStartMargin)
-    private val topMarginDp = context.dpToPx(topMargin)
 
     var mentors: List<Mentor>? = null
         set(value) {
@@ -38,89 +33,41 @@ class MentorsView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         }
 
     private fun redraw() {
-        removeAllViews()
-        val mentorsTitle = TextView(context).apply {
-            layoutParams = MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                setMargins(infoStartMarginDp, topMarginDp, infoStartMarginDp, topMarginDp)
-            }
-            setTextColor(context.getColorRes(R.color.black))
-            setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            setTypeface(null, Typeface.BOLD)
-            text = context.getString(R.string.mentors)
-        }
-        addView(mentorsTitle)
-
+        mentorsLayout.removeAllViews()
         mentors?.forEach { mentor ->
-            val mentorView = MentorView(context).apply {
-                setup(mentor)
-            }
-            addView(mentorView)
+            val mentorView = MentorView(context).setup(mentor)
+            mentorsLayout.addView(mentorView)
         }
 
-        if (mentors == null || mentors?.size == 0) {
-            val naTextView = TextView(context).apply {
-                layoutParams = MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                    setMargins(infoStartMarginDp, 0, infoStartMarginDp, 0)
-                }
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, infoTextSize)
-                text = context.getString(R.string.none_available)
-            }
-            addView(naTextView)
-        }
+        mentorsEmptyTextView.visibility = if (mentors == null || mentors?.size == 0) View.VISIBLE else View.GONE
     }
 }
 
-class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
-        orientation = VERTICAL
+        LayoutInflater.from(context).inflate(R.layout.view_mentor, this, true)
     }
 
-    private val infoStartMarginDp = context.dpToPx(infoStartMargin)
-    private val topMarginDp = context.dpToPx(topMargin)
-    private val infoLayoutParams = MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-        setMargins(infoStartMarginDp, 0, infoStartMarginDp, 0)
-    }
-
-    fun setup(mentor: Mentor) {
-        val name = TextView(context).apply {
-            layoutParams = infoLayoutParams
-            setTypeface(null, Typeface.BOLD)
-            setTextSize(TypedValue.COMPLEX_UNIT_SP, infoTextSize)
-            text = mentor.name
-        }
-        name.setTypeface(null, Typeface.BOLD)
-        name.text = mentor.name
-        addView(name)
+    fun setup(mentor: Mentor): MentorView {
+        nameTextView.text = mentor.name
 
         mentor.contact?.let { mentorContact ->
             if (mentorContact.isNotEmpty()) {
-                val contact = TextView(context).apply {
-                    setTextColor(context.getColorRes(R.color.linkColor))
-                    setTextSize(TypedValue.COMPLEX_UNIT_SP, infoTextSize)
-                    layoutParams = infoLayoutParams
-                    text = mentorContact
-                    setOnClickListener {
-                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                        val clip = ClipData.newPlainText("something", text)
-                        clipboard.primaryClip = clip
-                        Snackbar.make(
-                            rootView,
-                            "Contact copied to clipboard",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
+                contactTextView.text = mentorContact
+                contactTextView.setOnClickListener {
+                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clip = ClipData.newPlainText("something", mentorContact)
+                    clipboard.primaryClip = clip
+                    Snackbar.make(
+                        rootView,
+                        "Contact copied to clipboard",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
-                addView(contact)
             }
         }
 
-        val skills = TextView(context).apply {
-            layoutParams = MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                setMargins(infoStartMarginDp, 0, 0, 2*topMarginDp)
-            }
-            setTextSize(TypedValue.COMPLEX_UNIT_SP, infoTextSize)
-            text = if (mentor.skills != "") mentor.skills else context.getString(R.string.na)
-        }
-        addView(skills)
+        if (mentor.skills != "") skillsTextView.text = mentor.skills
+        return this
     }
 }
