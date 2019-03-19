@@ -15,5 +15,8 @@
     <string name="tiger_hacks_logo">Tiger Hacks Logo</string>
     <string name="sponsor_1">Sponsor 1</string>
     <string name="sponsor_2">Sponsor 2</string>
+    <string name="back">back</string>
+    <string name="sponsor_logo">sponsor logo</string>
+    <string name="mentors">Mentors</string>
 
 </resources>

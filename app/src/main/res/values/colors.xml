@@ -7,11 +7,12 @@
     <!--Greenish-->
     <color name="colorAccent">#C5E5D5</color>
     <!--Main Grey-->
-    <color name="colorGrey">#323132</color>
+    <color name="colorGray">#323132</color>
+    <color name="colorLightGray">#F5F5F5</color>
 
     <!--Sponsor Levels-->
     <color name="platinum">#53aab7</color>
-    <color name="gold">#f4dc3d</color>
+    <color name="gold">#E5C100</color>
     <color name="silver">#acacac</color>
     <color name="bronze">#c27836</color>
 
