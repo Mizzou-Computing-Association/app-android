@@ -61,17 +61,87 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/locationIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="10dp"
+            <TextView
+                android:id="@+id/descriptionTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" 
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/secondText"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                android:layout_marginStart="@dimen/sponsor_margin_start"
+                android:layout_marginEnd="@dimen/sponsor_margin_start"
+                android:textSize="@dimen/sponsor_text_size_title"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Description"
+                />
+            
+            <View
+                android:id="@+id/descriptionTitleDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sponsor_spacer_small"
+                app:layout_constraintTop_toBottomOf="@id/descriptionTitleTextView"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                android:background="@color/sponsorSpacerColor"
+                android:visibility="gone"
+                />
+            
+            <TextView
+                android:id="@+id/descriptionText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                app:layout_constraintEnd_toEndOf="@id/descriptionTitleTextView"
+                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/descriptionTitleDivider"
+                app:layout_constraintHorizontal_bias="0"
+                android:textSize="@dimen/sponsor_text_size"
+                android:textColor="@color/black"
+                tools:text="Description"
+                />
+            
+            <View
+                android:id="@+id/descriptionDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sponsor_spacer_large"
+                app:layout_constraintTop_toBottomOf="@id/descriptionText"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                android:background="@color/sponsorSpacerColor"
+                />
+            
+            <TextView
+                android:id="@+id/informationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/descriptionDivider"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                android:textSize="@dimen/sponsor_text_size_title"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Information"
+                />
 
+            <View
+                android:id="@+id/informationTitleDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sponsor_spacer_small"
+                app:layout_constraintTop_toBottomOf="@id/informationTitle"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                android:background="@color/sponsorSpacerColor"
+                android:visibility="gone"
+                />
+            
+            <ImageView
+                android:id="@+id/locationIcon"
+                android:layout_width="@dimen/sponsor_icon_size"
+                android:layout_height="@dimen/sponsor_icon_size"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintTop_toBottomOf="@id/informationTitleDivider"
+                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
+                app:layout_constraintEnd_toStartOf="@id/secondText"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintHorizontal_bias="0"
                 app:srcCompat="@drawable/ic_location"
@@ -85,21 +155,17 @@
                 app:layout_constraintStart_toEndOf="@id/locationIcon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/locationIcon"
-                app:layout_constraintBottom_toBottomOf="@id/locationIcon"
+                android:textSize="@dimen/sponsor_text_size"
+                android:textColor="@color/black"
                 />
 
             <ImageView
                 android:id="@+id/internetImageView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="@dimen/sponsor_icon_size"
+                android:layout_height="@dimen/sponsor_icon_size"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
                 app:layout_constraintTop_toBottomOf="@id/secondText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/linkText"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/locationIcon"
                 app:srcCompat="@drawable/ic_link"
                 />
 
@@ -107,54 +173,29 @@
                 android:id="@+id/linkText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/internetImageView"
+                app:layout_constraintStart_toStartOf="@id/secondText"
                 app:layout_constraintTop_toTopOf="@id/internetImageView"
-                app:layout_constraintBottom_toBottomOf="@id/internetImageView"
 
                 tools:text="link"
                 android:textColor="@color/linkColor"
-                android:textSize="16sp"
+                android:textSize="@dimen/sponsor_text_size"
                 />
 
             <View
                 android:id="@+id/informationDivider"
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
-                app:layout_constraintTop_toBottomOf="@id/linkText"
-                android:layout_marginTop="8dp"
-                android:background="@color/colorLightGray"
-                />
-
-            <TextView
-                android:id="@+id/descriptionText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                tools:text="Description"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/informationDivider"
-                android:textSize="24sp"/>
-
-            <View
-                android:id="@+id/descriptionDivider"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                app:layout_constraintTop_toBottomOf="@id/descriptionText"
-                android:layout_marginTop="8dp"
-                android:background="@color/colorLightGray"
+                android:layout_height="@dimen/sponsor_spacer_large"
+                app:layout_constraintTop_toBottomOf="@id/internetImageView"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
+                android:background="@color/sponsorSpacerColor"
                 />
 
             <tigerhacks.android.tigerhacksapp.sponsors.views.MentorsView
                 android:id="@+id/mentorLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/descriptionDivider"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/informationDivider"
+                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
         </android.support.constraint.ConstraintLayout>

@@ -17,8 +17,8 @@
         app:layout_constraintEnd_toStartOf="@id/contactTextView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:textStyle="bold"
-        android:textSize="@dimen/sponsor_text_size_secondary"
+        android:textColor="@color/sponsorTextTitle"
+        android:textSize="@dimen/sponsor_text_size"
         tools:text="Paul Gillis"
         />
     <TextView
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@id/nameTextView"
         app:layout_constraintStart_toEndOf="@id/nameTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="@dimen/sponsor_text_size_secondary"
+        android:textSize="@dimen/sponsor_text_size"
         android:textColor="@color/linkColor"
         tools:text="UDCR..."
         />
@@ -40,7 +40,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/sponsor_margin_bottom"
-        android:textSize="@dimen/sponsor_text_size_secondary"
+        android:textSize="@dimen/sponsor_text_size"
+        android:textColor="@color/sponsorTextPrimary"
         tools:text="Java/Kotlin"
         android:text="@string/na"
         />

@@ -11,13 +11,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.fabric.sdk.android.Fabric;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,6 +61,9 @@ public class HomeScreenActivity extends AppCompatActivity implements MapFragment
         //and sets up the action bar custom xml layout (layout/action_bar_layout.xml)
 
         setContentView(R.layout.activity_home_screen);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         NavigationTabLayout navigation = findViewById(R.id.navigation);
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
