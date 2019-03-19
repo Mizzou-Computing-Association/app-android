@@ -2,9 +2,15 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="sponsor_text_size_primary">20sp</dimen>
-    <dimen name="sponsor_text_size_secondary">16sp</dimen>
+
+    <!-- Sponsor Section -->
+    <dimen name="sponsor_icon_size">28dp</dimen>
+    <dimen name="sponsor_text_size_title">24sp</dimen>
+    <dimen name="sponsor_text_size">20sp</dimen>
     <dimen name="sponsor_margin_top">8dp</dimen>
     <dimen name="sponsor_margin_bottom">16dp</dimen>
     <dimen name="sponsor_margin_start">16dp</dimen>
+    <dimen name="sponsor_margin_start_indent">24dp</dimen>
+    <dimen name="sponsor_spacer_large">4dp</dimen>
+    <dimen name="sponsor_spacer_small">1dp</dimen>
 </resources>
