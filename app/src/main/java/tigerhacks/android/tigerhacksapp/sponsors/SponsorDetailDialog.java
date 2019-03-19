@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import tigerhacks.android.tigerhacksapp.R;
 
@@ -57,7 +57,7 @@ public class SponsorDetailDialog extends DialogFragment {
         linkText.setText(sponsorData.getWebsite());
         descriptionText.setText(sponsorData.getDescription());
 
-        Picasso.get().load(sponsorData.getImage()).into(mainImage);
+        Glide.with(mainImage).load(sponsorData.getImage()).into(mainImage);
 
         linkText.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
