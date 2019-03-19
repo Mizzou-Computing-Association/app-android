@@ -150,12 +150,7 @@ public class SponsorsFragment extends Fragment {
             image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.e("TEST", "clicked image");
                     startActivity(SponsorDetailActivity.newInstance(getContext(), sponsor));
-//                    SponsorDetailDialog dialog = new SponsorDetailDialog(sponsor);
-//                    dialog.show(Objects.requireNonNull(getActivity()).getFragmentManager(),"tag");
-
-                    //dialog.getDialog().getWindow().setAttributes();
                 }
             });
 

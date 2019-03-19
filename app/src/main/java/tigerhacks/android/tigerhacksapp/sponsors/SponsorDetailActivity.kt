@@ -40,7 +40,7 @@ class SponsorDetailActivity : AppCompatActivity() {
         if (sponsor.location != "tbd") {
             secondText.text = sponsor.location
         } else {
-            secondText.text = "N/A"
+            secondText.text = getString(R.string.na)
         }
 
         linkText.text = sponsor.website
