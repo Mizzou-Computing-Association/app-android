@@ -100,7 +100,7 @@
                 app:layout_constraintEnd_toStartOf="@id/linkText"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintHorizontal_bias="0"
-                app:srcCompat="@drawable/ic_internet"
+                app:srcCompat="@drawable/ic_link"
                 />
 
             <TextView
