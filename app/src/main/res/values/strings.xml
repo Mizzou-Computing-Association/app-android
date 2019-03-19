@@ -18,5 +18,6 @@
     <string name="back">back</string>
     <string name="sponsor_logo">sponsor logo</string>
     <string name="mentors">Mentors</string>
-
+    <string name="na">N/A</string>
+    <string name="none_available">None Available</string>
 </resources>
