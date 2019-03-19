@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -139,7 +139,7 @@ public class PrizeCardView extends CardView {
 
     public void setImage(String s)
     {
-        Picasso.get().load(s).into(imageView);
+        Glide.with(imageView).load(s).into(imageView);
     }
     public void setType(Type t){type = t;}
     public Type getType(){return type;}

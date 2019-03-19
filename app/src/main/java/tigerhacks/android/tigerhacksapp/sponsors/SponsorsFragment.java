@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.Objects;
 
@@ -130,7 +130,7 @@ public class SponsorsFragment extends Fragment {
             layoutParams.setMargins(0, 32, 0, 32);
             image.setLayoutParams(layoutParams);
             image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            Picasso.get().load(sponsor.getImage()).into(image);
+            Glide.with(image).load(sponsor.getImage()).into(image);
             switch(sponsor.getLevel())
             {
                 case "Platinum":
