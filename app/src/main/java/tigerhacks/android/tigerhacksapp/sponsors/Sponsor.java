@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.sponsors;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

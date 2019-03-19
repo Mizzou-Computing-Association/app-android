@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.maps;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,11 @@ import android.widget.LinearLayout;
 import com.jsibbold.zoomage.ZoomageView;
 
 import java.util.ArrayList;
+
+import tigerhacks.android.tigerhacksapp.HomeScreenActivity;
+import tigerhacks.android.tigerhacksapp.R;
+import tigerhacks.android.tigerhacksapp.schedule.ScheduleItem;
+import tigerhacks.android.tigerhacksapp.schedule.ScheduleItemList;
 
 
 /**
@@ -143,5 +148,5 @@ public class MapFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    interface OnFragmentInteractionListener {}
+    public interface OnFragmentInteractionListener {}
 }

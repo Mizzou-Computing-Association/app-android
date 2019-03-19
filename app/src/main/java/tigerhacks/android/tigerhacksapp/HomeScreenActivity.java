@@ -23,6 +23,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tigerhacks.android.tigerhacksapp.maps.MapFragment;
+import tigerhacks.android.tigerhacksapp.prizes.PrizeList;
+import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment;
+import tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment;
+import tigerhacks.android.tigerhacksapp.schedule.ScheduleItemList;
+import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService;
+import tigerhacks.android.tigerhacksapp.sponsors.SponsorList;
+import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment;
+import tigerhacks.android.tigerhacksapp.tigertalks.TigerTalksFragment;
 
 public class HomeScreenActivity extends AppCompatActivity implements MapFragment.OnFragmentInteractionListener, PrizesFragment.OnFragmentInteractionListener, SponsorsFragment.OnFragmentInteractionListener, ScheduleFragment.OnFragmentInteractionListener, TigerTalksFragment.OnFragmentInteractionListener {
 

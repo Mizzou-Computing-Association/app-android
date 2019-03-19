@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:foregroundGravity="center"
-    tools:context="tigerhacks.android.tigerhacksapp.TigerTalksFragment">
+    tools:context="tigerhacks.android.tigerhacksapp.tigertalks.TigerTalksFragment">
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.constraint.ConstraintLayout

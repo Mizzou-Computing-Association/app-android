@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.sponsors;
 
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import tigerhacks.android.tigerhacksapp.R;
 
 @SuppressLint("ValidFragment")
 public class SponsorDetailDialog extends DialogFragment {

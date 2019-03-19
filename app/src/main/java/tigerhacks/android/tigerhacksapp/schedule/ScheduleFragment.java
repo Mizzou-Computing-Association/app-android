@@ -1,28 +1,33 @@
-package tigerhacks.android.tigerhacksapp;
+package tigerhacks.android.tigerhacksapp.schedule;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import tigerhacks.android.tigerhacksapp.HomeScreenActivity;
+import tigerhacks.android.tigerhacksapp.R;
+import tigerhacks.android.tigerhacksapp.schedule.ScheduleCardView.Day;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PrizesFragment.OnFragmentInteractionListener} interface
+ * {@link ScheduleFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PrizesFragment#newInstance} factory method to
+ * Use the {@link ScheduleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PrizesFragment extends Fragment {
+public class ScheduleFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,19 +36,17 @@ public class PrizesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private PrizeCardView card1;
+    private LinearLayout cardLayoutView;
     private View layoutView;
-    private LinearLayout ll, cardLinearLayout;
-    private ProgressBar progressBar;
-    private PrizeCardView.Type currentType = PrizeCardView.Type.MAIN;
     private TabLayout tabLayout;
-    private ArrayList<Prize> cardList;
-    private ArrayList<Sponsor> sponsorList;
-    private HomeScreenActivity home;
+    private Day currentDay = Day.FRIDAY;
+    private ArrayList<ScheduleItem> cardList;
+    private ProgressBar progressBar;
+    public HomeScreenActivity home;
 
     private OnFragmentInteractionListener mListener;
 
-    public PrizesFragment() {
+    public ScheduleFragment() {
         // Required empty public constructor
     }
 
@@ -53,11 +56,11 @@ public class PrizesFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PrizesFragment.
+     * @return A new instance of fragment ScheduleFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PrizesFragment newInstance(String param1, String param2) {
-        PrizesFragment fragment = new PrizesFragment();
+    public static ScheduleFragment newInstance(String param1, String param2) {
+        ScheduleFragment fragment = new ScheduleFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,29 +80,28 @@ public class PrizesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        layoutView = inflater.inflate(R.layout.fragment_prizes, container, false);
-        ll = layoutView.findViewById(R.id.linearView);
-        tabLayout = layoutView.findViewById(R.id.typeTabLayout);
-        cardLinearLayout = layoutView.findViewById(R.id.prizeCardLinearLayout);
+        // Inflate the layout for this fragment
+        layoutView = inflater.inflate(R.layout.fragment_schedule, container, false);
+        tabLayout = layoutView.findViewById(R.id.tabLayout);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Log.e("TEST","Selected");
                 if(tab.getPosition() == 0)
                 {
-                    currentType = PrizeCardView.Type.MAIN;
-                    addCardsByType(cardList, sponsorList);
+                    currentDay = Day.FRIDAY;
+                    addDayEvents(cardList);
                 }
                 else if(tab.getPosition() == 1)
                 {
-                    currentType = PrizeCardView.Type.STARTUP;
-                    addCardsByType(cardList, sponsorList);
+                    currentDay = Day.SATURDAY;
+                    addDayEvents(cardList);
                 }
                 else if(tab.getPosition() == 2)
                 {
-                    currentType = PrizeCardView.Type.BEGINNER;
-                    addCardsByType(cardList, sponsorList);
+                    currentDay = Day.SUNDAY;
+                    addDayEvents(cardList);
                 }
             }
 
@@ -114,13 +116,9 @@ public class PrizesFragment extends Fragment {
             }
         });
 
-        progressBar = layoutView.findViewById(R.id.progressBar);
-
+        cardLayoutView = layoutView.findViewById(R.id.cardLinearLayout);
+        progressBar = layoutView.findViewById(R.id.progressBar2);
         home = (HomeScreenActivity)getActivity();
-
-        //create cards. This is static, and will be replaced by dynamic creation through the API
-
-
         return layoutView;
     }
 
@@ -154,7 +152,7 @@ public class PrizesFragment extends Fragment {
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p>
-     * See the Android Training lesson <a href=
+     * See the Android Training lesson <a href
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
@@ -163,62 +161,35 @@ public class PrizesFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void loadData(PrizeList prizeList, SponsorList spList)
+    public void onStart()
     {
-        if(prizeList == null || spList == null)
-        {
-            return;
-        }
-        progressBar.setVisibility(View.GONE);
-        cardList = (ArrayList<Prize>)prizeList.getPrizes();
-        sponsorList = (ArrayList<Sponsor>)spList.getSponsors();
-        addCardsByType(cardList, sponsorList);
-    }
-
-    public void onStart() {
         super.onStart();
         home.onFragmentsReady();
     }
 
-    public void addCardsByType(ArrayList<Prize> list, ArrayList<Sponsor> sList)
+    public void loadSchedule(ScheduleItemList scheduleList)
     {
-        if(list == null || sList == null)
+        if(scheduleList == null)
         {
             return;
         }
-
-        cardLinearLayout.removeAllViews();
-        for(Prize prize : list)
+        progressBar.setVisibility(View.GONE);
+        cardList = (ArrayList<ScheduleItem>)scheduleList.getSchedule();
+        addDayEvents(cardList);
+    }
+    public void addDayEvents(ArrayList<ScheduleItem> list)
+    {
+        cardLayoutView.removeAllViews();
+        for(ScheduleItem item : list)
         {
-            PrizeCardView card = (PrizeCardView)LayoutInflater.from(ll.getContext()).inflate(R.layout.prize_card_layout, ll, false);
-            card.setDescription(prize.getDescription());
-            card.setTitle(prize.getTitle());
-            card.setPrizes(new ArrayList<String>(Arrays.asList(prize.getReward())));
+            ScheduleCardView card = (ScheduleCardView)LayoutInflater.from(cardLayoutView.getContext()).inflate(R.layout.schedule_card_layout, cardLayoutView, false);
+            card.setTitle(item.getTitle());
+            card.setLocation(item.getLocation());
+            card.setTime(item.getTime());
+            card.setDescription(item.getDescription());
             card.onClickAction(layoutView);
-
-            if(sList != null) {
-                if(prize.getSponsor() < sList.size() && prize.getSponsor() >= 0)
-                {
-                    card.setImage(sList.get(prize.getSponsor()).getImage());
-                }
-            }
-
-            if(prize.getPrizetype().equals("Beginner"))
-            {
-                card.setType(PrizeCardView.Type.BEGINNER);
-            }
-            else if(prize.getPrizetype().equals("Main"))
-            {
-                card.setType(PrizeCardView.Type.MAIN);
-            }
-            else if(prize.getPrizetype().equals("StartUp"))
-            {
-                card.setType(PrizeCardView.Type.STARTUP);
-            }
-
-            if(card.getType() == currentType)
-            {
-                cardLinearLayout.addView(card);
+            if(card.getDay() == currentDay) {
+                cardLayoutView.addView(card);
             }
         }
     }
