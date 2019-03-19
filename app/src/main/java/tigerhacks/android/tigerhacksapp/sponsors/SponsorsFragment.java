@@ -151,8 +151,9 @@ public class SponsorsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Log.e("TEST", "clicked image");
-                    SponsorDetailDialog dialog = new SponsorDetailDialog(sponsor);
-                    dialog.show(Objects.requireNonNull(getActivity()).getFragmentManager(),"tag");
+                    startActivity(SponsorDetailActivity.newInstance(getContext(), sponsor));
+//                    SponsorDetailDialog dialog = new SponsorDetailDialog(sponsor);
+//                    dialog.show(Objects.requireNonNull(getActivity()).getFragmentManager(),"tag");
 
                     //dialog.getDialog().getWindow().setAttributes();
                 }
