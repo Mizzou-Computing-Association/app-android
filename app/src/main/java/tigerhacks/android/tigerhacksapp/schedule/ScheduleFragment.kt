@@ -27,7 +27,8 @@ class ScheduleFragment : Fragment() {
         }
 
     private var cardList: ArrayList<ScheduleItem>? = null
-    private var home: HomeScreenActivity? = null
+    private lateinit var home: HomeScreenActivity
+
     private val eventsAdapter = object : ListAdapter<ScheduleItem, RecyclerView.ViewHolder>(ScheduleItem.diff) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(ScheduleCardView(parent.context)) {}
 
@@ -58,14 +59,17 @@ class ScheduleFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
-        layoutView.findViewById<RecyclerView>(R.id.scheduleRecyclerView).adapter = eventsAdapter
-        home = activity as HomeScreenActivity?
+        home = activity as HomeScreenActivity
+
+        val recyclerView = layoutView.findViewById<RecyclerView>(R.id.scheduleRecyclerView)
+        recyclerView.adapter = eventsAdapter
+
         return layoutView
     }
 
     override fun onStart() {
         super.onStart()
-        home?.onFragmentsReady()
+        home.onFragmentsReady()
     }
 
     fun loadSchedule(scheduleList: ScheduleItemList?) {
