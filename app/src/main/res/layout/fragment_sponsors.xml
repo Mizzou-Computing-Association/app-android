@@ -1,161 +1,110 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment"
+    android:id="@+id/sponsorScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment">
-    <!-- TODO: Update blank fragment layout -->
+    tools:ignore="UselessParent">
 
-    <ScrollView
-        android:id="@+id/sponsorScrollView"
+    <LinearLayout
+        android:id="@+id/sponsorVerticalLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="UselessParent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/platinum"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/platinum"
+            android:gravity="center"
+            android:text="Platinum Sponsors"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/sponsorVerticalLayout"
+            android:id="@+id/platinumLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<ImageView-->
-            <!--android:id="@+id/imageView2"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:src="@drawable/ic_sponsors_24dp" />-->
-
-            <!--<ImageView-->
-            <!--android:id="@+id/imageView"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:src="@drawable/ic_sponsors_24dp" />-->
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<ImageView-->
-            <!--android:id="@+id/imageView2"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:src="@drawable/ic_sponsors_24dp" />-->
-
-            <!--<ImageView-->
-            <!--android:id="@+id/imageView"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="200dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:src="@drawable/ic_sponsors_24dp" />-->
-            <!--</LinearLayout>-->
-
-            <TextView
-                android:id="@+id/platinum"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/platinum"
-                android:gravity="center"
-                android:text="Platinum Sponsors"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/platinumLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                android:paddingEnd="32dp"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/gold"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/gold"
-                android:gravity="center"
-                android:text="Gold Sponsors"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/goldLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                android:paddingEnd="32dp"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/silver"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/silver"
-                android:gravity="center"
-                android:text="Silver Sponsors"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/silverLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                android:paddingEnd="32dp"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp">
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/bronze"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/bronze"
-                android:gravity="center"
-                android:text="Bronze Sponsors"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/bronzeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                android:paddingEnd="32dp"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp">
-
-            </LinearLayout>
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp">
 
         </LinearLayout>
-    </ScrollView>
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/gold"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/gold"
+            android:gravity="center"
+            android:text="Gold Sponsors"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/goldLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/silver"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/silver"
+            android:gravity="center"
+            android:text="Silver Sponsors"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/silverLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/bronze"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/bronze"
+            android:gravity="center"
+            android:text="Bronze Sponsors"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/bronzeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp">
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

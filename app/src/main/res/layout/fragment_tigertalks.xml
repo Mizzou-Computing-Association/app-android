@@ -24,15 +24,14 @@
             android:textAppearance="@android:style/TextAppearance.Material.Medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+            app:layout_constraintTop_toBottomOf="@+id/introFlaskCardView" />
 
         <android.support.v7.widget.CardView
-            android:id="@+id/cardView3"
+            android:id="@+id/tigerHacksWebsiteCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="16dp"
-            android:onClick="linkWebsite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/otherLinks">
@@ -66,16 +65,15 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/mcaSlackCardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="8dp"
-            android:onClick="linkSlack"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView3">
+            app:layout_constraintTop_toBottomOf="@+id/tigerHacksWebsiteCardView">
 
             <LinearLayout
                 android:id="@+id/mcaSlackLink"
@@ -109,15 +107,14 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/cardView4"
+            android:id="@+id/introFlaskCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="8dp"
-            android:onClick="linkFlask"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView5">
+            app:layout_constraintTop_toBottomOf="@+id/introWebDevCardView">
 
             <TextView
                 android:id="@+id/flask"
@@ -130,15 +127,14 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/cardView5"
+            android:id="@+id/introWebDevCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="16dp"
-            android:onClick="linkWebDev"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView7">
+            app:layout_constraintTop_toBottomOf="@+id/introiOSCardView">
 
             <TextView
                 android:id="@+id/webDev"
@@ -151,12 +147,11 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/cardView7"
+            android:id="@+id/introiOSCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="16dp"
-            android:onClick="linkIOS"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8">

@@ -15,7 +15,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:padding="8dp"
-        android:background="?attr/colorPrimary">
+        android:background="?attr/colorPrimary"
+        android:elevation="3dp">
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"

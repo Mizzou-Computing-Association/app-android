@@ -1,89 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tigerhacks.android.tigerhacksapp.prizes.PrizeCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/prizeCard1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="6dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="2dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryLight">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/prizeImageView"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:contentDescription="image"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
+        app:layout_constraintTop_toBottomOf="@id/prizeImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_goneMarginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Tech Company Prize"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/prizeInfoLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        android:background="@color/colorPrimaryLight"
         android:orientation="vertical"
-        android:padding="0dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
+        android:visibility="gone"
+        >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_margin="16dp"
-            android:contentDescription="image"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/ic_launcher_round" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/descriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryLight"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginBottom="8dp"
+            android:text="Here's some content talking about the prize."
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/prizesTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Prizes"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/prizeLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/prizeListTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="title"
-                android:text="Tech Company Prize"
+                android:text="\u2022 Here's a prize"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="description"
-                android:text="Here's some content talking about the prize."
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="subtitle2"
-                android:text="Prizes"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="visible" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="linear2"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="prizes"
-                    android:text="\u2022 Here's a prize"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
-</tigerhacks.android.tigerhacksapp.prizes.PrizeCardView>
+</android.support.constraint.ConstraintLayout>
