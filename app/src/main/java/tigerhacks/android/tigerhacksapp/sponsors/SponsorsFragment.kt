@@ -3,13 +3,16 @@ package tigerhacks.android.tigerhacksapp.sponsors
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.airbnb.epoxy.EpoxyRecyclerView
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
+import tigerhacks.android.tigerhacksapp.service.extensions.withModels
+import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorImage
+import tigerhacks.android.tigerhacksapp.sponsors.views.header
+import tigerhacks.android.tigerhacksapp.sponsors.views.sponsorImage
 
 class SponsorsFragment : Fragment() {
 
@@ -17,8 +20,8 @@ class SponsorsFragment : Fragment() {
         fun newInstance() = SponsorsFragment()
     }
 
-    private var recyclerView: RecyclerView? = null
     private var viewModel: HomeScreenViewModel? = null
+    private var sponsorList: List<Sponsor>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,22 +34,30 @@ class SponsorsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        // layout = inflater.inflate(R.layout.fragment_sponsors, container, false)
+        val recyclerView = EpoxyRecyclerView(context!!)
 
-        val controller = SponsorController()
-        recyclerView = RecyclerView(context!!).apply {
-            adapter = controller.adapter
-            layoutManager = LinearLayoutManager(context)
-        }
-
-        controller.clickListener = View.OnClickListener { epoxyModel ->
-            val model = epoxyModel as? SponsorImage
-            model?.let { startActivity(SponsorDetailActivity.newInstance(activity!!, it.sponsorData)) }
+        recyclerView.withModels {
+            for (i in 0..3) {
+                header {
+                    id("level${i}Title")
+                    sponsorLevel(i)
+                }
+                sponsorList?.filter { it.getLevel() == i }?.forEach {
+                    sponsorImage {
+                        id(it.name)
+                        sponsor(it)
+                        listener { epoxyModel ->
+                            val model = epoxyModel as? SponsorImage
+                            model?.let { startActivity(SponsorDetailActivity.newInstance(activity!!, it.sponsorData)) }
+                        }
+                    }
+                }
+            }
         }
 
         viewModel?.sponsorListLiveData?.observeNotNull(this) {
-            controller.setData(it)
+            sponsorList = it
+            recyclerView.requestModelBuild()
         }
 
         return recyclerView
