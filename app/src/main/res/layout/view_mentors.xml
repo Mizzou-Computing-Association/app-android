@@ -22,11 +22,13 @@
         android:id="@+id/titleSpacer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sponsor_spacer_small"
+
         app:layout_constraintTop_toBottomOf="@id/mentorsTitle"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/sponsor_margin_top"
-        android:background="@color/sponsorSpacerColor"
-        android:visibility="gone"
+        android:layout_marginStart="@dimen/sponsor_margin_start"
+        android:layout_marginEnd="@dimen/sponsor_margin_start"
+
+        android:background="@color/divider"
         />
 
     <LinearLayout

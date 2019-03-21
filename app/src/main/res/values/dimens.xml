@@ -13,4 +13,12 @@
     <dimen name="sponsor_margin_start_indent">24dp</dimen>
     <dimen name="sponsor_spacer_large">4dp</dimen>
     <dimen name="sponsor_spacer_small">1dp</dimen>
+
+    <!-- TigerTalks Section-->
+    <dimen name="tigertalks_card_radius">10dp</dimen>
+    <dimen name="tigertalks_margin_top">8dp</dimen>
+    <dimen name="tigertalks_margin_start">16dp</dimen>
+    <dimen name="tigertalks_spacer_large">4dp</dimen>
+    <dimen name="tigertalks_spacer_small">1dp</dimen>
+    <dimen name="tigertalks_text_size">24sp</dimen>
 </resources>

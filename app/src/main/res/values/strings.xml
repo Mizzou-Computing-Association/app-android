@@ -20,4 +20,13 @@
     <string name="mentors">Mentors</string>
     <string name="na">N/A</string>
     <string name="none_available">None Available</string>
+    <string name="tiger_hacks_website">TigerHacks Website</string>
+    <string name="mca_slack">MCA Slack</string>
+    <string name="intro_to_flask">Intro to Flask</string>
+    <string name="intro_to_web">Intro to Web Dev</string>
+    <string name="intro_to_ios">Intro to iOS Dev</string>
+    <string name="tiger_talks">Tiger Talks</string>
+    <string name="other_links">Other Links</string>
+    <string name="description">Description</string>
+    <string name="information">Information</string>
 </resources>

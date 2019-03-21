@@ -4,12 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.R
+
+//Helper data class to link View Id's to the Url that should open that that view Id is clicked
+private data class IdLink(val id: Int, val link: String)
 
 class TigerTalksFragment : Fragment() {
 
@@ -17,32 +18,24 @@ class TigerTalksFragment : Fragment() {
         fun newInstance() = TigerTalksFragment()
     }
 
-    private var home: HomeScreenActivity? = null
-
-    private val clickListener = View.OnClickListener { clickedView ->
-        val intent = when (clickedView.id) {
-            R.id.tigerHacksWebsiteCardView -> Intent(Intent.ACTION_VIEW, Uri.parse("http://tiger-hacks.com/"))
-            R.id.mcaSlackCardView -> Intent(Intent.ACTION_VIEW, Uri.parse("https://mizzoumca.slack.com/"))
-            R.id.introFlaskCardView -> Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=V0QmmrTTbY4"))
-            R.id.introiOSCardView -> Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=kobP_rJAuyI"))
-            R.id.introWebDevCardView -> Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s"))
-            else -> null
-        }
-        intent?.let { nonNullIntent -> startActivity(nonNullIntent) }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        home = activity as HomeScreenActivity
         val view = inflater.inflate(R.layout.fragment_tigertalks, container, false)
-        view.findViewById<CardView>(R.id.tigerHacksWebsiteCardView).setOnClickListener(clickListener)
-        view.findViewById<CardView>(R.id.mcaSlackCardView).setOnClickListener(clickListener)
-        view.findViewById<CardView>(R.id.introFlaskCardView).setOnClickListener(clickListener)
-        view.findViewById<CardView>(R.id.introiOSCardView).setOnClickListener(clickListener)
-        view.findViewById<CardView>(R.id.introWebDevCardView).setOnClickListener(clickListener)
+        arrayOf(
+            IdLink(R.id.tigerHacksWebsiteCardView, "http://tiger-hacks.com/"),
+            IdLink(R.id.mcaSlackCardView,"https://mizzoumca.slack.com/"),
+            IdLink(R.id.introFlaskCardView,"https://www.youtube.com/watch?v=V0QmmrTTbY4"),
+            IdLink(R.id.introiOSCardView,"https://www.youtube.com/watch?v=kobP_rJAuyI"),
+            IdLink(R.id.introWebDevCardView,"https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s")
+        ).forEach { idLink ->
+            //For Every IdLink register a click listener to the view id
+            view.findViewById<TigerCardView>(idLink.id).setOnClickListener {
+                //When clicked pull Id's link and start a browse intent with that link
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(idLink.link)))
+            }
+        }
         return view
     }
 }

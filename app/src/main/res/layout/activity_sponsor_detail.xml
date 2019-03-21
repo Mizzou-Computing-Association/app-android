@@ -66,17 +66,20 @@
                 android:textSize="@dimen/sponsor_text_size_title"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Description"
+                android:text="@string/description"
                 />
             
             <View
                 android:id="@+id/descriptionTitleDivider"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/sponsor_spacer_small"
+
                 app:layout_constraintTop_toBottomOf="@id/descriptionTitleTextView"
+                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
+                app:layout_constraintEnd_toEndOf="@id/descriptionTitleTextView"
+
                 android:layout_marginTop="@dimen/sponsor_margin_top"
-                android:background="@color/sponsorSpacerColor"
-                android:visibility="gone"
+                android:background="@color/divider"
                 />
             
             <TextView
@@ -93,36 +96,30 @@
                 tools:text="Description"
                 />
             
-            <View
-                android:id="@+id/descriptionDivider"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sponsor_spacer_large"
-                app:layout_constraintTop_toBottomOf="@id/descriptionText"
-                android:layout_marginTop="@dimen/sponsor_margin_top"
-                android:background="@color/sponsorSpacerColor"
-                />
-            
             <TextView
                 android:id="@+id/informationTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
-                app:layout_constraintTop_toBottomOf="@id/descriptionDivider"
+                app:layout_constraintTop_toBottomOf="@id/descriptionText"
                 android:layout_marginTop="@dimen/sponsor_margin_top"
                 android:textSize="@dimen/sponsor_text_size_title"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Information"
+                android:text="@string/information"
                 />
 
             <View
                 android:id="@+id/informationTitleDivider"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/sponsor_spacer_small"
+
                 app:layout_constraintTop_toBottomOf="@id/informationTitle"
+                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
+                app:layout_constraintEnd_toEndOf="@id/descriptionTitleTextView"
+
                 android:layout_marginTop="@dimen/sponsor_margin_top"
-                android:background="@color/sponsorSpacerColor"
-                android:visibility="gone"
+                android:background="@color/divider"
                 />
             
             <ImageView
@@ -173,20 +170,11 @@
                 android:textSize="@dimen/sponsor_text_size"
                 />
 
-            <View
-                android:id="@+id/informationDivider"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sponsor_spacer_large"
-                app:layout_constraintTop_toBottomOf="@id/internetImageView"
-                android:layout_marginTop="@dimen/sponsor_margin_top"
-                android:background="@color/sponsorSpacerColor"
-                />
-
             <tigerhacks.android.tigerhacksapp.sponsors.views.MentorsView
                 android:id="@+id/mentorLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/informationDivider"
+                app:layout_constraintTop_toBottomOf="@id/linkText"
                 app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
