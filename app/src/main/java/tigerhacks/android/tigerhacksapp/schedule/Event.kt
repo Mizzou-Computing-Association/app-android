@@ -1,31 +1,26 @@
 package tigerhacks.android.tigerhacksapp.schedule
 
 import android.support.v7.util.DiffUtil
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.JsonClass
 import java.util.regex.Pattern
 
-data class ScheduleItem (
-    @SerializedName("time")
-    @Expose
-    var time: String = "",
-    @SerializedName("location")
-    @Expose
-    var location: String = "",
-    @SerializedName("floor")
-    @Expose
-    var floor: Int = 0,
-    @SerializedName("title")
-    @Expose
-    var title: String = "",
-    @SerializedName("description")
-    @Expose
-    var description: String = ""
+@JsonClass(generateAdapter = true)
+data class EventList (
+    val schedule: List<Event> = emptyList()
+)
+
+@JsonClass(generateAdapter = true)
+data class Event (
+    val time: String = "",
+    val location: String = "",
+    val floor: Int = 0,
+    val title: String = "",
+    val description: String = ""
 ) {
     companion object {
-        val diff = object : DiffUtil.ItemCallback<ScheduleItem>() {
-            override fun areItemsTheSame(oldItem: ScheduleItem?, newItem: ScheduleItem?) = oldItem?.time == newItem?.time && oldItem?.location == newItem?.location
-            override fun areContentsTheSame(oldItem: ScheduleItem?, newItem: ScheduleItem?) = oldItem == newItem
+        val diff = object : DiffUtil.ItemCallback<Event>() {
+            override fun areItemsTheSame(oldItem: Event, newItem: Event) = oldItem.time == newItem.time && oldItem.location == newItem.location
+            override fun areContentsTheSame(oldItem: Event, newItem: Event) = oldItem == newItem
         }
     }
 

@@ -1,30 +1,27 @@
 package tigerhacks.android.tigerhacksapp.prizes
 
 import android.support.v7.util.DiffUtil
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
+data class PrizeList(
+    val prizes: List<Prize> = emptyList()
+)
+
+@JsonClass(generateAdapter = true)
 data class Prize(
-    @SerializedName("sponsor")
-    @Expose
-    var sponsor: Int = 0,
-    @SerializedName("title")
-    @Expose
-    var title: String = "",
-    @SerializedName("reward")
-    @Expose
-    var reward: String = "",
-    @SerializedName("description")
-    @Expose
-    var description: String = "",
-    @SerializedName("prizetype")
-    @Expose
-    var prizeType: String? = null
+    val sponsor: Int = 0,
+    val title: String = "",
+    val reward: String = "",
+    val description: String = "",
+    @Json(name = "prizetype")
+    val prizeType: String = ""
 ) {
     companion object {
         val diff = object : DiffUtil.ItemCallback<Prize>() {
-            override fun areContentsTheSame(oldItem: Prize?, newItem: Prize?) = oldItem?.sponsor == newItem?.sponsor && oldItem?.title == newItem?.title
-            override fun areItemsTheSame(oldItem: Prize?, newItem: Prize?) = oldItem == newItem
+            override fun areContentsTheSame(oldItem: Prize, newItem: Prize) = oldItem.sponsor == newItem.sponsor && oldItem.title == newItem.title
+            override fun areItemsTheSame(oldItem: Prize, newItem: Prize) = oldItem == newItem
         }
     }
 }

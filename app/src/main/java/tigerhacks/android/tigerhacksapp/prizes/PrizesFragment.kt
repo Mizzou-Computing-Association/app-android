@@ -1,5 +1,6 @@
 package tigerhacks.android.tigerhacksapp.prizes
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -8,28 +9,27 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import tigerhacks.android.tigerhacksapp.HomeScreenActivity
+import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
-import tigerhacks.android.tigerhacksapp.sponsors.SponsorList
-import java.util.ArrayList
 
 class PrizesFragment : Fragment() {
     companion object {
         fun newInstance() = PrizesFragment()
     }
 
-    private lateinit var layoutView: View
-    //TODO ll needs to be changed to RecyclerView and scroll view to be removed
-    private lateinit var progressBar: ProgressBar
-    private var currentType: PrizeCardView.Type = PrizeCardView.Type.MAIN
     private var tabLayout: TabLayout? = null
-    private var cardList: ArrayList<Prize>? = null
-    private var sponsorList: ArrayList<Sponsor>? = null
-    private var home: HomeScreenActivity? = null
+    private var sponsorList: List<Sponsor>? = null
 
     private var prizeAdapter = object : ListAdapter<Prize, RecyclerView.ViewHolder>(Prize.diff) {
+        private var totalList: List<Prize>? = null
+        var currentType: PrizeCardView.Type = PrizeCardView.Type.MAIN
+            set(value) {
+                field = value
+                submitList(totalList)
+            }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(PrizeCardView(parent.context)) {}
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -37,13 +37,34 @@ class PrizesFragment : Fragment() {
             val prize = getItem(position)
             card.setup(prize, sponsorList)
         }
+
+        override fun submitList(list: List<Prize>?) {
+            totalList = list
+            val filteredList = list?.filter { it.prizeType.toPrizeType() == currentType }
+            super.submitList(filteredList)
+        }
+    }
+
+    private lateinit var viewModel: HomeScreenViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(HomeScreenViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
+        viewModel.prizeListLiveData.observeNotNull(this) { list ->
+            prizeAdapter.submitList(list)
+        }
+
+        viewModel.sponsorListLiveData.observeNotNull(this) { sponsorList = it }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        layoutView = inflater.inflate(R.layout.fragment_prizes, container, false)
+        val layoutView = inflater.inflate(R.layout.fragment_prizes, container, false)
         val prizeRecyclerView = layoutView.findViewById<RecyclerView>(R.id.prizeRecyclerView)
         prizeRecyclerView.adapter = prizeAdapter
 
@@ -52,55 +73,18 @@ class PrizesFragment : Fragment() {
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
-                    0 -> {
-                        currentType = PrizeCardView.Type.MAIN
-                        addCardsByType(cardList, sponsorList)
-                    }
-                    1 -> {
-                        currentType = PrizeCardView.Type.STARTUP
-                        addCardsByType(cardList, sponsorList)
-                    }
-                    2 -> {
-                        currentType = PrizeCardView.Type.BEGINNER
-                        addCardsByType(cardList, sponsorList)
-                    }
+                    0 -> prizeAdapter.currentType = PrizeCardView.Type.MAIN
+                    1 -> prizeAdapter.currentType = PrizeCardView.Type.STARTUP
+                    2 -> prizeAdapter.currentType = PrizeCardView.Type.BEGINNER
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
 
-            override fun onTabReselected(tab: TabLayout.Tab) {
-            }
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
-        progressBar = layoutView.findViewById(R.id.progressBar)
-
-        home = activity as HomeScreenActivity?
-
-        //create cards. This is static, and will be replaced by dynamic creation through the API
-
         return layoutView
-    }
-
-    fun loadData(prizeList: PrizeList?, spList: SponsorList?) {
-        if (prizeList == null || spList == null) return
-        progressBar.visibility = View.GONE
-        cardList = prizeList.prizes as ArrayList<Prize>
-        sponsorList = spList.sponsors as ArrayList<Sponsor>
-        addCardsByType(cardList, sponsorList)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        home?.onFragmentsReady()
-    }
-
-    fun addCardsByType(list: ArrayList<Prize>?, sList: ArrayList<Sponsor>?) {
-        if (list == null || sList == null) return
-
-        val prizes = list.filter { it.prizeType?.toPrizeType() == currentType }
-        prizeAdapter.submitList(prizes)
     }
 
     private fun String.toPrizeType() = when (this) {

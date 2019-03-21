@@ -6,9 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.jsibbold.zoomage.ZoomageView
-
 import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.R
 
@@ -49,10 +47,5 @@ class MapFragment : Fragment() {
         //initial setup of event list
         //return fragment layout to main activity
         return layoutView
-    }
-
-    override fun onStart() {
-        super.onStart()
-        home!!.onFragmentsReady()
     }
 }

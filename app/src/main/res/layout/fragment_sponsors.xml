@@ -1,110 +1,17 @@
-<ScrollView
+<ImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment"
-    android:id="@+id/sponsorScrollView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="UselessParent">
-
-    <LinearLayout
-        android:id="@+id/sponsorVerticalLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/platinum"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/platinum"
-            android:gravity="center"
-            android:text="Platinum Sponsors"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/platinumLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingEnd="32dp"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp">
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/gold"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/gold"
-            android:gravity="center"
-            android:text="Gold Sponsors"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/goldLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingEnd="32dp"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp">
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/silver"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/silver"
-            android:gravity="center"
-            android:text="Silver Sponsors"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/silverLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingEnd="32dp"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp">
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/bronze"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/bronze"
-            android:gravity="center"
-            android:text="Bronze Sponsors"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/bronzeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingEnd="32dp"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp">
-
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sponsorImageView"
+    android:layout_width="350dp"
+    android:layout_height="120dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:scaleType="fitCenter"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginStart="32dp"
+    android:layout_marginEnd="32dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    />

@@ -1,16 +1,15 @@
 package tigerhacks.android.tigerhacksapp.sponsors
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import com.bumptech.glide.Glide
-import tigerhacks.android.tigerhacksapp.HomeScreenActivity
-import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
+import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
+import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
 class SponsorsFragment : Fragment() {
 
@@ -18,56 +17,38 @@ class SponsorsFragment : Fragment() {
         fun newInstance() = SponsorsFragment()
     }
 
-    private var layout: View? = null
-    private var home: HomeScreenActivity? = null
+    private var recyclerView: RecyclerView? = null
+    private var viewModel: HomeScreenViewModel? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(HomeScreenViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        layout = inflater.inflate(R.layout.fragment_sponsors, container, false)
-        home = activity as HomeScreenActivity?
-        return layout
-    }
+        // layout = inflater.inflate(R.layout.fragment_sponsors, container, false)
 
-    override fun onStart() {
-        super.onStart()
-        home!!.onFragmentsReady()
-    }
-
-    fun loadSponsorData(list: SponsorList?) {
-        layout?.let { immutableLayout ->
-            val pLayout = immutableLayout.findViewById<LinearLayout>(R.id.platinumLayout)
-            val gLayout = immutableLayout.findViewById<LinearLayout>(R.id.goldLayout)
-            val sLayout = immutableLayout.findViewById<LinearLayout>(R.id.silverLayout)
-            val bLayout = immutableLayout.findViewById<LinearLayout>(R.id.bronzeLayout)
-
-            list?.sponsors?.forEach { sponsor ->
-                val image = ImageView(context)
-                val layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100)
-                layoutParams.height = context!!.dpToPx(100)
-                layoutParams.setMargins(0, 32, 0, 32)
-                image.layoutParams = layoutParams
-                image.scaleType = ImageView.ScaleType.FIT_CENTER
-                Glide.with(image).load(sponsor.image).into(image)
-                when (sponsor.level) {
-                    "Platinum" -> pLayout.addView(image)
-                    "Gold" -> gLayout.addView(image)
-                    "Silver" -> sLayout.addView(image)
-                    "Bronze" -> bLayout.addView(image)
-                }
-
-                image.setOnClickListener {
-                    startActivity(
-                        SponsorDetailActivity.newInstance(
-                            context!!,
-                            sponsor
-                        )
-                    )
-                }
-            }
+        val controller = SponsorController()
+        recyclerView = RecyclerView(context!!).apply {
+            adapter = controller.adapter
+            layoutManager = LinearLayoutManager(context)
         }
 
+        controller.clickListener = View.OnClickListener { epoxyModel ->
+            val model = epoxyModel as? SponsorImage
+            model?.let { startActivity(SponsorDetailActivity.newInstance(activity!!, it.sponsorData)) }
+        }
+
+        viewModel?.sponsorListLiveData?.observeNotNull(this) {
+            controller.setData(it)
+        }
+
+        return recyclerView
     }
 }

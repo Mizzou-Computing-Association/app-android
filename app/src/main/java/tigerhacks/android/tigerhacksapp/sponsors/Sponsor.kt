@@ -2,40 +2,25 @@ package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.os.Parcelable
 import android.support.annotation.ColorRes
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 import tigerhacks.android.tigerhacksapp.R
 
+@JsonClass(generateAdapter = true)
+data class SponsorList (
+    val sponsors: List<Sponsor> = emptyList()
+)
+
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class Sponsor(
-    @SerializedName("name")
-    @Expose
-    var name: String? = null,
-
-    @SerializedName("mentors")
-    @Expose
-    var mentors: List<Mentor>? = null,
-
-    @SerializedName("description")
-    @Expose
-    var description: String? = null,
-
-    @SerializedName("website")
-    @Expose
-    var website: String? = null,
-
-    @SerializedName("location")
-    @Expose
-    var location: String? = null,
-
-    @SerializedName("image")
-    @Expose
-    var image: String? = null,
-
-    @SerializedName("level")
-    @Expose
-    var level: String? = null
+    val name: String = "",
+    val mentors: List<Mentor> = emptyList(),
+    val description: String = "",
+    val website: String = "",
+    val location: String = "",
+    val image: String = "",
+    val level: String = ""
 ) : Parcelable {
     @ColorRes
     fun getSponsorLevelColorRes(): Int {
@@ -46,5 +31,12 @@ data class Sponsor(
             "Bronze" -> R.color.bronze
             else -> R.color.colorPrimary
         }
+    }
+
+    fun getLevel() = when (level) {
+        "Platinum" -> 0
+        "Gold" -> 1
+        "Silver" -> 2
+        else -> 3
     }
 }

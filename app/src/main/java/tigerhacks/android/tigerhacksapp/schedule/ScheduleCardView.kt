@@ -30,10 +30,10 @@ class ScheduleCardView @JvmOverloads constructor (context: Context, attrs: Attri
         setOnClickListener { expanded = !expanded }
     }
 
-    fun setup(scheduleItem: ScheduleItem) {
-        titleTextView.text = scheduleItem.title
-        locationTextView.text = scheduleItem.location
-        descriptionTextView.text = scheduleItem.description
-        timeTextView.text = scheduleItem.easyTime.format()
+    fun setup(event: Event) {
+        titleTextView.text = event.title
+        locationTextView.text = event.location
+        descriptionTextView.text = event.description
+        timeTextView.text = event.easyTime.format()
     }
 }

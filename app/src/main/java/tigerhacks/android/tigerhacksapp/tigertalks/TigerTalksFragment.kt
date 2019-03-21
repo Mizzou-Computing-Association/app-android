@@ -45,9 +45,4 @@ class TigerTalksFragment : Fragment() {
         view.findViewById<CardView>(R.id.introWebDevCardView).setOnClickListener(clickListener)
         return view
     }
-
-    override fun onStart() {
-        super.onStart()
-        home?.onFragmentsReady()
-    }
 }
