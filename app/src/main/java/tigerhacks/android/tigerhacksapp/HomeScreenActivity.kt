@@ -49,7 +49,7 @@ class HomeScreenActivity : AppCompatActivity() {
         mainViewPager.offscreenPageLimit = 4
 
         //set initial page/tab state
-        mainViewPager.currentItem = 0
+        mainViewPager.currentItem = 2
     }
 
     // Snackbar.make(
