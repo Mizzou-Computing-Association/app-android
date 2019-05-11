@@ -1,3 +1,3 @@
 # app-android
 Android App for Tigerhacks
-Written in Java
+Written in Kotlin
