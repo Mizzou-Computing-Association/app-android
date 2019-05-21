@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.airbnb.epoxy.EpoxyRecyclerView
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
+import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.service.extensions.withModels
-import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorImage
+import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
 import tigerhacks.android.tigerhacksapp.sponsors.views.header
-import tigerhacks.android.tigerhacksapp.sponsors.views.sponsorImage
+import tigerhacks.android.tigerhacksapp.sponsors.views.sponsorCardView
 
 class SponsorsFragment : Fragment() {
 
@@ -43,12 +44,12 @@ class SponsorsFragment : Fragment() {
                     sponsorLevel(i)
                 }
                 sponsorList?.filter { it.getLevel() == i }?.forEach {
-                    sponsorImage {
+                    sponsorCardView {
                         id(it.name)
                         sponsor(it)
                         listener { epoxyModel ->
-                            val model = epoxyModel as? SponsorImage
-                            model?.let { startActivity(SponsorDetailActivity.newInstance(activity!!, it.sponsorData)) }
+                            val model = epoxyModel as? SponsorCardView ?: return@listener
+                            activity?.let { startActivity(SponsorDetailActivity.newInstance(it, model.sponsorData)) }
                         }
                     }
                 }
@@ -59,6 +60,8 @@ class SponsorsFragment : Fragment() {
             sponsorList = it
             recyclerView.requestModelBuild()
         }
+
+        recyclerView.setBackgroundResource(R.color.colorPrimaryBackground)
 
         return recyclerView
     }

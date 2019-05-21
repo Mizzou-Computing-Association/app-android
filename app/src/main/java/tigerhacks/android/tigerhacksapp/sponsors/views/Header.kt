@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.ViewGroup.MarginLayoutParams
 import android.widget.TextView
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
@@ -11,7 +12,9 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
 
-/*
+
+
+/**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 
@@ -28,6 +31,7 @@ class Header @JvmOverloads constructor(
         gravity = Gravity.CENTER
         val dp = context.dpToPx(4)
         setPadding(dp, dp, dp, dp)
+        elevation = context.dpToPx(3).toFloat()
     }
 
     @ModelProp
@@ -49,6 +53,12 @@ class Header @JvmOverloads constructor(
                 setBackgroundResource(R.color.bronze)
                 text = "Bronze Sponsors"
             }
+        }
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        layoutParams = (layoutParams as? MarginLayoutParams)?.apply {
+            bottomMargin = context.dpToPx(10)
         }
     }
 }
