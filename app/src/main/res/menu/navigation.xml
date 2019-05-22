@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigation_map"
-        android:icon="@drawable/ic_map_24dp"
-        android:title="@string/title_map" />
+        android:id="@+id/navigation_schedule"
+        android:icon="@drawable/ic_schedule_24dp"
+        android:title="@string/title_schedule" />
 
     <item
         android:id="@+id/navigation_prizes"
@@ -11,19 +11,19 @@
         android:title="@string/title_prizes" />
 
     <item
-        android:id="@+id/navigation_schedule"
-        android:icon="@drawable/ic_schedule_24dp"
-        android:title="@string/title_schedule" />
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/ic_location"
+        android:title="@string/title_map" />
 
     <item
         android:id="@+id/navigation_sponsors"
-        android:icon="@drawable/ic_baseline_account_circle_24px"
+        android:icon="@drawable/ic_sponsors_24px"
         android:title="@string/title_sponsors" />
 
     <item
-        android:id="@+id/navigation_tigertalks"
-        android:icon="@drawable/ic_tigertalks_24dp"
-        android:title="@string/title_tigertalks" />
+        android:id="@+id/navigation_resources"
+        android:icon="@drawable/ic_resources_24px"
+        android:title="@string/title_resources" />
 
 
 
