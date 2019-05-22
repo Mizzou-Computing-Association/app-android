@@ -8,9 +8,9 @@ import kotlinx.android.synthetic.main.activity_home_screen.navigation
 import kotlinx.android.synthetic.main.activity_home_screen.toolbar
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
 import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment
+import tigerhacks.android.tigerhacksapp.resources.ResourcesFragment
 import tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment
 import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment
-import tigerhacks.android.tigerhacksapp.tigertalks.TigerTalksFragment
 
 class HomeScreenActivity : AppCompatActivity() {
 
@@ -18,7 +18,7 @@ class HomeScreenActivity : AppCompatActivity() {
     private lateinit var prizesFragment: PrizesFragment
     private lateinit var scheduleFragment: ScheduleFragment
     private lateinit var sponsorsFragment: SponsorsFragment
-    private lateinit var tigerTalksFragment: TigerTalksFragment
+    private lateinit var resourcesFragment: ResourcesFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -32,7 +32,7 @@ class HomeScreenActivity : AppCompatActivity() {
         prizesFragment = PrizesFragment.newInstance()
         scheduleFragment = ScheduleFragment.newInstance()
         sponsorsFragment = SponsorsFragment.newInstance()
-        tigerTalksFragment = TigerTalksFragment.newInstance()
+        resourcesFragment = ResourcesFragment.newInstance()
 
         supportFragmentManager
             ?.beginTransaction()
@@ -46,7 +46,7 @@ class HomeScreenActivity : AppCompatActivity() {
                 R.id.navigation_prizes -> prizesFragment
                 R.id.navigation_schedule -> scheduleFragment
                 R.id.navigation_sponsors -> sponsorsFragment
-                else -> tigerTalksFragment
+                else -> resourcesFragment
             }
             supportFragmentManager
                 ?.beginTransaction()

@@ -3,7 +3,7 @@
     <declare-styleable name="PrizeCardView">
         <attr name="titleText" format="string"/>
     </declare-styleable>
-    <declare-styleable name="TigerCardView">
+    <declare-styleable name="ResourceCardView">
         <attr name="titleIcon" format="reference" />
         <attr name="titleRes" format="reference" />
     </declare-styleable>

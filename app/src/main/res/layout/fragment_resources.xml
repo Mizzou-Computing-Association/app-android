@@ -37,7 +37,7 @@
         android:background="@color/divider"
         />
 
-    <tigerhacks.android.tigerhacksapp.tigertalks.TigerCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
         android:id="@+id/introiOSCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         app:titleRes="@string/intro_to_ios"
         />
 
-    <tigerhacks.android.tigerhacksapp.tigertalks.TigerCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
         android:id="@+id/introWebDevCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         app:titleRes="@string/intro_to_web"
         />
 
-    <tigerhacks.android.tigerhacksapp.tigertalks.TigerCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
         android:id="@+id/introFlaskCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
         android:background="@color/divider"
         />
 
-    <tigerhacks.android.tigerhacksapp.tigertalks.TigerCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
         android:id="@+id/tigerHacksWebsiteCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
         app:titleRes="@string/tiger_hacks_website"
         />
 
-    <tigerhacks.android.tigerhacksapp.tigertalks.TigerCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
         android:id="@+id/mcaSlackCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

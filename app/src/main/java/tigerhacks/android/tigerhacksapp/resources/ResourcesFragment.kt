@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.tigertalks
+package tigerhacks.android.tigerhacksapp.resources
 
 import android.content.Intent
 import android.net.Uri
@@ -12,17 +12,17 @@ import tigerhacks.android.tigerhacksapp.R
 //Helper data class to link View Id's to the Url that should open that that view Id is clicked
 private data class IdLink(val id: Int, val link: String)
 
-class TigerTalksFragment : Fragment() {
+class ResourcesFragment : Fragment() {
 
     companion object {
-        fun newInstance() = TigerTalksFragment()
+        fun newInstance() = ResourcesFragment()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_tigertalks, container, false)
+        val view = inflater.inflate(R.layout.fragment_resources, container, false)
         arrayOf(
             IdLink(R.id.tigerHacksWebsiteCardView, "http://tiger-hacks.com/"),
             IdLink(R.id.mcaSlackCardView,"https://mizzoumca.slack.com/"),
@@ -31,7 +31,7 @@ class TigerTalksFragment : Fragment() {
             IdLink(R.id.introWebDevCardView,"https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s")
         ).forEach { idLink ->
             //For Every IdLink register a click listener to the view id
-            view.findViewById<TigerCardView>(idLink.id).setOnClickListener {
+            view.findViewById<ResourceCardView>(idLink.id).setOnClickListener {
                 //When clicked pull Id's link and start a browse intent with that link
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(idLink.link)))
             }
