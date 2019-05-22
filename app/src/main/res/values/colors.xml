@@ -18,6 +18,7 @@
 
     <!--Utility Colors-->
     <color name="white">#FFF</color>
+    <color name="blackSemiTransparent">#40000000</color>
     <color name="black">#000</color>
     <color name="transparent">#0FFF</color>
     <color name="linkColor">#00B0FF</color>
