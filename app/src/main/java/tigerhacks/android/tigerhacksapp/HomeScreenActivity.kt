@@ -1,7 +1,9 @@
 package tigerhacks.android.tigerhacksapp
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_home_screen.navigation
@@ -25,6 +27,9 @@ class HomeScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Fabric.with(this, Crashlytics())
         setContentView(R.layout.activity_home_screen)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -36,7 +41,6 @@ class HomeScreenActivity : AppCompatActivity() {
 
         supportFragmentManager
             ?.beginTransaction()
-            ?.addToBackStack(scheduleFragment.tag)
             ?.add(R.id.contentFrameLayout, scheduleFragment)
             ?.commit()
 
