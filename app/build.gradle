@@ -46,24 +46,28 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
+    
     //Airbnb Epoxy (Advanced RecyclerViews)
     implementation 'com.airbnb.android:epoxy:2.8.0'
     kapt "com.airbnb.android:epoxy-processor:2.8.0"
+
     //Zoomage (Zoomable Image View)
     implementation 'com.jsibbold:zoomage:1.1.0'
+
     //Glide (Url to Image View)
     implementation('com.github.bumptech.glide:glide:4.9.0') {
         exclude group: 'com.android.support'
     }
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
+
     //Retrofit (Networking)
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.4.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
-    implementation 'com.squareup.retrofit2:converter-moshi:2.4.0'
+
     //Fabric Crashlytics and Beta Distribution
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.crashlytics.sdk.android:answers:1.4.7'
 }
 
