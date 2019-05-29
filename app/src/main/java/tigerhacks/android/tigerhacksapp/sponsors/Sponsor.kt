@@ -7,15 +7,9 @@ import kotlinx.android.parcel.Parcelize
 import tigerhacks.android.tigerhacksapp.R
 
 @JsonClass(generateAdapter = true)
-data class SponsorList (
-    val sponsors: List<Sponsor> = emptyList()
-)
-
-@JsonClass(generateAdapter = true)
 @Parcelize
 data class Sponsor(
     val name: String = "",
-    val mentors: List<Mentor> = emptyList(),
     val description: String = "",
     val website: String = "",
     val location: String = "",

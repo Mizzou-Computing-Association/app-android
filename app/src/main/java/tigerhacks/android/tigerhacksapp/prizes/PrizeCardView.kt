@@ -38,7 +38,7 @@ class PrizeCardView @JvmOverloads constructor(context: Context, attrs: Attribute
         setOnClickListener { expanded = !expanded }
     }
 
-    fun setup(prize: Prize, sponsorList: List<Sponsor>?) {
+    fun setup(prize: Prize) {
         titleTextView.text = prize.title
         descriptionTextView.text = prize.description
         val list = listOf(Arrays.asList(prize.reward))
@@ -48,11 +48,5 @@ class PrizeCardView @JvmOverloads constructor(context: Context, attrs: Attribute
         }
         newString = newString.substring(0, newString.length - 1)
         prizeListTextView.text = newString
-
-        if (prize.sponsor >= 0 && prize.sponsor < sponsorList?.size ?: 0) {
-            sponsorList?.get(prize.sponsor)?.image?.let { image ->
-                Glide.with(prizeImageView).load(image).into(prizeImageView)
-            }
-        }
     }
 }

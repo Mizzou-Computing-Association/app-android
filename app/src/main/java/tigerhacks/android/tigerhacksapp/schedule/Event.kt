@@ -5,12 +5,8 @@ import com.squareup.moshi.JsonClass
 import java.util.regex.Pattern
 
 @JsonClass(generateAdapter = true)
-data class EventList (
-    val schedule: List<Event> = emptyList()
-)
-
-@JsonClass(generateAdapter = true)
 data class Event (
+    val day: Int = 0,
     val time: String = "",
     val location: String = "",
     val floor: Int = 0,

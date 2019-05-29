@@ -8,16 +8,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import tigerhacks.android.tigerhacksapp.prizes.Prize
-import tigerhacks.android.tigerhacksapp.prizes.PrizeList
 import tigerhacks.android.tigerhacksapp.schedule.Event
-import tigerhacks.android.tigerhacksapp.schedule.EventList
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
+import tigerhacks.android.tigerhacksapp.sponsors.Mentor
 import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
-import tigerhacks.android.tigerhacksapp.sponsors.SponsorList
 import java.util.Timer
 import java.util.TimerTask
 
-/*
+/**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 
@@ -34,9 +32,18 @@ class HomeScreenViewModel : ViewModel() {
     }
 
     val statusLiveData = MutableLiveData<NetworkStatus>()
+
     val sponsorListLiveData = MutableLiveData<List<Sponsor>>()
-    val prizeListLiveData = MutableLiveData<List<Prize>>()
-    val eventListLiveData = MutableLiveData<List<Event>>()
+    val mentorsListLiveData = MutableLiveData<List<Mentor>>()
+
+    val developerPrizeListLiveData = MutableLiveData<List<Prize>>()
+    val beginnerPrizeListLiveData = MutableLiveData<List<Prize>>()
+    val startupPrizeListLiveData = MutableLiveData<List<Prize>>()
+
+    val fridayEventListLiveData = MutableLiveData<List<Event>>()
+    val saturdayEventListLiveData = MutableLiveData<List<Event>>()
+    val sundayEventListLiveData = MutableLiveData<List<Event>>()
+
 
     init {
         refresh()
@@ -45,42 +52,64 @@ class HomeScreenViewModel : ViewModel() {
     fun refresh() {
         statusLiveData.postValue(NetworkStatus.LOADING)
 
-        service.listSponsors().enqueue(object : Callback<SponsorList> {
-            override fun onResponse(call: Call<SponsorList>, response: Response<SponsorList>) {
+        service.listSponsors().enqueue(object : Callback<List<Sponsor>> {
+            override fun onResponse(call: Call<List<Sponsor>>, response: Response<List<Sponsor>>) {
                 if (response.isSuccessful) {
                     statusLiveData.postValue(NetworkStatus.SUCCESS)
-                    sponsorListLiveData.postValue(response.body()?.sponsors)
+                    sponsorListLiveData.postValue(response.body())
                 }
             }
-            override fun onFailure(call: Call<SponsorList>, t: Throwable) { onFailure() }
+            override fun onFailure(call: Call<List<Sponsor>>, t: Throwable) { onFailure() }
         })
 
-        service.listPrizes().enqueue(object : Callback<PrizeList> {
-            override fun onResponse(call: Call<PrizeList>, response: Response<PrizeList>) {
+        service.listMentors().enqueue(object : Callback<List<Mentor>> {
+            override fun onResponse(call: Call<List<Mentor>>, response: Response<List<Mentor>>) {
                 if (response.isSuccessful) {
                     statusLiveData.postValue(NetworkStatus.SUCCESS)
-                    prizeListLiveData.postValue(response.body()?.prizes)
+                    mentorsListLiveData.postValue(response.body())
                 }
             }
-            override fun onFailure(call: Call<PrizeList>, t: Throwable) { onFailure() }
+            override fun onFailure(call: Call<List<Mentor>>, t: Throwable) { onFailure() }
         })
 
-        service.listEvents().enqueue(object : Callback<EventList> {
-            override fun onResponse(call: Call<EventList>, response: Response<EventList>) {
+        service.listPrizes().enqueue(object : Callback<List<Prize>> {
+            override fun onResponse(call: Call<List<Prize>>, response: Response<List<Prize>>) {
                 if (response.isSuccessful) {
                     statusLiveData.postValue(NetworkStatus.SUCCESS)
-                    eventListLiveData.postValue(response.body()?.schedule)
+                    val totalPrizes = response.body() ?: return
+                    developerPrizeListLiveData.postValue(totalPrizes.filter { it.prizeType == "Main" })
+                    beginnerPrizeListLiveData.postValue(totalPrizes.filter { it.prizeType == "Beginner" })
+                    startupPrizeListLiveData.postValue(totalPrizes.filter { it.prizeType == "StartUp" })
                 }
             }
-            override fun onFailure(call: Call<EventList>, t: Throwable) { onFailure() }
+            override fun onFailure(call: Call<List<Prize>>, t: Throwable) { onFailure() }
+        })
+
+        service.listEvents().enqueue(object : Callback<List<Event>> {
+            override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
+                if (response.isSuccessful) {
+                    statusLiveData.postValue(NetworkStatus.SUCCESS)
+                    val totalEvents = response.body() ?: return
+                    fridayEventListLiveData.postValue(totalEvents.filter { it.day == 0 })
+                    saturdayEventListLiveData.postValue(totalEvents.filter { it.day == 1 })
+                    sundayEventListLiveData.postValue(totalEvents.filter { it.day == 2 })
+                }
+            }
+            override fun onFailure(call: Call<List<Event>>, t: Throwable) { onFailure() }
         })
     }
 
+    @Volatile
+    private var refreshInProcess = false
+
     private fun onFailure() {
         statusLiveData.postValue(NetworkStatus.FAILURE)
+        if (refreshInProcess) return
+        refreshInProcess = true
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 refresh()
+                refreshInProcess = false
             }
         }, 10000)
     }

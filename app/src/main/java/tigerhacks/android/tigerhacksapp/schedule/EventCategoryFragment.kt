@@ -1,0 +1,37 @@
+package tigerhacks.android.tigerhacksapp.schedule
+
+import android.os.Bundle
+import android.support.v7.recyclerview.extensions.ListAdapter
+import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
+import tigerhacks.android.tigerhacksapp.service.CategoryFragment
+
+private const val POSITION_KEY = "EVENT_CATEGORY_FRAGMENT_POSITION"
+
+class EventCategoryFragment : CategoryFragment<Event>() {
+    companion object {
+        fun newInstance(position: Int) = EventCategoryFragment().apply {
+            arguments = Bundle().apply {
+                putInt(POSITION_KEY, position)
+            }
+        }
+    }
+
+    override val position = lazy { arguments?.getInt(POSITION_KEY) ?: 0 }
+
+    override fun buildAdapter() = object : ListAdapter<Event, RecyclerView.ViewHolder>(Event.diff) {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(EventCardView(parent.context)) {}
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            val card = (holder.itemView as EventCardView)
+            val event = getItem(position)
+            card.setup(event)
+        }
+    }
+
+    override fun getLiveData(position: Int) = when (position) {
+        0 -> viewModel.fridayEventListLiveData
+        1 -> viewModel.saturdayEventListLiveData
+        else -> viewModel.sundayEventListLiveData
+    }
+}

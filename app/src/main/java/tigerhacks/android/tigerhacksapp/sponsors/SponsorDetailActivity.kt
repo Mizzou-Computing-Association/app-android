@@ -1,5 +1,6 @@
 package tigerhacks.android.tigerhacksapp.sponsors
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -13,9 +14,11 @@ import kotlinx.android.synthetic.main.activity_sponsor_detail.mentorLayout
 import kotlinx.android.synthetic.main.activity_sponsor_detail.secondText
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbar
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbarLayout
+import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.darkenColor
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
+import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
 private const val SPONSOR_KEY = "sponsor_key"
 
@@ -51,7 +54,10 @@ class SponsorDetailActivity : AppCompatActivity() {
             startActivity(browserIntent)
         }
 
-        mentorLayout.mentors = sponsor.mentors
+        val viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel::class.java)
+        viewModel.mentorsListLiveData.observeNotNull(this) {
+            mentorLayout.mentors = it
+        }
 
         //Toolbar Setup
         val sponsorColor = sponsor.getSponsorLevelColorRes()

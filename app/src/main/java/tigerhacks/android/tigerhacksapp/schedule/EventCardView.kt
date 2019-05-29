@@ -15,7 +15,7 @@ import tigerhacks.android.tigerhacksapp.R
  * Created by Conno on 9/15/2018.
  */
 
-class ScheduleCardView @JvmOverloads constructor (context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : CardView(context, attrs, defStyle) {
+class EventCardView @JvmOverloads constructor (context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : CardView(context, attrs, defStyle) {
 
     private var expanded = false
         set(value) {

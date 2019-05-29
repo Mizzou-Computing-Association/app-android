@@ -14,33 +14,12 @@
         android:layout_marginBottom="4dp"
         android:background="@color/white"
         app:tabGravity="center"
-        app:tabIndicatorColor="@color/colorPrimary">
+        app:tabIndicatorColor="@color/colorPrimary" />
 
-        <android.support.design.widget.TabItem
-            android:id="@+id/developerTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Developer" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/startupTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="StartUp" />
-
-        <android.support.design.widget.TabItem
-            android:id="@+id/beginnerTab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Beginner" />
-
-    </android.support.design.widget.TabLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/prizeRecyclerView"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/prizeViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         />
 
     <ProgressBar

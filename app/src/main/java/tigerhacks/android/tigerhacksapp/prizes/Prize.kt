@@ -5,13 +5,8 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class PrizeList(
-    val prizes: List<Prize> = emptyList()
-)
-
-@JsonClass(generateAdapter = true)
 data class Prize(
-    val sponsor: Int = 0,
+    val sponsor: String = "",
     val title: String = "",
     val reward: String = "",
     val description: String = "",
