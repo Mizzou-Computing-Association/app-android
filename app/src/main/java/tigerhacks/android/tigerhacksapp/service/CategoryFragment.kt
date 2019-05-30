@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
+import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
 
@@ -30,7 +31,8 @@ abstract class CategoryFragment<T> : Fragment() {
         super.onCreate(savedInstanceState)
 
         viewModel = activity?.run {
-            ViewModelProviders.of(this).get(HomeScreenViewModel::class.java)
+            val db = TigerHacksDatabase.getDatabase(this.applicationContext)
+            ViewModelProviders.of(this, HomeScreenViewModel.FACTORY(db)).get(HomeScreenViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         val adapter = buildAdapter()

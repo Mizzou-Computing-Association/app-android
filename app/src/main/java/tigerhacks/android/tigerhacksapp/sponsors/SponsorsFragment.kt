@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.airbnb.epoxy.EpoxyRecyclerView
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.service.extensions.withModels
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
@@ -30,7 +31,8 @@ class SponsorsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = activity?.run {
-            ViewModelProviders.of(this).get(HomeScreenViewModel::class.java)
+            val db = TigerHacksDatabase.getDatabase(applicationContext)
+            ViewModelProviders.of(this, HomeScreenViewModel.FACTORY(db)).get(HomeScreenViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 
@@ -46,7 +48,7 @@ class SponsorsFragment : Fragment() {
                     id("level${i}Title")
                     sponsorLevel(i)
                 }
-                sponsorList?.filter { it.getLevel() == i }?.forEach {
+                sponsorList?.filter { it.getLevelNum() == i }?.forEach {
                     sponsorCardView {
                         id(it.name)
                         sponsor(it)

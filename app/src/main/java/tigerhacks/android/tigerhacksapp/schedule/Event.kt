@@ -1,16 +1,19 @@
 package tigerhacks.android.tigerhacksapp.schedule
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import java.util.regex.Pattern
 
+@Entity
 @JsonClass(generateAdapter = true)
 data class Event (
     val day: Int = 0,
     val time: String = "",
     val location: String = "",
     val floor: Int = 0,
-    val title: String = "",
+    @PrimaryKey val title: String = "",
     val description: String = ""
 ) {
     companion object {

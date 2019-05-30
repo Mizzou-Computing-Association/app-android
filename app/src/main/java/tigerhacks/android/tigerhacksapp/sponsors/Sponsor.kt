@@ -2,6 +2,8 @@ package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.os.Parcelable
 import androidx.annotation.ColorRes
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 import tigerhacks.android.tigerhacksapp.R
@@ -9,10 +11,11 @@ import tigerhacks.android.tigerhacksapp.R
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
+@Entity
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Sponsor(
-    val name: String = "",
+    @PrimaryKey val name: String = "",
     val description: String = "",
     val website: String = "",
     val location: String = "",
@@ -30,7 +33,7 @@ data class Sponsor(
         }
     }
 
-    fun getLevel() = when (level) {
+    fun getLevelNum() = when (level) {
         "Platinum" -> 0
         "Gold" -> 1
         "Silver" -> 2

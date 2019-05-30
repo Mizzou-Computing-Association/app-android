@@ -2,24 +2,37 @@ package tigerhacks.android.tigerhacksapp
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.ViewModelProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import tigerhacks.android.tigerhacksapp.prizes.Prize
-import tigerhacks.android.tigerhacksapp.schedule.Event
+import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
-import tigerhacks.android.tigerhacksapp.sponsors.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
-import java.util.Timer
-import java.util.TimerTask
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 
-class HomeScreenViewModel : ViewModel() {
+fun <T : ViewModel, A> singleArgViewModelFactory(constructor: (A) -> T):
+    (A) -> ViewModelProvider.NewInstanceFactory {
+    return { arg: A ->
+        object : ViewModelProvider.NewInstanceFactory() {
+            @Suppress("UNCHECKED_CAST")
+            override fun <V : ViewModel> create(modelClass: Class<V>): V {
+                return constructor(arg) as V
+            }
+        }
+    }
+}
+
+class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel() {
+    companion object {
+        val FACTORY = singleArgViewModelFactory(::HomeScreenViewModel)
+    }
+
     private val tigerHacksRetrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/")
         .addConverterFactory(MoshiConverterFactory.create())
@@ -33,84 +46,84 @@ class HomeScreenViewModel : ViewModel() {
 
     val statusLiveData = MutableLiveData<NetworkStatus>()
 
-    val sponsorListLiveData = MutableLiveData<List<Sponsor>>()
-    val mentorsListLiveData = MutableLiveData<List<Mentor>>()
+    val sponsorListLiveData = database.sponsorsDAO().getSponsors()
 
-    val developerPrizeListLiveData = MutableLiveData<List<Prize>>()
-    val beginnerPrizeListLiveData = MutableLiveData<List<Prize>>()
-    val startupPrizeListLiveData = MutableLiveData<List<Prize>>()
+    val developerPrizeListLiveData = database.prizeDAO().getAllDevPrizes()
+    val beginnerPrizeListLiveData = database.prizeDAO().getAllBeginnerPrizes()
+    val startupPrizeListLiveData = database.prizeDAO().getAllStartUpPrizes()
 
-    val fridayEventListLiveData = MutableLiveData<List<Event>>()
-    val saturdayEventListLiveData = MutableLiveData<List<Event>>()
-    val sundayEventListLiveData = MutableLiveData<List<Event>>()
+    val fridayEventListLiveData = database.scheduleDAO().getFridayEvents()
+    val saturdayEventListLiveData = database.scheduleDAO().getSaturdayEvents()
+    val sundayEventListLiveData = database.scheduleDAO().getSundayEvents()
 
+    private val uiScope = CoroutineScope(Dispatchers.Main)
 
     init {
         refresh()
     }
 
     fun refresh() {
-        statusLiveData.postValue(NetworkStatus.LOADING)
-
-        service.listSponsors().enqueue(object : Callback<List<Sponsor>> {
-            override fun onResponse(call: Call<List<Sponsor>>, response: Response<List<Sponsor>>) {
-                if (response.isSuccessful) {
-                    statusLiveData.postValue(NetworkStatus.SUCCESS)
-                    sponsorListLiveData.postValue(response.body())
-                }
-            }
-            override fun onFailure(call: Call<List<Sponsor>>, t: Throwable) { onFailure() }
-        })
-
-        service.listMentors().enqueue(object : Callback<List<Mentor>> {
-            override fun onResponse(call: Call<List<Mentor>>, response: Response<List<Mentor>>) {
-                if (response.isSuccessful) {
-                    statusLiveData.postValue(NetworkStatus.SUCCESS)
-                    mentorsListLiveData.postValue(response.body())
-                }
-            }
-            override fun onFailure(call: Call<List<Mentor>>, t: Throwable) { onFailure() }
-        })
-
-        service.listPrizes().enqueue(object : Callback<List<Prize>> {
-            override fun onResponse(call: Call<List<Prize>>, response: Response<List<Prize>>) {
-                if (response.isSuccessful) {
-                    statusLiveData.postValue(NetworkStatus.SUCCESS)
-                    val totalPrizes = response.body() ?: return
-                    developerPrizeListLiveData.postValue(totalPrizes.filter { it.prizeType == "Main" })
-                    beginnerPrizeListLiveData.postValue(totalPrizes.filter { it.prizeType == "Beginner" })
-                    startupPrizeListLiveData.postValue(totalPrizes.filter { it.prizeType == "StartUp" })
-                }
-            }
-            override fun onFailure(call: Call<List<Prize>>, t: Throwable) { onFailure() }
-        })
-
-        service.listEvents().enqueue(object : Callback<List<Event>> {
-            override fun onResponse(call: Call<List<Event>>, response: Response<List<Event>>) {
-                if (response.isSuccessful) {
-                    statusLiveData.postValue(NetworkStatus.SUCCESS)
-                    val totalEvents = response.body() ?: return
-                    fridayEventListLiveData.postValue(totalEvents.filter { it.day == 0 })
-                    saturdayEventListLiveData.postValue(totalEvents.filter { it.day == 1 })
-                    sundayEventListLiveData.postValue(totalEvents.filter { it.day == 2 })
-                }
-            }
-            override fun onFailure(call: Call<List<Event>>, t: Throwable) { onFailure() }
-        })
+        uiScope.launch {
+            refreshPrizes()
+            refreshEvents()
+            refreshSponsors()
+            refreshMentors()
+        }
     }
 
-    @Volatile
-    private var refreshInProcess = false
-
-    private fun onFailure() {
-        statusLiveData.postValue(NetworkStatus.FAILURE)
-        if (refreshInProcess) return
-        refreshInProcess = true
-        Timer().schedule(object : TimerTask() {
-            override fun run() {
-                refresh()
-                refreshInProcess = false
+    suspend fun refreshPrizes() = withContext(Dispatchers.IO) {
+        statusLiveData.postValue(NetworkStatus.LOADING)
+        val response = service.listPrizes().execute()
+        if (response.isSuccessful) {
+            statusLiveData.postValue(NetworkStatus.SUCCESS)
+            val totalPrizes = response.body()
+            if (totalPrizes != null) {
+                database.prizeDAO().updatePrizes(totalPrizes)
             }
-        }, 10000)
+        } else {
+            statusLiveData.postValue(NetworkStatus.FAILURE)
+        }
+    }
+
+    suspend fun refreshEvents() = withContext(Dispatchers.IO) {
+        statusLiveData.postValue(NetworkStatus.LOADING)
+        val response = service.listEvents().execute()
+        if (response.isSuccessful) {
+            statusLiveData.postValue(NetworkStatus.SUCCESS)
+            val totalEvents = response.body()
+            if (totalEvents != null) {
+                database.scheduleDAO().updateEvents(totalEvents)
+            }
+        } else {
+            statusLiveData.postValue(NetworkStatus.FAILURE)
+        }
+    }
+
+    suspend fun refreshSponsors() = withContext(Dispatchers.IO) {
+        statusLiveData.postValue(NetworkStatus.LOADING)
+        val response = service.listSponsors().execute()
+        if (response.isSuccessful) {
+            statusLiveData.postValue(NetworkStatus.SUCCESS)
+            val sponsors = response.body()
+            if (sponsors != null) {
+                database.sponsorsDAO().updateSponsors(sponsors)
+            }
+        } else {
+            statusLiveData.postValue(NetworkStatus.FAILURE)
+        }
+    }
+
+    suspend fun refreshMentors() = withContext(Dispatchers.IO) {
+        statusLiveData.postValue(NetworkStatus.LOADING)
+        val response = service.listMentors().execute()
+        if (response.isSuccessful) {
+            statusLiveData.postValue(NetworkStatus.SUCCESS)
+            val mentors = response.body()
+            if (mentors != null) {
+                database.sponsorsDAO().updateMentors(mentors)
+            }
+        } else {
+            statusLiveData.postValue(NetworkStatus.FAILURE)
+        }
     }
 }
