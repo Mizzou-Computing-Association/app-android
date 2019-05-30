@@ -5,37 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
-    <TextView
-        android:id="@+id/mentorsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/sponsor_margin_start"
-        android:layout_marginTop="@dimen/sponsor_margin_top"
-        android:textSize="@dimen/sponsor_text_size_title"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="@string/mentors"
-        />
     <View
         android:id="@+id/titleSpacer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/sponsor_spacer_small"
 
-        app:layout_constraintTop_toBottomOf="@id/mentorsTitle"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/sponsor_margin_top"
-        android:layout_marginStart="@dimen/sponsor_margin_start"
-        android:layout_marginEnd="@dimen/sponsor_margin_start"
-
         android:background="@color/divider"
+        />
+
+    <TextView
+        android:id="@+id/mentorsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/titleSpacer"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_marginStart="@dimen/sponsor_margin_start"
+        android:layout_marginTop="@dimen/sponsor_margin_top"
+
+        android:textSize="@dimen/sponsor_text_size"
+        android:textStyle="bold"
+        android:textColor="@color/sponsorTextPrimary"
+        android:textAllCaps="true"
+        android:text="@string/mentors"
         />
 
     <LinearLayout
         android:id="@+id/mentorsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/titleSpacer"
+        app:layout_constraintTop_toBottomOf="@id/mentorsTitle"
         android:paddingTop="@dimen/sponsor_margin_top"
         android:paddingBottom="@dimen/sponsor_margin_top"
         android:paddingStart="@dimen/sponsor_margin_start"

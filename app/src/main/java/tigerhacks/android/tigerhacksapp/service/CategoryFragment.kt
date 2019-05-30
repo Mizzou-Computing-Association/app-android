@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
@@ -26,6 +27,7 @@ abstract class CategoryFragment<T> : Fragment() {
     private var adapter: ListAdapter<T, RecyclerView.ViewHolder>? = null
     internal lateinit var viewModel: HomeScreenViewModel
     private var observer: Observer<List<T>>? = null
+    private var layout: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +38,32 @@ abstract class CategoryFragment<T> : Fragment() {
         } ?: throw Exception("Invalid Activity")
 
         val adapter = buildAdapter()
-        observer = getLiveData(position.value).observeNotNull(this) { adapter.submitList(it) }
+        observer = getLiveData(position.value).observeNotNull(this) {
+            adapter.submitList(it)
+            layout?.isRefreshing = false
+        }
         this.adapter = adapter
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val recyclerView = RecyclerView(inflater.context)
+        val layout = SwipeRefreshLayout(inflater.context)
+        layout.addView(recyclerView)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(inflater.context)
             this.adapter = this@CategoryFragment.adapter
         }
-        return recyclerView
+        this.layout = layout
+        layout.setOnRefreshListener {
+            onRefresh()
+            adapter?.submitList(null)
+        }
+        return layout
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        layout = null
     }
 
     override fun onDestroy() {
@@ -60,4 +77,6 @@ abstract class CategoryFragment<T> : Fragment() {
     abstract fun buildAdapter(): ListAdapter<T, RecyclerView.ViewHolder>
 
     abstract fun getLiveData(position: Int): LiveData<List<T>>
+
+    abstract fun onRefresh()
 }

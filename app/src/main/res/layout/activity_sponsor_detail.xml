@@ -56,30 +56,21 @@
             <TextView
                 android:id="@+id/descriptionTitleTextView"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
+
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 android:layout_marginTop="@dimen/sponsor_margin_top"
                 android:layout_marginStart="@dimen/sponsor_margin_start"
                 android:layout_marginEnd="@dimen/sponsor_margin_start"
-                android:textSize="@dimen/sponsor_text_size_title"
-                android:textColor="@color/black"
+
+                android:textAllCaps="true"
+                android:textSize="@dimen/sponsor_text_size"
+                android:textColor="@color/sponsorTextPrimary"
                 android:textStyle="bold"
                 android:text="@string/description"
-                />
-            
-            <View
-                android:id="@+id/descriptionTitleDivider"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/sponsor_spacer_small"
-
-                app:layout_constraintTop_toBottomOf="@id/descriptionTitleTextView"
-                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
-                app:layout_constraintEnd_toEndOf="@id/descriptionTitleTextView"
-
-                android:layout_marginTop="@dimen/sponsor_margin_top"
-                android:background="@color/divider"
                 />
             
             <TextView
@@ -89,37 +80,38 @@
                 android:layout_marginTop="@dimen/sponsor_margin_top"
                 app:layout_constraintEnd_toEndOf="@id/descriptionTitleTextView"
                 app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
-                app:layout_constraintTop_toBottomOf="@id/descriptionTitleDivider"
+                app:layout_constraintTop_toBottomOf="@id/descriptionTitleTextView"
                 app:layout_constraintHorizontal_bias="0"
                 android:textSize="@dimen/sponsor_text_size"
                 android:textColor="@color/black"
                 tools:text="Description"
                 />
-            
+
+            <View
+                android:id="@+id/informationTitleDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sponsor_spacer_small"
+
+                app:layout_constraintTop_toBottomOf="@id/descriptionText"
+
+                android:layout_marginTop="32dp"
+                android:background="@color/divider"
+                />
+
             <TextView
                 android:id="@+id/informationTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
-                app:layout_constraintTop_toBottomOf="@id/descriptionText"
+                app:layout_constraintTop_toBottomOf="@id/informationTitleDivider"
                 android:layout_marginTop="@dimen/sponsor_margin_top"
-                android:textSize="@dimen/sponsor_text_size_title"
+
+                android:textAllCaps="true"
+                android:textSize="@dimen/sponsor_text_size"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/sponsorTextPrimary"
                 android:text="@string/information"
-                />
-
-            <View
-                android:id="@+id/informationTitleDivider"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/sponsor_spacer_small"
-
-                app:layout_constraintTop_toBottomOf="@id/informationTitle"
-                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
-                app:layout_constraintEnd_toEndOf="@id/descriptionTitleTextView"
-
-                android:layout_marginTop="@dimen/sponsor_margin_top"
-                android:background="@color/divider"
                 />
             
             <ImageView
@@ -128,7 +120,7 @@
                 android:layout_height="@dimen/sponsor_icon_size"
                 android:layout_marginTop="@dimen/sponsor_margin_top"
                 android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toBottomOf="@id/informationTitleDivider"
+                app:layout_constraintTop_toBottomOf="@id/informationTitle"
                 app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
                 app:layout_constraintEnd_toStartOf="@id/secondText"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -177,6 +169,7 @@
                 app:layout_constraintTop_toBottomOf="@id/linkText"
                 app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/sponsor_margin_top"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

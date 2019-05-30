@@ -3,6 +3,7 @@ package tigerhacks.android.tigerhacksapp.resources
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import kotlinx.android.synthetic.main.view_tiger_card.view.iconImageView
@@ -16,11 +17,9 @@ import tigerhacks.android.tigerhacksapp.R
 class ResourceCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
         LayoutInflater.from(context).inflate(R.layout.view_tiger_card, this)
-        val rippleAttrs = intArrayOf(android.R.attr.selectableItemBackground)
-        val typedArray = context.obtainStyledAttributes(rippleAttrs)
-        val backgroundResource = typedArray.getResourceId(0, 0)
-        setBackgroundResource(backgroundResource)
-        typedArray.recycle()
+        val typedValue = TypedValue()
+        getContext().theme.resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
+        setBackgroundResource(typedValue.resourceId)
 
         val attr = context.obtainStyledAttributes(attrs, R.styleable.ResourceCardView, defStyleAttr, 0)
         val iconRes = attr.getResourceId(R.styleable.ResourceCardView_titleIcon, -1)

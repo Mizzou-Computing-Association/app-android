@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.service.CategoryFragment
 
 private const val POSITION_KEY = "EVENT_CATEGORY_FRAGMENT_POSITION"
@@ -33,5 +36,11 @@ class EventCategoryFragment : CategoryFragment<Event>() {
         0 -> viewModel.fridayEventListLiveData
         1 -> viewModel.saturdayEventListLiveData
         else -> viewModel.sundayEventListLiveData
+    }
+
+    override fun onRefresh() {
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.refreshEvents()
+        }
     }
 }

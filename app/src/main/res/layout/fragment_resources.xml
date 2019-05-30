@@ -1,40 +1,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tigerTalksTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/tigertalks_margin_top"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
+        android:paddingTop="@dimen/tigertalks_padding_top_bottom"
+        android:paddingBottom="@dimen/tigertalks_padding_top_bottom"
+        android:paddingStart="@dimen/tigertalks_padding_start_end"
+        android:paddingEnd="@dimen/tigertalks_padding_start_end"
 
-        android:textColor="@color/black"
+        android:textColor="@color/sponsorTextPrimary"
         android:text="@string/tiger_talks"
         android:textSize="@dimen/tigertalks_text_size"
         android:textStyle="bold"
-        />
-
-    <View
-        android:id="@+id/tigerTalksTitleDivider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tigerTalksTextView"
-
-        android:layout_marginTop="@dimen/tigertalks_margin_top"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
-        android:layout_marginEnd="@dimen/tigertalks_margin_start"
-
-        android:background="@color/divider"
+        android:textAllCaps="true"
         />
 
     <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
@@ -42,12 +28,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@id/tigerTalksTitleDivider"
+        app:layout_constraintTop_toBottomOf="@id/tigerTalksTextView"
         app:layout_constraintBottom_toTopOf="@id/introWebDevCardView"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
-        android:layout_marginEnd="@dimen/tigertalks_margin_start"
+        android:paddingTop="@dimen/tigertalks_padding_top_bottom"
+        android:paddingBottom="@dimen/tigertalks_padding_top_bottom"
+        android:paddingStart="@dimen/tigertalks_padding_start_end"
+        android:paddingEnd="@dimen/tigertalks_padding_start_end"
 
         app:titleRes="@string/intro_to_ios"
+        app:titleIcon="@drawable/ic_round_play_circle_24px"
         />
 
     <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
@@ -56,10 +45,13 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@+id/introiOSCardView"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
-        android:layout_marginEnd="@dimen/tigertalks_margin_start"
+        android:paddingTop="@dimen/tigertalks_padding_top_bottom"
+        android:paddingBottom="@dimen/tigertalks_padding_top_bottom"
+        android:paddingStart="@dimen/tigertalks_padding_start_end"
+        android:paddingEnd="@dimen/tigertalks_padding_start_end"
 
         app:titleRes="@string/intro_to_web"
+        app:titleIcon="@drawable/ic_round_play_circle_24px"
         />
 
     <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
@@ -68,43 +60,43 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@+id/introWebDevCardView"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
-        android:layout_marginEnd="@dimen/tigertalks_margin_start"
+        android:paddingTop="@dimen/tigertalks_padding_top_bottom"
+        android:paddingBottom="@dimen/tigertalks_padding_top_bottom"
+        android:paddingStart="@dimen/tigertalks_padding_start_end"
+        android:paddingEnd="@dimen/tigertalks_padding_start_end"
 
         app:titleRes="@string/intro_to_flask"
+        app:titleIcon="@drawable/ic_round_play_circle_24px"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+
+        app:layout_constraintTop_toBottomOf="@id/introFlaskCardView"
+        android:layout_marginTop="8dp"
+        android:background="@color/divider"
         />
 
     <TextView
         android:id="@+id/otherLinksTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introFlaskCardView"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
 
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
+        android:paddingTop="@dimen/tigertalks_padding_top_bottom"
+        android:paddingBottom="@dimen/tigertalks_padding_top_bottom"
+        android:paddingStart="@dimen/tigertalks_padding_start_end"
+        android:paddingEnd="@dimen/tigertalks_padding_start_end"
 
         android:text="@string/other_links"
-        android:textColor="@color/black"
+        android:textColor="@color/sponsorTextPrimary"
+        android:textAllCaps="true"
         android:textSize="@dimen/tigertalks_text_size"
         android:textStyle="bold"
-        />
-
-    <View
-        android:id="@+id/otherLinksTitleDivider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/otherLinksTextView"
-
-        android:layout_marginTop="@dimen/tigertalks_margin_top"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
-        android:layout_marginEnd="@dimen/tigertalks_margin_start"
-
-        android:background="@color/divider"
         />
 
     <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
@@ -112,11 +104,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@+id/otherLinksTitleDivider"
+        app:layout_constraintTop_toBottomOf="@id/otherLinksTextView"
 
-        android:layout_marginTop="@dimen/tigertalks_margin_top"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
-        android:layout_marginEnd="@dimen/tigertalks_margin_start"
+        android:paddingTop="@dimen/tigertalks_padding_top_bottom"
+        android:paddingBottom="@dimen/tigertalks_padding_top_bottom"
+        android:paddingStart="@dimen/tigertalks_padding_start_end"
+        android:paddingEnd="@dimen/tigertalks_padding_start_end"
 
         app:titleIcon="@mipmap/ic_launcher_round"
         app:titleRes="@string/tiger_hacks_website"
@@ -128,11 +121,14 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@+id/tigerHacksWebsiteCardView"
-        android:layout_marginStart="@dimen/tigertalks_margin_start"
-        android:layout_marginEnd="@dimen/tigertalks_margin_start"
+        android:paddingTop="@dimen/tigertalks_padding_top_bottom"
+        android:paddingBottom="@dimen/tigertalks_padding_top_bottom"
+        android:paddingStart="@dimen/tigertalks_padding_start_end"
+        android:paddingEnd="@dimen/tigertalks_padding_start_end"
 
         app:titleIcon="@drawable/ic_icon_slack_hash_colored"
         app:titleRes="@string/mca_slack"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

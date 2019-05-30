@@ -50,19 +50,17 @@ class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     fun setup(mentor: Mentor): MentorView {
         nameTextView.text = mentor.name
 
-        mentor.contact?.let { mentorContact ->
-            if (mentorContact.isNotEmpty()) {
-                contactTextView.text = mentorContact
-                contactTextView.setOnClickListener {
-                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val clip = ClipData.newPlainText("something", mentorContact)
-                    clipboard.primaryClip = clip
-                    Snackbar.make(
-                        rootView,
-                        "Contact copied to clipboard",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
+        if (mentor.contact.isNotEmpty()) {
+            contactTextView.text = mentor.contact
+            contactTextView.setOnClickListener {
+                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("something", mentor.contact)
+                clipboard.primaryClip = clip
+                Snackbar.make(
+                    rootView,
+                    "Contact copied to clipboard",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         }
 

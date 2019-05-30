@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.epoxy.EpoxyRecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
@@ -40,7 +44,15 @@ class SponsorsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val recyclerView = EpoxyRecyclerView(context!!)
+        val context = context ?: return null
+        val layout = SwipeRefreshLayout(context).apply {
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        }
+        val recyclerView = EpoxyRecyclerView(context).apply {
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        }
+
+        layout.addView(recyclerView)
 
         recyclerView.withModels {
             for (i in 0..3) {
@@ -61,13 +73,23 @@ class SponsorsFragment : Fragment() {
             }
         }
 
+        layout.setOnRefreshListener {
+            sponsorList = null
+            recyclerView.requestModelBuild()
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel?.refreshSponsors()
+                viewModel?.refreshMentors()
+            }
+        }
+
         viewModel?.sponsorListLiveData?.observeNotNull(this) {
             sponsorList = it
             recyclerView.requestModelBuild()
+            layout.isRefreshing = false
         }
 
         recyclerView.setBackgroundResource(R.color.colorPrimaryBackground)
 
-        return recyclerView
+        return layout
     }
 }
