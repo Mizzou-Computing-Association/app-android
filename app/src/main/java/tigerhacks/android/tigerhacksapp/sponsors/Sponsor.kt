@@ -1,11 +1,14 @@
 package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.os.Parcelable
-import android.support.annotation.ColorRes
+import androidx.annotation.ColorRes
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 import tigerhacks.android.tigerhacksapp.R
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Sponsor(

@@ -11,7 +11,6 @@ import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
  * Created by Conno on 9/22/2018.
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-
 interface TigerHacksService {
     @GET("tigerhacksNewPrizes")
     fun listPrizes(): Call<List<Prize>>

@@ -12,12 +12,9 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
 
-
-
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
 class Header @JvmOverloads constructor(
     context: Context,

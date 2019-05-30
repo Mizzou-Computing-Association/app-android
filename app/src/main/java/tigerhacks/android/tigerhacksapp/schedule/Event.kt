@@ -1,6 +1,6 @@
 package tigerhacks.android.tigerhacksapp.schedule
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 import com.squareup.moshi.JsonClass
 import java.util.regex.Pattern
 

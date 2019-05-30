@@ -1,4 +1,4 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,7 +6,7 @@
     android:background="@color/white"
     tools:context="tigerhacks.android.tigerhacksapp.maps.MapFragment">
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,25 +17,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:tabIndicatorColor="@color/colorPrimary">
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabFloor1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/floor_1" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabFloor2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/floor_2" />
 
-        <android.support.design.widget.TabItem
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabFloor3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/floor_3" />
 
-    </android.support.design.widget.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/mapView"
@@ -57,4 +57,4 @@
         app:zoomage_translatable="true"
         app:zoomage_zoomable="true" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

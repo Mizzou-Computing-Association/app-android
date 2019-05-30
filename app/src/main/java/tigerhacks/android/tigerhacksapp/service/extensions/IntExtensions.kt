@@ -1,6 +1,6 @@
 package tigerhacks.android.tigerhacksapp.service.extensions
 
-/*
+/**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 fun Int.darkenColor(): Int {

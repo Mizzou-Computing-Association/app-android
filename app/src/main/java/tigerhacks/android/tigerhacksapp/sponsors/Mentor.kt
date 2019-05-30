@@ -4,6 +4,9 @@ import android.os.Parcelable
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Mentor(

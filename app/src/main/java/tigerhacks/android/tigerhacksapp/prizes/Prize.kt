@@ -1,6 +1,6 @@
 package tigerhacks.android.tigerhacksapp.prizes
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

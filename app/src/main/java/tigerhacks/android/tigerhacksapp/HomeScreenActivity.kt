@@ -2,7 +2,7 @@ package tigerhacks.android.tigerhacksapp
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
@@ -60,10 +60,4 @@ class HomeScreenActivity : AppCompatActivity() {
             true
         }
     }
-
-    // Snackbar.make(
-    // mPager.rootView,
-    // "TigerHacks API call failed. Attempting to reconnect...",
-    // Snackbar.LENGTH_SHORT
-    // ).show()
 }

@@ -3,8 +3,8 @@ package tigerhacks.android.tigerhacksapp.sponsors.views
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.design.widget.Snackbar
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.snackbar.Snackbar
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +16,9 @@ import kotlinx.android.synthetic.main.view_mentors.view.mentorsLayout
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.sponsors.Mentor
 
-/*
+/**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-
 class MentorsView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
         LayoutInflater.from(context).inflate(R.layout.view_mentors, this, true)

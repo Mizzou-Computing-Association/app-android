@@ -1,18 +1,15 @@
 package tigerhacks.android.tigerhacksapp.prizes
 
 import android.content.Context
-import android.support.v7.widget.CardView
+import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.prize_card_layout.view.descriptionTextView
-import kotlinx.android.synthetic.main.prize_card_layout.view.prizeImageView
 import kotlinx.android.synthetic.main.prize_card_layout.view.prizeInfoLinearLayout
 import kotlinx.android.synthetic.main.prize_card_layout.view.prizeListTextView
 import kotlinx.android.synthetic.main.prize_card_layout.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
 import java.util.Arrays
 
 /**
@@ -27,10 +24,6 @@ class PrizeCardView @JvmOverloads constructor(context: Context, attrs: Attribute
             field = value
             prizeInfoLinearLayout.visibility = if (value) View.VISIBLE else View.GONE
         }
-
-    enum class Type {
-        BEGINNER, MAIN, STARTUP
-    }
 
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)

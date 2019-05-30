@@ -1,4 +1,4 @@
-<android.support.design.card.MaterialCardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sponsorCardView"
@@ -20,4 +20,4 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         />
-</android.support.design.card.MaterialCardView>
+</com.google.android.material.card.MaterialCardView>
