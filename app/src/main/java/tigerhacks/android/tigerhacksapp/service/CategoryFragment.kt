@@ -11,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
+import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
+import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
 
@@ -46,17 +49,23 @@ abstract class CategoryFragment<T> : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val recyclerView = RecyclerView(inflater.context)
-        val layout = SwipeRefreshLayout(inflater.context)
-        layout.addView(recyclerView)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(inflater.context)
-            this.adapter = this@CategoryFragment.adapter
+        val layout = inflater.inflate(R.layout.vertical_recycler_view, null) as SwipeRefreshLayout
+        val recyclerView = layout.findViewById<RecyclerView>(R.id.recyclerView)
+
+        val divider = DividerItemDecoration(inflater.context, DividerItemDecoration.VERTICAL).apply {
+            val drawable = inflater.context.getDrawable(R.drawable.divider) ?: return@apply
+            setDrawable(drawable)
         }
+
+        recyclerView.apply {
+            this.adapter = this@CategoryFragment.adapter
+            //addItemDecoration(divider)
+        }
+
         this.layout = layout
         layout.setOnRefreshListener {
-            onRefresh()
             adapter?.submitList(null)
+            onRefresh()
         }
         return layout
     }

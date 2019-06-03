@@ -2,7 +2,7 @@
 <resources>
     <!--Primary-->
     <color name="colorPrimaryLight">#FEF8E2</color>
-    <color name="colorPrimary">#f99a3a</color>
+    <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#E8E8E8</color>
     <color name="colorPrimaryBackground">#E8E8E8</color>
     <!--Greenish-->
@@ -16,6 +16,8 @@
     <color name="gold">#E5C100</color>
     <color name="silver">#acacac</color>
     <color name="bronze">#c27836</color>
+    <color name="orange">#f99a3a</color>
+
 
     <!--Utility Colors-->
     <color name="white">#FFF</color>
