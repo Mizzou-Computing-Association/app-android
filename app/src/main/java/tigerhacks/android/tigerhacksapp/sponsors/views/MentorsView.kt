@@ -1,10 +1,7 @@
 package tigerhacks.android.tigerhacksapp.sponsors.views
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.snackbar.Snackbar
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -53,14 +50,14 @@ class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         if (mentor.contact.isNotEmpty()) {
             contactTextView.text = mentor.contact
             contactTextView.setOnClickListener {
-                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip = ClipData.newPlainText("something", mentor.contact)
-                clipboard.primaryClip = clip
-                Snackbar.make(
-                    rootView,
-                    "Contact copied to clipboard",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+//                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+//                val clip = ClipData.newPlainText("something", mentor.contact)
+//                clipboard.primaryClip = clip
+//                Snackbar.make(
+//                    rootView,
+//                    "Contact copied to clipboard",
+//                    Snackbar.LENGTH_SHORT
+//                ).show()
             }
         }
 

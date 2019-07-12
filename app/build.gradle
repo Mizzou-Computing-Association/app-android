@@ -5,11 +5,11 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "tigerhacks.android.tigerhacksapp"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 5
         versionName "1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -20,7 +20,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '29.0.0 rc1'
+    buildToolsVersion '29.0.1'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -43,13 +43,13 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     
     //Airbnb Epoxy (Advanced RecyclerViews)
-    implementation 'com.airbnb.android:epoxy:2.8.0'
-    kapt "com.airbnb.android:epoxy-processor:2.8.0"
+    implementation 'com.airbnb.android:epoxy:3.7.0'
+    kapt 'com.airbnb.android:epoxy-processor:3.7.0'
 
     //Zoomage (Zoomable Image View)
     implementation 'com.jsibbold:zoomage:1.1.0'
@@ -61,8 +61,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     //Retrofit (Networking)
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.6.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
 
@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.crashlytics.sdk.android:answers:1.4.7'
 
-    def room_version = "2.1.0-rc01"
+    def room_version = "2.1.0"
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
