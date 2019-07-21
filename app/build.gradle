@@ -3,6 +3,7 @@ apply plugin: 'io.fabric'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -45,11 +46,13 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    implementation 'com.amazonaws:aws-android-sdk-sns:2.14.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    
+
     //Airbnb Epoxy (Advanced RecyclerViews)
     implementation 'com.airbnb.android:epoxy:3.7.0'
     kapt 'com.airbnb.android:epoxy-processor:3.7.0'
