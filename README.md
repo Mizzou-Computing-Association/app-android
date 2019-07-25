@@ -13,5 +13,3 @@ object SNSSecrets {
     const val topicArn = "YOUR_SUBSCRIPTION_ARN"
 }
 ```
-
-Download google-services.json from Firebase console -> TigerHacksApp -> project settings and put it in app/.

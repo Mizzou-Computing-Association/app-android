@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "101828787945",
+    "firebase_url": "https://tigerhacksapp.firebaseio.com",
+    "project_id": "tigerhacksapp",
+    "storage_bucket": "tigerhacksapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101828787945:android:980fe68a0a1eceac",
+        "android_client_info": {
+          "package_name": "tigerhacks.android.tigerhacksapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101828787945-sf3usrs1i7505q2virc9evf33mtokfj3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tigerhacks.android.tigerhacksapp",
+            "certificate_hash": "0f08e7b7665df3d547467eac4e3489a6301e0135"
+          }
+        },
+        {
+          "client_id": "101828787945-t5tisvvc5hnno6jabaoa7m7n1kbr0c50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tigerhacks.android.tigerhacksapp",
+            "certificate_hash": "6f85f0a88f7e15c496ce1b4a6a659e9f23610750"
+          }
+        },
+        {
+          "client_id": "101828787945-c3gp800qg9kq9h2708kvi95ki2fgktpr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6WTGZJ-pcgy815A-qqYsZGAc95dumDiQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101828787945-c3gp800qg9kq9h2708kvi95ki2fgktpr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "101828787945-an103083gbmsk9r108i1ovka3mkphaf9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "edu.missouri.TigerHacks-App"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
