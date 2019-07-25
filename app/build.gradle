@@ -47,7 +47,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
-    implementation 'com.amazonaws:aws-android-sdk-sns:2.14.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
