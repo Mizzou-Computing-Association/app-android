@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.crashlytics.android.Crashlytics
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_home_screen.navigation
 import kotlinx.android.synthetic.main.activity_home_screen.toolbar
@@ -26,6 +27,7 @@ class HomeScreenActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         Fabric.with(this, Crashlytics())
+        FirebaseAnalytics.getInstance(this)
         setContentView(R.layout.activity_home_screen)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
