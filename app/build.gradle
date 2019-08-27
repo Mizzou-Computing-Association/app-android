@@ -57,6 +57,9 @@ dependencies {
     implementation 'com.crashlytics.sdk.android:answers:1.4.7'
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
 
+    // Amazon SNS (Push Notifications)
+    implementation 'com.amazonaws:aws-android-sdk-sns:2.14.0'
+
     //Airbnb Epoxy (Advanced RecyclerViews)
     implementation 'com.airbnb.android:epoxy:3.7.0'
     kapt 'com.airbnb.android:epoxy-processor:3.7.0'
