@@ -24,22 +24,20 @@ private const val CHANNEL_ID = "tigerhacks.android.tigerhacksapp.TigerHacks"
 private const val CHANNEL_NAME = "TigerHacks"
 
 class TigerHacksMessagingService : FirebaseMessagingService() {
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        Log.d(TAG, "From: ${remoteMessage?.from}")
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Log.d(TAG, "From: ${remoteMessage.from}")
+        
+        val message = remoteMessage.data.values.toTypedArray()[0]
+        createChannelsIfNeeded()
 
-        remoteMessage?.data?.let {
-            val message = it.values.toTypedArray()[0]
-            createChannelsIfNeeded()
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentText(message)
+            .setSmallIcon(R.drawable.logo_round)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-            val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentText(message)
-                .setSmallIcon(R.drawable.logo_round)
-                .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-            with(NotificationManagerCompat.from(this)) {
-                notify(builder.hashCode(), builder.build())
-            }
+        with(NotificationManagerCompat.from(this)) {
+            notify(builder.hashCode(), builder.build())
         }
     }
 
