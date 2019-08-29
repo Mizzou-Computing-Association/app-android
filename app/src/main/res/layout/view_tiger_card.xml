@@ -38,6 +38,6 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         tools:text="TigerHacks Website"
-        android:textColor="@color/black"
-        android:textSize="@dimen/tigertalks_text_size" />
+        android:textAppearance="@style/TextPrimary"
+        />
 </merge>

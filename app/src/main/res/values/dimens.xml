@@ -3,23 +3,12 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <!-- Sponsor Section -->
-    <dimen name="sponsor_icon_size">28dp</dimen>
-    <dimen name="sponsor_text_size_title">24sp</dimen>
-    <dimen name="sponsor_text_size">24sp</dimen>
-    <dimen name="sponsor_margin_top">16dp</dimen>
-    <dimen name="sponsor_margin_bottom">16dp</dimen>
-    <dimen name="sponsor_margin_start">16dp</dimen>
-    <dimen name="sponsor_margin_start_indent">24dp</dimen>
-    <dimen name="sponsor_spacer_large">4dp</dimen>
-    <dimen name="sponsor_spacer_small">0.5dp</dimen>
+    <dimen name="text_size">20sp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="divider_size">1dp</dimen>
 
-    <!-- TigerTalks Section-->
-    <dimen name="tigertalks_card_radius">10dp</dimen>
-    <dimen name="tigertalks_padding_top_bottom">12dp</dimen>
-    <dimen name="tigertalks_padding_start_end">16dp</dimen>
-    <dimen name="tigertalks_margin_start">16dp</dimen>
-    <dimen name="tigertalks_spacer_large">4dp</dimen>
-    <dimen name="tigertalks_spacer_small">1dp</dimen>
-    <dimen name="tigertalks_text_size">24sp</dimen>
+    <dimen name="margin_start">10dp</dimen>
+    <dimen name="margin_start_large">20dp</dimen>
+    <dimen name="margin_top">10dp</dimen>
+    <dimen name="margin_top_large">20dp</dimen>
 </resources>

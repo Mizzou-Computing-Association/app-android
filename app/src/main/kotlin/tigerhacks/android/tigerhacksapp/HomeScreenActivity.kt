@@ -8,7 +8,6 @@ import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_home_screen.navigation
-import kotlinx.android.synthetic.main.activity_home_screen.toolbar
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
 import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment
 import tigerhacks.android.tigerhacksapp.resources.ResourcesFragment
@@ -26,13 +25,15 @@ class HomeScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+
         Fabric.with(this, Crashlytics())
         FirebaseAnalytics.getInstance(this)
+
         setContentView(R.layout.activity_home_screen)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
-        setSupportActionBar(toolbar)
+
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         mapFragment = MapFragment.newInstance()

@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Primary-->
-    <color name="colorPrimaryLight">#FEF8E2</color>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#E8E8E8</color>
-    <color name="colorPrimaryBackground">#E8E8E8</color>
+    <color name="colorPrimary">#f99a3a</color>
+    <color name="colorPrimaryDark">#000000</color>
     <!--Greenish-->
     <color name="colorAccent">#C5E5D5</color>
-    <!--Main Gray-->
-    <color name="colorGray">#323132</color>
-    <color name="colorNavigationBackground">#FFFFFF</color>
+    
+    <!--Text Colors-->
+    <color name="colorTextTitlePrimary">#f99a3a</color>
+    <color name="colorTextTitleSecondary">#4D000000</color>
+    <color name="colorTextPrimary">#000000</color>
+    <color name="colorTextSecondary">#A9A9A9</color>
+
+    <color name="colorSelectorSelected">#000000</color>
+    <color name="colorSelectorUnselected">#40000000</color>
 
     <!--Sponsor Levels-->
     <color name="platinum">#53aab7</color>
@@ -17,7 +21,6 @@
     <color name="silver">#acacac</color>
     <color name="bronze">#c27836</color>
     <color name="orange">#f99a3a</color>
-
 
     <!--Utility Colors-->
     <color name="white">#FFF</color>
@@ -27,8 +30,4 @@
     <color name="linkColor">#00B0FF</color>
 
     <color name="divider">#1A000000</color>
-
-    <color name="sponsorTextTitle">#000</color>
-    <color name="sponsorTextPrimary">#A9A9A9</color>
-    <color name="sponsorSpacerColor">#F0F0F0</color>
 </resources>

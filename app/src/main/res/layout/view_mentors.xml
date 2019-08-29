@@ -8,10 +8,11 @@
     <View
         android:id="@+id/titleSpacer"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sponsor_spacer_small"
+        android:layout_height="@dimen/divider_size"
 
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/sponsor_margin_top"
+        android:layout_marginTop="@dimen/margin_top_large"
+
         android:background="@color/divider"
         />
 
@@ -23,13 +24,10 @@
         app:layout_constraintTop_toBottomOf="@id/titleSpacer"
         app:layout_constraintStart_toStartOf="parent"
 
-        android:layout_marginStart="@dimen/sponsor_margin_start"
-        android:layout_marginTop="@dimen/sponsor_margin_top"
+        android:layout_marginStart="@dimen/margin_start_large"
+        android:layout_marginTop="@dimen/margin_top_large"
 
-        android:textSize="@dimen/sponsor_text_size"
-        android:textStyle="bold"
-        android:textColor="@color/sponsorTextPrimary"
-        android:textAllCaps="true"
+        android:textAppearance="@style/TitlePrimary"
         android:text="@string/mentors"
         />
 
@@ -37,23 +35,29 @@
         android:id="@+id/mentorsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:layout_constraintTop_toBottomOf="@id/mentorsTitle"
-        android:paddingTop="@dimen/sponsor_margin_top"
-        android:paddingBottom="@dimen/sponsor_margin_top"
-        android:paddingStart="@dimen/sponsor_margin_start"
-        android:paddingEnd="@dimen/sponsor_margin_start"
+
+        android:paddingTop="@dimen/margin_top_large"
+        android:paddingBottom="@dimen/margin_top_large"
+        android:paddingStart="@dimen/margin_start_large"
+        android:paddingEnd="@dimen/margin_start_large"
+
         android:orientation="vertical"
         />
+
     <TextView
         android:id="@+id/mentorsEmptyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/titleSpacer"
+
+        app:layout_constraintTop_toBottomOf="@id/mentorsTitle"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/sponsor_margin_start"
-        android:layout_marginTop="@dimen/sponsor_margin_top"
-        android:textColor="@color/sponsorTextPrimary"
-        android:textSize="@dimen/sponsor_text_size"
+
+        android:layout_marginStart="@dimen/margin_start_large"
+        android:layout_marginTop="@dimen/margin_top_large"
+
+        android:textAppearance="@style/TextPrimary"
         android:text="@string/none_available"
         android:visibility="gone"
         />

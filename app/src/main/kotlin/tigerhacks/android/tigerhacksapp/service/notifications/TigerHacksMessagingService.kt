@@ -26,7 +26,7 @@ private const val CHANNEL_NAME = "TigerHacks"
 class TigerHacksMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
-        
+
         val message = remoteMessage.data.values.toTypedArray()[0]
         createChannelsIfNeeded()
 

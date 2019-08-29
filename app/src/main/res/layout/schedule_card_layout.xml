@@ -8,25 +8,42 @@
     tools:layout_height="wrap_content">
 
     <View
+        android:id="@+id/timeLineSide2"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/timeLineSide"
+        app:layout_constraintStart_toStartOf="@id/timeLineSide"
+
+        android:background="@color/colorPrimary"
+        />
+
+    <View
         android:id="@+id/timeLineSide"
-        android:layout_width="2dp"
+        android:layout_width="3dp"
         android:layout_height="0dp"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/timeImageView"
         app:layout_constraintBottom_toBottomOf="parent"
 
-        android:background="@color/orange"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+
+        android:background="@color/colorPrimary"
         />
 
     <ImageView
         android:id="@+id/timeImageView"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
 
         app:layout_constraintTop_toTopOf="@id/timeTextView"
         app:layout_constraintBottom_toBottomOf="@id/timeTextView"
-        app:layout_constraintStart_toEndOf="@id/timeLineSide"
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:layout_marginStart="5dp"
 
         android:src="@drawable/indicator"
         />
@@ -39,14 +56,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="@dimen/margin_top_large"
 
+        android:textAppearance="@style/TitlePrimary"
         tools:text="8:30 PM"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textColor="@color/orange"
-        android:textSize="20sp"
         />
 
     <TextView
@@ -55,25 +69,21 @@
         android:layout_height="wrap_content"
         android:maxWidth="280dp"
 
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/timeTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/timeTextView"
 
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginEnd="@dimen/margin_start_large"
 
         tools:text="Pillow Fight"
-        android:textColor="@color/sponsorTextPrimary"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:textAppearance="@style/TitleSecondary"
         />
 
     <ImageView
         android:id="@+id/locationIconImageView"
         android:layout_width="24dp"
-        android:layout_height="26dp"
+        android:layout_height="24dp"
 
         app:layout_constraintTop_toTopOf="@id/locationTextView"
         app:layout_constraintBottom_toBottomOf="@id/locationTextView"
@@ -90,12 +100,11 @@
         app:layout_constraintTop_toBottomOf="@id/titleTextView"
         app:layout_constraintStart_toEndOf="@id/locationIconImageView"
 
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginTop="@dimen/margin_top"
 
         tools:text="Time Capsule"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textAppearance="@style/TextPrimary"
         />
 
     <ImageView
@@ -106,7 +115,7 @@
         app:layout_constraintStart_toStartOf="@id/locationIconImageView"
         app:layout_constraintTop_toBottomOf="@id/locationIconImageView"
 
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_top"
 
         android:src="@drawable/ic_resources_24px"
         />
@@ -121,13 +130,24 @@
         app:layout_constraintStart_toEndOf="@id/infoImageView"
         app:layout_constraintEnd_toEndOf="@id/titleTextView"
 
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginBottom="@dimen/margin_start_large"
 
         tools:text="This is some description text for an event happening at TigerHacks"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textAppearance="@style/TextPrimary"
         android:visibility="visible"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_size"
+
+        app:layout_constraintStart_toStartOf="@id/descriptionTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:background="@color/divider"
         />
 
 </merge>

@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:background="@color/colorPrimaryBackground"
-        app:tabGravity="center"
-        app:tabIndicatorColor="@color/colorPrimary" />
+
+        style="@style/Selector"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/prizeViewPager"

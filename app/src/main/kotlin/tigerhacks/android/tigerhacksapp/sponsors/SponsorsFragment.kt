@@ -88,8 +88,6 @@ class SponsorsFragment : Fragment() {
             layout.isRefreshing = false
         }
 
-        recyclerView.setBackgroundResource(R.color.colorPrimaryBackground)
-
         return layout
     }
 }

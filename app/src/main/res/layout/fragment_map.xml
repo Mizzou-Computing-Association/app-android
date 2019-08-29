@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+
     tools:context="tigerhacks.android.tigerhacksapp.maps.MapFragment">
 
     <com.google.android.material.tabs.TabLayout
@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorPrimaryBackground"
-        app:tabIndicatorColor="@color/colorPrimary">
+
+        style="@style/Selector"
+        >
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabFloor1"

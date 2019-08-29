@@ -7,12 +7,12 @@
 
     <item
         android:id="@+id/navigation_prizes"
-        android:icon="@drawable/ic_outline_grade_24px"
+        android:icon="@drawable/outline_local_play_black_24"
         android:title="@string/title_prizes" />
 
     <item
         android:id="@+id/navigation_map"
-        android:icon="@drawable/ic_location"
+        android:icon="@drawable/outline_map_black_24"
         android:title="@string/title_map" />
 
     <item
@@ -22,7 +22,7 @@
 
     <item
         android:id="@+id/navigation_resources"
-        android:icon="@drawable/ic_resources_24px"
+        android:icon="@drawable/outline_help_outline_black_24"
         android:title="@string/title_resources" />
 
 

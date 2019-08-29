@@ -29,6 +29,8 @@ class EventCategoryFragment : CategoryFragment<Event>() {
             val card = (holder.itemView as EventCardView)
             val event = getItem(position)
             card.setup(event)
+            if (position == 0) card.hideTopLine()
+            if (position == itemCount - 1) card.hideBottomLine()
         }
     }
 

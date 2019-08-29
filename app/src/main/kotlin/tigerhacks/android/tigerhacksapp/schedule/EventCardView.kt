@@ -8,6 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.schedule_card_layout.view.descriptionTextView
 import kotlinx.android.synthetic.main.schedule_card_layout.view.locationIconImageView
 import kotlinx.android.synthetic.main.schedule_card_layout.view.locationTextView
+import kotlinx.android.synthetic.main.schedule_card_layout.view.timeLineSide
+import kotlinx.android.synthetic.main.schedule_card_layout.view.timeLineSide2
 import kotlinx.android.synthetic.main.schedule_card_layout.view.timeTextView
 import kotlinx.android.synthetic.main.schedule_card_layout.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
@@ -32,5 +34,13 @@ class EventCardView @JvmOverloads constructor (context: Context, attrs: Attribut
             locationTextView.visibility = View.GONE
             locationIconImageView.visibility = View.GONE
         }
+    }
+
+    fun hideTopLine() {
+        timeLineSide2.visibility = View.GONE
+    }
+
+    fun hideBottomLine() {
+        timeLineSide.visibility = View.INVISIBLE
     }
 }
