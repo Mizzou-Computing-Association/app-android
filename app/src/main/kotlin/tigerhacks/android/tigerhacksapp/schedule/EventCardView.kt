@@ -24,7 +24,7 @@ class EventCardView @JvmOverloads constructor (context: Context, attrs: Attribut
         LayoutInflater.from(context).inflate(R.layout.schedule_card_layout, this)
     }
 
-    fun setup(event: Event) {
+    fun setup(event: Event, isFirstItem: Boolean, isLastItem: Boolean) {
         titleTextView.text = event.title
         locationTextView.text = event.location
         descriptionTextView.text = event.description
@@ -34,13 +34,8 @@ class EventCardView @JvmOverloads constructor (context: Context, attrs: Attribut
             locationTextView.visibility = View.GONE
             locationIconImageView.visibility = View.GONE
         }
-    }
-
-    fun hideTopLine() {
-        timeLineSide2.visibility = View.GONE
-    }
-
-    fun hideBottomLine() {
-        timeLineSide.visibility = View.INVISIBLE
+        
+        timeLineSide.visibility = if (isLastItem) View.INVISIBLE else View.VISIBLE
+        timeLineSide2.visibility = if (isFirstItem) View.GONE else View.VISIBLE
     }
 }

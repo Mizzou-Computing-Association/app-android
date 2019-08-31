@@ -28,9 +28,11 @@ class EventCategoryFragment : CategoryFragment<Event>() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val card = (holder.itemView as EventCardView)
             val event = getItem(position)
-            card.setup(event)
-            if (position == 0) card.hideTopLine()
-            if (position == itemCount - 1) card.hideBottomLine()
+            card.setup(
+                event,
+                0 == position,
+                (itemCount - 1) == position
+            )
         }
     }
 
