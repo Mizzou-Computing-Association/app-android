@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
+import java.io.IOException
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -73,56 +74,72 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
 
     suspend fun refreshPrizes() = withContext(Dispatchers.IO) {
         statusLiveData.postValue(NetworkStatus.LOADING)
-        val response = service.listPrizes().execute()
-        if (response.isSuccessful) {
-            statusLiveData.postValue(NetworkStatus.SUCCESS)
-            val totalPrizes = response.body()
-            if (totalPrizes != null) {
-                database.prizeDAO().updatePrizes(totalPrizes)
+        try {
+            val response = service.listPrizes().execute()
+            if (response.isSuccessful) {
+                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                val totalPrizes = response.body()
+                if (totalPrizes != null) {
+                    database.prizeDAO().updatePrizes(totalPrizes)
+                }
+            } else {
+                statusLiveData.postValue(NetworkStatus.FAILURE)
             }
-        } else {
+        } catch (e: IOException) {
             statusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 
     suspend fun refreshEvents() = withContext(Dispatchers.IO) {
         statusLiveData.postValue(NetworkStatus.LOADING)
-        val response = service.listEvents().execute()
-        if (response.isSuccessful) {
-            statusLiveData.postValue(NetworkStatus.SUCCESS)
-            val totalEvents = response.body()
-            if (totalEvents != null) {
-                database.scheduleDAO().updateEvents(totalEvents)
+        try {
+            val response = service.listEvents().execute()
+            if (response.isSuccessful) {
+                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                val totalEvents = response.body()
+                if (totalEvents != null) {
+                    database.scheduleDAO().updateEvents(totalEvents)
+                }
+            } else {
+                statusLiveData.postValue(NetworkStatus.FAILURE)
             }
-        } else {
+        } catch (e: IOException) {
             statusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 
     suspend fun refreshSponsors() = withContext(Dispatchers.IO) {
         statusLiveData.postValue(NetworkStatus.LOADING)
-        val response = service.listSponsors().execute()
-        if (response.isSuccessful) {
-            statusLiveData.postValue(NetworkStatus.SUCCESS)
-            val sponsors = response.body()
-            if (sponsors != null) {
-                database.sponsorsDAO().updateSponsors(sponsors)
+        try {
+            val response = service.listSponsors().execute()
+            if (response.isSuccessful) {
+                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                val sponsors = response.body()
+                if (sponsors != null) {
+                    database.sponsorsDAO().updateSponsors(sponsors)
+                }
+            } else {
+                statusLiveData.postValue(NetworkStatus.FAILURE)
             }
-        } else {
+        } catch (e: IOException) {
             statusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 
     suspend fun refreshMentors() = withContext(Dispatchers.IO) {
         statusLiveData.postValue(NetworkStatus.LOADING)
-        val response = service.listMentors().execute()
-        if (response.isSuccessful) {
-            statusLiveData.postValue(NetworkStatus.SUCCESS)
-            val mentors = response.body()
-            if (mentors != null) {
-                database.sponsorsDAO().updateMentors(mentors)
+        try {
+            val response = service.listMentors().execute()
+            if (response.isSuccessful) {
+                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                val mentors = response.body()
+                if (mentors != null) {
+                    database.sponsorsDAO().updateMentors(mentors)
+                }
+            } else {
+                statusLiveData.postValue(NetworkStatus.FAILURE)
             }
-        } else {
+        } catch (e: IOException) {
             statusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
