@@ -133,6 +133,7 @@
                 android:layout_marginTop="@dimen/margin_top_large"
                 android:layout_marginEnd="@dimen/margin_start"
 
+                style="@style/IconAppearance"
                 app:srcCompat="@drawable/ic_location"
                 />
 
@@ -159,6 +160,7 @@
 
                 android:layout_marginTop="@dimen/margin_top"
 
+                style="@style/IconAppearance"
                 app:srcCompat="@drawable/ic_link"
                 />
 

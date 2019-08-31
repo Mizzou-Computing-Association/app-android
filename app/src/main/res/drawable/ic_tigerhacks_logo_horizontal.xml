@@ -593,7 +593,7 @@
       android:strokeColor="#00000000"/>
   <path
       android:pathData="M618,62L618,78L624,78L640,78L640,62L630,62L621.056,62L618,62M278,63L278,78L301,78L301,63L278,63z"
-      android:fillColor="@color/white"
+      android:fillColor="@color/orange"
       android:strokeColor="#00000000"/>
   <path
       android:pathData="M463,63L464,64L463,63z"

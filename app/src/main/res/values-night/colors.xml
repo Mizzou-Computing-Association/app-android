@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Day Colors-->
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#1E1E1E</color>
+    
+    <!--Text Colors-->
+    <color name="colorTextTitleSecondary">#80FFFFFF</color>
+    <color name="colorTextPrimary">#CCFFFFFF</color>
+    <color name="colorTextSecondary">#A9A9A9</color>
+
+    <color name="colorSelectorSelected">#F99A3A</color>
+    <color name="colorSelectorUnselected">#80FFFFFF</color>
+
+    <!--Night Colors-->
+    <color name="colorNavBarBackground">#181818</color>
+    <color name="colorNavBarTintSelected">#FFF</color>
+    <color name="colorNavBarTintUnselected">#40FFFFFF</color>
+
+    <color name="colorWindowBackground">#000000</color>
+
+    <color name="divider">#1AFFFFFF</color>
+</resources>

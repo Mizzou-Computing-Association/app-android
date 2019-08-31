@@ -33,6 +33,7 @@
 
         android:layout_marginTop="@dimen/margin_top"
 
+        style="@style/IconAppearance"
         android:src="@drawable/ic_resources_24px"
         />
 
@@ -77,6 +78,7 @@
 
         android:layout_marginTop="@dimen/margin_top"
 
+        style="@style/IconAppearance"
         android:src="@drawable/ic_outline_grade_24px"
         />
 
