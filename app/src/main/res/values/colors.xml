@@ -18,6 +18,10 @@
     <color name="colorIconTint">@color/colorTextPrimary</color>
     <color name="colorSponsorsBackground">@color/white</color>
 
+    <color name="colorNavBarBackground">@color/orange</color>
+    <color name="colorNavBarTintSelected">#000</color>
+    <color name="colorNavBarTintUnselected">#40000000</color>
+
     <!--Sponsor Levels-->
     <color name="platinum">#53aab7</color>
     <color name="gold">#E5C100</color>
