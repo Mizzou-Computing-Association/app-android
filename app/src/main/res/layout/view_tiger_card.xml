@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintHorizontal_bias="0"
 
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/margin_start_large"
 
         style="@style/IconAppearance"
         android:scaleType="fitCenter"
