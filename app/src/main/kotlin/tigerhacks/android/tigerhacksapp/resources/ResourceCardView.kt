@@ -24,11 +24,13 @@ class ResourceCardView @JvmOverloads constructor(context: Context, attrs: Attrib
         val attr = context.obtainStyledAttributes(attrs, R.styleable.ResourceCardView, defStyleAttr, 0)
         val iconRes = attr.getResourceId(R.styleable.ResourceCardView_titleIcon, -1)
         val titleRes = attr.getResourceId(R.styleable.ResourceCardView_titleRes, -1)
+        val autoTint = attr.getBoolean(R.styleable.ResourceCardView_autoTint, true)
         attr.recycle()
 
         if (iconRes != -1) {
             iconImageView.setImageResource(iconRes)
             iconImageView.visibility = View.VISIBLE
+            if (!autoTint) iconImageView.imageTintList = null
         }
 
         if (titleRes != -1) titleTextView.setText(titleRes)

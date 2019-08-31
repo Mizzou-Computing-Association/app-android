@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toTopOf="@id/timeLineSide"
         app:layout_constraintStart_toStartOf="@id/timeLineSide"
 
-        android:background="@color/colorPrimary"
+        android:background="@color/orange"
         />
 
     <View
@@ -31,7 +31,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="2dp"
 
-        android:background="@color/colorPrimary"
+        android:background="@color/orange"
         />
 
     <ImageView
@@ -89,6 +89,7 @@
         app:layout_constraintBottom_toBottomOf="@id/locationTextView"
         app:layout_constraintStart_toStartOf="@id/titleTextView"
 
+        style="@style/IconAppearance"
         android:src="@drawable/ic_location"
         />
 
@@ -117,6 +118,7 @@
 
         android:layout_marginTop="@dimen/margin_top"
 
+        style="@style/IconAppearance"
         android:src="@drawable/ic_resources_24px"
         />
 

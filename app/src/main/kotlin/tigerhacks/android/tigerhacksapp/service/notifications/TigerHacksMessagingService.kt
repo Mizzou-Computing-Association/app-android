@@ -16,6 +16,7 @@ import com.amazonaws.services.sns.model.CreatePlatformEndpointRequest
 import com.amazonaws.services.sns.model.SubscribeRequest
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import tigerhacks.android.tigerhacksapp.BuildConfig
 import tigerhacks.android.tigerhacksapp.R
 
 
@@ -42,6 +43,7 @@ class TigerHacksMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
+        if (BuildConfig.DEBUG) return
         val credentials = CognitoCachingCredentialsProvider(
             applicationContext,
             SNSSecrets.identityPoolId,

@@ -11,8 +11,9 @@
 
         app:layout_constraintTop_toTopOf="parent"
 
+        android:layout_marginTop="@dimen/margin_top"
+
         android:src="@mipmap/tigerhacks_logo_horizontal"
-        android:background="@color/orange"
         />
 
     <TextView
@@ -84,7 +85,7 @@
         android:layout_height="@dimen/divider_size"
 
         app:layout_constraintTop_toBottomOf="@id/introFlaskCardView"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_top_large"
         android:background="@color/divider"
         />
 
@@ -117,6 +118,7 @@
         android:paddingStart="@dimen/margin_start_large"
         android:paddingEnd="@dimen/margin_start_large"
 
+        app:autoTint="false"
         app:titleIcon="@mipmap/ic_launcher_round"
         app:titleRes="@string/tiger_hacks_website"
         />
@@ -132,6 +134,7 @@
         android:paddingStart="@dimen/margin_start_large"
         android:paddingEnd="@dimen/margin_start_large"
 
+        app:autoTint="false"
         app:titleIcon="@drawable/ic_icon_slack_hash_colored"
         app:titleRes="@string/mca_slack"
         />

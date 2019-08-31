@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Primary-->
+    <!--Day Colors-->
     <color name="colorPrimary">#f99a3a</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <!--Greenish-->
+    <color name="colorPrimaryDark">#f78109</color>
     <color name="colorAccent">#C5E5D5</color>
     
     <!--Text Colors-->
-    <color name="colorTextTitlePrimary">#f99a3a</color>
+    <color name="colorTextTitlePrimary">@color/orange</color>
     <color name="colorTextTitleSecondary">#4D000000</color>
     <color name="colorTextPrimary">#000000</color>
     <color name="colorTextSecondary">#A9A9A9</color>
 
     <color name="colorSelectorSelected">#000000</color>
     <color name="colorSelectorUnselected">#40000000</color>
+    <color name="colorWindowBackground">#FFFFFF</color>
+
+    <color name="colorIconTint">@color/colorTextPrimary</color>
+    <color name="colorSponsorsBackground">@color/white</color>
 
     <!--Sponsor Levels-->
     <color name="platinum">#53aab7</color>

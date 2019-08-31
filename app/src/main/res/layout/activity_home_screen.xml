@@ -29,17 +29,10 @@
         app:elevation="4dp"
 
         android:layout_gravity="bottom"
-
-        android:background="@color/colorPrimary"
-
-        app:tabIndicatorHeight="0dp"
-        app:labelVisibilityMode="labeled"
-        app:itemHorizontalTranslationEnabled="false"
+        android:background="@color/colorNavBarBackground"
         app:itemIconTint="@drawable/navigation_color_selector"
         app:itemTextColor="@drawable/navigation_color_selector"
-
-        app:tabIndicatorColor="@color/black"
-        app:tabTextAppearance="@style/SmallerTabText"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/navigation"
         />
 

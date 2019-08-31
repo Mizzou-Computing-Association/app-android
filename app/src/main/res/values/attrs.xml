@@ -6,5 +6,6 @@
     <declare-styleable name="ResourceCardView">
         <attr name="titleIcon" format="reference" />
         <attr name="titleRes" format="reference" />
+        <attr name="autoTint" format="boolean" />
     </declare-styleable>
 </resources>
