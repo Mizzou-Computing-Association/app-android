@@ -1,9 +1,7 @@
 package tigerhacks.android.tigerhacksapp
 
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.fabric.sdk.android.Fabric
@@ -40,10 +38,13 @@ class HomeScreenActivity : AppCompatActivity() {
         sponsorsFragment = SponsorsFragment.newInstance()
         resourcesFragment = ResourcesFragment.newInstance()
 
-        supportFragmentManager
-            ?.beginTransaction()
-            ?.add(R.id.contentFrameLayout, scheduleFragment)
-            ?.commit()
+        val fragmentCount = supportFragmentManager.fragments.size
+        if (fragmentCount == 0) {
+            supportFragmentManager
+                ?.beginTransaction()
+                ?.add(R.id.contentFrameLayout, scheduleFragment)
+                ?.commit()
+        }
 
         navigation.setOnNavigationItemSelectedListener { menuItem ->
             val fragment = when(menuItem.itemId) {
