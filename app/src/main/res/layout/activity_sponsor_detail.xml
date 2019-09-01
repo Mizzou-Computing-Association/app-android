@@ -134,7 +134,7 @@
                 android:layout_marginEnd="@dimen/margin_start"
 
                 style="@style/IconAppearance"
-                app:srcCompat="@drawable/ic_location"
+                app:srcCompat="@drawable/location_marker_icon"
                 />
 
             <TextView
@@ -161,7 +161,7 @@
                 android:layout_marginTop="@dimen/margin_top"
 
                 style="@style/IconAppearance"
-                app:srcCompat="@drawable/ic_link"
+                app:srcCompat="@drawable/link_icon"
                 />
 
             <TextView

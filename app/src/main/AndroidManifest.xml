@@ -36,10 +36,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="f81806aba0258b0f4496096c1ad5782fc8542d14" />
     </application>
 
 </manifest>

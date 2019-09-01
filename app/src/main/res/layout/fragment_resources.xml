@@ -46,7 +46,7 @@
         android:paddingEnd="@dimen/margin_start_large"
 
         app:titleRes="@string/intro_to_ios"
-        app:titleIcon="@drawable/ic_round_play_circle_24px"
+        app:titleIcon="@drawable/play_icon"
         />
 
     <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
@@ -61,7 +61,7 @@
         android:paddingEnd="@dimen/margin_start_large"
 
         app:titleRes="@string/intro_to_web"
-        app:titleIcon="@drawable/ic_round_play_circle_24px"
+        app:titleIcon="@drawable/play_icon"
         />
 
     <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
@@ -76,7 +76,7 @@
         android:paddingEnd="@dimen/margin_start_large"
 
         app:titleRes="@string/intro_to_flask"
-        app:titleIcon="@drawable/ic_round_play_circle_24px"
+        app:titleIcon="@drawable/play_icon"
         />
 
     <View
@@ -135,7 +135,7 @@
         android:paddingEnd="@dimen/margin_start_large"
 
         app:autoTint="false"
-        app:titleIcon="@drawable/ic_icon_slack_hash_colored"
+        app:titleIcon="@drawable/slack_icon"
         app:titleRes="@string/mca_slack"
         />
 

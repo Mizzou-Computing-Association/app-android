@@ -34,7 +34,7 @@
         android:layout_marginTop="@dimen/margin_top"
 
         style="@style/IconAppearance"
-        android:src="@drawable/ic_resources_24px"
+        android:src="@drawable/info_icon"
         />
 
     <TextView
@@ -79,7 +79,7 @@
         android:layout_marginTop="@dimen/margin_top"
 
         style="@style/IconAppearance"
-        android:src="@drawable/ic_outline_grade_24px"
+        android:src="@drawable/star_icon"
         />
 
     <TextView

@@ -33,7 +33,7 @@ class TigerHacksMessagingService : FirebaseMessagingService() {
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentText(message)
-            .setSmallIcon(R.drawable.logo_round)
+            .setSmallIcon(R.mipmap.ic_launcher_round)
             .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 

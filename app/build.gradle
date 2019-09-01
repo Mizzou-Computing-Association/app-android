@@ -58,7 +58,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
     // Amazon SNS (Push Notifications)
-    implementation 'com.amazonaws:aws-android-sdk-sns:2.15.1'
+    implementation 'com.amazonaws:aws-android-sdk-sns:2.15.2'
 
     //Airbnb Epoxy (Advanced RecyclerViews)
     implementation 'com.airbnb.android:epoxy:3.7.0'

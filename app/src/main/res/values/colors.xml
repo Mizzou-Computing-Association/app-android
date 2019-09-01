@@ -37,4 +37,6 @@
     <color name="linkColor">#00B0FF</color>
 
     <color name="divider">#1A000000</color>
+
+    <color name="ic_launcher_background">#F8993B</color>
 </resources>

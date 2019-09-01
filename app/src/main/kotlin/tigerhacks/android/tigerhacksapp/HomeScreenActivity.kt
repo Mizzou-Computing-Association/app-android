@@ -2,9 +2,7 @@ package tigerhacks.android.tigerhacksapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.crashlytics.android.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
-import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_home_screen.navigation
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
 import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment
@@ -24,11 +22,8 @@ class HomeScreenActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        Fabric.with(this, Crashlytics())
         FirebaseAnalytics.getInstance(this)
-
         setContentView(R.layout.activity_home_screen)
-
 
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
