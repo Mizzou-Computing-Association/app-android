@@ -5,23 +5,23 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.schedule_card_layout.view.descriptionTextView
-import kotlinx.android.synthetic.main.schedule_card_layout.view.locationIconImageView
-import kotlinx.android.synthetic.main.schedule_card_layout.view.locationTextView
-import kotlinx.android.synthetic.main.schedule_card_layout.view.timeLineSide
-import kotlinx.android.synthetic.main.schedule_card_layout.view.timeLineSide2
-import kotlinx.android.synthetic.main.schedule_card_layout.view.timeTextView
-import kotlinx.android.synthetic.main.schedule_card_layout.view.titleTextView
+import kotlinx.android.synthetic.main.view_event.view.descriptionTextView
+import kotlinx.android.synthetic.main.view_event.view.locationIconImageView
+import kotlinx.android.synthetic.main.view_event.view.locationTextView
+import kotlinx.android.synthetic.main.view_event.view.timeLineSide
+import kotlinx.android.synthetic.main.view_event.view.timeLineSide2
+import kotlinx.android.synthetic.main.view_event.view.timeTextView
+import kotlinx.android.synthetic.main.view_event.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
 
 /**
  * Created by Conno on 9/15/2018.
  */
 
-class EventCardView @JvmOverloads constructor (context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : ConstraintLayout(context, attrs, defStyle) {
+class EventView @JvmOverloads constructor (context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : ConstraintLayout(context, attrs, defStyle) {
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        LayoutInflater.from(context).inflate(R.layout.schedule_card_layout, this)
+        LayoutInflater.from(context).inflate(R.layout.view_event, this)
     }
 
     fun setup(event: Event, isFirstItem: Boolean, isLastItem: Boolean) {

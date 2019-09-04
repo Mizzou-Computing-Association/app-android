@@ -30,7 +30,7 @@ class ResourcesFragment : androidx.fragment.app.Fragment() {
             IdLink(R.id.introWebDevCardView,"https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s")
         ).forEach { idLink ->
             //For Every IdLink register a click listener to the view id
-            view.findViewById<ResourceCardView>(idLink.id).setOnClickListener {
+            view.findViewById<ResourceItemView>(idLink.id).setOnClickListener {
                 //When clicked pull Id's link and start a browse intent with that link
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(idLink.link)))
             }

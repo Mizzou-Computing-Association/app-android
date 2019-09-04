@@ -75,7 +75,7 @@
                 android:layout_marginStart="@dimen/margin_start_large"
                 android:layout_marginEnd="@dimen/margin_start_large"
 
-                android:textAppearance="@style/TitlePrimary"
+                android:textAppearance="@style/AppTheme.TitlePrimary"
                 android:text="@string/description"
                 />
             
@@ -91,7 +91,7 @@
 
                 android:layout_marginTop="@dimen/margin_top_large"
 
-                android:textAppearance="@style/TextPrimary"
+                android:textAppearance="@style/AppTheme.TextPrimary"
                 tools:text="Description"
                 />
 
@@ -115,7 +115,7 @@
                 app:layout_constraintTop_toBottomOf="@id/informationTitleDivider"
                 android:layout_marginTop="@dimen/margin_top_large"
 
-                android:textAppearance="@style/TitleSecondary"
+                android:textAppearance="@style/AppTheme.TitleSecondary"
                 android:text="@string/information"
                 />
             
@@ -133,7 +133,7 @@
                 android:layout_marginTop="@dimen/margin_top_large"
                 android:layout_marginEnd="@dimen/margin_start"
 
-                style="@style/IconAppearance"
+                style="@style/AppTheme.IconAppearance"
                 app:srcCompat="@drawable/location_marker_icon"
                 />
 
@@ -147,7 +147,7 @@
                 app:layout_constraintTop_toTopOf="@id/locationIcon"
 
                 tools:text="Second Text"
-                android:textAppearance="@style/TextPrimary"
+                android:textAppearance="@style/AppTheme.TextPrimary"
                 />
 
             <ImageView
@@ -160,7 +160,7 @@
 
                 android:layout_marginTop="@dimen/margin_top"
 
-                style="@style/IconAppearance"
+                style="@style/AppTheme.IconAppearance"
                 app:srcCompat="@drawable/link_icon"
                 />
 
@@ -173,11 +173,11 @@
                 app:layout_constraintTop_toTopOf="@id/internetImageView"
 
                 tools:text="link"
-                android:textAppearance="@style/TextPrimary"
+                android:textAppearance="@style/AppTheme.TextPrimary"
                 android:textColor="@color/linkColor"
                 />
 
-            <tigerhacks.android.tigerhacksapp.sponsors.views.MentorsView
+            <tigerhacks.android.tigerhacksapp.sponsors.views.MentorListView
                 android:id="@+id/mentorLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

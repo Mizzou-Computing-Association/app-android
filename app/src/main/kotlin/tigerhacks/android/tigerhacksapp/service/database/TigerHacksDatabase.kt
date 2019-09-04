@@ -9,8 +9,8 @@ import tigerhacks.android.tigerhacksapp.schedule.Event
 import tigerhacks.android.tigerhacksapp.service.database.daos.PrizesDAO
 import tigerhacks.android.tigerhacksapp.service.database.daos.ScheduleDAO
 import tigerhacks.android.tigerhacksapp.service.database.daos.SponsorsDAO
-import tigerhacks.android.tigerhacksapp.sponsors.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

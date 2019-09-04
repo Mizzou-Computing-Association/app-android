@@ -27,7 +27,7 @@
         android:layout_marginStart="@dimen/margin_start_large"
         android:layout_marginTop="@dimen/margin_top_large"
 
-        android:textAppearance="@style/TitlePrimary"
+        android:textAppearance="@style/AppTheme.TitlePrimary"
         android:text="@string/mentors"
         />
 
@@ -57,7 +57,7 @@
         android:layout_marginStart="@dimen/margin_start_large"
         android:layout_marginTop="@dimen/margin_top_large"
 
-        android:textAppearance="@style/TextPrimary"
+        android:textAppearance="@style/AppTheme.TextPrimary"
         android:text="@string/none_available"
         android:visibility="gone"
         />

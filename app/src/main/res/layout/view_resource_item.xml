@@ -22,7 +22,7 @@
 
         android:layout_marginEnd="@dimen/margin_start_large"
 
-        style="@style/IconAppearance"
+        style="@style/AppTheme.IconAppearance"
         android:scaleType="fitCenter"
         tools:src="@mipmap/ic_launcher_round"
         android:visibility="gone"
@@ -39,6 +39,6 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         tools:text="TigerHacks Website"
-        android:textAppearance="@style/TextPrimary"
+        android:textAppearance="@style/AppTheme.TextPrimary"
         />
 </merge>

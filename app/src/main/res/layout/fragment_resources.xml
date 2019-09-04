@@ -28,10 +28,10 @@
         android:layout_marginStart="@dimen/margin_start_large"
 
         android:text="@string/tiger_talks"
-        android:textAppearance="@style/TitlePrimary"
+        android:textAppearance="@style/AppTheme.TitlePrimary"
         />
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
         android:id="@+id/introiOSCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:titleIcon="@drawable/play_icon"
         />
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
         android:id="@+id/introWebDevCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         app:titleIcon="@drawable/play_icon"
         />
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
         android:id="@+id/introFlaskCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,10 +101,10 @@
         android:layout_marginStart="@dimen/margin_start_large"
 
         android:text="@string/other_links"
-        android:textAppearance="@style/TitleSecondary"
+        android:textAppearance="@style/AppTheme.TitleSecondary"
         />
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
         android:id="@+id/tigerHacksWebsiteCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
         app:titleRes="@string/tiger_hacks_website"
         />
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceCardView
+    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
         android:id="@+id/mcaSlackCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

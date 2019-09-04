@@ -30,4 +30,10 @@
     <string name="description">Description</string>
     <string name="information">Information</string>
     <string name="prizes">Prizes</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="developer">Developer</string>
+    <string name="startup">Startup</string>
+    <string name="beginner">Beginner</string>
 </resources>

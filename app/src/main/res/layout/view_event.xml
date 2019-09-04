@@ -59,7 +59,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="@dimen/margin_top_large"
 
-        android:textAppearance="@style/TitlePrimary"
+        android:textAppearance="@style/AppTheme.TitlePrimary"
         tools:text="8:30 PM"
         />
 
@@ -77,7 +77,7 @@
         android:layout_marginEnd="@dimen/margin_start_large"
 
         tools:text="Pillow Fight"
-        android:textAppearance="@style/TitleSecondary"
+        android:textAppearance="@style/AppTheme.TitleSecondary"
         />
 
     <ImageView
@@ -89,7 +89,7 @@
         app:layout_constraintBottom_toBottomOf="@id/locationTextView"
         app:layout_constraintStart_toStartOf="@id/titleTextView"
 
-        style="@style/IconAppearance"
+        style="@style/AppTheme.IconAppearance"
         android:src="@drawable/location_marker_icon"
         />
 
@@ -105,7 +105,7 @@
         android:layout_marginTop="@dimen/margin_top"
 
         tools:text="Time Capsule"
-        android:textAppearance="@style/TextPrimary"
+        android:textAppearance="@style/AppTheme.TextPrimary"
         />
 
     <ImageView
@@ -118,7 +118,7 @@
 
         android:layout_marginTop="@dimen/margin_top"
 
-        style="@style/IconAppearance"
+        style="@style/AppTheme.IconAppearance"
         android:src="@drawable/info_icon"
         />
 
@@ -136,7 +136,7 @@
         android:layout_marginBottom="@dimen/margin_start_large"
 
         tools:text="This is some description text for an event happening at TigerHacks"
-        android:textAppearance="@style/TextPrimary"
+        android:textAppearance="@style/AppTheme.TextPrimary"
         android:visibility="visible"
         />
 

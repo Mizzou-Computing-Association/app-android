@@ -12,10 +12,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
-import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
-import tigerhacks.android.tigerhacksapp.service.extensions.withModels
+import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
 import tigerhacks.android.tigerhacksapp.sponsors.views.header
 import tigerhacks.android.tigerhacksapp.sponsors.views.sponsorCardView

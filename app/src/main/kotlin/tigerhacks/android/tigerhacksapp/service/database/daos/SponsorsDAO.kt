@@ -5,8 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import tigerhacks.android.tigerhacksapp.sponsors.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

@@ -12,7 +12,7 @@ import com.airbnb.epoxy.ModelView
 import com.bumptech.glide.Glide
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
-import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

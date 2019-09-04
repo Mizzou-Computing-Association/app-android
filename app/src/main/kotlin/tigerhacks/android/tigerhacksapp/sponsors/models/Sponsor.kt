@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.sponsors
+package tigerhacks.android.tigerhacksapp.sponsors.models
 
 import android.os.Parcelable
 import androidx.annotation.ColorRes

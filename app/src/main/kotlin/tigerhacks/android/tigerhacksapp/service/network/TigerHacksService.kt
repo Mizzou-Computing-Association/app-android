@@ -4,8 +4,8 @@ import retrofit2.Call
 import retrofit2.http.GET
 import tigerhacks.android.tigerhacksapp.prizes.Prize
 import tigerhacks.android.tigerhacksapp.schedule.Event
-import tigerhacks.android.tigerhacksapp.sponsors.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.Sponsor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 
 /**
  * Created by Conno on 9/22/2018.

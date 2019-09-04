@@ -18,6 +18,7 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.darkenColor
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
+import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 
 private const val SPONSOR_KEY = "sponsor_key"
 
@@ -34,7 +35,7 @@ class SponsorDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sponsor_detail)
 
-        sponsor = intent.getParcelableExtra(SPONSOR_KEY)
+        sponsor = intent.getParcelableExtra(SPONSOR_KEY)!!
 
         //Sponsor Info
         toolbar.title = sponsor.name

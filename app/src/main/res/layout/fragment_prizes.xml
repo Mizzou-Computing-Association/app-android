@@ -8,18 +8,37 @@
     android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/typeTabLayout"
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
 
-        style="@style/Selector"
-        />
+        style="@style/AppTheme.Selector"
+        >
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabDeveloper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/developer" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/prizeViewPager"
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabStartup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/startup" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabBeginner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/beginner" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
     <ProgressBar

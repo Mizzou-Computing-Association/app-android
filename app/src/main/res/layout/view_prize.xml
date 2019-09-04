@@ -20,7 +20,7 @@
         android:layout_marginStart="@dimen/margin_start_large"
 
         tools:text="Tech Company Prize"
-        android:textAppearance="@style/TitlePrimary"
+        android:textAppearance="@style/AppTheme.TitlePrimary"
         />
 
     <ImageView
@@ -33,7 +33,7 @@
 
         android:layout_marginTop="@dimen/margin_top"
 
-        style="@style/IconAppearance"
+        style="@style/AppTheme.IconAppearance"
         android:src="@drawable/info_icon"
         />
 
@@ -51,7 +51,7 @@
         android:layout_marginEnd="@dimen/margin_start_large"
 
         tools:text="Here's some content talking about the prize."
-        android:textAppearance="@style/TextPrimary"
+        android:textAppearance="@style/AppTheme.TextPrimary"
         />
 
     <TextView
@@ -65,7 +65,7 @@
         android:layout_marginTop="@dimen/margin_top"
 
         android:text="@string/prizes"
-        android:textAppearance="@style/TitleSecondary"
+        android:textAppearance="@style/AppTheme.TitleSecondary"
         />
 
     <ImageView
@@ -78,7 +78,7 @@
 
         android:layout_marginTop="@dimen/margin_top"
 
-        style="@style/IconAppearance"
+        style="@style/AppTheme.IconAppearance"
         android:src="@drawable/star_icon"
         />
 
@@ -95,7 +95,7 @@
         android:layout_marginEnd="@dimen/margin_start_large"
 
         tools:text="Here's a prize"
-        android:textAppearance="@style/TextPrimary"
+        android:textAppearance="@style/AppTheme.TextPrimary"
         />
 
     <View

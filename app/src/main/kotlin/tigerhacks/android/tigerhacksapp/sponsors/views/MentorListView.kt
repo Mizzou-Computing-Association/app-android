@@ -8,17 +8,17 @@ import android.view.View
 import kotlinx.android.synthetic.main.view_mentor.view.contactTextView
 import kotlinx.android.synthetic.main.view_mentor.view.nameTextView
 import kotlinx.android.synthetic.main.view_mentor.view.skillsTextView
-import kotlinx.android.synthetic.main.view_mentors.view.mentorsEmptyTextView
-import kotlinx.android.synthetic.main.view_mentors.view.mentorsLayout
+import kotlinx.android.synthetic.main.view_mentor_list.view.mentorsEmptyTextView
+import kotlinx.android.synthetic.main.view_mentor_list.view.mentorsLayout
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.sponsors.Mentor
+import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-class MentorsView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
+class MentorListView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
-        LayoutInflater.from(context).inflate(R.layout.view_mentors, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_mentor_list, this, true)
     }
 
     var mentors: List<Mentor>? = null
