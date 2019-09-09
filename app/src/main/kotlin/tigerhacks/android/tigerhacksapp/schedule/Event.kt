@@ -28,7 +28,9 @@ data class Event (
             val searchPattern = Pattern.compile("(\\d)T(\\d{2}):(\\d{2})")
             val matcher = searchPattern.matcher(time)
             return if (matcher.find()) {
-                val militaryTime = Integer.parseInt(matcher.group(2))
+                val groupTwo = matcher.group(2)
+                groupTwo ?: return EasyTime()
+                val militaryTime = Integer.parseInt(groupTwo)
 
                 val hoursTime = when (militaryTime) {
                     0 -> EasyTime(hours = "12", inAm = true)
@@ -44,7 +46,9 @@ data class Event (
                     else -> EasyTime.Day.FRIDAY
                 }
 
-                hoursTime.copy(minutes = matcher.group(3), day = day)
+                val groupThree = matcher.group(3)
+                groupThree ?: return EasyTime()
+                hoursTime.copy(minutes = groupThree, day = day)
             } else {
                 EasyTime()
             }

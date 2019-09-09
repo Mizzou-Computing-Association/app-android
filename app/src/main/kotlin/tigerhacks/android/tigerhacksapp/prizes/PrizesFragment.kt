@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
@@ -26,6 +30,7 @@ class PrizesFragment : Fragment() {
     }
 
     private lateinit var viewModel: HomeScreenViewModel
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var adapter: ListAdapter<Prize, RecyclerView.ViewHolder>
     private var currentCategory = PrizeCategory.DEVELOPER
 
@@ -35,6 +40,7 @@ class PrizesFragment : Fragment() {
     ): View? {
         val layoutView = inflater.inflate(R.layout.fragment_prizes, container, false)
         val recyclerView = layoutView.findViewById<RecyclerView>(R.id.recyclerView)
+        swipeRefreshLayout = layoutView.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
 
         adapter = object : ListAdapter<Prize, RecyclerView.ViewHolder>(Prize.diff) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(PrizeView(parent.context)) {}
@@ -71,6 +77,12 @@ class PrizesFragment : Fragment() {
             tabLayout.getTabAt(currentCategory.ordinal)?.select()
         }
 
+        swipeRefreshLayout.setOnRefreshListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.refreshPrizes()
+            }
+        }
+
         return layoutView
     }
 
@@ -90,7 +102,10 @@ class PrizesFragment : Fragment() {
             PrizeCategory.BEGINNER -> viewModel.beginnerPrizeListLiveData
         }
 
-        liveData.observeNotNull(this, adapter::submitList)
+        liveData.observeNotNull(this) {
+            swipeRefreshLayout.isRefreshing = false
+            adapter.submitList(it)
+        }
     }
 
     private fun resetObservers() {

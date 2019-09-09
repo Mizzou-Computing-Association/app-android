@@ -43,7 +43,7 @@ class TigerHacksMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
-        if (BuildConfig.DEBUG) return
+        if (true) return
         val credentials = CognitoCachingCredentialsProvider(
             applicationContext,
             SNSSecrets.identityPoolId,
