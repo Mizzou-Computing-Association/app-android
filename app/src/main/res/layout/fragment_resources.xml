@@ -1,143 +1,160 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/tigerHacksLogo"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content">
 
-        app:layout_constraintTop_toTopOf="parent"
+        <ImageView
+            android:id="@+id/tigerHacksLogo"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
 
-        android:layout_marginTop="@dimen/margin_top"
+            app:layout_constraintTop_toTopOf="parent"
 
-        android:src="@mipmap/tigerhacks_logo_horizontal"
-        />
+            android:layout_marginTop="@dimen/margin_top"
 
-    <TextView
-        android:id="@+id/tigerTalksTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:src="@mipmap/tigerhacks_logo_horizontal"
+            />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tigerHacksLogo"
+        <TextView
+            android:id="@+id/tigerTalksTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginTop="@dimen/margin_top_large"
-        android:layout_marginStart="@dimen/margin_start_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tigerHacksLogo"
 
-        android:text="@string/tiger_talks"
-        android:textAppearance="@style/AppTheme.TitlePrimary"
-        />
+            android:layout_marginTop="@dimen/margin_top_large"
+            android:layout_marginStart="@dimen/margin_start_large"
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
-        android:id="@+id/introiOSCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:text="@string/tiger_talks"
+            android:textAppearance="@style/AppTheme.TitlePrimary"
+            />
 
-        app:layout_constraintTop_toBottomOf="@id/tigerTalksTextView"
-        app:layout_constraintBottom_toTopOf="@id/introWebDevCardView"
+        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+            android:id="@+id/introiOSCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:layout_marginTop="@dimen/margin_top"
-        android:paddingTop="@dimen/margin_top"
-        android:paddingBottom="@dimen/margin_top"
-        android:paddingStart="@dimen/margin_start_large"
-        android:paddingEnd="@dimen/margin_start_large"
+            app:layout_constraintTop_toBottomOf="@id/tigerTalksTextView"
+            app:layout_constraintBottom_toTopOf="@id/introWebDevCardView"
 
-        app:titleRes="@string/intro_to_ios"
-        app:titleIcon="@drawable/play_icon"
-        />
+            android:layout_marginTop="@dimen/margin_top"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
-        android:id="@+id/introWebDevCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            app:titleRes="@string/intro_to_ios"
+            app:titleIcon="@drawable/play_icon"
+            />
 
-        app:layout_constraintTop_toBottomOf="@+id/introiOSCardView"
-        android:paddingTop="@dimen/margin_top"
-        android:paddingBottom="@dimen/margin_top"
-        android:paddingStart="@dimen/margin_start_large"
-        android:paddingEnd="@dimen/margin_start_large"
+        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+            android:id="@+id/introWebDevCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        app:titleRes="@string/intro_to_web"
-        app:titleIcon="@drawable/play_icon"
-        />
+            app:layout_constraintTop_toBottomOf="@+id/introiOSCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
-        android:id="@+id/introFlaskCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            app:titleRes="@string/intro_to_web"
+            app:titleIcon="@drawable/play_icon"
+            />
 
-        app:layout_constraintTop_toBottomOf="@+id/introWebDevCardView"
-        android:paddingTop="@dimen/margin_top"
-        android:paddingBottom="@dimen/margin_top"
-        android:paddingStart="@dimen/margin_start_large"
-        android:paddingEnd="@dimen/margin_start_large"
+        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+            android:id="@+id/introFlaskCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        app:titleRes="@string/intro_to_flask"
-        app:titleIcon="@drawable/play_icon"
-        />
+            app:layout_constraintTop_toBottomOf="@+id/introWebDevCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_size"
+            app:titleRes="@string/intro_to_flask"
+            app:titleIcon="@drawable/play_icon"
+            />
 
-        app:layout_constraintTop_toBottomOf="@id/introFlaskCardView"
-        android:layout_marginTop="@dimen/margin_top_large"
-        android:background="@color/divider"
-        />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_size"
 
-    <TextView
-        android:id="@+id/otherLinksTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/introFlaskCardView"
+            android:layout_marginTop="@dimen/margin_top_large"
+            android:background="@color/divider"
+            />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
+        <TextView
+            android:id="@+id/otherLinksTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_marginTop="@dimen/margin_top_large"
-        android:layout_marginStart="@dimen/margin_start_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
 
-        android:text="@string/other_links"
-        android:textAppearance="@style/AppTheme.TitleSecondary"
-        />
+            android:layout_marginTop="@dimen/margin_top_large"
+            android:layout_marginStart="@dimen/margin_start_large"
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
-        android:id="@+id/tigerHacksWebsiteCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:text="@string/other_links"
+            android:textAppearance="@style/AppTheme.TitleSecondary"
+            />
 
-        app:layout_constraintTop_toBottomOf="@id/otherLinksTextView"
+        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+            android:id="@+id/tigerHacksWebsiteCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:layout_marginTop="@dimen/margin_top"
+            app:layout_constraintTop_toBottomOf="@id/otherLinksTextView"
 
-        android:paddingTop="@dimen/margin_top"
-        android:paddingBottom="@dimen/margin_top"
-        android:paddingStart="@dimen/margin_start_large"
-        android:paddingEnd="@dimen/margin_start_large"
+            android:layout_marginTop="@dimen/margin_top"
 
-        app:autoTint="false"
-        app:titleIcon="@mipmap/ic_launcher_round"
-        app:titleRes="@string/tiger_hacks_website"
-        />
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
 
-    <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
-        android:id="@+id/mcaSlackCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            app:autoTint="false"
+            app:titleIcon="@mipmap/ic_launcher_round"
+            app:titleRes="@string/tiger_hacks_website"
+            />
 
-        app:layout_constraintTop_toBottomOf="@+id/tigerHacksWebsiteCardView"
-        android:paddingTop="@dimen/margin_top"
-        android:paddingBottom="@dimen/margin_top"
-        android:paddingStart="@dimen/margin_start_large"
-        android:paddingEnd="@dimen/margin_start_large"
+        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+            android:id="@+id/mcaSlackCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        app:autoTint="false"
-        app:titleIcon="@drawable/slack_icon"
-        app:titleRes="@string/mca_slack"
-        />
+            app:layout_constraintTop_toBottomOf="@+id/tigerHacksWebsiteCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            app:autoTint="false"
+            app:titleIcon="@drawable/slack_icon"
+            app:titleRes="@string/mca_slack"
+            />
+
+        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+            android:id="@+id/logOutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/mcaSlackCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
+            app:titleRes="@string/log_out"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 

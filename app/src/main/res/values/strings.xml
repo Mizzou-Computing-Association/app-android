@@ -36,4 +36,6 @@
     <string name="developer">Developer</string>
     <string name="startup">Startup</string>
     <string name="beginner">Beginner</string>
+    <string name="log_in_button">Log in with Github</string>
+    <string name="log_out">Log out</string>
 </resources>

@@ -51,11 +51,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
-    // Firebase (Push Notifications, Crashlytics)
+    // Firebase (Push Notifications, Crashlytics, Auth)
     implementation 'com.google.firebase:firebase-core:17.2.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.crashlytics.sdk.android:answers:1.4.7'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
 
     // Amazon SNS (Push Notifications)
     implementation 'com.amazonaws:aws-android-sdk-sns:2.15.2'
