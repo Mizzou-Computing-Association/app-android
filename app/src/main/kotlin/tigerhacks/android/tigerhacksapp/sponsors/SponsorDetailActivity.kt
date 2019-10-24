@@ -4,13 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionText
+import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitle
+import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitleDivider
+import kotlinx.android.synthetic.main.activity_sponsor_detail.internetImageView
 import kotlinx.android.synthetic.main.activity_sponsor_detail.linkText
 import kotlinx.android.synthetic.main.activity_sponsor_detail.mainImage
 import kotlinx.android.synthetic.main.activity_sponsor_detail.mentorLayout
-import kotlinx.android.synthetic.main.activity_sponsor_detail.secondText
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbar
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbarLayout
 import tigerhacks.android.tigerhacksapp.R
@@ -40,13 +43,15 @@ class SponsorDetailActivity : AppCompatActivity() {
         //Sponsor Info
         toolbar.title = sponsor.name
         Glide.with(mainImage).load(sponsor.image).into(mainImage)
-        if (sponsor.location != "tbd") {
-            secondText.text = sponsor.location
-        } else {
-            secondText.text = getString(R.string.na)
-        }
 
-        linkText.text = sponsor.website
+        if (sponsor.website.isNotEmpty()) {
+            linkText.text = sponsor.website
+        } else {
+            informationTitleDivider.visibility = View.GONE
+            internetImageView.visibility = View.GONE
+            informationTitle.visibility = View.GONE
+            linkText.visibility = View.GONE
+        }
         descriptionText.text = sponsor.description
 
         linkText.setOnClickListener {

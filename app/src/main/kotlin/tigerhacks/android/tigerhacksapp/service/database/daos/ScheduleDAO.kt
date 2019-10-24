@@ -14,13 +14,13 @@ import tigerhacks.android.tigerhacksapp.schedule.Event
 @Dao
 interface ScheduleDAO {
 
-    @Query("SELECT * FROM event WHERE day=0")
+    @Query("SELECT * FROM event WHERE day=1")
     fun getFridayEvents(): LiveData<List<Event>>
 
-    @Query("SELECT * FROM event WHERE day=1")
+    @Query("SELECT * FROM event WHERE day=2")
     fun getSaturdayEvents(): LiveData<List<Event>>
 
-    @Query("SELECT * FROM event WHERE day=2")
+    @Query("SELECT * FROM event WHERE day=3")
     fun getSundayEvents(): LiveData<List<Event>>
 
     @Query("DELETE FROM event")

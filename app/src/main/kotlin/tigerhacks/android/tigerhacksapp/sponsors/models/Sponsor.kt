@@ -11,6 +11,24 @@ import tigerhacks.android.tigerhacksapp.R
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
+
+@JsonClass(generateAdapter = true)
+data class SponsorList(
+    val Gold: List<Sponsor> = emptyList(),
+    val Bronze: List<Sponsor> = emptyList(),
+    val Platinum: List<Sponsor> = emptyList(),
+    val Silver: List<Sponsor> = emptyList()
+) {
+    fun combine(): List<Sponsor> {
+        val totalSponsors = arrayListOf<Sponsor>()
+        totalSponsors.addAll(Gold)
+        totalSponsors.addAll(Bronze)
+        totalSponsors.addAll(Platinum)
+        totalSponsors.addAll(Silver)
+        return totalSponsors
+    }
+}
+
 @Entity
 @JsonClass(generateAdapter = true)
 @Parcelize
@@ -18,25 +36,17 @@ data class Sponsor(
     @PrimaryKey val name: String = "",
     val description: String = "",
     val website: String = "",
-    val location: String = "",
     val image: String = "",
-    val level: String = ""
+    val level: Int = 0
 ) : Parcelable {
     @ColorRes
     fun getSponsorLevelColorRes(): Int {
         return when (level) {
-            "Platinum" -> R.color.platinum
-            "Gold" -> R.color.gold
-            "Silver" -> R.color.silver
-            "Bronze" -> R.color.bronze
+            0 -> R.color.platinum
+            1 -> R.color.gold
+            2 -> R.color.silver
+            3 -> R.color.bronze
             else -> R.color.colorPrimary
         }
-    }
-
-    fun getLevelNum() = when (level) {
-        "Platinum" -> 0
-        "Gold" -> 1
-        "Silver" -> 2
-        else -> 3
     }
 }

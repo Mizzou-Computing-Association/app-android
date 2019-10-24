@@ -31,7 +31,7 @@
             android:screenOrientation="portrait" />
 
         <service
-            android:name=".service.notifications.TigerHacksMessagingService"
+            android:name=".service.TigerHacksMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

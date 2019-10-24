@@ -13,7 +13,7 @@ import tigerhacks.android.tigerhacksapp.prizes.Prize
 
 @Dao
 interface PrizesDAO {
-    @Query("SELECT * FROM prize WHERE prizeType='Main'")
+    @Query("SELECT * FROM prize WHERE prizeType='Developer'")
     fun getAllDevPrizes(): LiveData<List<Prize>>
 
     @Query("SELECT * FROM prize WHERE prizeType='Beginner'")

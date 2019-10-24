@@ -16,7 +16,7 @@ import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 
-@Database(entities = [Prize::class, Event::class, Sponsor::class, Mentor::class], version = 1)
+@Database(entities = [Prize::class, Event::class, Sponsor::class, Mentor::class], version = 3)
 abstract class TigerHacksDatabase : RoomDatabase() {
     abstract fun prizeDAO(): PrizesDAO
     abstract fun scheduleDAO(): ScheduleDAO
@@ -33,7 +33,9 @@ abstract class TigerHacksDatabase : RoomDatabase() {
                 applicationContext,
                 TigerHacksDatabase::class.java,
                 "TigerHacksDatabase"
-            ).build()
+            )
+                .fallbackToDestructiveMigration()
+                .build()
 
             return instance!!
         }

@@ -1,26 +1,23 @@
 package tigerhacks.android.tigerhacksapp.service.network
 
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
-import tigerhacks.android.tigerhacksapp.prizes.Prize
-import tigerhacks.android.tigerhacksapp.schedule.Event
+import tigerhacks.android.tigerhacksapp.prizes.PrizeList
 import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
+import tigerhacks.android.tigerhacksapp.sponsors.models.SponsorList
 
 /**
  * Created by Conno on 9/22/2018.
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 interface TigerHacksService {
-    @GET("tigerhacksNewPrizes")
-    fun listPrizes(): Call<List<Prize>>
+    @GET("prizes")
+    fun listPrizes(): Call<PrizeList>
 
-    @GET("tigerhacksNewSchedule")
-    fun listEvents(): Call<List<Event>>
+    @GET("schedule")
+    fun listEvents(): Call<ResponseBody>
 
-    @GET("tigerhacksNewSponsors")
-    fun listSponsors(): Call<List<Sponsor>>
-
-    @GET("tigerhacksMentors")
-    fun listMentors(): Call<List<Mentor>>
+    @GET("sponsors")
+    fun listSponsors(): Call<SponsorList>
 }

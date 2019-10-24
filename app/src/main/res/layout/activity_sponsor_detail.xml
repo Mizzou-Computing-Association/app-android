@@ -118,45 +118,14 @@
                 android:textAppearance="@style/AppTheme.TitleSecondary"
                 android:text="@string/information"
                 />
-            
-            <ImageView
-                android:id="@+id/locationIcon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-
-                app:layout_constraintTop_toBottomOf="@id/informationTitle"
-                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
-                app:layout_constraintEnd_toStartOf="@id/secondText"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintHorizontal_bias="0"
-
-                android:layout_marginTop="@dimen/margin_top_large"
-                android:layout_marginEnd="@dimen/margin_start"
-
-                style="@style/AppTheme.IconAppearance"
-                app:srcCompat="@drawable/location_marker_icon"
-                />
-
-            <TextView
-                android:id="@+id/secondText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                app:layout_constraintStart_toEndOf="@id/locationIcon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/locationIcon"
-
-                tools:text="Second Text"
-                android:textAppearance="@style/AppTheme.TextPrimary"
-                />
 
             <ImageView
                 android:id="@+id/internetImageView"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
 
-                app:layout_constraintTop_toBottomOf="@id/secondText"
-                app:layout_constraintStart_toStartOf="@id/locationIcon"
+                app:layout_constraintTop_toBottomOf="@id/informationTitle"
+                app:layout_constraintStart_toStartOf="@id/informationTitle"
 
                 android:layout_marginTop="@dimen/margin_top"
 
@@ -169,8 +138,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                app:layout_constraintStart_toStartOf="@id/secondText"
+                app:layout_constraintStart_toEndOf="@id/internetImageView"
                 app:layout_constraintTop_toTopOf="@id/internetImageView"
+
+                android:layout_marginStart="@dimen/margin_start"
 
                 tools:text="link"
                 android:textAppearance="@style/AppTheme.TextPrimary"

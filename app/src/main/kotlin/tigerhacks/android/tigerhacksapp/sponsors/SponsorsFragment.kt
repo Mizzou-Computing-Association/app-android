@@ -59,7 +59,7 @@ class SponsorsFragment : Fragment() {
                     id("level${i}Title")
                     sponsorLevel(i)
                 }
-                sponsorList?.filter { it.getLevelNum() == i }?.forEach {
+                sponsorList?.filter { it.level == i }?.forEach {
                     sponsorCardView {
                         id(it.name)
                         sponsor(it)
@@ -77,7 +77,7 @@ class SponsorsFragment : Fragment() {
             recyclerView.requestModelBuild()
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel?.refreshSponsors()
-                viewModel?.refreshMentors()
+                //viewModel?.refreshMentors()
             }
         }
 

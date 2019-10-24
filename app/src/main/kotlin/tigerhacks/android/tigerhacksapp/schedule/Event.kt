@@ -9,23 +9,21 @@ import java.util.regex.Pattern
 @Entity
 @JsonClass(generateAdapter = true)
 data class Event (
-    val day: Int = 0,
-    val time: String = "",
+    @PrimaryKey val time: String = "",
     val location: String = "",
     val floor: Int = 0,
-    @PrimaryKey val title: String = "",
-    val description: String = ""
+    val title: String = "",
+    val description: String = "",
+    val day: Int = 0
 ) {
     companion object {
         val diff = object : DiffUtil.ItemCallback<Event>() {
             override fun areItemsTheSame(oldItem: Event, newItem: Event) = oldItem.time == newItem.time && oldItem.location == newItem.location
             override fun areContentsTheSame(oldItem: Event, newItem: Event) = oldItem == newItem
         }
-    }
 
-    val easyTime: EasyTime
-        get() {
-            val searchPattern = Pattern.compile("(\\d)T(\\d{2}):(\\d{2})")
+        fun findEasyTime(time: String): EasyTime {
+            val searchPattern = Pattern.compile("(\\d{2})T(\\d{2}):(\\d{2})")
             val matcher = searchPattern.matcher(time)
             return if (matcher.find()) {
                 val groupTwo = matcher.group(2)
@@ -40,9 +38,9 @@ data class Event (
                 }
 
                 val day = when (matcher.group(1)) {
-                    "2" -> EasyTime.Day.FRIDAY
-                    "3" -> EasyTime.Day.SATURDAY
-                    "4" -> EasyTime.Day.SUNDAY
+                    "08" -> EasyTime.Day.FRIDAY
+                    "09" -> EasyTime.Day.SATURDAY
+                    "10" -> EasyTime.Day.SUNDAY
                     else -> EasyTime.Day.FRIDAY
                 }
 
@@ -53,4 +51,8 @@ data class Event (
                 EasyTime()
             }
         }
+    }
+
+    val easyTime: EasyTime
+        get() { return findEasyTime(time) }
 }

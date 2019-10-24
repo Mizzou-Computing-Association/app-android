@@ -34,7 +34,7 @@ class ScheduleFragment : Fragment() {
     ): View? {
         val layoutView = inflater.inflate(R.layout.fragment_schedule, container, false)
         val recyclerView = layoutView.findViewById<RecyclerView>(R.id.eventRecyclerView)
-        swipeRefreshLayout = layoutView.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+        swipeRefreshLayout = layoutView.findViewById(R.id.swipeRefreshLayout)
 
         adapter = object : ListAdapter<Event, RecyclerView.ViewHolder>(Event.diff) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(EventView(parent.context)) {}

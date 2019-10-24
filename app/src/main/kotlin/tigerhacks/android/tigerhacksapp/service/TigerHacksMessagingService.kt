@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.service.notifications
+package tigerhacks.android.tigerhacksapp.service
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -9,14 +9,8 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.amazonaws.auth.CognitoCachingCredentialsProvider
-import com.amazonaws.regions.Regions
-import com.amazonaws.services.sns.AmazonSNSClient
-import com.amazonaws.services.sns.model.CreatePlatformEndpointRequest
-import com.amazonaws.services.sns.model.SubscribeRequest
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import tigerhacks.android.tigerhacksapp.BuildConfig
 import tigerhacks.android.tigerhacksapp.R
 
 
@@ -28,7 +22,7 @@ class TigerHacksMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
 
-        val message = remoteMessage.data.values.toTypedArray()[0]
+        val message = remoteMessage.notification?.body ?: ""
         createChannelsIfNeeded()
 
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
@@ -39,40 +33,6 @@ class TigerHacksMessagingService : FirebaseMessagingService() {
 
         with(NotificationManagerCompat.from(this)) {
             notify(builder.hashCode(), builder.build())
-        }
-    }
-
-    override fun onNewToken(token: String) {
-        if (true) return
-        val credentials = CognitoCachingCredentialsProvider(
-            applicationContext,
-            SNSSecrets.identityPoolId,
-            Regions.US_EAST_1
-        )
-
-        val client = AmazonSNSClient(credentials)
-
-        val endpointArnRequest = CreatePlatformEndpointRequest()
-            .withPlatformApplicationArn(SNSSecrets.platformArn)
-            .withToken(token)
-
-        val endpointArnResult = client.createPlatformEndpoint(endpointArnRequest)
-        if (endpointArnResult == null) {
-            Log.d(TAG, "Error creating sns platform endpoint!")
-            return
-        }
-
-        val endpointArn = endpointArnResult.endpointArn
-
-        val subscribeRequest = SubscribeRequest()
-            .withProtocol("application")
-            .withEndpoint(endpointArn)
-            .withTopicArn(SNSSecrets.topicArn)
-
-        val subscribeResult = client.subscribe(subscribeRequest)
-        if (subscribeResult == null) {
-            Log.d(TAG, "Error subscribing to sns topic")
-            return
         }
     }
 

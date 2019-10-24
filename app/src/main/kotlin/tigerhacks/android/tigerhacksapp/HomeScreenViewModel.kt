@@ -1,17 +1,24 @@
 package tigerhacks.android.tigerhacksapp
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import tigerhacks.android.tigerhacksapp.schedule.Event
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
 import java.io.IOException
+import com.squareup.moshi.Types
+
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -34,9 +41,11 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
         val FACTORY = singleArgViewModelFactory(::HomeScreenViewModel)
     }
 
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
     private val tigerHacksRetrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://n61dynih7d.execute-api.us-east-2.amazonaws.com/production/")
-        .addConverterFactory(MoshiConverterFactory.create())
+        .baseUrl("https://tigerhacks.com/api/")
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
     private val service = tigerHacksRetrofit.create(TigerHacksService::class.java)
@@ -68,7 +77,6 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
             refreshPrizes()
             refreshEvents()
             refreshSponsors()
-            refreshMentors()
         }
     }
 
@@ -78,7 +86,7 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
             val response = service.listPrizes().execute()
             if (response.isSuccessful) {
                 statusLiveData.postValue(NetworkStatus.SUCCESS)
-                val totalPrizes = response.body()
+                val totalPrizes = response.body()?.combine()
                 if (totalPrizes != null) {
                     database.prizeDAO().updatePrizes(totalPrizes)
                 }
@@ -96,9 +104,24 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
             val response = service.listEvents().execute()
             if (response.isSuccessful) {
                 statusLiveData.postValue(NetworkStatus.SUCCESS)
-                val totalEvents = response.body()
+                val totalEvents = response.body()?.string()
                 if (totalEvents != null) {
-                    database.scheduleDAO().updateEvents(totalEvents)
+                    try {
+                        val jsonBody = JSONObject(totalEvents)
+                        val jsonArr = jsonBody.toJSONArray(jsonBody.names())
+                        val type = Types.newParameterizedType(List::class.java, Event::class.java)
+                        val adapter = moshi.adapter<List<Event>>(type)
+                        if (jsonArr != null) {
+                            var json = jsonArr.toString()
+                                .replace("[", "")
+                                .replace("]", "")
+                            json = "[${json}]"
+                            val result = adapter.fromJson(json)
+                            if (result != null) database.scheduleDAO().updateEvents(result)
+                        }
+                    } catch(io: Exception) {
+                        //TODO nothing
+                    }
                 }
             } else {
                 statusLiveData.postValue(NetworkStatus.FAILURE)
@@ -116,7 +139,7 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
                 statusLiveData.postValue(NetworkStatus.SUCCESS)
                 val sponsors = response.body()
                 if (sponsors != null) {
-                    database.sponsorsDAO().updateSponsors(sponsors)
+                    database.sponsorsDAO().updateSponsors(sponsors.combine())
                 }
             } else {
                 statusLiveData.postValue(NetworkStatus.FAILURE)
@@ -126,21 +149,21 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
         }
     }
 
-    suspend fun refreshMentors() = withContext(Dispatchers.IO) {
-        statusLiveData.postValue(NetworkStatus.LOADING)
-        try {
-            val response = service.listMentors().execute()
-            if (response.isSuccessful) {
-                statusLiveData.postValue(NetworkStatus.SUCCESS)
-                val mentors = response.body()
-                if (mentors != null) {
-                    database.sponsorsDAO().updateMentors(mentors)
-                }
-            } else {
-                statusLiveData.postValue(NetworkStatus.FAILURE)
-            }
-        } catch (e: IOException) {
-            statusLiveData.postValue(NetworkStatus.FAILURE)
-        }
-    }
+//    suspend fun refreshMentors() = withContext(Dispatchers.IO) {
+//        statusLiveData.postValue(NetworkStatus.LOADING)
+//        try {
+//            val response = service.listMentors().execute()
+//            if (response.isSuccessful) {
+//                statusLiveData.postValue(NetworkStatus.SUCCESS)
+//                val mentors = response.body()
+//                if (mentors != null) {
+//                    database.sponsorsDAO().updateMentors(mentors)
+//                }
+//            } else {
+//                statusLiveData.postValue(NetworkStatus.FAILURE)
+//            }
+//        } catch (e: IOException) {
+//            statusLiveData.postValue(NetworkStatus.FAILURE)
+//        }
+//    }
 }
