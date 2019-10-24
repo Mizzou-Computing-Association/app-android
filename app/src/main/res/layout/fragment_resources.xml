@@ -141,20 +141,6 @@
             app:titleIcon="@drawable/slack_icon"
             app:titleRes="@string/mca_slack"
             />
-
-        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
-            android:id="@+id/logOutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@id/mcaSlackCardView"
-            android:paddingTop="@dimen/margin_top"
-            android:paddingBottom="@dimen/margin_top"
-            android:paddingStart="@dimen/margin_start_large"
-            android:paddingEnd="@dimen/margin_start_large"
-
-            app:titleRes="@string/log_out"
-            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 

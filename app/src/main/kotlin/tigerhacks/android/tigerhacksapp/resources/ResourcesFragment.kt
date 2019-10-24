@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.firebase.auth.FirebaseAuth
-import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.SplashActivity
 
 //Helper data class to link View Id's to the Url that should open that that view Id is clicked
 private data class IdLink(val id: Int, val link: String)
@@ -37,12 +34,6 @@ class ResourcesFragment : androidx.fragment.app.Fragment() {
                 //When clicked pull Id's link and start a browse intent with that link
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(idLink.link)))
             }
-        }
-
-        view.findViewById<ResourceItemView>(R.id.logOutButton).setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(context, SplashActivity::class.java))
-            activity?.finish()
         }
         return view
     }
