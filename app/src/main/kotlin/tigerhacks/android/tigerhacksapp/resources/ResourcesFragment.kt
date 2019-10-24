@@ -24,8 +24,8 @@ class ResourcesFragment : androidx.fragment.app.Fragment() {
         val view = inflater.inflate(R.layout.fragment_resources, container, false)
         arrayOf(
             IdLink(R.id.tigerHacksWebsiteCardView, "http://tiger-hacks.com/"),
-            IdLink(R.id.mcaSlackCardView,"https://mizzoumca.slack.com/"),
-            IdLink(R.id.introFlaskCardView,"https://www.youtube.com/watch?v=V0QmmrTTbY4"),
+            IdLink(R.id.mcaSlackCardView,"https://join.slack.com/t/tigerhacks2019/shared_invite/enQtNzg3ODQxMjQyNDg2LWExZTIyNWQ1ZThlMGRhMzAwNjQ4MGEwZDhhMmQxNTUwMTcyOGZiNjAxNzFkN2IzZjQxMDhhZGI5ZmFlMzkxMWQ"),
+                IdLink(R.id.introFlaskCardView,"https://www.youtube.com/watch?v=V0QmmrTTbY4"),
             IdLink(R.id.introiOSCardView,"https://www.youtube.com/watch?v=kobP_rJAuyI"),
             IdLink(R.id.introWebDevCardView,"https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s")
         ).forEach { idLink ->
