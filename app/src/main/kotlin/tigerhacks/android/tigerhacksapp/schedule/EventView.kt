@@ -5,12 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.android.synthetic.main.view_event.view.*
 import kotlinx.android.synthetic.main.view_event.view.descriptionTextView
-import kotlinx.android.synthetic.main.view_event.view.locationIconImageView
-import kotlinx.android.synthetic.main.view_event.view.locationTextView
-import kotlinx.android.synthetic.main.view_event.view.timeLineSide
-import kotlinx.android.synthetic.main.view_event.view.timeLineSide2
-import kotlinx.android.synthetic.main.view_event.view.timeTextView
 import kotlinx.android.synthetic.main.view_event.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
 
@@ -34,8 +30,18 @@ class EventView @JvmOverloads constructor (context: Context, attrs: AttributeSet
             locationTextView.visibility = View.GONE
             locationIconImageView.visibility = View.GONE
         }
+        if ( event.description.isEmpty()) {
+            descriptionTextView.visibility = View.GONE
+            infoImageView.visibility = View.GONE
+        }
+        else{
+            descriptionTextView.visibility = View.VISIBLE
+            infoImageView.visibility = View.VISIBLE
+        }
         
         timeLineSide.visibility = if (isLastItem) View.INVISIBLE else View.VISIBLE
         timeLineSide2.visibility = if (isFirstItem) View.GONE else View.VISIBLE
+        divider.visibility = if(isLastItem) View.INVISIBLE else View.VISIBLE
+
     }
 }

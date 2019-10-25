@@ -128,12 +128,10 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toTopOf="@id/infoImageView"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/infoImageView"
         app:layout_constraintEnd_toEndOf="@id/titleTextView"
 
         android:layout_marginStart="@dimen/margin_start"
-        android:layout_marginBottom="@dimen/margin_start_large"
 
         tools:text="This is some description text for an event happening at TigerHacks"
         android:textAppearance="@style/AppTheme.TextPrimary"
@@ -145,9 +143,13 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/divider_size"
 
-        app:layout_constraintStart_toStartOf="@id/descriptionTextView"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintStart_toStartOf="@id/titleTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
+        android:layout_marginStart="@dimen/margin_start"
+
 
         android:background="@color/divider"
         />
