@@ -1,8 +1,12 @@
 package tigerhacks.android.tigerhacksapp.sponsors.views
 
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.net.Uri
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import kotlinx.android.synthetic.main.view_mentor.view.contactTextView
@@ -41,23 +45,20 @@ class MentorListView @JvmOverloads constructor(context: Context, attrs: Attribut
 
 class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
+        val typedValue = TypedValue()
+        getContext().theme.resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
         LayoutInflater.from(context).inflate(R.layout.view_mentor, this, true)
+        contactTextView.setBackgroundResource(typedValue.resourceId)
     }
 
     fun setup(mentor: Mentor): MentorView {
         nameTextView.text = mentor.name
 
         if (mentor.contact.isNotEmpty()) {
-            contactTextView.text = mentor.contact
             contactTextView.setOnClickListener {
-//                val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//                val clip = ClipData.newPlainText("something", mentor.contact)
-//                clipboard.primaryClip = clip
-//                Snackbar.make(
-//                    rootView,
-//                    "Contact copied to clipboard",
-//                    Snackbar.LENGTH_SHORT
-//                ).show()
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("slack://channel?id=${mentor.contact}&team=TN5APUBT9"))
+                intent.flags = FLAG_ACTIVITY_NEW_TASK
+                context.startActivity(intent)
             }
         }
 

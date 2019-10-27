@@ -5,6 +5,7 @@ import android.content.Intent
 import android.database.Observable
 import android.net.Uri
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -51,6 +52,9 @@ class SponsorDetailActivity : AppCompatActivity() {
 
         if (sponsor.website.isNotEmpty()) {
             linkText.text = sponsor.website
+            val typedValue = TypedValue()
+            theme.resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
+            linkText.setBackgroundResource(typedValue.resourceId)
         } else {
             informationTitleDivider.visibility = View.GONE
             internetImageView.visibility = View.GONE

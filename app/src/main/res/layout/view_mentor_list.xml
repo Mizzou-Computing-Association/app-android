@@ -38,10 +38,7 @@
 
         app:layout_constraintTop_toBottomOf="@id/mentorsTitle"
 
-        android:paddingTop="@dimen/margin_top_large"
-        android:paddingBottom="@dimen/margin_top_large"
-        android:paddingStart="@dimen/margin_start_large"
-        android:paddingEnd="@dimen/margin_start_large"
+        android:layout_marginTop="5dp"
 
         android:orientation="vertical"
         />
