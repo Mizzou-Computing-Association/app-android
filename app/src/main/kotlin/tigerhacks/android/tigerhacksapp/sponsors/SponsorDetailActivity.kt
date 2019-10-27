@@ -2,10 +2,12 @@ package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.content.Context
 import android.content.Intent
+import android.database.Observable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionText
 import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitle
@@ -21,6 +23,7 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.darkenColor
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
+import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
 import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 
 private const val SPONSOR_KEY = "sponsor_key"
@@ -32,7 +35,9 @@ class SponsorDetailActivity : AppCompatActivity() {
         fun newInstance(context: Context, sponsor: Sponsor): Intent = Intent(context, SponsorDetailActivity::class.java).putExtra(SPONSOR_KEY, sponsor)
     }
 
+    private lateinit var db: TigerHacksDatabase
     private lateinit var sponsor: Sponsor
+    private var observer: Observer<List<Mentor>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +64,8 @@ class SponsorDetailActivity : AppCompatActivity() {
             startActivity(browserIntent)
         }
 
-        val db = TigerHacksDatabase.getDatabase(applicationContext)
-        db.sponsorsDAO().getMentorsForSponsor(sponsor.name).observeNotNull(this) {
+        db = TigerHacksDatabase.getDatabase(applicationContext)
+        observer = db.sponsorsDAO().getMentorsForSponsor(sponsor.name).observeNotNull(this) {
             mentorLayout.mentors = it
         }
 
@@ -71,6 +76,11 @@ class SponsorDetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         window.statusBarColor = getColorRes(sponsorColor).darkenColor()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (observer != null) db.sponsorsDAO().getMentorsForSponsor(sponsor.name).removeObservers(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -77,7 +77,6 @@ class SponsorsFragment : Fragment() {
             recyclerView.requestModelBuild()
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel?.refreshSponsors()
-                //viewModel?.refreshMentors()
             }
         }
 

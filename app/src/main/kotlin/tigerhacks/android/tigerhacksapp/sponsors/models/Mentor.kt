@@ -16,5 +16,5 @@ data class Mentor(
     val sponsor: String = "",
     @PrimaryKey val name: String = "",
     val skills: String = "",
-    var contact: String = ""
+    val contact: String = ""
 ) : Parcelable

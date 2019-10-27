@@ -3,8 +3,10 @@ package tigerhacks.android.tigerhacksapp.sponsors.models
 import android.os.Parcelable
 import androidx.annotation.ColorRes
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import tigerhacks.android.tigerhacksapp.R
 
@@ -39,6 +41,11 @@ data class Sponsor(
     val image: String = "",
     val level: Int = 0
 ) : Parcelable {
+
+    @IgnoredOnParcel
+    @Ignore
+    var mentors: List<Mentor> = emptyList()
+
     @ColorRes
     fun getSponsorLevelColorRes(): Int {
         return when (level) {

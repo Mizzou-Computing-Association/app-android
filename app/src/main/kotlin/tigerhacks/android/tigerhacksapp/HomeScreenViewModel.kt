@@ -18,6 +18,7 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
 import java.io.IOException
 import com.squareup.moshi.Types
+import tigerhacks.android.tigerhacksapp.sponsors.models.SponsorJsonAdapter
 
 
 /**
@@ -148,22 +149,4 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
             statusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
-
-//    suspend fun refreshMentors() = withContext(Dispatchers.IO) {
-//        statusLiveData.postValue(NetworkStatus.LOADING)
-//        try {
-//            val response = service.listMentors().execute()
-//            if (response.isSuccessful) {
-//                statusLiveData.postValue(NetworkStatus.SUCCESS)
-//                val mentors = response.body()
-//                if (mentors != null) {
-//                    database.sponsorsDAO().updateMentors(mentors)
-//                }
-//            } else {
-//                statusLiveData.postValue(NetworkStatus.FAILURE)
-//            }
-//        } catch (e: IOException) {
-//            statusLiveData.postValue(NetworkStatus.FAILURE)
-//        }
-//    }
 }

@@ -30,6 +30,13 @@ interface SponsorsDAO {
     open suspend fun updateSponsors(sponsors: List<Sponsor>) {
         deleteAllSponsors()
         insertAllSponsors(sponsors)
+        val mentors = arrayListOf<Mentor>()
+        for (sponsor in sponsors) {
+            for (mentor in sponsor.mentors) {
+                mentors.add(mentor.copy(sponsor = sponsor.name))
+            }
+        }
+        updateMentors(mentors)
     }
 
     @Insert
