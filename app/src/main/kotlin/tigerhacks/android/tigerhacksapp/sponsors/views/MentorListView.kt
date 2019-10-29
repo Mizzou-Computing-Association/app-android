@@ -56,7 +56,8 @@ class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         if (mentor.contact.isNotEmpty()) {
             contactTextView.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("slack://channel?id=${mentor.contact}&team=TN5APUBT9"))
+                val uriString = "slack://user?team=TN5APUBT9&id=${mentor.contact}"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
                 intent.flags = FLAG_ACTIVITY_NEW_TASK
                 context.startActivity(intent)
             }
