@@ -3,7 +3,7 @@
     <string name="title_map">Map</string>
     <string name="title_prizes">Prizes</string>
     <string name="title_schedule">Schedule</string>
-    <string name="title_resources">Resources</string>
+    <string name="title_resources">Help</string>
     <string name="title_sponsors">Sponsors</string>
     <string name="test">Test String</string>
     <string name="sponsors">Sponsors</string>
@@ -21,7 +21,7 @@
     <string name="na">N/A</string>
     <string name="none_available">None Available</string>
     <string name="tiger_hacks_website">TigerHacks Website</string>
-    <string name="mca_slack">MCA Slack</string>
+    <string name="mca_slack">Tigerhacks 2019 Slack</string>
     <string name="intro_to_flask">Intro to Flask</string>
     <string name="intro_to_web">Intro to Web Dev</string>
     <string name="intro_to_ios">Intro to iOS Dev</string>
