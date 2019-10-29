@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".tigerpass.TigerPassFragment">
+    android:layout_height="match_parent">
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="0dp"
@@ -18,7 +18,7 @@
         android:layout_marginStart="@dimen/margin_start_large"
         android:layout_marginEnd="@dimen/margin_start_large"
 
-        android:hint="Username"
+        android:hint="@string/username"
         />
 
     <EditText
@@ -30,7 +30,8 @@
         app:layout_constraintStart_toStartOf="@id/usernameEditText"
         app:layout_constraintEnd_toEndOf="@id/usernameEditText"
 
-        android:hint="Password"
+        android:inputType="textPassword"
+        android:hint="@string/password"
         />
 
     <Button
@@ -42,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/registerButton"
 
-        android:text="Log In"
+        android:text="@string/log_in"
         />
 
     <Button
@@ -54,18 +55,20 @@
         app:layout_constraintStart_toEndOf="@id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:text="Register"
+        android:text="@string/register"
         />
 
     <!-- Google Button -->
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+        android:id="@+id/loginGoogleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@id/loginButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
+        app:buttonSize="wide"
 
         android:visibility="visible"
         tools:visibility="visible"

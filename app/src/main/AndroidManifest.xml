@@ -11,11 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".tigerpass.TigerPassFragment"></activity>
         <activity
-            android:name=".SignInActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme" />
+            android:name=".tigerpass.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tigerpass.TigerPassActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
