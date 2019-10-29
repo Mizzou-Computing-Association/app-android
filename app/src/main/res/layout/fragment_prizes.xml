@@ -21,16 +21,17 @@
             android:text="@string/developer" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabStartup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/startup" />
-
-        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabBeginner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/beginner" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabStartup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Misc" />
+        
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

@@ -63,8 +63,8 @@ class PrizesFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 -> syncCategoryState(PrizeCategory.DEVELOPER)
-                    1 -> syncCategoryState(PrizeCategory.STARTUP)
-                    else -> syncCategoryState(PrizeCategory.BEGINNER)
+                    1 -> syncCategoryState(PrizeCategory.BEGINNER)
+                    else -> syncCategoryState(PrizeCategory.STARTUP)
                 }
             }
 

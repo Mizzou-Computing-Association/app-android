@@ -19,7 +19,7 @@ interface PrizesDAO {
     @Query("SELECT * FROM prize WHERE prizeType='Beginner'")
     fun getAllBeginnerPrizes(): LiveData<List<Prize>>
 
-    @Query("SELECT * FROM prize WHERE prizeType='StartUp'")
+    @Query("SELECT * FROM prize WHERE prizeType='StartUp' OR prizeType='Sponsored' OR prizeType='Visuals' OR prizeType ='Audio' OR prizeType='Hardware'")
     fun getAllStartUpPrizes(): LiveData<List<Prize>>
 
     @Insert
