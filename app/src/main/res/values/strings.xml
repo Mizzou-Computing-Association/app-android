@@ -38,8 +38,11 @@
     <string name="beginner">Beginner</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="log_in">Log in</string>
+    <string name="log_in">Sign in with Email</string>
     <string name="log_out">Log out</string>
     <string name="register">Register</string>
     <string name="message">Message</string>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="github_sign_in">Sign in with Github</string>
+    
 </resources>

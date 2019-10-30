@@ -1,5 +1,6 @@
 package tigerhacks.android.tigerhacksapp.sponsors.views
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
@@ -9,6 +10,8 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_tiger_login.loginContainer
 import kotlinx.android.synthetic.main.view_mentor.view.contactTextView
 import kotlinx.android.synthetic.main.view_mentor.view.nameTextView
 import kotlinx.android.synthetic.main.view_mentor.view.skillsTextView
@@ -59,7 +62,17 @@ class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 val uriString = "slack://user?team=TN5APUBT9&id=${mentor.contact}"
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uriString))
                 intent.flags = FLAG_ACTIVITY_NEW_TASK
-                context.startActivity(intent)
+                try {
+                    context.startActivity(intent)
+                } catch (e: ActivityNotFoundException) { //Couldn't Find slack try and open play store to download Slack
+                    val playUriString = "https://play.google.com/store/apps/details?id=com.Slack"
+                    val playIntent = Intent(Intent.ACTION_VIEW, Uri.parse(playUriString))
+                    try { //Couldn't Find Slack or Google Play
+                        context.startActivity(playIntent)
+                    } catch (e: ActivityNotFoundException) {
+                        Snackbar.make(this, "Couldn't find slack app or google play store!", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 

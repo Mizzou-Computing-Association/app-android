@@ -15,7 +15,9 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".tigerpass.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity
             android:name=".tigerpass.TigerPassActivity"
             android:screenOrientation="portrait" />

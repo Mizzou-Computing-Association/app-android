@@ -20,8 +20,8 @@ import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
 private enum class PrizeCategory {
     DEVELOPER,
-    STARTUP,
-    BEGINNER
+    BEGINNER,
+    MISC
 }
 
 class PrizesFragment : Fragment() {
@@ -40,7 +40,7 @@ class PrizesFragment : Fragment() {
     ): View? {
         val layoutView = inflater.inflate(R.layout.fragment_prizes, container, false)
         val recyclerView = layoutView.findViewById<RecyclerView>(R.id.recyclerView)
-        swipeRefreshLayout = layoutView.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+        swipeRefreshLayout = layoutView.findViewById(R.id.swipeRefreshLayout)
 
         adapter = object : ListAdapter<Prize, RecyclerView.ViewHolder>(Prize.diff) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(PrizeView(parent.context)) {}
@@ -64,7 +64,7 @@ class PrizesFragment : Fragment() {
                 when (tab.position) {
                     0 -> syncCategoryState(PrizeCategory.DEVELOPER)
                     1 -> syncCategoryState(PrizeCategory.BEGINNER)
-                    else -> syncCategoryState(PrizeCategory.STARTUP)
+                    else -> syncCategoryState(PrizeCategory.MISC)
                 }
             }
 
@@ -98,8 +98,8 @@ class PrizesFragment : Fragment() {
 
         val liveData = when (currentCategory) {
             PrizeCategory.DEVELOPER -> viewModel.developerPrizeListLiveData
-            PrizeCategory.STARTUP -> viewModel.startupPrizeListLiveData
             PrizeCategory.BEGINNER -> viewModel.beginnerPrizeListLiveData
+            PrizeCategory.MISC -> viewModel.miscPrizeListLiveData
         }
 
         liveData.observeNotNull(this) {
@@ -110,7 +110,7 @@ class PrizesFragment : Fragment() {
 
     private fun resetObservers() {
         viewModel.developerPrizeListLiveData.removeObservers(this)
-        viewModel.startupPrizeListLiveData.removeObservers(this)
+        viewModel.miscPrizeListLiveData.removeObservers(this)
         viewModel.beginnerPrizeListLiveData.removeObservers(this)
     }
 }

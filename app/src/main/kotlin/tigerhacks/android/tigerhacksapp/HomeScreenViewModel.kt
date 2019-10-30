@@ -1,6 +1,5 @@
 package tigerhacks.android.tigerhacksapp
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +17,6 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
 import java.io.IOException
 import com.squareup.moshi.Types
-import tigerhacks.android.tigerhacksapp.sponsors.models.SponsorJsonAdapter
 
 
 /**
@@ -61,7 +59,7 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
 
     val developerPrizeListLiveData = database.prizeDAO().getAllDevPrizes()
     val beginnerPrizeListLiveData = database.prizeDAO().getAllBeginnerPrizes()
-    val startupPrizeListLiveData = database.prizeDAO().getAllStartUpPrizes()
+    val miscPrizeListLiveData = database.prizeDAO().getAllMiscPrizes()
 
     val fridayEventListLiveData = database.scheduleDAO().getFridayEvents()
     val saturdayEventListLiveData = database.scheduleDAO().getSaturdayEvents()
@@ -73,7 +71,7 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
         refresh()
     }
 
-    fun refresh() {
+    private fun refresh() {
         uiScope.launch {
             refreshPrizes()
             refreshEvents()
@@ -120,9 +118,7 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
                             val result = adapter.fromJson(json)
                             if (result != null) database.scheduleDAO().updateEvents(result)
                         }
-                    } catch(io: Exception) {
-                        //TODO nothing
-                    }
+                    } catch(io: Exception) {}
                 }
             } else {
                 statusLiveData.postValue(NetworkStatus.FAILURE)

@@ -14,9 +14,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
-import kotlinx.android.synthetic.main.activity_home_screen.contentFrameLayout
+import kotlinx.android.synthetic.main.activity_tiger_login.loginButton
 import kotlinx.android.synthetic.main.activity_tiger_login.loginContainer
+import kotlinx.android.synthetic.main.activity_tiger_login.loginGithubButton
 import kotlinx.android.synthetic.main.activity_tiger_login.loginGoogleButton
+import kotlinx.android.synthetic.main.activity_tiger_login.passwordEditText
+import kotlinx.android.synthetic.main.activity_tiger_login.usernameEditText
 import tigerhacks.android.tigerhacksapp.R
 
 class LoginActivity : AppCompatActivity() {
@@ -29,10 +32,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val provider = OAuthProvider.newBuilder("github.com")
-        .addCustomParameters(mapOf(
-            "login" to "your-email@gmail.com",
-            "redirect_uri" to "tigerhacks://"
-        ))
+        .addCustomParameter("login", "your-email@gmail.com")
         .setScopes(listOf("user:email"))
         .build()
 
@@ -53,7 +53,19 @@ class LoginActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
+        loginButton.setOnClickListener {
+            if (usernameEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
+                login(usernameEditText.text.toString(), passwordEditText.text.toString())
+            } else {
+                loginFailure("Invalid Username or Password")
+            }
+        }
+
         loginGoogleButton.setOnClickListener {
+            loginWithGoogle()
+        }
+
+        loginGithubButton.setOnClickListener {
             loginWithGithub()
         }
     }
@@ -86,7 +98,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun loginWithGithub() {
+    private fun login(email: String, pass: String) {
+        auth.signInWithEmailAndPassword(email, pass)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    swapToPass()
+                } else {
+                    val message = it.exception?.message
+                    if (message == null) loginFailure() else loginFailure(message)
+                }
+            }
+    }
+
+    private fun loginWithGithub() {
         auth.startActivityForSignInWithProvider(this, provider)
             .addOnSuccessListener { swapToPass() }
             .addOnFailureListener {
@@ -94,7 +118,7 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    fun loginWithGoogle() {
+    private fun loginWithGoogle() {
         val logInIntent = googleSignInClient.signInIntent
         startActivityForResult(logInIntent, RC_SIGN_IN)
     }
@@ -116,8 +140,8 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun loginFailure() {
+    private fun loginFailure(message: String = "Authentication Failed.") {
         if (!isActive) return
-        Snackbar.make(loginContainer, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(loginContainer, message, Snackbar.LENGTH_SHORT).show()
     }
 }

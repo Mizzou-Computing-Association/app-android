@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jsibbold.zoomage.ZoomageView
-import tigerhacks.android.tigerhacksapp.HomeScreenActivity
+import com.davemorrissey.labs.subscaleview.ImageSource
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import tigerhacks.android.tigerhacksapp.R
 
 class MapFragment : Fragment() {
@@ -15,37 +15,43 @@ class MapFragment : Fragment() {
         fun newInstance() = MapFragment()
     }
 
-    private var home: HomeScreenActivity? = null
+    private var mapView: SubsamplingScaleImageView? = null
+    private var selection = 0
+        set(value) {
+            if (value == field || value < 0 || 3 < value) return
+            field = value
+            updateSelection()
+        }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val layoutView = inflater.inflate(R.layout.fragment_map, container, false)
 
         val tabLayout = layoutView.findViewById<TabLayout>(R.id.tabLayout)
-        val mapView = layoutView.findViewById<ZoomageView>(R.id.mapView)
+        mapView = layoutView.findViewById(R.id.mapView)
 
         //add button onclick events. Handles button visuals and map changing
+        tabLayout.getTabAt(selection)?.select()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                val drawableRes = when (tab.position) {
-                    0 -> R.drawable.floor1map
-                    1 -> R.drawable.floor2map
-                    2 -> R.drawable.floor3map
-                    else -> null
-                }
-                drawableRes?.let {
-                    mapView.setImageDrawable(context!!.getDrawable(it))
-                }
+                selection = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
-        home = activity as HomeScreenActivity?
+        updateSelection()
 
-        //initial setup of event list
-        //return fragment layout to main activity
         return layoutView
+    }
+
+    private fun updateSelection() {
+        val drawableRes = when (selection) {
+            0 -> R.drawable.floor1map
+            1 -> R.drawable.floor2map
+            else -> R.drawable.floor3map
+        }
+        mapView?.setImage(ImageSource.resource(drawableRes))
     }
 }
