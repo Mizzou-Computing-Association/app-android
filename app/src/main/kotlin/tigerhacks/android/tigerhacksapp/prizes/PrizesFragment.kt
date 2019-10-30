@@ -43,11 +43,27 @@ class PrizesFragment : Fragment() {
         swipeRefreshLayout = layoutView.findViewById(R.id.swipeRefreshLayout)
 
         adapter = object : ListAdapter<Prize, RecyclerView.ViewHolder>(Prize.diff) {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(PrizeView(parent.context)) {}
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+                val itemView = if (viewType == 0) {
+                    PrizeHeaderView(parent.context)
+                } else {
+                    PrizeView(parent.context)
+                }
+                return object : RecyclerView.ViewHolder(itemView) {}
+            }
 
             override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-                val prizeView = (holder.itemView as? PrizeView) ?: return
-                prizeView.setup(getItem(position))
+                val itemView = holder.itemView
+                if (itemView is PrizeView) {
+                    itemView.setup(getItem(position))
+                } else {
+                    (itemView as? PrizeHeaderView)?.setCategoryLevel(getItem(position).prizeType)
+                }
+            }
+
+            override fun getItemViewType(position: Int): Int {
+                val item = getItem(position) ?: return 1
+                return if (item.id.contains(Prize.HEADER_KEY)) 0 else 1
             }
         }
 
