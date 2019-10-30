@@ -3,7 +3,7 @@
     <string name="title_map">Map</string>
     <string name="title_prizes">Prizes</string>
     <string name="title_schedule">Schedule</string>
-    <string name="title_resources">Help</string>
+    <string name="title_help">Help</string>
     <string name="title_sponsors">Sponsors</string>
     <string name="test">Test String</string>
     <string name="sponsors">Sponsors</string>
@@ -52,5 +52,6 @@
     <string name="dark_theme">Dark Theme</string>
     <string name="follow_battery_saver">Follow Battery Saver</string>
     <string name="follow_system">Follow System</string>
+    <string name="theme_settings">Theme Settings</string>
     <string name="firebase_web_host" translatable="false">177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com</string>
 </resources>

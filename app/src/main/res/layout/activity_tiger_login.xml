@@ -6,13 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:fitsSystemWindows="true"
+        android:elevation="3dp"
+        android:background="@color/colorNavBarBackground"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            app:layout_collapseMode="pin"
+            android:fitsSystemWindows="false"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
         android:layout_marginStart="@dimen/margin_start_large"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginTop="@dimen/margin_top_large"
         android:layout_marginEnd="@dimen/margin_start_large"
 
         android:hint="@string/username"
@@ -20,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -74,6 +96,7 @@
 
         android:background="@drawable/google_log_in_button"
         android:drawableStart="@drawable/google_logo"
+        android:drawablePadding="12dp"
         android:elevation="3dp"
 
         android:text="@string/google_sign_in"
@@ -98,6 +121,7 @@
 
         android:background="@drawable/github_log_in_button"
         android:drawableStart="@drawable/github_logo"
+        android:drawablePadding="6dp"
         android:elevation="3dp"
 
         android:text="@string/github_sign_in"

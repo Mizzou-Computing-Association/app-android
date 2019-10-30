@@ -21,9 +21,9 @@
         android:title="@string/title_sponsors" />
 
     <item
-        android:id="@+id/navigation_resources"
+        android:id="@+id/navigation_help"
         android:icon="@drawable/question_icon"
-        android:title="@string/title_resources" />
+        android:title="@string/title_help" />
 
 
 

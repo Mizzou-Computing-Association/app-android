@@ -18,8 +18,12 @@ import kotlinx.android.synthetic.main.activity_tiger_login.loginContainer
 import kotlinx.android.synthetic.main.activity_tiger_login.loginGithubButton
 import kotlinx.android.synthetic.main.activity_tiger_login.loginGoogleButton
 import kotlinx.android.synthetic.main.activity_tiger_login.passwordEditText
+import kotlinx.android.synthetic.main.activity_tiger_login.toolbar
 import kotlinx.android.synthetic.main.activity_tiger_login.usernameEditText
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
+
+
 
 class LoginActivity : AppCompatActivity() {
     companion object {
@@ -39,6 +43,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tiger_login)
 
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Sign in"
+
         auth = FirebaseAuth.getInstance()
 
         if (auth.currentUser != null) {
@@ -51,6 +59,11 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        val twentyFourDp = dpToPx(30)
+        val img = resources.getDrawable(R.mipmap.ic_launcher_round, theme)
+        img.setBounds(0, 0, twentyFourDp, twentyFourDp)
+        loginButton.setCompoundDrawables(img, null, null, null)
 
         loginButton.setOnClickListener {
             if (usernameEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
@@ -142,5 +155,10 @@ class LoginActivity : AppCompatActivity() {
     private fun loginFailure(message: String = "Authentication Failed.") {
         if (!isActive) return
         Snackbar.make(loginContainer, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

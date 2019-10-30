@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home_screen.fab
 import kotlinx.android.synthetic.main.activity_home_screen.navigation
 import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment
-import tigerhacks.android.tigerhacksapp.resources.ResourcesFragment
+import tigerhacks.android.tigerhacksapp.help.HelpFragment
 import tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment
 import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
@@ -20,7 +20,7 @@ class HomeScreenActivity : AppCompatActivity() {
     private lateinit var prizesFragment: PrizesFragment
     private lateinit var scheduleFragment: ScheduleFragment
     private lateinit var sponsorsFragment: SponsorsFragment
-    private lateinit var resourcesFragment: ResourcesFragment
+    private lateinit var helpFragment: HelpFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -35,7 +35,7 @@ class HomeScreenActivity : AppCompatActivity() {
         prizesFragment = PrizesFragment.newInstance()
         scheduleFragment = ScheduleFragment.newInstance()
         sponsorsFragment = SponsorsFragment.newInstance()
-        resourcesFragment = ResourcesFragment.newInstance()
+        helpFragment = HelpFragment.newInstance()
 
         val fragmentCount = supportFragmentManager.fragments.size
         if (fragmentCount == 0) {
@@ -51,7 +51,7 @@ class HomeScreenActivity : AppCompatActivity() {
                 R.id.navigation_prizes -> prizesFragment
                 R.id.navigation_schedule -> scheduleFragment
                 R.id.navigation_sponsors -> sponsorsFragment
-                else -> resourcesFragment
+                else -> helpFragment
             }
             supportFragmentManager
                 .beginTransaction()

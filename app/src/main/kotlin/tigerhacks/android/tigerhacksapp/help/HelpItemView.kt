@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.resources
+package tigerhacks.android.tigerhacksapp.help
 
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -14,17 +14,17 @@ import tigerhacks.android.tigerhacksapp.R
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 
-class ResourceItemView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
+class HelpItemView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
         LayoutInflater.from(context).inflate(R.layout.view_resource_item, this)
         val typedValue = TypedValue()
         getContext().theme.resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
         setBackgroundResource(typedValue.resourceId)
 
-        val attr = context.obtainStyledAttributes(attrs, R.styleable.ResourceItemView, defStyleAttr, 0)
-        val iconRes = attr.getResourceId(R.styleable.ResourceItemView_titleIcon, -1)
-        val titleRes = attr.getResourceId(R.styleable.ResourceItemView_titleRes, -1)
-        val autoTint = attr.getBoolean(R.styleable.ResourceItemView_autoTint, true)
+        val attr = context.obtainStyledAttributes(attrs, R.styleable.HelpItemView, defStyleAttr, 0)
+        val iconRes = attr.getResourceId(R.styleable.HelpItemView_titleIcon, -1)
+        val titleRes = attr.getResourceId(R.styleable.HelpItemView_titleRes, -1)
+        val autoTint = attr.getBoolean(R.styleable.HelpItemView_autoTint, true)
         attr.recycle()
 
         if (iconRes != -1) {
