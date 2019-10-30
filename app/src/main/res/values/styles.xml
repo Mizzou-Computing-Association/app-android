@@ -64,6 +64,23 @@
         <item name="tabTextAppearance">@style/SmallerTabText</item>
     </style>
 
+    <style name="AppTheme.Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:spinnerStyle">@style/spinnerItemStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
+    </style>
+
+    <style name="spinnerItemStyle" parent="@android:style/Widget.Material.Light.Spinner">
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textSize">500sp</item>
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="@android:style/Widget.Material.DropDownItem.Spinner">
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:textSize">500sp</item>
+    </style>
+
     <style name="AppTheme.IconAppearance">
         <item name="android:tint">@color/colorIconTint</item>
     </style>
