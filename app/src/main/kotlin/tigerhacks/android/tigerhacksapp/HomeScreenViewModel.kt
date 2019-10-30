@@ -17,6 +17,7 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
 import java.io.IOException
 import com.squareup.moshi.Types
+import tigerhacks.android.tigerhacksapp.schedule.EventTimeAdapter
 
 
 /**
@@ -40,7 +41,7 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
         val FACTORY = singleArgViewModelFactory(::HomeScreenViewModel)
     }
 
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val moshi = Moshi.Builder().add(EventTimeAdapter()).add(KotlinJsonAdapterFactory()).build()
 
     private val tigerHacksRetrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://tigerhacks.com/api/")
