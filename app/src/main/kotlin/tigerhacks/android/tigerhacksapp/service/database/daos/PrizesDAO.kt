@@ -29,7 +29,7 @@ interface PrizesDAO {
     fun deleteAll()
 
     @Transaction
-    open suspend fun updatePrizes(prizes: List<Prize>) {
+    suspend fun updatePrizes(prizes: List<Prize>) {
         deleteAll()
         insertAll(prizes)
     }

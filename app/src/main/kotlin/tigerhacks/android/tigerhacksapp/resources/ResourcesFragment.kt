@@ -14,7 +14,6 @@ import tigerhacks.android.tigerhacksapp.TigerApplication
 import android.widget.ArrayAdapter
 import tigerhacks.android.tigerhacksapp.ThemeMode
 
-
 //Helper data class to link View Id's to the Url that should open that that view Id is clicked
 private data class IdLink(val id: Int, val link: String)
 

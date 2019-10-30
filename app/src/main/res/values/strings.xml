@@ -7,6 +7,10 @@
     <string name="title_sponsors">Sponsors</string>
     <string name="test">Test String</string>
     <string name="sponsors">Sponsors</string>
+    <string name="platinum_sponsors">Platinum Sponsors</string>
+    <string name="gold_sponsors">Gold Sponsors</string>
+    <string name="silver_sponsors">Silver Sponsors</string>
+    <string name="bronze_sponsors">Bronze Sponsors</string>
     <string name="events">Events</string>
     <string name="floor_1">Floor 1</string>
     <string name="floor_2">Floor 2</string>

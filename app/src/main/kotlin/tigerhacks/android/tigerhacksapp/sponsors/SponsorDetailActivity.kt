@@ -2,7 +2,6 @@ package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.content.Context
 import android.content.Intent
-import android.database.Observable
 import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
@@ -32,7 +31,6 @@ private const val SPONSOR_KEY = "sponsor_key"
 class SponsorDetailActivity : AppCompatActivity() {
 
     companion object {
-        @JvmStatic
         fun newInstance(context: Context, sponsor: Sponsor): Intent = Intent(context, SponsorDetailActivity::class.java).putExtra(SPONSOR_KEY, sponsor)
     }
 
@@ -44,7 +42,7 @@ class SponsorDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sponsor_detail)
 
-        sponsor = intent.getParcelableExtra(SPONSOR_KEY)!!
+        sponsor = intent.getParcelableExtra(SPONSOR_KEY) ?: Sponsor()
 
         //Sponsor Info
         toolbar.title = sponsor.name

@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.airbnb.epoxy.EpoxyRecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,8 +18,7 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
-import tigerhacks.android.tigerhacksapp.sponsors.views.header
-import tigerhacks.android.tigerhacksapp.sponsors.views.sponsorCardView
+import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorHeader
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -29,7 +30,6 @@ class SponsorsFragment : Fragment() {
     }
 
     private var viewModel: HomeScreenViewModel? = null
-    private var sponsorList: List<Sponsor>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,42 +47,54 @@ class SponsorsFragment : Fragment() {
         val layout = SwipeRefreshLayout(context).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
-        val recyclerView = EpoxyRecyclerView(context).apply {
+        val recyclerView = RecyclerView(context).apply {
+            layoutManager = LinearLayoutManager(context)
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
 
         layout.addView(recyclerView)
 
-        recyclerView.withModels {
-            for (i in 0..3) {
-                header {
-                    id("level${i}Title")
-                    sponsorLevel(i)
+        val adapter = object : ListAdapter<Sponsor, RecyclerView.ViewHolder>(Sponsor.diff) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+                return if (viewType == 0) { //Header
+                    object : RecyclerView.ViewHolder(SponsorHeader(parent.context)) {}
+                } else {
+                    object : RecyclerView.ViewHolder(SponsorCardView(parent.context)) {}
                 }
-                sponsorList?.filter { it.level == i }?.forEach {
-                    sponsorCardView {
-                        id(it.name)
-                        sponsor(it)
-                        listener { epoxyModel ->
-                            val model = epoxyModel as? SponsorCardView ?: return@listener
-                            activity?.let { startActivity(SponsorDetailActivity.newInstance(it, model.sponsorData)) }
-                        }
+            }
+
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+                val itemView = holder.itemView
+                val item = getItem(position)
+                if (itemView is SponsorHeader) {
+                    itemView.setSponsorLevel(item.level)
+                } else {
+                    val card = (itemView as? SponsorCardView)
+                    card?.setSponsor(item)
+                    card?.setOnClickListener {
+                        startActivity(SponsorDetailActivity.newInstance(context, item))
                     }
+                }
+            }
+
+            override fun getItemViewType(position: Int): Int {
+                return when (getItem(position).name) {
+                    "${Sponsor.HEADER_KEY}0", "${Sponsor.HEADER_KEY}1", "${Sponsor.HEADER_KEY}2", "${Sponsor.HEADER_KEY}3" -> 0
+                    else -> 1
                 }
             }
         }
 
+        recyclerView.adapter = adapter
+
         layout.setOnRefreshListener {
-            sponsorList = null
-            recyclerView.requestModelBuild()
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel?.refreshSponsors()
             }
         }
 
         viewModel?.sponsorListLiveData?.observeNotNull(this) {
-            sponsorList = it
-            recyclerView.requestModelBuild()
+            adapter.submitList(it)
             layout.isRefreshing = false
         }
 

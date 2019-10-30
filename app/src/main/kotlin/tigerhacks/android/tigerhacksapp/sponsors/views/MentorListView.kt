@@ -11,7 +11,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_tiger_login.loginContainer
 import kotlinx.android.synthetic.main.view_mentor.view.contactTextView
 import kotlinx.android.synthetic.main.view_mentor.view.nameTextView
 import kotlinx.android.synthetic.main.view_mentor.view.skillsTextView

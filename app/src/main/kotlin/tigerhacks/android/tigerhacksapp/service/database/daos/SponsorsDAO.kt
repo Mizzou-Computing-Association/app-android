@@ -27,7 +27,7 @@ interface SponsorsDAO {
     fun deleteAllSponsors()
 
     @Transaction
-    open suspend fun updateSponsors(sponsors: List<Sponsor>) {
+    suspend fun updateSponsors(sponsors: List<Sponsor>) {
         deleteAllSponsors()
         insertAllSponsors(sponsors)
         val mentors = arrayListOf<Mentor>()
@@ -46,7 +46,7 @@ interface SponsorsDAO {
     fun deleteAllMentors()
 
     @Transaction
-    open suspend fun updateMentors(mentors: List<Mentor>) {
+    suspend fun updateMentors(mentors: List<Mentor>) {
         deleteAllMentors()
         insertAllMentors(mentors)
     }
