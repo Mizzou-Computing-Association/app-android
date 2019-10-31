@@ -16,7 +16,6 @@ import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
-import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorHeader
 
 class PrizesFragment : Fragment() {
     companion object {
@@ -29,7 +28,7 @@ class PrizesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val layoutView = inflater.inflate(R.layout.fragment_prizes, container, false)
+        val layoutView = inflater.inflate(R.layout.vertical_recycler_view, container, false)
         val recyclerView = layoutView.findViewById<RecyclerView>(R.id.recyclerView)
         val swipeRefreshLayout = layoutView.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
 

@@ -23,17 +23,21 @@ class ScheduleFragment : Fragment() {
         fun newInstance() = ScheduleFragment()
     }
 
+    enum class Day {
+        FRIDAY, SATURDAY, SUNDAY
+    }
+
     private lateinit var viewModel: HomeScreenViewModel
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var adapter: ListAdapter<Event, RecyclerView.ViewHolder>
-    private var currentDay = EasyTime.Day.FRIDAY
+    private var currentDay = Day.FRIDAY
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val layoutView = inflater.inflate(R.layout.fragment_schedule, container, false)
-        val recyclerView = layoutView.findViewById<RecyclerView>(R.id.eventRecyclerView)
+        val layoutView = inflater.inflate(R.layout.vertical_recycler_view, container, false)
+        val recyclerView = layoutView.findViewById<RecyclerView>(R.id.recyclerView)
         swipeRefreshLayout = layoutView.findViewById(R.id.swipeRefreshLayout)
 
         adapter = object : ListAdapter<Event, RecyclerView.ViewHolder>(Event.diff) {
@@ -52,13 +56,14 @@ class ScheduleFragment : Fragment() {
             ViewModelProviders.of(this, HomeScreenViewModel.FACTORY(db)).get(HomeScreenViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val tabLayout = layoutView.findViewById<TabLayout>(R.id.tabLayout)
+        val tabLayout = activity?.findViewById<TabLayout>(R.id.tabLayout) ?: throw Exception("")
+
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
-                    0 -> syncDayState(EasyTime.Day.FRIDAY)
-                    1 -> syncDayState(EasyTime.Day.SATURDAY)
-                    else -> syncDayState(EasyTime.Day.SUNDAY)
+                    0 -> syncDayState(Day.FRIDAY)
+                    1 -> syncDayState(Day.SATURDAY)
+                    else -> syncDayState(Day.SUNDAY)
                 }
             }
 
@@ -85,15 +90,15 @@ class ScheduleFragment : Fragment() {
         resetObservers()
     }
 
-    private fun syncDayState(day: EasyTime.Day, bypass: Boolean = false) {
+    private fun syncDayState(day: Day, bypass: Boolean = false) {
         if (currentDay == day && !bypass) return
         currentDay = day
         resetObservers()
 
         val liveData = when (currentDay) {
-            EasyTime.Day.FRIDAY -> viewModel.fridayEventListLiveData
-            EasyTime.Day.SATURDAY -> viewModel.saturdayEventListLiveData
-            EasyTime.Day.SUNDAY -> viewModel.sundayEventListLiveData
+            Day.FRIDAY -> viewModel.fridayEventListLiveData
+            Day.SATURDAY -> viewModel.saturdayEventListLiveData
+            Day.SUNDAY -> viewModel.sundayEventListLiveData
         }
 
         liveData.observeNotNull(this) {
