@@ -65,6 +65,9 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
     val sundayEventListLiveData = database.scheduleDAO().getSundayEvents()
     val eventStatusLiveData = MutableLiveData<NetworkStatus>()
 
+    val profileLiveData = database.profileDAO().getProfile()
+    val profileStatusLiveData = MutableLiveData<NetworkStatus>()
+
     private val uiScope = CoroutineScope(Dispatchers.Main)
 
     init {
@@ -143,6 +146,24 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
             }
         } catch (e: IOException) {
             sponsorStatusLiveData.postValue(NetworkStatus.FAILURE)
+        }
+    }
+
+    suspend fun refreshProfile(userId: String) = withContext(Dispatchers.IO) {
+        profileStatusLiveData.postValue(NetworkStatus.LOADING)
+        try {
+            val response = service.getProfile(userId).execute()
+            if (response.isSuccessful) {
+                profileStatusLiveData.postValue(NetworkStatus.SUCCESS)
+                val profile = response.body()
+                if (profile != null) {
+                    database.profileDAO().updateProfile(profile)
+                }
+            } else {
+                profileStatusLiveData.postValue(NetworkStatus.FAILURE)
+            }
+        } catch (e: IOException) {
+            profileStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 }
