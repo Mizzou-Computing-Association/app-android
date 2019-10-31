@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/navigation_schedule">
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment"
+        android:label="@string/title_schedule"
+        tools:layout="@layout/vertical_recycler_view"
+        />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="tigerhacks.android.tigerhacksapp.tigerpass.TigerPassFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/vertical_recycler_view"
+        />
+
+    <fragment
+        android:id="@+id/navigation_prizes"
+        android:name="tigerhacks.android.tigerhacksapp.prizes.PrizesFragment"
+        android:label="@string/title_prizes"
+        tools:layout="@layout/vertical_recycler_view"
+        />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="tigerhacks.android.tigerhacksapp.maps.MapFragment"
+        android:label="@string/title_map"
+        />
+
+    <fragment
+        android:id="@+id/navigation_sponsors"
+        android:name="tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment"
+        android:label="@string/title_sponsors"
+        />
+
+    <fragment
+        android:id="@+id/navigation_help"
+        android:name="tigerhacks.android.tigerhacksapp.help.HelpFragment"
+        android:label="@string/title_help"
+        />
+</navigation>
