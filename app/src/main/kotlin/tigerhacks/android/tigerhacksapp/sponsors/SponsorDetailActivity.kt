@@ -2,7 +2,6 @@ package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.content.Context
 import android.content.Intent
-import android.database.Observable
 import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
@@ -10,12 +9,15 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_sponsor_detail.appBarLayout
 import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionText
+import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionTitleTextView
 import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitle
 import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitleDivider
 import kotlinx.android.synthetic.main.activity_sponsor_detail.internetImageView
 import kotlinx.android.synthetic.main.activity_sponsor_detail.linkText
 import kotlinx.android.synthetic.main.activity_sponsor_detail.mainImage
+import kotlinx.android.synthetic.main.activity_sponsor_detail.mentorDivider
 import kotlinx.android.synthetic.main.activity_sponsor_detail.mentorLayout
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbar
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbarLayout
@@ -32,7 +34,6 @@ private const val SPONSOR_KEY = "sponsor_key"
 class SponsorDetailActivity : AppCompatActivity() {
 
     companion object {
-        @JvmStatic
         fun newInstance(context: Context, sponsor: Sponsor): Intent = Intent(context, SponsorDetailActivity::class.java).putExtra(SPONSOR_KEY, sponsor)
     }
 
@@ -44,11 +45,11 @@ class SponsorDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sponsor_detail)
 
-        sponsor = intent.getParcelableExtra(SPONSOR_KEY)!!
+        sponsor = intent.getParcelableExtra(SPONSOR_KEY) ?: Sponsor()
 
         //Sponsor Info
         toolbar.title = sponsor.name
-        Glide.with(mainImage).load(sponsor.image).into(mainImage)
+        if (sponsor.image.isNotEmpty()) Glide.with(mainImage).load(sponsor.image).into(mainImage)
 
         if (sponsor.website.isNotEmpty()) {
             linkText.text = sponsor.website
@@ -60,7 +61,9 @@ class SponsorDetailActivity : AppCompatActivity() {
             internetImageView.visibility = View.GONE
             informationTitle.visibility = View.GONE
             linkText.visibility = View.GONE
+            appBarLayout.setExpanded(false, false)
         }
+
         descriptionText.text = sponsor.description
 
         linkText.setOnClickListener {
@@ -69,7 +72,17 @@ class SponsorDetailActivity : AppCompatActivity() {
         }
 
         db = TigerHacksDatabase.getDatabase(applicationContext)
-        observer = db.sponsorsDAO().getMentorsForSponsor(sponsor.name).observeNotNull(this) {
+        val liveData = if (sponsor.description.isEmpty()) {
+            descriptionTitleTextView.visibility = View.GONE
+            descriptionText.visibility = View.GONE
+            mentorDivider.visibility = View.GONE
+
+            db.sponsorsDAO().getAllMentors()
+        } else {
+            db.sponsorsDAO().getMentorsForSponsor(sponsor.name)
+        }
+
+        observer = liveData.observeNotNull(this) {
             mentorLayout.mentors = it
         }
 

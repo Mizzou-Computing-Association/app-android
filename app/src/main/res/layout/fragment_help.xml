@@ -7,69 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/tigerHacksLogo"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-
-            app:layout_constraintTop_toTopOf="parent"
-
-            android:layout_marginTop="@dimen/margin_top"
-
-            android:src="@mipmap/tigerhacks_logo_horizontal"
-            />
-
-        <TextView
-            android:id="@+id/appThemeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@id/tigerHacksLogo"
-            app:layout_constraintStart_toStartOf="parent"
-
-            android:layout_marginStart="@dimen/margin_start_large"
-            android:layout_marginTop="@dimen/margin_top_large"
-
-            android:textAppearance="@style/AppTheme.TitlePrimary"
-            android:text="App Theme Settings"
-            />
-
-        <Spinner
-            android:id="@+id/appThemeSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintStart_toStartOf="@id/appThemeTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appThemeTextView"
-
-            android:layout_marginTop="@dimen/margin_top"
-            android:layout_marginEnd="@dimen/margin_start_large"
-
-            android:padding="0dp"
-
-            android:spinnerMode="dropdown"
-            android:spinnerItemStyle="@style/spinnerItemStyle"
-            android:spinnerDropDownItemStyle="@style/spinnerDropDownItemStyle"
-            />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_size"
-
-            app:layout_constraintTop_toBottomOf="@id/appThemeSpinner"
-            android:layout_marginTop="@dimen/margin_top_large"
-            android:background="@color/divider"
-            />
-
         <TextView
             android:id="@+id/tigerTalksTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintTop_toTopOf="parent"
 
             android:layout_marginTop="@dimen/margin_top_large"
             android:layout_marginStart="@dimen/margin_start_large"
@@ -78,7 +22,7 @@
             android:textAppearance="@style/AppTheme.TitlePrimary"
             />
 
-        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
             android:id="@+id/introiOSCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,7 +40,7 @@
             app:titleIcon="@drawable/play_icon"
             />
 
-        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
             android:id="@+id/introWebDevCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +55,7 @@
             app:titleIcon="@drawable/play_icon"
             />
 
-        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
             android:id="@+id/introFlaskCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -151,7 +95,7 @@
             android:textAppearance="@style/AppTheme.TitleSecondary"
             />
 
-        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
             android:id="@+id/tigerHacksWebsiteCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,7 +114,7 @@
             app:titleRes="@string/tiger_hacks_website"
             />
 
-        <tigerhacks.android.tigerhacksapp.resources.ResourceItemView
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
             android:id="@+id/mcaSlackCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

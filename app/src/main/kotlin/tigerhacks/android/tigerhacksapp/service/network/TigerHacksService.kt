@@ -3,9 +3,10 @@ package tigerhacks.android.tigerhacksapp.service.network
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 import tigerhacks.android.tigerhacksapp.prizes.PrizeList
-import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
 import tigerhacks.android.tigerhacksapp.sponsors.models.SponsorList
+import tigerhacks.android.tigerhacksapp.tigerpass.Profile
 
 /**
  * Created by Conno on 9/22/2018.
@@ -20,4 +21,7 @@ interface TigerHacksService {
 
     @GET("sponsors")
     fun listSponsors(): Call<SponsorList>
+
+    @GET("profile")
+    fun getProfile(@Query("userid") userId: String): Call<Profile>
 }

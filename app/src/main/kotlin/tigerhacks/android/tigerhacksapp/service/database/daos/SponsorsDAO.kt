@@ -20,6 +20,9 @@ interface SponsorsDAO {
     @Query("SELECT * FROM mentor WHERE sponsor=:sponsor")
     fun getMentorsForSponsor(sponsor: String): LiveData<List<Mentor>>
 
+    @Query("SELECT * FROM mentor")
+    fun getAllMentors(): LiveData<List<Mentor>>
+
     @Insert
     fun insertAllSponsors(sponsors: List<Sponsor>)
 
@@ -27,7 +30,7 @@ interface SponsorsDAO {
     fun deleteAllSponsors()
 
     @Transaction
-    open suspend fun updateSponsors(sponsors: List<Sponsor>) {
+    suspend fun updateSponsors(sponsors: List<Sponsor>) {
         deleteAllSponsors()
         insertAllSponsors(sponsors)
         val mentors = arrayListOf<Mentor>()
@@ -46,7 +49,7 @@ interface SponsorsDAO {
     fun deleteAllMentors()
 
     @Transaction
-    open suspend fun updateMentors(mentors: List<Mentor>) {
+    suspend fun updateMentors(mentors: List<Mentor>) {
         deleteAllMentors()
         insertAllMentors(mentors)
     }

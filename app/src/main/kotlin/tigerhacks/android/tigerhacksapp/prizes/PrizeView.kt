@@ -18,6 +18,8 @@ class PrizeView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         LayoutInflater.from(context).inflate(R.layout.view_prize, this, true)
+        val dimen = resources.getDimension(R.dimen.margin_top_large).toInt()
+        setPadding(0, 0, 0, dimen)
     }
 
     fun setup(prize: Prize) {

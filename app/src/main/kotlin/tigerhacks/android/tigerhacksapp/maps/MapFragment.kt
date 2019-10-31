@@ -25,11 +25,9 @@ class MapFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val layoutView = inflater.inflate(R.layout.fragment_map, container, false)
+        mapView = SubsamplingScaleImageView(inflater.context)
 
-        val tabLayout = layoutView.findViewById<TabLayout>(R.id.tabLayout)
-        mapView = layoutView.findViewById(R.id.mapView)
-
+        val tabLayout = activity?.findViewById<TabLayout>(R.id.tabLayout) ?: throw Exception("")
         //add button onclick events. Handles button visuals and map changing
         tabLayout.getTabAt(selection)?.select()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -43,7 +41,7 @@ class MapFragment : Fragment() {
 
         updateSelection()
 
-        return layoutView
+        return mapView
     }
 
     private fun updateSelection() {

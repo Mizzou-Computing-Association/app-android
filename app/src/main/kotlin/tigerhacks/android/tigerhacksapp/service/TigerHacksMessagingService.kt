@@ -6,22 +6,17 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import tigerhacks.android.tigerhacksapp.R
 
-
-private const val TAG = "THMessagingService"
 private const val CHANNEL_ID = "tigerhacks.android.tigerhacksapp.TigerHacks"
 private const val CHANNEL_NAME = "TigerHacks"
 
 class TigerHacksMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d(TAG, "From: ${remoteMessage.from}")
-
         val message = remoteMessage.notification?.body ?: ""
         createChannelsIfNeeded()
 

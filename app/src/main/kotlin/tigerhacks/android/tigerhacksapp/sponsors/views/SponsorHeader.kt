@@ -6,8 +6,6 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.TextView
-import com.airbnb.epoxy.ModelProp
-import com.airbnb.epoxy.ModelView
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
@@ -15,13 +13,15 @@ import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-@ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
-class Header @JvmOverloads constructor(
+class SponsorHeader @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : TextView(context, attrs, defStyleAttr) {
     init {
+        layoutParams = MarginLayoutParams(MarginLayoutParams.MATCH_PARENT, MarginLayoutParams.WRAP_CONTENT).apply {
+            bottomMargin = context.dpToPx(10)
+        }
         setTextColor(context.getColorRes(R.color.white))
         textSize = 24f
         setTypeface(null, Typeface.BOLD)
@@ -31,31 +31,24 @@ class Header @JvmOverloads constructor(
         elevation = context.dpToPx(3).toFloat()
     }
 
-    @ModelProp
     fun setSponsorLevel(sponsorLevel: Int) {
         when (sponsorLevel) {
             0 -> {
                 setBackgroundResource(R.color.platinum)
-                text = "Platinum Sponsors"
+                text = context.getText(R.string.platinum_sponsors)
             }
             1 -> {
                 setBackgroundResource(R.color.gold)
-                text = "Gold Sponsors"
+                text = context.getText(R.string.gold_sponsors)
             }
             2 -> {
                 setBackgroundResource(R.color.silver)
-                text = "Silver Sponsors"
+                text = context.getText(R.string.silver_sponsors)
             }
             else -> {
                 setBackgroundResource(R.color.bronze)
-                text = "Bronze Sponsors"
+                text = context.getText(R.string.bronze_sponsors)
             }
-        }
-    }
-
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        layoutParams = (layoutParams as? MarginLayoutParams)?.apply {
-            bottomMargin = context.dpToPx(10)
         }
     }
 }

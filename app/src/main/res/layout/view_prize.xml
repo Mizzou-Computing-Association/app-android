@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        android:layout_marginTop="@dimen/margin_top_large"
+        android:layout_marginTop="@dimen/margin_top"
         android:layout_marginStart="@dimen/margin_start_large"
 
         tools:text="Tech Company Prize"
@@ -83,20 +83,5 @@
 
         tools:text="Here's a prize"
         android:textAppearance="@style/AppTheme.TextPrimary"
-        />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/divider_size"
-
-        app:layout_constraintStart_toStartOf="@id/starIcon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/prizeListTextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        android:layout_marginTop="@dimen/margin_top_large"
-
-        android:background="@color/divider"
         />
 </merge>

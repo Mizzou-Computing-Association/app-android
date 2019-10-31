@@ -3,10 +3,15 @@
     <string name="title_map">Map</string>
     <string name="title_prizes">Prizes</string>
     <string name="title_schedule">Schedule</string>
-    <string name="title_resources">Help</string>
+    <string name="title_help">Help</string>
     <string name="title_sponsors">Sponsors</string>
-    <string name="test">Test String</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_sign_in">Sign In</string>
     <string name="sponsors">Sponsors</string>
+    <string name="platinum_sponsors">Platinum Sponsors</string>
+    <string name="gold_sponsors">Gold Sponsors</string>
+    <string name="silver_sponsors">Silver Sponsors</string>
+    <string name="bronze_sponsors">Bronze Sponsors</string>
     <string name="events">Events</string>
     <string name="floor_1">Floor 1</string>
     <string name="floor_2">Floor 2</string>
@@ -44,9 +49,13 @@
     <string name="message">Message</string>
     <string name="google_sign_in">Sign in with Google</string>
     <string name="github_sign_in">Sign in with Github</string>
-    <string name="light_theme">Light Theme</string>
-    <string name="dark_theme">Dark Theme</string>
-    <string name="follow_battery_saver">Follow Battery Saver</string>
-    <string name="follow_system">Follow System</string>
+    <string name="light_theme">Day Theme</string>
+    <string name="dark_theme">Night Theme</string>
+    <string name="follow_battery_saver">Toggle Battery Saver</string>
+    <string name="follow_system">Follow System Theme</string>
+    <string name="theme_settings">Theme Settings</string>
+    <string name="all_mentors">All Mentors</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
     <string name="firebase_web_host" translatable="false">177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com</string>
 </resources>

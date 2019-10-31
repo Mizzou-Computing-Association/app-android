@@ -17,6 +17,7 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
 import java.io.IOException
 import com.squareup.moshi.Types
+import tigerhacks.android.tigerhacksapp.schedule.EventTimeAdapter
 
 
 /**
@@ -35,12 +36,16 @@ fun <T : ViewModel, A> singleArgViewModelFactory(constructor: (A) -> T):
     }
 }
 
+enum class NetworkStatus {
+    LOADING, FAILURE, SUCCESS
+}
+
 class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel() {
     companion object {
         val FACTORY = singleArgViewModelFactory(::HomeScreenViewModel)
     }
 
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    private val moshi = Moshi.Builder().add(EventTimeAdapter()).add(KotlinJsonAdapterFactory()).build()
 
     private val tigerHacksRetrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://tigerhacks.com/api/")
@@ -49,21 +54,19 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
 
     private val service = tigerHacksRetrofit.create(TigerHacksService::class.java)
 
-    enum class NetworkStatus {
-        LOADING, FAILURE, SUCCESS
-    }
-
-    val statusLiveData = MutableLiveData<NetworkStatus>()
-
     val sponsorListLiveData = database.sponsorsDAO().getSponsors()
+    val sponsorStatusLiveData = MutableLiveData<NetworkStatus>()
 
-    val developerPrizeListLiveData = database.prizeDAO().getAllDevPrizes()
-    val beginnerPrizeListLiveData = database.prizeDAO().getAllBeginnerPrizes()
-    val miscPrizeListLiveData = database.prizeDAO().getAllMiscPrizes()
+    val prizeListLiveData = database.prizeDAO().getAllPrizes()
+    val prizeStatusLiveData = MutableLiveData<NetworkStatus>()
 
     val fridayEventListLiveData = database.scheduleDAO().getFridayEvents()
     val saturdayEventListLiveData = database.scheduleDAO().getSaturdayEvents()
     val sundayEventListLiveData = database.scheduleDAO().getSundayEvents()
+    val eventStatusLiveData = MutableLiveData<NetworkStatus>()
+
+    val profileLiveData = database.profileDAO().getProfile()
+    val profileStatusLiveData = MutableLiveData<NetworkStatus>()
 
     private val uiScope = CoroutineScope(Dispatchers.Main)
 
@@ -80,29 +83,29 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
     }
 
     suspend fun refreshPrizes() = withContext(Dispatchers.IO) {
-        statusLiveData.postValue(NetworkStatus.LOADING)
+        prizeStatusLiveData.postValue(NetworkStatus.LOADING)
         try {
             val response = service.listPrizes().execute()
             if (response.isSuccessful) {
-                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                prizeStatusLiveData.postValue(NetworkStatus.SUCCESS)
                 val totalPrizes = response.body()?.combine()
                 if (totalPrizes != null) {
                     database.prizeDAO().updatePrizes(totalPrizes)
                 }
             } else {
-                statusLiveData.postValue(NetworkStatus.FAILURE)
+                prizeStatusLiveData.postValue(NetworkStatus.FAILURE)
             }
         } catch (e: IOException) {
-            statusLiveData.postValue(NetworkStatus.FAILURE)
+            prizeStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 
     suspend fun refreshEvents() = withContext(Dispatchers.IO) {
-        statusLiveData.postValue(NetworkStatus.LOADING)
+        eventStatusLiveData.postValue(NetworkStatus.LOADING)
         try {
             val response = service.listEvents().execute()
             if (response.isSuccessful) {
-                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                eventStatusLiveData.postValue(NetworkStatus.SUCCESS)
                 val totalEvents = response.body()?.string()
                 if (totalEvents != null) {
                     try {
@@ -121,28 +124,46 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
                     } catch(io: Exception) {}
                 }
             } else {
-                statusLiveData.postValue(NetworkStatus.FAILURE)
+                eventStatusLiveData.postValue(NetworkStatus.FAILURE)
             }
         } catch (e: IOException) {
-            statusLiveData.postValue(NetworkStatus.FAILURE)
+            eventStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 
     suspend fun refreshSponsors() = withContext(Dispatchers.IO) {
-        statusLiveData.postValue(NetworkStatus.LOADING)
+        sponsorStatusLiveData.postValue(NetworkStatus.LOADING)
         try {
             val response = service.listSponsors().execute()
             if (response.isSuccessful) {
-                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                sponsorStatusLiveData.postValue(NetworkStatus.SUCCESS)
                 val sponsors = response.body()
                 if (sponsors != null) {
                     database.sponsorsDAO().updateSponsors(sponsors.combine())
                 }
             } else {
-                statusLiveData.postValue(NetworkStatus.FAILURE)
+                sponsorStatusLiveData.postValue(NetworkStatus.FAILURE)
             }
         } catch (e: IOException) {
-            statusLiveData.postValue(NetworkStatus.FAILURE)
+            sponsorStatusLiveData.postValue(NetworkStatus.FAILURE)
+        }
+    }
+
+    suspend fun refreshProfile(userId: String) = withContext(Dispatchers.IO) {
+        profileStatusLiveData.postValue(NetworkStatus.LOADING)
+        try {
+            val response = service.getProfile(userId).execute()
+            if (response.isSuccessful) {
+                profileStatusLiveData.postValue(NetworkStatus.SUCCESS)
+                val profile = response.body()
+                if (profile != null) {
+                    database.profileDAO().updateProfile(profile)
+                }
+            } else {
+                profileStatusLiveData.postValue(NetworkStatus.FAILURE)
+            }
+        } catch (e: IOException) {
+            profileStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 }

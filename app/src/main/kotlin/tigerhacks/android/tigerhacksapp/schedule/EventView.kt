@@ -24,7 +24,7 @@ class EventView @JvmOverloads constructor (context: Context, attrs: AttributeSet
         titleTextView.text = event.title
         locationTextView.text = event.location
         descriptionTextView.text = event.description
-        timeTextView.text = event.easyTime.format()
+        timeTextView.text = event.time
 
         if (event.location.isEmpty()) {
             locationTextView.visibility = View.GONE

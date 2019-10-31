@@ -30,7 +30,7 @@ interface ScheduleDAO {
     fun insertAll(events: List<Event>)
 
     @Transaction
-    open suspend fun updateEvents(events: List<Event>) {
+    suspend fun updateEvents(events: List<Event>) {
         deleteAll()
         insertAll(events)
     }
