@@ -9,6 +9,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_sponsor_detail.appBarLayout
 import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionText
 import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionTitleTextView
 import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitle
@@ -60,6 +61,7 @@ class SponsorDetailActivity : AppCompatActivity() {
             internetImageView.visibility = View.GONE
             informationTitle.visibility = View.GONE
             linkText.visibility = View.GONE
+            appBarLayout.setExpanded(false, false)
         }
 
         descriptionText.text = sponsor.description
