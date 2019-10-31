@@ -29,7 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginBottom="4dp"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
                 style="@style/AppTheme.Selector" />
@@ -48,14 +47,15 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
 
-        android:paddingTop="20dp"
-
         app:menu="@menu/navigation"
-        android:layout_gravity="start"
+        android:layout_gravity="start|top"
         android:elevation="3dp"
 
+        app:headerLayout="@layout/drawer_header"
         app:itemIconTint="@drawable/navigation_color_selector"
         app:itemTextColor="@drawable/navigation_color_selector"
+        app:itemBackground="@android:color/transparent"
+        android:background="@color/colorNavBarBackground"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>

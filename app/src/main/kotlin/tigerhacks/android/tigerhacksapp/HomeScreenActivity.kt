@@ -17,6 +17,8 @@ import tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment
 import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
+import android.os.Build
+import android.view.Menu
 
 class HomeScreenActivity : AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
@@ -102,8 +104,37 @@ class HomeScreenActivity : AppCompatActivity() {
         tabLayout.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.options, menu)
+
+        val kept = if (Build.VERSION.SDK_INT < 29) R.id.options_battery else R.id.options_system
+        val removed = if (Build.VERSION.SDK_INT >= 29) R.id.options_battery else R.id.options_system
+        menu.removeItem(removed)
+
+        when (TigerApplication.getThemeMode().getPosition()) {
+            0 -> menu.findItem(R.id.options_day).isChecked = true
+            1 -> menu.findItem(R.id.options_night).isChecked = true
+            2 -> menu.findItem(kept).isChecked = true
+        }
+
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) return true
+        val themeMode = when (item.itemId) {
+            R.id.options_day -> ThemeMode.LIGHT
+            R.id.options_night -> ThemeMode.DARK
+            R.id.options_system -> ThemeMode.FOLLOW_SYSTEM
+            R.id.options_battery -> ThemeMode.AUTO_BATTERY
+            else -> null
+        }
+        if (themeMode != null) {
+            item.isChecked = true
+            TigerApplication.setThemeMode(themeMode)
+            return true
+        }
         return super.onOptionsItemSelected(item)
     }
 }

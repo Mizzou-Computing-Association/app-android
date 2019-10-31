@@ -42,25 +42,6 @@ class HelpFragment : androidx.fragment.app.Fragment() {
             }
         }
 
-        val selectedThemePos = TigerApplication.getThemeMode().getPosition()
-        val spinner = view.findViewById<Spinner>(R.id.appThemeSpinner)
-
-        context?.let {
-            val res = if (Build.VERSION.SDK_INT >= 29) R.array.theme_q_data else R.array.theme_data
-            spinner.adapter = ArrayAdapter.createFromResource(it, res, android.R.layout.simple_spinner_dropdown_item)
-            spinner.setSelection(selectedThemePos)
-            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    val themeMode = if (position >= 2 && Build.VERSION.SDK_INT >= 29) { ThemeMode.FOLLOW_SYSTEM } else {
-                        ThemeMode.values()[position]
-                    }
-                    TigerApplication.setThemeMode(themeMode)
-                }
-            }
-        }
-
         return view
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Day Colors-->
-    <color name="colorPrimary">@color/colorNavBarBackground</color>
+    <color name="colorPrimary">@color/colorPrimaryDark</color>
     <color name="colorPrimaryDark">#1E1E1E</color>
     
     <!--Text Colors-->

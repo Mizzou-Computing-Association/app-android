@@ -48,10 +48,10 @@
     <string name="message">Message</string>
     <string name="google_sign_in">Sign in with Google</string>
     <string name="github_sign_in">Sign in with Github</string>
-    <string name="light_theme">Light Theme</string>
-    <string name="dark_theme">Dark Theme</string>
-    <string name="follow_battery_saver">Follow Battery Saver</string>
-    <string name="follow_system">Follow System</string>
+    <string name="light_theme">Day Theme</string>
+    <string name="dark_theme">Night Theme</string>
+    <string name="follow_battery_saver">Toggle Battery Saver</string>
+    <string name="follow_system">Follow System Theme</string>
     <string name="theme_settings">Theme Settings</string>
     <string name="all_mentors">All Mentors</string>
     <string name="open">Open</string>

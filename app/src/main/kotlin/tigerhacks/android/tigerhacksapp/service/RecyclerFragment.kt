@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,8 +32,9 @@ import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
  */
 abstract class RecyclerFragment<T> : Fragment() {
 
-    internal lateinit var progressBar: ProgressBar
-    internal lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var layout: ConstraintLayout
+    private lateinit var progressBar: ProgressBar
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     internal lateinit var recyclerView: RecyclerView
     internal lateinit var tabLayout: TabLayout
 
@@ -68,6 +71,7 @@ abstract class RecyclerFragment<T> : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layoutView = inflater.inflate(R.layout.vertical_recycler_view, container, false)
 
+        layout = layoutView.findViewById(R.id.container)
         swipeRefreshLayout = layoutView.findViewById(R.id.swipeRefreshLayout)
         recyclerView = layoutView.findViewById(R.id.recyclerView)
         progressBar = layoutView.findViewById(R.id.progressBar)
@@ -131,7 +135,7 @@ abstract class RecyclerFragment<T> : Fragment() {
                 else -> {
                     swipeRefreshLayout.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
-                    //TODO User Message
+                    Snackbar.make(layout, "Couldn't find slack app or google play store!", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

@@ -8,62 +8,18 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/appThemeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            android:layout_marginStart="@dimen/margin_start_large"
-            android:layout_marginTop="@dimen/margin_top_large"
-
-            android:textAppearance="@style/AppTheme.TitlePrimary"
-            android:text="@string/theme_settings"
-            />
-
-        <Spinner
-            android:id="@+id/appThemeSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintStart_toStartOf="@id/appThemeTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appThemeTextView"
-
-            android:layout_marginTop="@dimen/margin_top"
-            android:layout_marginEnd="@dimen/margin_start_large"
-
-            android:padding="0dp"
-
-            android:spinnerMode="dropdown"
-            android:spinnerItemStyle="@style/spinnerItemStyle"
-            android:spinnerDropDownItemStyle="@style/spinnerDropDownItemStyle"
-            />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_size"
-
-            app:layout_constraintTop_toBottomOf="@id/appThemeSpinner"
-            android:layout_marginTop="@dimen/margin_top_large"
-            android:background="@color/divider"
-            />
-
-        <TextView
             android:id="@+id/tigerTalksTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintTop_toTopOf="parent"
 
             android:layout_marginTop="@dimen/margin_top_large"
             android:layout_marginStart="@dimen/margin_start_large"
 
             android:text="@string/tiger_talks"
-            android:textAppearance="@style/AppTheme.TitleSecondary"
+            android:textAppearance="@style/AppTheme.TitlePrimary"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
@@ -136,7 +92,7 @@
             android:layout_marginStart="@dimen/margin_start_large"
 
             android:text="@string/other_links"
-            android:textAppearance="@style/AppTheme.TitlePrimary"
+            android:textAppearance="@style/AppTheme.TitleSecondary"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
