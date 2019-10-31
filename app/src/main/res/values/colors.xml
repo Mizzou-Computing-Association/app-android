@@ -21,6 +21,7 @@
     <color name="colorNavBarBackground">@color/orange</color>
     <color name="colorNavBarTintSelected">#000</color>
     <color name="colorNavBarTintUnselected">#40000000</color>
+    <color name="toolBarColor">@color/colorNavBarBackground</color>
 
     <!--Sponsor Levels-->
     <color name="platinum">#53aab7</color>
@@ -30,6 +31,7 @@
     <color name="orange">#f99a3a</color>
 
     <!--Utility Colors-->
+    <color name="darkBlue">#2B4262</color>
     <color name="white">#FFF</color>
     <color name="blackSemiTransparent">#40000000</color>
     <color name="black">#000</color>

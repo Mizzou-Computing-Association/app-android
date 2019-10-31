@@ -75,7 +75,7 @@ class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet
             }
         }
 
-        if (mentor.skills != "") skillsTextView.text = mentor.skills
+        if (mentor.skills.isNotEmpty()) skillsTextView.text = mentor.skills
         return this
     }
 }

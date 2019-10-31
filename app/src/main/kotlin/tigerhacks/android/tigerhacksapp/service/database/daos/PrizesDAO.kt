@@ -13,14 +13,8 @@ import tigerhacks.android.tigerhacksapp.prizes.Prize
 
 @Dao
 interface PrizesDAO {
-    @Query("SELECT * FROM prize WHERE prizeType='Developer'")
-    fun getAllDevPrizes(): LiveData<List<Prize>>
-
-    @Query("SELECT * FROM prize WHERE prizeType='Beginner'")
-    fun getAllBeginnerPrizes(): LiveData<List<Prize>>
-
-    @Query("SELECT * FROM prize WHERE prizeType='StartUp' OR prizeType='Sponsored' OR prizeType='Visuals' OR prizeType ='Audio' OR prizeType='Hardware'")
-    fun getAllMiscPrizes(): LiveData<List<Prize>>
+    @Query("SELECT * FROM prize")
+    fun getAllPrizes(): LiveData<List<Prize>>
 
     @Insert
     fun insertAll(prizes: List<Prize>)

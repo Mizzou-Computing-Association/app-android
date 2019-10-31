@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import kotlinx.android.synthetic.main.view_resource_item.view.iconImageView
-import kotlinx.android.synthetic.main.view_resource_item.view.titleTextView
+import kotlinx.android.synthetic.main.view_help_item.view.iconImageView
+import kotlinx.android.synthetic.main.view_help_item.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
 
 /**
@@ -16,7 +16,7 @@ import tigerhacks.android.tigerhacksapp.R
 
 class HelpItemView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
-        LayoutInflater.from(context).inflate(R.layout.view_resource_item, this)
+        LayoutInflater.from(context).inflate(R.layout.view_help_item, this)
         val typedValue = TypedValue()
         getContext().theme.resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
         setBackgroundResource(typedValue.resourceId)

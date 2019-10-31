@@ -58,9 +58,7 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
 
     val sponsorListLiveData = database.sponsorsDAO().getSponsors()
 
-    val developerPrizeListLiveData = database.prizeDAO().getAllDevPrizes()
-    val beginnerPrizeListLiveData = database.prizeDAO().getAllBeginnerPrizes()
-    val miscPrizeListLiveData = database.prizeDAO().getAllMiscPrizes()
+    val prizeListLiveData = database.prizeDAO().getAllPrizes()
 
     val fridayEventListLiveData = database.scheduleDAO().getFridayEvents()
     val saturdayEventListLiveData = database.scheduleDAO().getSaturdayEvents()

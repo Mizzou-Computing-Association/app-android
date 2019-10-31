@@ -15,7 +15,7 @@
 
         android:fitsSystemWindows="true"
         android:elevation="3dp"
-        android:background="@color/colorNavBarBackground"
+        android:background="@color/toolBarColor"
         >
 
         <androidx.appcompat.widget.Toolbar

@@ -20,6 +20,9 @@ interface SponsorsDAO {
     @Query("SELECT * FROM mentor WHERE sponsor=:sponsor")
     fun getMentorsForSponsor(sponsor: String): LiveData<List<Mentor>>
 
+    @Query("SELECT * FROM mentor")
+    fun getAllMentors(): LiveData<List<Mentor>>
+
     @Insert
     fun insertAllSponsors(sponsors: List<Sponsor>)
 

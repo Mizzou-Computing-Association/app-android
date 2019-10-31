@@ -12,6 +12,9 @@
     <color name="colorSelectorSelected">#F99A3A</color>
     <color name="colorSelectorUnselected">#80FFFFFF</color>
 
+    <color name="colorSponsorsBackground">#F2FFFFFF</color>
+    <color name="toolBarColor">@color/darkBlue</color>
+
     <!--Night Colors-->
     <color name="colorNavBarBackground">#181818</color>
     <color name="colorNavBarTintSelected">@color/orange</color>

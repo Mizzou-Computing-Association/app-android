@@ -148,16 +148,25 @@
                 android:textColor="@color/linkColor"
                 />
 
+            <View
+                android:id="@+id/mentorDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_size"
+
+                app:layout_constraintTop_toBottomOf="@id/linkText"
+                android:layout_marginTop="@dimen/margin_top_large"
+
+                android:background="@color/divider"
+                />
+
             <tigerhacks.android.tigerhacksapp.sponsors.views.MentorListView
                 android:id="@+id/mentorLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                app:layout_constraintTop_toBottomOf="@id/linkText"
+                app:layout_constraintTop_toBottomOf="@id/mentorDivider"
                 app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-
-                android:layout_marginTop="@dimen/margin_top"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

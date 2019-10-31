@@ -1,0 +1,56 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sponsorCardView"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+
+    app:cardBackgroundColor="@color/colorSponsorsBackground"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp"
+
+    android:clipToPadding="false"
+    android:clipChildren="false">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sponsorContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+        <ImageView
+            android:id="@+id/sponsorImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/allMentorsTextView"
+            app:layout_constraintHorizontal_chainStyle="packed"
+
+            tools:src="@mipmap/ic_launcher_round"
+
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/allMentorsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/sponsorImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginStart="@dimen/margin_start"
+
+            android:textAppearance="@style/AppTheme.TitleSecondary"
+            android:textColor="@color/blackSemiTransparent"
+            android:textSize="36sp"
+            android:visibility="gone"
+            android:text="@string/all_mentors"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

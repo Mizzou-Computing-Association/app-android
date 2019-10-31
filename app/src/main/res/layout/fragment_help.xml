@@ -63,7 +63,7 @@
             android:layout_marginStart="@dimen/margin_start_large"
 
             android:text="@string/tiger_talks"
-            android:textAppearance="@style/AppTheme.TitlePrimary"
+            android:textAppearance="@style/AppTheme.TitleSecondary"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
@@ -136,7 +136,7 @@
             android:layout_marginStart="@dimen/margin_start_large"
 
             android:text="@string/other_links"
-            android:textAppearance="@style/AppTheme.TitleSecondary"
+            android:textAppearance="@style/AppTheme.TitlePrimary"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView

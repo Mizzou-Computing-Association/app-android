@@ -1,34 +1,25 @@
 package tigerhacks.android.tigerhacksapp.prizes
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Typeface
 import android.util.AttributeSet
-import android.view.Gravity
-import android.view.ViewGroup
-import android.widget.TextView
+import android.view.LayoutInflater
+import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.android.synthetic.main.view_prize_header.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 
 class PrizeHeaderView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : TextView(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
-        layoutParams = ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams.MATCH_PARENT, ViewGroup.MarginLayoutParams.WRAP_CONTENT).apply {
-            topMargin = context.dpToPx(10)
-            bottomMargin = context.dpToPx(10)
-        }
-        setBackgroundResource(R.color.colorPrimary)
-        gravity = Gravity.CENTER
-        textSize = 48f
-        setTypeface(null, Typeface.BOLD)
-        val dp = context.dpToPx(4)
-        setPadding(dp, dp, dp, dp)
-        setTextAppearance(context, R.style.AppTheme_TitlePrimary)
+        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        LayoutInflater.from(context).inflate(R.layout.view_prize_header, this, true)
     }
 
-    fun setCategoryLevel(prizeCategory: String) {
-        text = prizeCategory
+    @SuppressLint("SetTextI18n")
+    fun setPrizeCategory(prizeType: String) {
+        titleTextView.text = "$prizeType Prizes"
     }
 }

@@ -7,33 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        style="@style/AppTheme.Selector"
-        >
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabDeveloper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/developer" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabBeginner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/beginner" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabMisc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Misc" />
-        
-    </com.google.android.material.tabs.TabLayout>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
