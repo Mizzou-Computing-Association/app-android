@@ -36,6 +36,10 @@ fun <T : ViewModel, A> singleArgViewModelFactory(constructor: (A) -> T):
     }
 }
 
+enum class NetworkStatus {
+    LOADING, FAILURE, SUCCESS
+}
+
 class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel() {
     companion object {
         val FACTORY = singleArgViewModelFactory(::HomeScreenViewModel)
@@ -50,19 +54,16 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
 
     private val service = tigerHacksRetrofit.create(TigerHacksService::class.java)
 
-    enum class NetworkStatus {
-        LOADING, FAILURE, SUCCESS
-    }
-
-    val statusLiveData = MutableLiveData<NetworkStatus>()
-
     val sponsorListLiveData = database.sponsorsDAO().getSponsors()
+    val sponsorStatusLiveData = MutableLiveData<NetworkStatus>()
 
     val prizeListLiveData = database.prizeDAO().getAllPrizes()
+    val prizeStatusLiveData = MutableLiveData<NetworkStatus>()
 
     val fridayEventListLiveData = database.scheduleDAO().getFridayEvents()
     val saturdayEventListLiveData = database.scheduleDAO().getSaturdayEvents()
     val sundayEventListLiveData = database.scheduleDAO().getSundayEvents()
+    val eventStatusLiveData = MutableLiveData<NetworkStatus>()
 
     private val uiScope = CoroutineScope(Dispatchers.Main)
 
@@ -79,29 +80,29 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
     }
 
     suspend fun refreshPrizes() = withContext(Dispatchers.IO) {
-        statusLiveData.postValue(NetworkStatus.LOADING)
+        prizeStatusLiveData.postValue(NetworkStatus.LOADING)
         try {
             val response = service.listPrizes().execute()
             if (response.isSuccessful) {
-                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                prizeStatusLiveData.postValue(NetworkStatus.SUCCESS)
                 val totalPrizes = response.body()?.combine()
                 if (totalPrizes != null) {
                     database.prizeDAO().updatePrizes(totalPrizes)
                 }
             } else {
-                statusLiveData.postValue(NetworkStatus.FAILURE)
+                prizeStatusLiveData.postValue(NetworkStatus.FAILURE)
             }
         } catch (e: IOException) {
-            statusLiveData.postValue(NetworkStatus.FAILURE)
+            prizeStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 
     suspend fun refreshEvents() = withContext(Dispatchers.IO) {
-        statusLiveData.postValue(NetworkStatus.LOADING)
+        eventStatusLiveData.postValue(NetworkStatus.LOADING)
         try {
             val response = service.listEvents().execute()
             if (response.isSuccessful) {
-                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                eventStatusLiveData.postValue(NetworkStatus.SUCCESS)
                 val totalEvents = response.body()?.string()
                 if (totalEvents != null) {
                     try {
@@ -120,28 +121,28 @@ class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel(
                     } catch(io: Exception) {}
                 }
             } else {
-                statusLiveData.postValue(NetworkStatus.FAILURE)
+                eventStatusLiveData.postValue(NetworkStatus.FAILURE)
             }
         } catch (e: IOException) {
-            statusLiveData.postValue(NetworkStatus.FAILURE)
+            eventStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 
     suspend fun refreshSponsors() = withContext(Dispatchers.IO) {
-        statusLiveData.postValue(NetworkStatus.LOADING)
+        sponsorStatusLiveData.postValue(NetworkStatus.LOADING)
         try {
             val response = service.listSponsors().execute()
             if (response.isSuccessful) {
-                statusLiveData.postValue(NetworkStatus.SUCCESS)
+                sponsorStatusLiveData.postValue(NetworkStatus.SUCCESS)
                 val sponsors = response.body()
                 if (sponsors != null) {
                     database.sponsorsDAO().updateSponsors(sponsors.combine())
                 }
             } else {
-                statusLiveData.postValue(NetworkStatus.FAILURE)
+                sponsorStatusLiveData.postValue(NetworkStatus.FAILURE)
             }
         } catch (e: IOException) {
-            statusLiveData.postValue(NetworkStatus.FAILURE)
+            sponsorStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
     }
 }

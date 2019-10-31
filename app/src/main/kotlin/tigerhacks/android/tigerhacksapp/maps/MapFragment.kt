@@ -25,7 +25,7 @@ class MapFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val mapView = SubsamplingScaleImageView(inflater.context)
+        mapView = SubsamplingScaleImageView(inflater.context)
 
         val tabLayout = activity?.findViewById<TabLayout>(R.id.tabLayout) ?: throw Exception("")
         //add button onclick events. Handles button visuals and map changing
