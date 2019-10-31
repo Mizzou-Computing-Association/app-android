@@ -40,7 +40,7 @@ enum class NetworkStatus {
     LOADING, FAILURE, SUCCESS
 }
 
-class HomeScreenViewModel(private val database: TigerHacksDatabase) : ViewModel() {
+class HomeScreenViewModel(val database: TigerHacksDatabase) : ViewModel() {
     companion object {
         val FACTORY = singleArgViewModelFactory(::HomeScreenViewModel)
     }

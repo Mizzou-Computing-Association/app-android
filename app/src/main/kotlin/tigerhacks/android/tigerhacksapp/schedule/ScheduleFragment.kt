@@ -1,9 +1,11 @@
 package tigerhacks.android.tigerhacksapp.schedule
 
+import android.view.View
 import com.google.android.material.tabs.TabLayout
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
 class ScheduleFragment : RecyclerFragment<Event>() {
@@ -20,8 +22,10 @@ class ScheduleFragment : RecyclerFragment<Event>() {
     override val onRefresh
         get() = viewModel::refreshEvents
 
+    override var tabResList = listOf(R.string.friday, R.string.saturday, R.string.sunday)
+
     override fun initSetup() {
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 -> syncDayState(Day.FRIDAY)
@@ -38,8 +42,8 @@ class ScheduleFragment : RecyclerFragment<Event>() {
 
         syncDayState(currentDay, true)
         statusLiveData = viewModel.eventStatusLiveData
-        if (currentDay.ordinal != tabLayout.selectedTabPosition) {
-            tabLayout.getTabAt(currentDay.ordinal)?.select()
+        if (currentDay.ordinal != tabLayout?.selectedTabPosition) {
+            tabLayout?.getTabAt(currentDay.ordinal)?.select()
         }
     }
 
