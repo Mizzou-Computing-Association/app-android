@@ -5,7 +5,8 @@
     <string name="title_schedule">Schedule</string>
     <string name="title_help">Help</string>
     <string name="title_sponsors">Sponsors</string>
-    <string name="test">Test String</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_sign_in">Sign In</string>
     <string name="sponsors">Sponsors</string>
     <string name="platinum_sponsors">Platinum Sponsors</string>
     <string name="gold_sponsors">Gold Sponsors</string>

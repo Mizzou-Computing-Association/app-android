@@ -1,51 +1,49 @@
 package tigerhacks.android.tigerhacksapp.tigerpass
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
+import androidx.appcompat.widget.AppCompatButton
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
-import kotlinx.android.synthetic.main.activity_tiger_login.loginButton
-import kotlinx.android.synthetic.main.activity_tiger_login.loginContainer
-import kotlinx.android.synthetic.main.activity_tiger_login.loginGithubButton
-import kotlinx.android.synthetic.main.activity_tiger_login.loginGoogleButton
-import kotlinx.android.synthetic.main.activity_tiger_login.passwordEditText
-import kotlinx.android.synthetic.main.activity_tiger_login.toolbar
-import kotlinx.android.synthetic.main.activity_tiger_login.usernameEditText
+import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 
-
-
-class LoginActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
     companion object {
-        fun newInstance(context: Context) = Intent(context, LoginActivity::class.java)
+        fun newInstance() = LoginFragment()
 
         const val RC_SIGN_IN = 9001
     }
 
+    private lateinit var loginContainer: ConstraintLayout
+
     private lateinit var auth: FirebaseAuth
-    private lateinit var googleSignInClient: GoogleSignInClient
     private val provider = OAuthProvider.newBuilder("github.com")
         .addCustomParameter("login", "your-email@gmail.com")
         .setScopes(listOf("user:email"))
         .build()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tiger_login)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val layoutView = inflater.inflate(R.layout.fragment_tiger_login, container, false)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Sign in"
+        loginContainer = layoutView.findViewById(R.id.loginContainer)
+        val loginButton = layoutView.findViewById<AppCompatButton>(R.id.loginButton)
+        val loginGoogleButton = layoutView.findViewById<AppCompatButton>(R.id.loginGoogleButton)
+        val loginGithubButton = layoutView.findViewById<AppCompatButton>(R.id.loginGithubButton)
+        val usernameEditText = layoutView.findViewById<EditText>(R.id.usernameEditText)
+        val passwordEditText = layoutView.findViewById<EditText>(R.id.passwordEditText)
 
         auth = FirebaseAuth.getInstance()
 
@@ -53,17 +51,13 @@ class LoginActivity : AppCompatActivity() {
             swapToPass()
         }
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.firebase_web_host))
-            .requestEmail()
-            .build()
+        (activity as? HomeScreenActivity)?.let {
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        val twentyFourDp = dpToPx(30)
-        val img = resources.getDrawable(R.mipmap.ic_launcher_round, theme)
-        img.setBounds(0, 0, twentyFourDp, twentyFourDp)
-        loginButton.setCompoundDrawables(img, null, null, null)
+            val twentyFourDp = it.dpToPx(30)
+            val img = resources.getDrawable(R.mipmap.ic_launcher_round, it.theme)
+            img.setBounds(0, 0, twentyFourDp, twentyFourDp)
+            loginButton.setCompoundDrawables(img, null, null, null)
+        }
 
         loginButton.setOnClickListener {
             if (usernameEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
@@ -80,11 +74,12 @@ class LoginActivity : AppCompatActivity() {
         loginGithubButton.setOnClickListener {
             loginWithGithub()
         }
+        return layoutView
     }
 
     private var isActive = true
 
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
         if (auth.currentUser != null) {
             swapToPass()
@@ -123,42 +118,42 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginWithGithub() {
-        auth.startActivityForSignInWithProvider(this, provider)
-            .addOnSuccessListener { swapToPass() }
-            .addOnFailureListener {
-                loginFailure()
-            }
+        (activity as? HomeScreenActivity)?.let {
+            auth.startActivityForSignInWithProvider(it, provider)
+                .addOnSuccessListener { swapToPass() }
+                .addOnFailureListener {
+                    loginFailure()
+                }
+        }
     }
 
     private fun loginWithGoogle() {
-        val logInIntent = googleSignInClient.signInIntent
-        startActivityForResult(logInIntent, RC_SIGN_IN)
+        (activity as? HomeScreenActivity)?.let {
+            val logInIntent = it.googleSignInClient.signInIntent
+            startActivityForResult(logInIntent, RC_SIGN_IN)
+        }
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) { //Success
-                    swapToPass()
-                } else {
-                    loginFailure()
+        (activity as? HomeScreenActivity)?.let {
+            val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+            auth.signInWithCredential(credential)
+                .addOnCompleteListener(it) { task ->
+                    if (task.isSuccessful) { //Success
+                        swapToPass()
+                    } else {
+                        loginFailure()
+                    }
                 }
-            }
+        }
     }
 
     private fun swapToPass() {
-        startActivity(TigerPassActivity.newInstance(this))
-        finish()
+        (activity as? HomeScreenActivity)?.swapLogInAndPass(true)
     }
 
     private fun loginFailure(message: String = "Authentication Failed.") {
         if (!isActive) return
         Snackbar.make(loginContainer, message, Snackbar.LENGTH_SHORT).show()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

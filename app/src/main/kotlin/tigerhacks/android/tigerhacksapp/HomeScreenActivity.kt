@@ -19,6 +19,12 @@ import tigerhacks.android.tigerhacksapp.maps.MapFragment
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import android.os.Build
 import android.view.Menu
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import tigerhacks.android.tigerhacksapp.tigerpass.LoginFragment
+import tigerhacks.android.tigerhacksapp.tigerpass.TigerPassFragment
 
 class HomeScreenActivity : AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
@@ -31,6 +37,8 @@ class HomeScreenActivity : AppCompatActivity() {
 
     lateinit var viewModel: HomeScreenViewModel
 
+    lateinit var googleSignInClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -40,6 +48,13 @@ class HomeScreenActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.firebase_web_host))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         val db = TigerHacksDatabase.getDatabase(applicationContext)
         viewModel = ViewModelProviders.of(this, HomeScreenViewModel.FACTORY(db)).get(HomeScreenViewModel::class.java)
@@ -59,7 +74,8 @@ class HomeScreenActivity : AppCompatActivity() {
                 .commit()
             updateTabs(R.id.navigation_schedule)
         } else {
-            val fragTag = supportFragmentManager.fragments[0].tag?.split("~")
+            val pos = supportFragmentManager.fragments.size - 1
+            val fragTag = supportFragmentManager.fragments[pos].tag?.split("~")
             if (fragTag != null && fragTag.size > 1) {
                 updateTabs(fragTag[0].toInt())
                 supportActionBar?.title = fragTag[1]
@@ -70,23 +86,38 @@ class HomeScreenActivity : AppCompatActivity() {
         container.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            updateTabs(menuItem.itemId)
-            val fragment = when (menuItem.itemId) {
-                R.id.navigation_map -> mapFragment
-                R.id.navigation_prizes -> prizesFragment
-                R.id.navigation_schedule -> scheduleFragment
-                R.id.navigation_sponsors -> sponsorsFragment
-                else -> helpFragment
-            }
-            supportActionBar?.title = menuItem.title
-            supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(R.id.contentFrameLayout, fragment, "${menuItem.itemId}~${menuItem.title}")
-                .commit()
-            true
+        val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
+        val profileTitle = if (isLoggedIn) getString(R.string.title_profile) else getString(R.string.title_sign_in)
+        navigationView.menu.findItem(R.id.navigation_profile).title = profileTitle
+
+        navigationView.setNavigationItemSelectedListener(::navigate)
+    }
+
+    fun swapLogInAndPass(swapToPass: Boolean) {
+        val navItem = navigationView.menu.findItem(R.id.navigation_profile)
+        val titleRes = if (swapToPass) R.string.title_profile else R.string.title_sign_in
+        navItem.title = getString(titleRes)
+        navigate(navItem)
+    }
+
+    private fun navigate(menuItem: MenuItem): Boolean {
+        val isUserLoggedIn = FirebaseAuth.getInstance().currentUser != null
+        updateTabs(menuItem.itemId)
+        val fragment = when (menuItem.itemId) {
+            R.id.navigation_map -> mapFragment
+            R.id.navigation_prizes -> prizesFragment
+            R.id.navigation_schedule -> scheduleFragment
+            R.id.navigation_sponsors -> sponsorsFragment
+            R.id.navigation_profile -> if (!isUserLoggedIn) LoginFragment.newInstance() else TigerPassFragment.newInstance()
+            else -> helpFragment
         }
+        supportActionBar?.title = menuItem.title
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            .replace(R.id.contentFrameLayout, fragment, "${menuItem.itemId}~${menuItem.title}")
+            .commit()
+        return true
     }
 
     private fun updateTabs(fragId: Int) {
