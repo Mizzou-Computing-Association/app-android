@@ -9,7 +9,10 @@
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dip"
 
         android:layout_marginStart="@dimen/margin_start_large"
         android:layout_marginTop="@dimen/margin_top_large"
@@ -25,7 +28,11 @@
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+
+
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp"
 
         android:layout_marginTop="@dimen/margin_top"
         android:hint="@string/password"
