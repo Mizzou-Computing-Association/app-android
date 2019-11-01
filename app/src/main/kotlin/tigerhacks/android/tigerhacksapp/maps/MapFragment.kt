@@ -43,9 +43,9 @@ class MapFragment : Fragment() {
 
     private fun updateSelection() {
         val asset = when (selection) {
-            0 -> "floor1map.png"
-            1 -> "floor2map.png"
-            else -> "floor3map.png"
+            0 -> "floor1map.webp"
+            1 -> "floor2map.webp"
+            else -> "floor3map.webp"
         }
         mapView?.setImage(ImageSource.asset(asset))
     }
