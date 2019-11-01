@@ -151,7 +151,10 @@
     <Button
         android:id="@+id/logOutButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp"
 
         app:layout_constraintStart_toStartOf="@id/qrCodeImageView"
         app:layout_constraintEnd_toEndOf="@id/qrCodeImageView"
