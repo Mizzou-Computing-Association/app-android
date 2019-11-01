@@ -15,8 +15,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home_screen.drawerLayout
+import kotlinx.android.synthetic.main.activity_home_screen.navFrameLayout
 import kotlinx.android.synthetic.main.activity_home_screen.toolbar
 import tigerhacks.android.tigerhacksapp.help.HelpFragment
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
@@ -24,6 +26,7 @@ import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment
 import tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment
 import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment
 import tigerhacks.android.tigerhacksapp.tigerpass.TigerPassFragment
+import java.util.Stack
 
 data class FragmentTag(val fragment: Fragment, val tag: String)
 
@@ -45,6 +48,8 @@ class HomeScreenActivity : AppCompatActivity() {
 
     lateinit var viewModel: HomeScreenViewModel
     lateinit var googleSignInClient: GoogleSignInClient
+
+    private var simpleBackStack: Stack<Int> = Stack()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -97,48 +102,9 @@ class HomeScreenActivity : AppCompatActivity() {
         if (menuId != null) outState.putInt(FRAGMENT_ID_KEY, menuId)
     }
 
-    fun navigateTo(menuItemId: Int) {
-        val menuItem = navigationView.menu.findItem(menuItemId) ?: return
-        navigateTo(menuItem)
-    }
-
-    private fun navigateTo(menuItem: MenuItem): Boolean {
-        val fragmentTag = when (menuItem.itemId) {
-            R.id.navigation_profile -> FragmentTag(profileFragment, getString(R.string.title_profile))
-            R.id.navigation_schedule -> FragmentTag(scheduleFragment, getString(R.string.title_schedule))
-            R.id.navigation_prizes -> FragmentTag(prizesFragment, getString(R.string.title_prizes))
-            R.id.navigation_map -> FragmentTag(mapsFragment, getString(R.string.title_map))
-            R.id.navigation_sponsors -> FragmentTag(sponsorsFragment, getString(R.string.title_sponsors))
-            else -> FragmentTag(helpFragment, getString(R.string.title_help))
-        }
-
-        currentFragmentTag = fragmentTag
-        updateTitle()
-
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-            actionBarDrawerToggle.syncState()
-        }
-
-        supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-            .replace(R.id.navFrameLayout, fragmentTag.fragment, fragmentTag.tag)
-            .commit()
-
-        return true
-    }
-
-    private fun updateNavgraphLabel() {
-        val title = if (FirebaseAuth.getInstance().currentUser != null) getString(R.string.title_profile) else getString(R.string.title_sign_in)
-        supportActionBar?.title = title
-        navigationView.menu.findItem(R.id.navigation_profile).title = title
-    }
-
-    fun updateTitle() {
-        if (currentFragmentTag.tag == getString(R.string.title_profile)) {
-            updateNavgraphLabel()
-        } else supportActionBar?.title = currentFragmentTag.tag
+    override fun onStop() {
+        super.onStop()
+        simpleBackStack.clear()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -173,5 +139,66 @@ class HomeScreenActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if (simpleBackStack.size > 1) {
+            simpleBackStack.pop()
+            val navId = simpleBackStack.pop()
+            navigateTo(navId)
+        } else {
+            Snackbar.make(navFrameLayout, "Nothing else to go back to!", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun addToSimpleBackStack(navId: Int) {
+        simpleBackStack.push(navId)
+    }
+
+    private fun navigateTo(menuItemId: Int) {
+        val menuItem = navigationView.menu.findItem(menuItemId) ?: return
+        navigateTo(menuItem)
+    }
+
+    private fun navigateTo(menuItem: MenuItem): Boolean {
+        val fragmentTag = when (menuItem.itemId) {
+            R.id.navigation_profile -> FragmentTag(profileFragment, getString(R.string.title_profile))
+            R.id.navigation_schedule -> FragmentTag(scheduleFragment, getString(R.string.title_schedule))
+            R.id.navigation_prizes -> FragmentTag(prizesFragment, getString(R.string.title_prizes))
+            R.id.navigation_map -> FragmentTag(mapsFragment, getString(R.string.title_map))
+            R.id.navigation_sponsors -> FragmentTag(sponsorsFragment, getString(R.string.title_sponsors))
+            else -> FragmentTag(helpFragment, getString(R.string.title_help))
+        }
+
+        menuItem.isChecked = true
+        currentFragmentTag = fragmentTag
+        updateTitle()
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            actionBarDrawerToggle.syncState()
+        }
+
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+            .replace(R.id.navFrameLayout, fragmentTag.fragment, fragmentTag.tag)
+            .commit()
+
+        addToSimpleBackStack(menuItem.itemId)
+
+        return true
+    }
+
+    private fun updateNavgraphLabel() {
+        val title = if (FirebaseAuth.getInstance().currentUser != null) getString(R.string.title_profile) else getString(R.string.title_sign_in)
+        supportActionBar?.title = title
+        navigationView.menu.findItem(R.id.navigation_profile).title = title
+    }
+
+    fun updateTitle() {
+        if (currentFragmentTag.tag == getString(R.string.title_profile)) {
+            updateNavgraphLabel()
+        } else supportActionBar?.title = currentFragmentTag.tag
     }
 }
