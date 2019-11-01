@@ -5,14 +5,9 @@ import com.google.android.material.tabs.TabLayout
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
 class ScheduleFragment : RecyclerFragment<Event>() {
-    companion object {
-        fun newInstance() = ScheduleFragment()
-    }
-
     enum class Day {
         FRIDAY, SATURDAY, SUNDAY
     }
@@ -21,8 +16,6 @@ class ScheduleFragment : RecyclerFragment<Event>() {
 
     override val onRefresh
         get() = viewModel::refreshEvents
-
-    override var tabResList = listOf(R.string.friday, R.string.saturday, R.string.sunday)
 
     override fun initSetup() {
         tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -39,6 +32,8 @@ class ScheduleFragment : RecyclerFragment<Event>() {
         })
 
         recyclerView.scrollBarSize = 0
+
+        tabLayout?.visibility = View.VISIBLE
 
         syncDayState(currentDay, true)
         statusLiveData = viewModel.eventStatusLiveData

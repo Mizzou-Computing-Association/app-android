@@ -11,14 +11,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -27,7 +22,6 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -43,8 +37,6 @@ import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 class TigerPassFragment : Fragment() {
     companion object {
         const val RC_SIGN_IN = 9001
-
-        fun newInstance() = TigerPassFragment()
     }
 
     private lateinit var loginContainer: ConstraintLayout
@@ -68,9 +60,7 @@ class TigerPassFragment : Fragment() {
     private lateinit var home: HomeScreenActivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val toolbarView = inflater.inflate(R.layout.toolbar_no_tab, container, false)
-        val toolbarContainer = toolbarView.findViewById<ConstraintLayout>(R.id.container)
-        val layoutView = inflater.inflate(R.layout.fragment_tiger_pass, toolbarContainer, true)
+        val layoutView = inflater.inflate(R.layout.fragment_tiger_pass, container, false)
 
         home = activity as HomeScreenActivity
 
@@ -99,19 +89,9 @@ class TigerPassFragment : Fragment() {
         loginGithubButton.setOnClickListener(::loginWithGithub)
         logOutButton.setOnClickListener(::logout)
 
-        val activity = activity as HomeScreenActivity
-        val toolbar = toolbarView.findViewById<Toolbar>(R.id.toolbar)
-
-        activity.setSupportActionBar(toolbar)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val navController = activity.findNavController(R.id.navHostFragment)
-        activity.setupActionBarWithNavController(navController, activity.findViewById<DrawerLayout>(R.id.drawerLayout))
-        activity.findViewById<NavigationView>(R.id.navigationView).setupWithNavController(navController)
-
         update()
 
-        return toolbarView
+        return layoutView
     }
 
     override fun onStart() {
@@ -155,7 +135,8 @@ class TigerPassFragment : Fragment() {
     private fun update() {
         observer?.let { home.viewModel.profileLiveData.removeObserver(it) }
 
-        home.updateNavgraphLabel()
+        home.updateTitle()
+        requireActivity()
 
         if (auth.currentUser == null) {
             setLoginVisibility(View.VISIBLE)
