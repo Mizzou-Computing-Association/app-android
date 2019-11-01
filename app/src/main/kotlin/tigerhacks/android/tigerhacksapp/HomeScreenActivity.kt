@@ -55,7 +55,7 @@ class HomeScreenActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        FirebaseAnalytics.getInstance(this)
+        if (!BuildConfig.DEBUG) FirebaseAnalytics.getInstance(this)
         setContentView(R.layout.activity_home_screen)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
