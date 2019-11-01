@@ -27,7 +27,8 @@ class SponsorCardView @JvmOverloads constructor(
     lateinit var sponsorData: Sponsor
 
     init {
-        layoutParams = MarginLayoutParams(MarginLayoutParams.MATCH_PARENT, MarginLayoutParams.WRAP_CONTENT)
+        val height = context.dpToPx(130)
+        layoutParams = MarginLayoutParams(MarginLayoutParams.MATCH_PARENT, height)
         LayoutInflater.from(context).inflate(R.layout.view_sponsor_card, this, true)
         sponsorImageView = findViewById(R.id.sponsorImageView)
         val tenDp = context.dpToPx(10)

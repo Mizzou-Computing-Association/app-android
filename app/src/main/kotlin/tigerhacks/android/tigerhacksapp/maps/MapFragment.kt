@@ -11,10 +11,6 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import tigerhacks.android.tigerhacksapp.R
 
 class MapFragment : Fragment() {
-    companion object {
-        fun newInstance() = MapFragment()
-    }
-
     private var mapView: SubsamplingScaleImageView? = null
     private var selection = 0
         set(value) {
@@ -24,11 +20,12 @@ class MapFragment : Fragment() {
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val layoutView = inflater.inflate(R.layout.fragment_map, container, false)
         // Inflate the layout for this fragment
-        mapView = SubsamplingScaleImageView(inflater.context)
+        mapView = layoutView.findViewById(R.id.mapView)
 
-        val tabLayout = activity?.findViewById<TabLayout>(R.id.tabLayout) ?: throw Exception("")
-        //add button onclick events. Handles button visuals and map changing
+        val tabLayout = layoutView.findViewById<TabLayout>(R.id.tabLayout)
+
         tabLayout.getTabAt(selection)?.select()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -41,15 +38,15 @@ class MapFragment : Fragment() {
 
         updateSelection()
 
-        return mapView
+        return layoutView
     }
 
     private fun updateSelection() {
-        val drawableRes = when (selection) {
-            0 -> R.drawable.floor1map
-            1 -> R.drawable.floor2map
-            else -> R.drawable.floor3map
+        val asset = when (selection) {
+            0 -> "floor1map.png"
+            1 -> "floor2map.png"
+            else -> "floor3map.png"
         }
-        mapView?.setImage(ImageSource.resource(drawableRes))
+        mapView?.setImage(ImageSource.asset(asset))
     }
 }

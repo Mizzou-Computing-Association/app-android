@@ -37,8 +37,6 @@ import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 class TigerPassFragment : Fragment() {
     companion object {
         const val RC_SIGN_IN = 9001
-
-        fun newInstance() = TigerPassFragment()
     }
 
     private lateinit var loginContainer: ConstraintLayout
@@ -137,7 +135,8 @@ class TigerPassFragment : Fragment() {
     private fun update() {
         observer?.let { home.viewModel.profileLiveData.removeObserver(it) }
 
-        home.setProfileTitle(auth.currentUser != null)
+        home.updateTitle()
+        requireActivity()
 
         if (auth.currentUser == null) {
             setLoginVisibility(View.VISIBLE)
@@ -222,7 +221,7 @@ class TigerPassFragment : Fragment() {
 
     private fun logout(v: View) {
         CoroutineScope(Dispatchers.IO).launch {
-            home.db?.profileDAO()?.deleteAll()
+            home.viewModel.database.profileDAO().deleteAll()
         }
         auth.signOut()
         home.googleSignInClient.revokeAccess()

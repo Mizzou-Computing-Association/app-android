@@ -12,11 +12,6 @@ import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorHeader
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 class SponsorsFragment : RecyclerFragment<Sponsor>() {
-
-    companion object {
-        fun newInstance() = SponsorsFragment()
-    }
-
     override fun initSetup() {
         liveData = viewModel.sponsorListLiveData
         statusLiveData = viewModel.sponsorStatusLiveData

@@ -13,7 +13,7 @@
 
         android:gravity="center"
         android:padding="10dp"
-        android:textAppearance="@style/AppTheme.TitlePrimary"
+        android:textAppearance="@style/AppTheme.TitleSecondary"
         tools:text="Developer Prizes"
         />
 

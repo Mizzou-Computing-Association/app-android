@@ -36,7 +36,7 @@ abstract class RecyclerFragment<T> : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     internal lateinit var recyclerView: RecyclerView
-    internal lateinit var tabLayout: TabLayout
+    internal var tabLayout: TabLayout? = null
 
     internal lateinit var viewModel: HomeScreenViewModel
     private var observer: Observer<List<T>>? = null
@@ -46,6 +46,7 @@ abstract class RecyclerFragment<T> : Fragment() {
 
     abstract val onRefresh: suspend () -> Unit
     abstract val adapter: ListAdapter<T, RecyclerView.ViewHolder>
+
     internal var liveData: LiveData<List<T>>? = null
         set(value) {
             if (value == field) {
@@ -76,10 +77,8 @@ abstract class RecyclerFragment<T> : Fragment() {
         recyclerView = layoutView.findViewById(R.id.recyclerView)
         progressBar = layoutView.findViewById(R.id.progressBar)
         val activity = activity as HomeScreenActivity
-        tabLayout = activity.findViewById(R.id.tabLayout)
-
+        tabLayout = layoutView.findViewById(R.id.tabLayout)
         viewModel = activity.viewModel
-
         recyclerView.adapter = adapter
 
         swipeRefreshLayout.setOnRefreshListener {

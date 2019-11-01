@@ -6,10 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
 class PrizesFragment : RecyclerFragment<Prize>() {
-    companion object {
-        fun newInstance() = PrizesFragment()
-    }
-
     override val onRefresh
         get() = viewModel::refreshPrizes
 
