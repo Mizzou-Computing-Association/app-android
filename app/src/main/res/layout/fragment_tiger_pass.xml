@@ -165,4 +165,23 @@
 
         android:text="@string/log_out"
         />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp"
+
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@id/logOutButton"
+        app:layout_constraintEnd_toEndOf="@id/logOutButton"
+        app:layout_constraintTop_toBottomOf="@id/logOutButton"
+
+        android:layout_marginTop="@dimen/margin_top_large"
+
+        android:text="@string/register"
+        android:visibility="gone"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

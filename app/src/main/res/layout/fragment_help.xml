@@ -1,4 +1,4 @@
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -129,6 +129,66 @@
             app:titleIcon="@drawable/slack_icon"
             app:titleRes="@string/mca_slack"
             />
+
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
+            android:id="@+id/devPostCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@+id/mcaSlackCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
+            app:autoTint="false"
+            app:titleRes="@string/devpost"
+            />
+
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
+            android:id="@+id/twitterCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@+id/devPostCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
+            app:autoTint="false"
+            app:titleRes="@string/twitter"
+            />
+
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
+            android:id="@+id/instagramCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@+id/twitterCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
+            app:autoTint="false"
+            app:titleRes="@string/instagram"
+            />
+
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
+            android:id="@+id/facebookCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@+id/instagramCardView"
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
+            app:autoTint="false"
+            app:titleRes="@string/facebook"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
 

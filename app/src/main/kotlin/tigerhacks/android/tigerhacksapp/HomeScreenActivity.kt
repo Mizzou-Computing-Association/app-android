@@ -81,6 +81,9 @@ class HomeScreenActivity : AppCompatActivity() {
         actionBarDrawerToggle.syncState()
         navigationView.setNavigationItemSelectedListener(::navigateTo)
 
+        val title = if (FirebaseAuth.getInstance().currentUser != null) getString(R.string.title_profile) else getString(R.string.title_sign_in)
+        navigationView.menu.findItem(R.id.navigation_profile).title = title
+
         if (savedInstanceState == null) navigateTo(R.id.navigation_schedule) else navigateTo(savedInstanceState.getInt(FRAGMENT_ID_KEY, R.id.navigation_schedule))
     }
 

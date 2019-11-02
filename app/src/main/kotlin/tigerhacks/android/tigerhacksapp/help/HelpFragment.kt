@@ -22,11 +22,15 @@ class HelpFragment : BaseFragment() {
     ): View? {
         val layoutView = inflater.inflate(R.layout.fragment_help, container, false)
         arrayOf(
-            IdLink(R.id.tigerHacksWebsiteCardView, "http://tiger-hacks.com/"),
+            IdLink(R.id.tigerHacksWebsiteCardView, "http://tigerhacks.com/"),
             IdLink(R.id.mcaSlackCardView,"https://join.slack.com/t/tigerhacks2019/shared_invite/enQtNzg3ODQxMjQyNDg2LWExZTIyNWQ1ZThlMGRhMzAwNjQ4MGEwZDhhMmQxNTUwMTcyOGZiNjAxNzFkN2IzZjQxMDhhZGI5ZmFlMzkxMWQ"),
             IdLink(R.id.introFlaskCardView,"https://www.youtube.com/watch?v=V0QmmrTTbY4"),
             IdLink(R.id.introiOSCardView,"https://www.youtube.com/watch?v=kobP_rJAuyI"),
-            IdLink(R.id.introWebDevCardView,"https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s")
+            IdLink(R.id.introWebDevCardView,"https://www.youtube.com/watch?v=KaNfsfwSUu4&t=66s"),
+            IdLink(R.id.devPostCardView, "https://th19.devpost.com/"),
+            IdLink(R.id.twitterCardView, "https://twitter.com/TigerHacksHD"),
+            IdLink(R.id.instagramCardView, "https://instagram.com/tigerhacks"),
+            IdLink(R.id.facebookCardView, "https://facebook.com/TigerHacks")
         ).forEach { idLink ->
             //For Every IdLink register a click listener to the view id
             layoutView.findViewById<HelpItemView>(idLink.id).setOnClickListener {

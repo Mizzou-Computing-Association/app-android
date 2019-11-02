@@ -26,6 +26,10 @@
     <string name="none_available">None Available</string>
     <string name="tiger_hacks_website">TigerHacks Website</string>
     <string name="mca_slack">Tigerhacks 2019 Slack</string>
+    <string name="devpost">Devpost</string>
+    <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
     <string name="intro_to_flask">Intro to Flask</string>
     <string name="intro_to_web">Intro to Web Dev</string>
     <string name="intro_to_ios">Intro to iOS Dev</string>

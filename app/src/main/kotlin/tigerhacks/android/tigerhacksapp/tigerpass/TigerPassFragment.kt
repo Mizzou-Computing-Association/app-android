@@ -2,6 +2,7 @@ package tigerhacks.android.tigerhacksapp.tigerpass
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +52,7 @@ class TigerPassFragment : BaseFragment() {
     private lateinit var passwordEditText: EditText
 
     private lateinit var logOutButton: Button
+    private lateinit var registerButton: Button
     private lateinit var qrCodeImageView: ImageView
     private lateinit var progressBarView: ProgressBar
 
@@ -78,6 +80,7 @@ class TigerPassFragment : BaseFragment() {
 
         /* Tiger Pass Views */
         logOutButton = layoutView.findViewById(R.id.logOutButton)
+        registerButton = layoutView.findViewById(R.id.registerButton)
         qrCodeImageView = layoutView.findViewById(R.id.qrCodeImageView)
         progressBarView = layoutView.findViewById(R.id.progressBarView)
 
@@ -92,6 +95,8 @@ class TigerPassFragment : BaseFragment() {
         loginGoogleButton.setOnClickListener(::loginWithGoogle)
         loginGithubButton.setOnClickListener(::loginWithGithub)
         logOutButton.setOnClickListener(::logout)
+
+        registerButton.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerhacks.com"))) }
 
         update()
 
@@ -151,11 +156,13 @@ class TigerPassFragment : BaseFragment() {
         if (auth.currentUser == null) {
             setLoginVisibility(View.VISIBLE)
             setProfileVisibility(View.GONE)
+            registerButton.visibility = View.GONE
         } else {
             setLoginVisibility(View.GONE)
             setProfileVisibility(View.VISIBLE)
 
             observer = home.viewModel.profileLiveData.observeNotNull(this) {
+                registerButton.visibility = if (!it.registered) View.VISIBLE else View.GONE
                 Glide.with(this)
                     .load(it.pass)
                     .listener(object : RequestListener<Drawable> {
