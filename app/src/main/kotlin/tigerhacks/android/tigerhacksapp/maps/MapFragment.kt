@@ -2,15 +2,18 @@ package tigerhacks.android.tigerhacksapp.maps
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.service.BaseFragment
 
-class MapFragment : Fragment() {
+class MapFragment : BaseFragment() {
+    override val navId = R.id.navigation_map
+    override val titleResId = R.string.title_map
+
     private var mapView: SubsamplingScaleImageView? = null
     private var selection = 0
         set(value) {

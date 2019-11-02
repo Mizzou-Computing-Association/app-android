@@ -11,7 +11,6 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import android.os.Build
 import android.view.Menu
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -24,11 +23,10 @@ import tigerhacks.android.tigerhacksapp.help.HelpFragment
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
 import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment
 import tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment
+import tigerhacks.android.tigerhacksapp.service.BaseFragment
 import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment
 import tigerhacks.android.tigerhacksapp.tigerpass.TigerPassFragment
 import java.util.Stack
-
-data class FragmentTag(val fragment: Fragment, val tag: String)
 
 class HomeScreenActivity : AppCompatActivity() {
 
@@ -36,7 +34,7 @@ class HomeScreenActivity : AppCompatActivity() {
         private const val FRAGMENT_ID_KEY = "FRAGMENT_TAG_KEY"
     }
 
-    private lateinit var currentFragmentTag: FragmentTag
+    private lateinit var currentFragment: BaseFragment
     private lateinit var profileFragment: TigerPassFragment
     private lateinit var scheduleFragment: ScheduleFragment
     private lateinit var prizesFragment: PrizesFragment
@@ -89,22 +87,8 @@ class HomeScreenActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val fragments = supportFragmentManager.fragments
-        val tag = fragments[fragments.size - 1].tag
-        val menuId = when (tag) {
-            getString(R.string.title_profile) -> R.id.navigation_profile
-            getString(R.string.title_schedule) -> R.id.navigation_schedule
-            getString(R.string.title_prizes) -> R.id.navigation_prizes
-            getString(R.string.title_map) -> R.id.navigation_map
-            getString(R.string.title_sponsors) -> R.id.navigation_sponsors
-            getString(R.string.title_help) -> R.id.navigation_help
-            else -> null
-        }
-        if (menuId != null) outState.putInt(FRAGMENT_ID_KEY, menuId)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        simpleBackStack.clear()
+        val menuId = (fragments[fragments.size - 1] as? BaseFragment)?.navId ?: return
+        outState.putInt(FRAGMENT_ID_KEY, menuId)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -142,36 +126,43 @@ class HomeScreenActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (simpleBackStack.size > 1) {
-            simpleBackStack.pop()
-            val navId = simpleBackStack.pop()
-            navigateTo(navId)
+        if (simpleBackStack.size > 0) {
+            if (simpleBackStack.size > 10) simpleBackStack.removeAt(0)
+            val fragmentSize = supportFragmentManager.fragments.size
+            if (fragmentSize > 0) {
+                val navId = simpleBackStack.pop()
+                navigateTo(navId, false)
+            }
         } else {
             Snackbar.make(navFrameLayout, "Nothing else to go back to!", Snackbar.LENGTH_SHORT).show()
         }
     }
 
+    private var prevId = -1
+
     private fun addToSimpleBackStack(navId: Int) {
-        simpleBackStack.push(navId)
+        if (prevId != -1) simpleBackStack.push(prevId)
+        prevId = navId
     }
 
-    private fun navigateTo(menuItemId: Int) {
+    private fun navigateTo(menuItemId: Int, addToStack: Boolean = true) {
         val menuItem = navigationView.menu.findItem(menuItemId) ?: return
         navigateTo(menuItem)
+        if (!addToStack) simpleBackStack.pop()
     }
 
     private fun navigateTo(menuItem: MenuItem): Boolean {
-        val fragmentTag = when (menuItem.itemId) {
-            R.id.navigation_profile -> FragmentTag(profileFragment, getString(R.string.title_profile))
-            R.id.navigation_schedule -> FragmentTag(scheduleFragment, getString(R.string.title_schedule))
-            R.id.navigation_prizes -> FragmentTag(prizesFragment, getString(R.string.title_prizes))
-            R.id.navigation_map -> FragmentTag(mapsFragment, getString(R.string.title_map))
-            R.id.navigation_sponsors -> FragmentTag(sponsorsFragment, getString(R.string.title_sponsors))
-            else -> FragmentTag(helpFragment, getString(R.string.title_help))
+        val fragment: BaseFragment = when (menuItem.itemId) {
+            R.id.navigation_profile -> profileFragment
+            R.id.navigation_schedule -> scheduleFragment
+            R.id.navigation_prizes -> prizesFragment
+            R.id.navigation_map -> mapsFragment
+            R.id.navigation_sponsors -> sponsorsFragment
+            else -> helpFragment
         }
 
         menuItem.isChecked = true
-        currentFragmentTag = fragmentTag
+        currentFragment = fragment
         updateTitle()
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -182,7 +173,7 @@ class HomeScreenActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-            .replace(R.id.navFrameLayout, fragmentTag.fragment, fragmentTag.tag)
+            .replace(R.id.navFrameLayout, fragment, getString(fragment.titleResId))
             .commit()
 
         addToSimpleBackStack(menuItem.itemId)
@@ -197,8 +188,8 @@ class HomeScreenActivity : AppCompatActivity() {
     }
 
     fun updateTitle() {
-        if (currentFragmentTag.tag == getString(R.string.title_profile)) {
+        if (currentFragment.navId == R.id.navigation_profile) {
             updateNavgraphLabel()
-        } else supportActionBar?.title = currentFragmentTag.tag
+        } else supportActionBar?.title = getString(currentFragment.titleResId)
     }
 }

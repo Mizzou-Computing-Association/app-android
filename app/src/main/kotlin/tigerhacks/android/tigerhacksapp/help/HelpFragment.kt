@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.service.BaseFragment
 
 //Helper data class to link View Id's to the Url that should open that that view Id is clicked
 private data class IdLink(val id: Int, val link: String)
 
-class HelpFragment : androidx.fragment.app.Fragment() {
+class HelpFragment : BaseFragment() {
+    override val navId = R.id.navigation_help
+    override val titleResId = R.string.title_help
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

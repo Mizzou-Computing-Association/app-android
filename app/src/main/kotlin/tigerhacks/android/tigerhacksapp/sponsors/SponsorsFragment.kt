@@ -3,6 +3,7 @@ package tigerhacks.android.tigerhacksapp.sponsors
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
@@ -12,6 +13,9 @@ import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorHeader
  * @author pauldg7@gmail.com (Paul Gillis)
  */
 class SponsorsFragment : RecyclerFragment<Sponsor>() {
+    override val navId = R.id.navigation_sponsors
+    override val titleResId = R.string.title_sponsors
+
     override fun initSetup() {
         liveData = viewModel.sponsorListLiveData
         statusLiveData = viewModel.sponsorStatusLiveData

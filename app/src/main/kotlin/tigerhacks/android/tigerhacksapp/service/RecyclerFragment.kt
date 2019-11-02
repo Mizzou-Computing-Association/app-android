@@ -30,7 +30,7 @@ import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
  * purpose: Multiple fragments inflate the same view as a base and then load content into it from the viewModel.
  * I made this super class to remove how many times I have to see this same code.
  */
-abstract class RecyclerFragment<T> : Fragment() {
+abstract class RecyclerFragment<T> : BaseFragment() {
 
     private lateinit var layout: ConstraintLayout
     private lateinit var progressBar: ProgressBar

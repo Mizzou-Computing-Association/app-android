@@ -5,9 +5,13 @@ import com.google.android.material.tabs.TabLayout
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
 class ScheduleFragment : RecyclerFragment<Event>() {
+    override val navId = R.id.navigation_schedule
+    override val titleResId = R.string.title_schedule
+
     enum class Day {
         FRIDAY, SATURDAY, SUNDAY
     }

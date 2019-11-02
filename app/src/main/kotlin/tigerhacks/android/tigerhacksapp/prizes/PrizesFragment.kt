@@ -3,9 +3,13 @@ package tigerhacks.android.tigerhacksapp.prizes
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
 class PrizesFragment : RecyclerFragment<Prize>() {
+    override val navId = R.id.navigation_prizes
+    override val titleResId = R.string.title_prizes
+
     override val onRefresh
         get() = viewModel::refreshPrizes
 

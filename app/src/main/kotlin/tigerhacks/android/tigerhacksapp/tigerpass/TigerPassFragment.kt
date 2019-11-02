@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -31,13 +30,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.service.BaseFragment
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
-class TigerPassFragment : Fragment() {
+class TigerPassFragment : BaseFragment() {
     companion object {
         const val RC_SIGN_IN = 9001
     }
+
+    override val navId = R.id.navigation_profile
+    override val titleResId = R.string.title_profile
 
     private lateinit var loginContainer: ConstraintLayout
     private lateinit var loginButton: AppCompatButton
