@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.view_mentor.view.skillsTextView
 import kotlinx.android.synthetic.main.view_mentor_list.view.mentorsEmptyTextView
 import kotlinx.android.synthetic.main.view_mentor_list.view.mentorsLayout
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
+import tigerhacks.android.tigerhacksapp.models.Mentor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

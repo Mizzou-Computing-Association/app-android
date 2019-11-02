@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
+import tigerhacks.android.tigerhacksapp.models.Sponsor
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorHeader
 

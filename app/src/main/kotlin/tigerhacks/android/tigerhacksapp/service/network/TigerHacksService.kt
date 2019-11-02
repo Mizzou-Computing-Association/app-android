@@ -4,9 +4,9 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import tigerhacks.android.tigerhacksapp.prizes.PrizeList
-import tigerhacks.android.tigerhacksapp.sponsors.models.SponsorList
-import tigerhacks.android.tigerhacksapp.tigerpass.Profile
+import tigerhacks.android.tigerhacksapp.models.PrizeList
+import tigerhacks.android.tigerhacksapp.models.SponsorList
+import tigerhacks.android.tigerhacksapp.models.Profile
 
 /**
  * Created by Conno on 9/22/2018.

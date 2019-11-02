@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.view_sponsor_card.view.allMentorsTextView
 import kotlinx.android.synthetic.main.view_sponsor_card.view.sponsorContainer
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
+import tigerhacks.android.tigerhacksapp.models.Sponsor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

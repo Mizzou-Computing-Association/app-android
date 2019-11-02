@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.view_event.view.*
 import kotlinx.android.synthetic.main.view_event.view.descriptionTextView
 import kotlinx.android.synthetic.main.view_event.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.models.Event
 
 /**
  * Created by Conno on 9/15/2018.

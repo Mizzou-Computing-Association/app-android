@@ -3,9 +3,10 @@ package tigerhacks.android.tigerhacksapp.service.database.daos
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import tigerhacks.android.tigerhacksapp.schedule.Event
+import tigerhacks.android.tigerhacksapp.models.Event
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -26,7 +27,7 @@ interface ScheduleDAO {
     @Query("DELETE FROM event")
     fun deleteAll()
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(events: List<Event>)
 
     @Transaction

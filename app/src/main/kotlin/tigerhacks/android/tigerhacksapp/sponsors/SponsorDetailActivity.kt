@@ -26,8 +26,8 @@ import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.darkenColor
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
-import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
+import tigerhacks.android.tigerhacksapp.models.Mentor
+import tigerhacks.android.tigerhacksapp.models.Sponsor
 
 private const val SPONSOR_KEY = "sponsor_key"
 

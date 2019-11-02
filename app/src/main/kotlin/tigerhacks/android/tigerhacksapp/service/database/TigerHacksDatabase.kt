@@ -4,15 +4,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
-import tigerhacks.android.tigerhacksapp.prizes.Prize
-import tigerhacks.android.tigerhacksapp.schedule.Event
+import tigerhacks.android.tigerhacksapp.models.Prize
+import tigerhacks.android.tigerhacksapp.models.Event
 import tigerhacks.android.tigerhacksapp.service.database.daos.PrizesDAO
 import tigerhacks.android.tigerhacksapp.service.database.daos.ProfileDAO
 import tigerhacks.android.tigerhacksapp.service.database.daos.ScheduleDAO
 import tigerhacks.android.tigerhacksapp.service.database.daos.SponsorsDAO
-import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
-import tigerhacks.android.tigerhacksapp.tigerpass.Profile
+import tigerhacks.android.tigerhacksapp.models.Mentor
+import tigerhacks.android.tigerhacksapp.models.Sponsor
+import tigerhacks.android.tigerhacksapp.models.Profile
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

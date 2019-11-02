@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.tigerpass
+package tigerhacks.android.tigerhacksapp.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

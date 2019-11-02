@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.models.Event
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
 class ScheduleFragment : RecyclerFragment<Event>() {

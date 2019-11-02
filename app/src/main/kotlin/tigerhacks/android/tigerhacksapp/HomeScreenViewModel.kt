@@ -12,12 +12,12 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import tigerhacks.android.tigerhacksapp.schedule.Event
+import tigerhacks.android.tigerhacksapp.models.Event
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.network.TigerHacksService
 import java.io.IOException
 import com.squareup.moshi.Types
-import tigerhacks.android.tigerhacksapp.schedule.EventTimeAdapter
+import tigerhacks.android.tigerhacksapp.models.EventTimeAdapter
 
 
 /**

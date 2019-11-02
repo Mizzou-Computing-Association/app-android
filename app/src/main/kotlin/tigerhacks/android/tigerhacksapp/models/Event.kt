@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.schedule
+package tigerhacks.android.tigerhacksapp.models
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity

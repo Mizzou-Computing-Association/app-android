@@ -3,9 +3,10 @@ package tigerhacks.android.tigerhacksapp.service.database.daos
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import tigerhacks.android.tigerhacksapp.tigerpass.Profile
+import tigerhacks.android.tigerhacksapp.models.Profile
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -19,7 +20,7 @@ interface ProfileDAO {
     @Query("DELETE FROM profile")
     fun deleteAll()
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(profile: Profile)
 
     @Transaction

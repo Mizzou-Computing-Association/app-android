@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Tiger Hacks</string>
     <string name="title_map">Map</string>
     <string name="title_prizes">Prizes</string>
     <string name="title_schedule">Schedule</string>
@@ -41,7 +40,7 @@
     <string name="developer">Developer</string>
     <string name="Misc">Misc.</string>
     <string name="beginner">Beginner</string>
-    <string name="username">Username</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="log_in">Sign in with Email</string>
     <string name="log_out">Log out</string>

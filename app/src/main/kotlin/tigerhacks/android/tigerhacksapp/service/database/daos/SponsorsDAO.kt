@@ -3,10 +3,11 @@ package tigerhacks.android.tigerhacksapp.service.database.daos
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import tigerhacks.android.tigerhacksapp.sponsors.models.Mentor
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor
+import tigerhacks.android.tigerhacksapp.models.Mentor
+import tigerhacks.android.tigerhacksapp.models.Sponsor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -23,7 +24,7 @@ interface SponsorsDAO {
     @Query("SELECT * FROM mentor")
     fun getAllMentors(): LiveData<List<Mentor>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllSponsors(sponsors: List<Sponsor>)
 
     @Query("DELETE FROM sponsor")
@@ -42,7 +43,7 @@ interface SponsorsDAO {
         updateMentors(mentors)
     }
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllMentors(mentors: List<Mentor>)
 
     @Query("DELETE FROM mentor")

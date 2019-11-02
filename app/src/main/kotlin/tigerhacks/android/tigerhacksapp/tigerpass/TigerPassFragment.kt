@@ -30,6 +30,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.models.Profile
 import tigerhacks.android.tigerhacksapp.service.BaseFragment
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
@@ -46,7 +47,7 @@ class TigerPassFragment : BaseFragment() {
     private lateinit var loginButton: AppCompatButton
     private lateinit var loginGoogleButton: AppCompatButton
     private lateinit var loginGithubButton: AppCompatButton
-    private lateinit var usernameEditText: EditText
+    private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
 
     private lateinit var logOutButton: Button
@@ -72,7 +73,7 @@ class TigerPassFragment : BaseFragment() {
         loginButton = layoutView.findViewById(R.id.loginButton)
         loginGoogleButton = layoutView.findViewById(R.id.loginGoogleButton)
         loginGithubButton = layoutView.findViewById(R.id.loginGithubButton)
-        usernameEditText = layoutView.findViewById(R.id.usernameEditText)
+        emailEditText = layoutView.findViewById(R.id.emailEditText)
         passwordEditText = layoutView.findViewById(R.id.passwordEditText)
 
         /* Tiger Pass Views */
@@ -116,17 +117,23 @@ class TigerPassFragment : BaseFragment() {
                 val account = task.getResult(ApiException::class.java) ?: return
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                loginFailure()
+                if (e.statusCode != 12501) { //User cancel status code
+                    loginFailure()
+                }
             }
         }
     }
 
     private fun setLoginVisibility(visibility: Int) {
-        usernameEditText.visibility = visibility
+        emailEditText.visibility = visibility
         passwordEditText.visibility = visibility
         loginButton.visibility = visibility
         loginGoogleButton.visibility = visibility
         loginGithubButton.visibility = visibility
+        if (visibility == View.GONE) {
+            emailEditText.editableText.clear()
+            passwordEditText.editableText.clear()
+        }
     }
 
     private fun setProfileVisibility(visibility: Int) {
@@ -168,8 +175,8 @@ class TigerPassFragment : BaseFragment() {
     }
 
     private fun login(v: View) {
-        if (usernameEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
-            val email = usernameEditText.text.toString()
+        if (emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
+            val email = emailEditText.text.toString()
             val pass = passwordEditText.text.toString()
             auth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener {
@@ -181,7 +188,7 @@ class TigerPassFragment : BaseFragment() {
                     }
                 }
         } else {
-            loginFailure("Invalid Username or Password")
+            loginFailure("Invalid Email or Password")
         }
     }
 
@@ -189,7 +196,9 @@ class TigerPassFragment : BaseFragment() {
         auth.startActivityForSignInWithProvider(home, githubProvider)
             .addOnSuccessListener { loginComplete() }
             .addOnFailureListener {
-                loginFailure()
+                if (it.message?.contains("An account already") == true) {
+                    loginFailure("Email address already registered using a different Sign in method!")
+                } else loginFailure()
             }
     }
 
@@ -219,7 +228,7 @@ class TigerPassFragment : BaseFragment() {
     }
 
     private fun loginFailure(message: String = "Authentication Failed.") {
-        Snackbar.make(loginContainer, message, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(loginContainer, message, Snackbar.LENGTH_LONG).show()
     }
 
     private fun logout(v: View) {

@@ -11,13 +11,22 @@ android {
         applicationId "tigerhacks.android.tigerhacksapp"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 6
-        versionName "1.3"
+        versionCode 8
+        versionName "1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            resValue "string", "app_name", "Tiger Hacks Debug"
+            debuggable true
+            minifyEnabled false
+        }
         release {
+            resValue "string", "app_name", "Tiger Hacks"
             minifyEnabled true
+            multiDexEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -85,8 +94,4 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2'
-}
-
-androidExtensions {
-    experimental = true
 }

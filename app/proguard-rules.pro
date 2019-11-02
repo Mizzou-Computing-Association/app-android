@@ -14,11 +14,30 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keep @com.squareup.moshi.JsonQualifier interface *
+-dontwarn org.jetbrains.annotations.**
+-keep class kotlin.Metadata { *; }
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+
+-keepclassmembers class * {
+    @com.squareup.moshi.FromJson <methods>;
+    @com.squareup.moshi.ToJson <methods>;
+}
+
+-keepnames @kotlin.Metadata class tigerhacks.android.tigerhacksapp.models.**
+-keep class tigerhacks.android.tigerhacksapp.models.** { *; }
+-keepclassmembers class tigerhacks.android.tigerhacksapp.models.**
+
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {

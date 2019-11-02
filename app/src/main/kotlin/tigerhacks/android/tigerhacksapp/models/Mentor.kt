@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.sponsors.models
+package tigerhacks.android.tigerhacksapp.models
 
 import android.os.Parcelable
 import androidx.room.Entity

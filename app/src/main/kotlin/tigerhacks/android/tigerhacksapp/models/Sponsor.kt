@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.sponsors.models
+package tigerhacks.android.tigerhacksapp.models
 
 import android.os.Parcelable
 import androidx.annotation.ColorRes
@@ -10,8 +10,8 @@ import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor.Companion.ALL_MENTORS_KEY
-import tigerhacks.android.tigerhacksapp.sponsors.models.Sponsor.Companion.HEADER_KEY
+import tigerhacks.android.tigerhacksapp.models.Sponsor.Companion.ALL_MENTORS_KEY
+import tigerhacks.android.tigerhacksapp.models.Sponsor.Companion.HEADER_KEY
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

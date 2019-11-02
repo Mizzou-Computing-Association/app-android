@@ -1,10 +1,10 @@
-package tigerhacks.android.tigerhacksapp.prizes
+package tigerhacks.android.tigerhacksapp.models
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
-import tigerhacks.android.tigerhacksapp.prizes.Prize.Companion.HEADER_KEY
+import tigerhacks.android.tigerhacksapp.models.Prize.Companion.HEADER_KEY
 
 @JsonClass(generateAdapter = true)
 data class PrizeList(
@@ -18,19 +18,19 @@ data class PrizeList(
 ) {
     fun combine(): List<Prize> {
         val total = arrayListOf<Prize>()
-        total.add(Prize(id="${HEADER_KEY}0", prizeType = "Developer"))
+        total.add(Prize(id = "${HEADER_KEY}0", prizeType = "Developer"))
         total.addAll(Developer)
-        total.add(Prize(id="${HEADER_KEY}1", prizeType = "Beginner"))
+        total.add(Prize(id = "${HEADER_KEY}1", prizeType = "Beginner"))
         total.addAll(Beginner)
-        total.add(Prize(id="${HEADER_KEY}2", prizeType = "Sponsored"))
+        total.add(Prize(id = "${HEADER_KEY}2", prizeType = "Sponsored"))
         total.addAll(Sponsored)
-        total.add(Prize(id="${HEADER_KEY}3", prizeType = "StartUp"))
+        total.add(Prize(id = "${HEADER_KEY}3", prizeType = "StartUp"))
         total.addAll(StartUp)
-        total.add(Prize(id="${HEADER_KEY}4", prizeType = "Visuals"))
+        total.add(Prize(id = "${HEADER_KEY}4", prizeType = "Visuals"))
         total.addAll(Visuals)
-        total.add(Prize(id="${HEADER_KEY}5", prizeType = "Audio"))
+        total.add(Prize(id = "${HEADER_KEY}5", prizeType = "Audio"))
         total.addAll(Audio)
-        total.add(Prize(id="${HEADER_KEY}6", prizeType = "Hardware"))
+        total.add(Prize(id = "${HEADER_KEY}6", prizeType = "Hardware"))
         total.addAll(Hardware)
         return total
     }

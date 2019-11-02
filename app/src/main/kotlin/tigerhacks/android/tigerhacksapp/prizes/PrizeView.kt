@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.view_prize.view.descriptionTextView
 import kotlinx.android.synthetic.main.view_prize.view.prizeListTextView
 import kotlinx.android.synthetic.main.view_prize.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.models.Prize
 
 /**
  * Created by Conno on 9/8/2018.
