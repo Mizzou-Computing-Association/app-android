@@ -91,7 +91,7 @@
             android:layout_marginTop="@dimen/margin_top_large"
             android:layout_marginStart="@dimen/margin_start_large"
 
-            android:text="@string/other_links"
+            android:text="@string/social_links"
             android:textAppearance="@style/AppTheme.TitleSecondary"
             />
 
