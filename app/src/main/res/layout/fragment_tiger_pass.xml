@@ -6,51 +6,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/emailEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameEditTextLayout"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="65dp"
 
-        android:background="@drawable/rounded_edittext"
-        android:padding="10dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
         android:layout_marginStart="@dimen/margin_start_large"
         android:layout_marginTop="@dimen/margin_top_large"
-        android:layout_marginEnd="@dimen/margin_start_large"
+        android:layout_marginEnd="@dimen/margin_start_large">
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
 
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/rounded_edittext"
+            android:padding="10dip"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/passwordEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordEditTextLayout"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="65dp"
 
+        app:layout_constraintEnd_toEndOf="@id/usernameEditTextLayout"
+        app:layout_constraintStart_toStartOf="@id/usernameEditTextLayout"
+        app:layout_constraintTop_toBottomOf="@id/usernameEditTextLayout"
 
-        android:background="@drawable/rounded_edittext"
-        android:padding="10dp"
+        android:layout_marginTop="5dp">
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
 
-        android:layout_marginTop="@dimen/margin_top"
-        android:hint="@string/password"
-        android:inputType="textPassword"
+            android:hint="@string/password"
+            android:inputType="textPassword"
 
-        app:layout_constraintEnd_toEndOf="@id/emailEditText"
+            android:padding="10dp"
 
-        app:layout_constraintStart_toStartOf="@id/emailEditText"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+            android:background="@drawable/rounded_edittext"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="55dp"
 
-        app:layout_constraintEnd_toEndOf="@id/passwordEditText"
-        app:layout_constraintStart_toStartOf="@id/passwordEditText"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+        app:layout_constraintEnd_toEndOf="@id/passwordEditTextLayout"
+        app:layout_constraintStart_toStartOf="@id/passwordEditTextLayout"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout"
 
         android:padding="14dp"
 
@@ -71,8 +83,8 @@
         android:layout_width="0dp"
         android:layout_height="55dp"
 
-        app:layout_constraintEnd_toEndOf="@id/passwordEditText"
-        app:layout_constraintStart_toStartOf="@id/passwordEditText"
+        app:layout_constraintEnd_toEndOf="@id/passwordEditTextLayout"
+        app:layout_constraintStart_toStartOf="@id/passwordEditTextLayout"
         app:layout_constraintTop_toBottomOf="@id/loginButton"
 
         android:padding="14dp"
@@ -96,8 +108,8 @@
         android:layout_width="0dp"
         android:layout_height="55dp"
 
-        app:layout_constraintEnd_toEndOf="@id/passwordEditText"
-        app:layout_constraintStart_toStartOf="@id/passwordEditText"
+        app:layout_constraintEnd_toEndOf="@id/passwordEditTextLayout"
+        app:layout_constraintStart_toStartOf="@id/passwordEditTextLayout"
         app:layout_constraintTop_toBottomOf="@id/loginGoogleButton"
 
         android:padding="14dp"

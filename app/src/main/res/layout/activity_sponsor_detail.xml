@@ -41,7 +41,6 @@
                 android:contentDescription="@string/sponsor_logo"
                 />
 
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -77,6 +76,7 @@
 
                 android:textAppearance="@style/AppTheme.TitlePrimary"
                 android:text="@string/description"
+                android:visibility="visible"
                 />
             
             <TextView
@@ -111,9 +111,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                app:layout_constraintStart_toStartOf="@id/descriptionTitleTextView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/informationTitleDivider"
                 android:layout_marginTop="@dimen/margin_top_large"
+                android:layout_marginStart="@dimen/margin_start_large"
 
                 android:textAppearance="@style/AppTheme.TitleSecondary"
                 android:text="@string/information"
@@ -135,13 +136,16 @@
 
             <TextView
                 android:id="@+id/linkText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
                 app:layout_constraintStart_toEndOf="@id/internetImageView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/internetImageView"
+                app:layout_constraintHorizontal_bias="0"
 
                 android:layout_marginStart="@dimen/margin_start"
+                android:layout_marginEnd="@dimen/margin_start_large"
 
                 tools:text="link"
                 android:textAppearance="@style/AppTheme.TextPrimary"

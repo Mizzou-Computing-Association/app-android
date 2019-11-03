@@ -16,7 +16,6 @@ import tigerhacks.android.tigerhacksapp.models.Sponsor.Companion.HEADER_KEY
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-
 @JsonClass(generateAdapter = true)
 data class SponsorList(
     val Gold: List<Sponsor> = emptyList(),

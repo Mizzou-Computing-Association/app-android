@@ -64,7 +64,13 @@ class SponsorDetailActivity : AppCompatActivity() {
             appBarLayout.setExpanded(false, false)
         }
 
-        descriptionText.text = sponsor.description
+        if (sponsor.description.isEmpty()) {
+            descriptionTitleTextView.visibility = View.GONE
+            descriptionText.visibility = View.GONE
+            informationTitleDivider.visibility = View.GONE
+        } else {
+            descriptionText.text = sponsor.description
+        }
 
         linkText.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(sponsor.website))
@@ -72,11 +78,8 @@ class SponsorDetailActivity : AppCompatActivity() {
         }
 
         db = TigerHacksDatabase.getDatabase(applicationContext)
-        val liveData = if (sponsor.description.isEmpty()) {
-            descriptionTitleTextView.visibility = View.GONE
-            descriptionText.visibility = View.GONE
+        val liveData = if (sponsor.name == Sponsor.ALL_MENTORS_KEY) {
             mentorDivider.visibility = View.GONE
-
             db.sponsorsDAO().getAllMentors()
         } else {
             db.sponsorsDAO().getMentorsForSponsor(sponsor.name)
