@@ -60,5 +60,23 @@
     <string name="all_mentors">All Mentors</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="full_name">Full Name</string>
+    <string name="school">School</string>
+    <string name="major">Major</string>
+    <string name="graduation_year">Graduation Year</string>
+    <string name="shirt_size">Shirt Size</string>
+    <string name="dietary_restrictions">Dietary Restrictions</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="kosher">Kosher</string>
+    <string name="halal">Halal</string>
+    <string name="vegan">Vegan</string>
+    <string name="gluten_free">Gluten Free</string>
+    <string name="allergy">Allergy (please specify in notes)</string>
+    <string name="other">Other (please specify in notes)</string>
+    <string name="notes">Notes</string>
+    <string name="upload_resume">Upload Resume</string>
+    <string name="travel_reimbursement">Will you need travel reimbursement?</string>
+    <string name="mlh_user_agreement">I have read and agree to the MLH Code of Conduct, the MLH Contest Terms and Conditions , and the MLH Privacy Policy</string>
+    <string name="mlh_share_agreement">I authorize you to share my application/registration information for event administration, ranking, MLH administration, pre- and post-event informational e-mails, and occasional messages about hackathons in-line with the MLH Privacy Policy.</string>
     <string name="firebase_web_host" translatable="false">177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com</string>
 </resources>

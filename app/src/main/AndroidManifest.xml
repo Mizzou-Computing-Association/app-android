@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".sponsors.SponsorDetailActivity" />
+        <activity android:name=".tigerpass.RegisterActivity" />
         <activity
             android:name=".HomeScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

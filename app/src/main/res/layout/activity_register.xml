@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        android:paddingTop="@dimen/margin_top_large"
+        android:paddingBottom="@dimen/margin_top_large"
+        android:paddingStart="@dimen/margin_start_large"
+        android:paddingEnd="@dimen/margin_start_large">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/full_name">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/email">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/schoolTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/school">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/schoolEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/majorTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/major">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/majorEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/graduation_year"
+            />
+
+        <Spinner
+            android:id="@+id/graduationYearSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/shirt_size"
+            />
+
+        <Spinner
+            android:id="@+id/shirtSizeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/dietary_restrictions"
+            />
+
+        <CheckBox
+            android:id="@+id/vegetarianCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/vegetarian"
+            />
+
+        <CheckBox
+            android:id="@+id/kosherCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/kosher"
+            />
+
+        <CheckBox
+            android:id="@+id/halalCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/halal"
+            />
+
+        <CheckBox
+            android:id="@+id/veganCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/vegan"
+            />
+
+        <CheckBox
+            android:id="@+id/glutenFreeCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/gluten_free"
+            />
+
+        <CheckBox
+            android:id="@+id/allergyCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/allergy"
+            />
+
+        <CheckBox
+            android:id="@+id/otherCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/other"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/notesTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/notes">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/notesEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/uploadResumeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/upload_resume"
+            />
+
+        <CheckBox
+            android:id="@+id/travelCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/travel_reimbursement"
+            />
+
+        <CheckBox
+            android:id="@+id/userAgreementCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/mlh_user_agreement"
+            />
+
+        <CheckBox
+            android:id="@+id/mlhShareCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/mlh_share_agreement"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/register"
+            />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -96,7 +96,7 @@ class TigerPassFragment : BaseFragment() {
         loginGithubButton.setOnClickListener(::loginWithGithub)
         logOutButton.setOnClickListener(::logout)
 
-        registerButton.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerhacks.com"))) }
+        registerButton.setOnClickListener { startActivity(Intent(context, RegisterActivity::class.java)) }
 
         update()
 
