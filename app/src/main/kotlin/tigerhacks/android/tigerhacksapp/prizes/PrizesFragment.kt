@@ -1,5 +1,7 @@
 package tigerhacks.android.tigerhacksapp.prizes
 
+import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +19,8 @@ class PrizesFragment : RecyclerFragment<Prize>() {
     override val onRefresh
         get() = viewModel::refreshPrizes
 
-    override fun initSetup() {
+    override fun onViewCreated(layoutView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(layoutView, savedInstanceState)
         liveData = viewModel.prizeListLiveData
         statusLiveData = viewModel.prizeStatusLiveData
     }

@@ -4,9 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -39,7 +37,7 @@ import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-class TigerPassFragment : BaseFragment() {
+class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
     companion object {
         const val RC_SIGN_IN = 9001
     }
@@ -68,8 +66,8 @@ class TigerPassFragment : BaseFragment() {
     private var observer: Observer<Profile>? = null
     private lateinit var home: HomeScreenActivity
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val layoutView = inflater.inflate(R.layout.fragment_tiger_pass, container, false)
+    override fun onViewCreated(layoutView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(layoutView, savedInstanceState)
 
         home = activity as HomeScreenActivity
 
@@ -102,8 +100,6 @@ class TigerPassFragment : BaseFragment() {
         registerButton.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerhacks.com"))) }
 
         update()
-
-        return layoutView
     }
 
     override fun onStart() {

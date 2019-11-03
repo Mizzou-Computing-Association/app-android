@@ -1,74 +1,45 @@
 package tigerhacks.android.tigerhacksapp.schedule
 
+import android.os.Bundle
 import android.view.View
 import com.google.android.material.tabs.TabLayout
-import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Event
-import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
+import tigerhacks.android.tigerhacksapp.service.BaseFragment
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-class ScheduleFragment : RecyclerFragment<Event>() {
+class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
     override val navId = R.id.navigation_schedule
     override val titleResId = R.string.title_schedule
 
-    enum class Day {
-        FRIDAY, SATURDAY, SUNDAY
-    }
+    private val pagerAdapter = object : FragmentStatePagerAdapter(childFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        override fun getItem(position: Int) = when (position) {
+            0 -> DayFragment(Event.Day.FRIDAY)
+            1 -> DayFragment(Event.Day.SATURDAY)
+            else -> DayFragment(Event.Day.SUNDAY)
+        }
 
-    private var currentDay = Day.FRIDAY
+        override fun getCount() = 3
 
-    override val onRefresh
-        get() = viewModel::refreshEvents
-
-    override fun initSetup() {
-        tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                when (tab.position) {
-                    0 -> syncDayState(Day.FRIDAY)
-                    1 -> syncDayState(Day.SATURDAY)
-                    else -> syncDayState(Day.SUNDAY)
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
-
-        recyclerView.scrollBarSize = 0
-
-        tabLayout?.visibility = View.VISIBLE
-
-        syncDayState(currentDay, true)
-        statusLiveData = viewModel.eventStatusLiveData
-        if (currentDay.ordinal != tabLayout?.selectedTabPosition) {
-            tabLayout?.getTabAt(currentDay.ordinal)?.select()
+        override fun getPageTitle(position: Int) = when (position) {
+            0 -> getString(R.string.friday)
+            1 -> getString(R.string.saturday)
+            else -> getString(R.string.sunday)
         }
     }
 
-    override val adapter = object : ListAdapter<Event, RecyclerView.ViewHolder>(Event.diff) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(EventView(parent.context)) {}
+    override fun onViewCreated(layout: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(layout, savedInstanceState)
+        val viewPager = layout.findViewById<ViewPager>(R.id.mainViewPager)
+        val tabLayout = layout.findViewById<TabLayout>(R.id.tabLayout)
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val eventCardView = (holder.itemView as? EventView) ?: return
-            eventCardView.setup(getItem(position), position == 0, position == itemCount - 1)
-        }
-    }
+        tabLayout.setupWithViewPager(viewPager)
 
-    private fun syncDayState(day: Day, bypass: Boolean = false) {
-        if (currentDay == day && !bypass) return
-        currentDay = day
-        resetObserver()
-
-        liveData = when (currentDay) {
-            Day.FRIDAY -> viewModel.fridayEventListLiveData
-            Day.SATURDAY -> viewModel.saturdayEventListLiveData
-            Day.SUNDAY -> viewModel.sundayEventListLiveData
-        }
+        viewPager.adapter = pagerAdapter
     }
 }
 

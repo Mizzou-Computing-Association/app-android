@@ -1,5 +1,8 @@
 package tigerhacks.android.tigerhacksapp.sponsors
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +19,8 @@ class SponsorsFragment : RecyclerFragment<Sponsor>() {
     override val navId = R.id.navigation_sponsors
     override val titleResId = R.string.title_sponsors
 
-    override fun initSetup() {
+    override fun onViewCreated(layoutView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(layoutView, savedInstanceState)
         liveData = viewModel.sponsorListLiveData
         statusLiveData = viewModel.sponsorStatusLiveData
     }

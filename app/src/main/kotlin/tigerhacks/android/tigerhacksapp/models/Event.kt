@@ -60,4 +60,8 @@ data class Event (
             override fun areContentsTheSame(oldItem: Event, newItem: Event) = oldItem == newItem
         }
     }
+
+    enum class Day {
+        FRIDAY, SATURDAY, SUNDAY
+    }
 }

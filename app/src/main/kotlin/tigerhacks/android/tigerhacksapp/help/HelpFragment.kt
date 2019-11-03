@@ -3,9 +3,7 @@ package tigerhacks.android.tigerhacksapp.help
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.BaseFragment
 
@@ -16,15 +14,12 @@ import tigerhacks.android.tigerhacksapp.service.BaseFragment
 //Helper data class to link View Id's to the Url that should open that that view Id is clicked
 private data class IdLink(val id: Int, val link: String)
 
-class HelpFragment : BaseFragment() {
+class HelpFragment : BaseFragment(R.layout.fragment_help) {
     override val navId = R.id.navigation_help
     override val titleResId = R.string.title_help
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val layoutView = inflater.inflate(R.layout.fragment_help, container, false)
+    override fun onViewCreated(layoutView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(layoutView, savedInstanceState)
         arrayOf(
             IdLink(R.id.tigerHacksWebsiteCardView, "http://tigerhacks.com/"),
             IdLink(R.id.mcaSlackCardView,"https://join.slack.com/t/tigerhacks2019/shared_invite/enQtNzg3ODQxMjQyNDg2LWExZTIyNWQ1ZThlMGRhMzAwNjQ4MGEwZDhhMmQxNTUwMTcyOGZiNjAxNzFkN2IzZjQxMDhhZGI5ZmFlMzkxMWQ"),
@@ -42,7 +37,5 @@ class HelpFragment : BaseFragment() {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(idLink.link)))
             }
         }
-
-        return layoutView
     }
 }
