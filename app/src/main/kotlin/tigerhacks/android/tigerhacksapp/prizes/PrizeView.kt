@@ -11,6 +11,7 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Prize
 
 /**
+ * @author pauldg7@gmail.com (Paul Gillis)
  * Created by Conno on 9/8/2018.
  */
 

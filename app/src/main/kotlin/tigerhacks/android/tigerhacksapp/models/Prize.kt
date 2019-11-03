@@ -4,9 +4,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
+import se.ansman.kotshi.JsonSerializable
 import tigerhacks.android.tigerhacksapp.models.Prize.Companion.HEADER_KEY
 
-@JsonClass(generateAdapter = true)
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
+@JsonSerializable
 data class PrizeList(
     val Developer: List<Prize> = emptyList(),
     val Sponsored: List<Prize> = emptyList(),
@@ -37,7 +41,7 @@ data class PrizeList(
 }
 
 @Entity
-@JsonClass(generateAdapter = true)
+@JsonSerializable
 data class Prize(
     @PrimaryKey val id: String = "",
     val sponsor: String = "",

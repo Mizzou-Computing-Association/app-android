@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.BaseFragment
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
+
 //Helper data class to link View Id's to the Url that should open that that view Id is clicked
 private data class IdLink(val id: Int, val link: String)
 

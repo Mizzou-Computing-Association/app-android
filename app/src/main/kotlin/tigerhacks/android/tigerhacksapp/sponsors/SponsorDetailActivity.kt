@@ -29,6 +29,9 @@ import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.models.Mentor
 import tigerhacks.android.tigerhacksapp.models.Sponsor
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 private const val SPONSOR_KEY = "sponsor_key"
 
 class SponsorDetailActivity : AppCompatActivity() {

@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
+import se.ansman.kotshi.JsonSerializable
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Sponsor.Companion.ALL_MENTORS_KEY
 import tigerhacks.android.tigerhacksapp.models.Sponsor.Companion.HEADER_KEY
@@ -16,7 +16,7 @@ import tigerhacks.android.tigerhacksapp.models.Sponsor.Companion.HEADER_KEY
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-@JsonClass(generateAdapter = true)
+@JsonSerializable
 data class SponsorList(
     val Gold: List<Sponsor> = emptyList(),
     val Bronze: List<Sponsor> = emptyList(),
@@ -39,8 +39,8 @@ data class SponsorList(
 }
 
 @Entity
-@JsonClass(generateAdapter = true)
 @Parcelize
+@JsonSerializable
 data class Sponsor(
     @PrimaryKey val name: String = "",
     val description: String = "",
