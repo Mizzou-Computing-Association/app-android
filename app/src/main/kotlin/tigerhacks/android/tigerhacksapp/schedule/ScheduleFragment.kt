@@ -9,6 +9,9 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Event
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 class ScheduleFragment : RecyclerFragment<Event>() {
     override val navId = R.id.navigation_schedule
     override val titleResId = R.string.title_schedule

@@ -12,6 +12,7 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Event
 
 /**
+ * @author pauldg7@gmail.com (Paul Gillis)
  * Created by Conno on 9/15/2018.
  */
 

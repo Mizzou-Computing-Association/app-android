@@ -12,6 +12,9 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import tigerhacks.android.tigerhacksapp.R
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 private const val CHANNEL_ID = "tigerhacks.android.tigerhacksapp.TigerHacks"
 private const val CHANNEL_NAME = "TigerHacks"
 

@@ -6,6 +6,9 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 enum class ThemeMode {
     LIGHT,
     DARK,

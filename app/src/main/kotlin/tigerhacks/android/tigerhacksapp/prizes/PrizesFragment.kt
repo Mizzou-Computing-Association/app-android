@@ -7,6 +7,9 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Prize
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 class PrizesFragment : RecyclerFragment<Prize>() {
     override val navId = R.id.navigation_prizes
     override val titleResId = R.string.title_prizes

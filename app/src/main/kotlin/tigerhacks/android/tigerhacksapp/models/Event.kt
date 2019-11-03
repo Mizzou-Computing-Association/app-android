@@ -8,8 +8,11 @@ import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
 import java.util.regex.Pattern
 import com.squareup.moshi.JsonQualifier
+import se.ansman.kotshi.JsonSerializable
 
-
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 @Retention(AnnotationRetention.RUNTIME)
 @JsonQualifier
 annotation class EventTime
@@ -41,7 +44,7 @@ class EventTimeAdapter {
 }
 
 @Entity
-@JsonClass(generateAdapter = true)
+@JsonSerializable
 data class Event (
     @PrimaryKey val id: String = "",
     @EventTime val time: String = "",

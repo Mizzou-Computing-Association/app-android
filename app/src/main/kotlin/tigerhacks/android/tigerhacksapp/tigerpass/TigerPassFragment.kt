@@ -36,6 +36,9 @@ import tigerhacks.android.tigerhacksapp.service.BaseFragment
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 class TigerPassFragment : BaseFragment() {
     companion object {
         const val RC_SIGN_IN = 9001

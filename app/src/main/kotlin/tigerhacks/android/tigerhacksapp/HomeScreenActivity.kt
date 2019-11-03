@@ -28,6 +28,9 @@ import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment
 import tigerhacks.android.tigerhacksapp.tigerpass.TigerPassFragment
 import java.util.Stack
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 class HomeScreenActivity : AppCompatActivity() {
 
     companion object {

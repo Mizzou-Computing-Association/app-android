@@ -8,6 +8,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_prize_header.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 class PrizeHeaderView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

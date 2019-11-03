@@ -10,6 +10,9 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.BaseFragment
 
+/**
+ * @author pauldg7@gmail.com (Paul Gillis)
+ */
 class MapFragment : BaseFragment() {
     override val navId = R.id.navigation_map
     override val titleResId = R.string.title_map
