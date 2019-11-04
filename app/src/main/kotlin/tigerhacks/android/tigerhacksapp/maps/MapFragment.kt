@@ -4,7 +4,8 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import android.view.View
 import com.davemorrissey.labs.subscaleview.ImageSource
-import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+import kotlinx.android.synthetic.main.fragment_map.mapView
+import kotlinx.android.synthetic.main.fragment_map.tabLayout
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.BaseFragment
 
@@ -15,8 +16,6 @@ class MapFragment : BaseFragment(R.layout.fragment_map) {
     override val navId = R.id.navigation_map
     override val titleResId = R.string.title_map
 
-    private var mapView: SubsamplingScaleImageView? = null
-    private var tabLayout: TabLayout? = null
     private var selection = 0
         set(value) {
             if (value == field || value < 0 || 3 < value) return
@@ -36,20 +35,16 @@ class MapFragment : BaseFragment(R.layout.fragment_map) {
     override fun onViewCreated(layoutView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(layoutView, savedInstanceState)
         // Inflate the layout for this fragment
-        mapView = layoutView.findViewById(R.id.mapView)
-        tabLayout = layoutView.findViewById<TabLayout>(R.id.tabLayout)
 
-        tabLayout?.getTabAt(selection)?.select()
-        tabLayout?.addOnTabSelectedListener(tabListener)
+        tabLayout.getTabAt(selection)?.select()
+        tabLayout.addOnTabSelectedListener(tabListener)
 
         updateSelection()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mapView = null
-        tabLayout?.removeOnTabSelectedListener(tabListener)
-        tabLayout = null
+        tabLayout.removeOnTabSelectedListener(tabListener)
     }
 
     private fun updateSelection() {
@@ -58,6 +53,6 @@ class MapFragment : BaseFragment(R.layout.fragment_map) {
             1 -> "floor2map.webp"
             else -> "floor3map.webp"
         }
-        mapView?.setImage(ImageSource.asset(asset))
+        mapView.setImage(ImageSource.asset(asset))
     }
 }

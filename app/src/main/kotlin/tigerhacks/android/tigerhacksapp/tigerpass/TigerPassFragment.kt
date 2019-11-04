@@ -5,12 +5,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.ProgressBar
-import androidx.appcompat.widget.AppCompatButton
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -24,6 +18,18 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
+import kotlinx.android.synthetic.main.fragment_tiger_pass.emailEditText
+import kotlinx.android.synthetic.main.fragment_tiger_pass.emailEditTextLayout
+import kotlinx.android.synthetic.main.fragment_tiger_pass.logOutButton
+import kotlinx.android.synthetic.main.fragment_tiger_pass.loginButton
+import kotlinx.android.synthetic.main.fragment_tiger_pass.loginContainer
+import kotlinx.android.synthetic.main.fragment_tiger_pass.loginGithubButton
+import kotlinx.android.synthetic.main.fragment_tiger_pass.loginGoogleButton
+import kotlinx.android.synthetic.main.fragment_tiger_pass.passwordEditText
+import kotlinx.android.synthetic.main.fragment_tiger_pass.passwordEditTextLayout
+import kotlinx.android.synthetic.main.fragment_tiger_pass.progressBarView
+import kotlinx.android.synthetic.main.fragment_tiger_pass.qrCodeImageView
+import kotlinx.android.synthetic.main.fragment_tiger_pass.registerButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,18 +51,6 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
     override val navId = R.id.navigation_profile
     override val titleResId = R.string.title_profile
 
-    private lateinit var loginContainer: ConstraintLayout
-    private lateinit var loginButton: AppCompatButton
-    private lateinit var loginGoogleButton: AppCompatButton
-    private lateinit var loginGithubButton: AppCompatButton
-    private lateinit var emailEditText: EditText
-    private lateinit var passwordEditText: EditText
-
-    private lateinit var logOutButton: Button
-    private lateinit var registerButton: Button
-    private lateinit var qrCodeImageView: ImageView
-    private lateinit var progressBarView: ProgressBar
-
     private lateinit var auth: FirebaseAuth
     private val githubProvider = OAuthProvider.newBuilder("github.com")
         .addCustomParameter("login", "your-email@gmail.com")
@@ -70,20 +64,6 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         super.onViewCreated(layoutView, savedInstanceState)
 
         home = activity as HomeScreenActivity
-
-        /* Login Views */
-        loginContainer = layoutView.findViewById(R.id.loginContainer)
-        loginButton = layoutView.findViewById(R.id.loginButton)
-        loginGoogleButton = layoutView.findViewById(R.id.loginGoogleButton)
-        loginGithubButton = layoutView.findViewById(R.id.loginGithubButton)
-        emailEditText = layoutView.findViewById(R.id.emailEditText)
-        passwordEditText = layoutView.findViewById(R.id.passwordEditText)
-
-        /* Tiger Pass Views */
-        logOutButton = layoutView.findViewById(R.id.logOutButton)
-        registerButton = layoutView.findViewById(R.id.registerButton)
-        qrCodeImageView = layoutView.findViewById(R.id.qrCodeImageView)
-        progressBarView = layoutView.findViewById(R.id.progressBarView)
 
         auth = FirebaseAuth.getInstance()
         
@@ -129,8 +109,8 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
     }
 
     private fun setLoginVisibility(visibility: Int) {
-        emailEditText.visibility = visibility
-        passwordEditText.visibility = visibility
+        emailEditTextLayout.visibility = visibility
+        passwordEditTextLayout.visibility = visibility
         loginButton.visibility = visibility
         loginGoogleButton.visibility = visibility
         loginGithubButton.visibility = visibility

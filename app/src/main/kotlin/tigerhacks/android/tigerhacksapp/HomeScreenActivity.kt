@@ -51,7 +51,6 @@ class HomeScreenActivity : AppCompatActivity() {
     private var simpleBackStack: Stack<Int> = Stack()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
         if (!BuildConfig.DEBUG) FirebaseAnalytics.getInstance(this)
