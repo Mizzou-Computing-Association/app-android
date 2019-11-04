@@ -159,7 +159,7 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
-            app:titleIcon="@drawable/ic_launcher_round"
+            app:titleIcon="@drawable/tiger_icon"
             app:titleRes="@string/tiger_hacks_website"
             />
 

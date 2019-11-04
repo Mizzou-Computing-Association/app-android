@@ -23,7 +23,7 @@
         android:layout_marginEnd="@dimen/margin_start_large"
 
         android:scaleType="fitCenter"
-        tools:src="@mipmap/ic_launcher_round"
+        tools:src="@drawable/tiger_icon"
         android:visibility="gone"
         />
 

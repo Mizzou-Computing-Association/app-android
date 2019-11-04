@@ -14,7 +14,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
 
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/tiger_icon"
         />
     <TextView
         android:layout_width="wrap_content"

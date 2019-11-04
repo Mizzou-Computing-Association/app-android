@@ -68,7 +68,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         auth = FirebaseAuth.getInstance()
         
         val twentyFourDp = home.dpToPx(30)
-        val img = resources.getDrawable(R.mipmap.ic_launcher_round, home.theme)
+        val img = resources.getDrawable(R.drawable.tiger_icon, home.theme)
         img.setBounds(0, 0, twentyFourDp, twentyFourDp)
         loginButton.setCompoundDrawables(img, null, null, null)
 

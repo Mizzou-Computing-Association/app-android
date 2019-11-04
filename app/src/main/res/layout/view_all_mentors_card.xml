@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toStartOf="@id/allMentorsTextView"
             app:layout_constraintHorizontal_chainStyle="packed"
 
-            android:src="@drawable/ic_launcher_round"
+            android:src="@drawable/tiger_icon"
             android:contentDescription="@string/tiger_hacks_logo"
 
             android:scaleType="fitCenter"

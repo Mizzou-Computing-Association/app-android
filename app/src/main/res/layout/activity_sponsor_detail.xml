@@ -37,7 +37,7 @@
 
                 app:layout_collapseMode="parallax"
                 android:fitsSystemWindows="true"
-                app:srcCompat="@mipmap/ic_launcher_round"
+                app:srcCompat="@drawable/tiger_icon"
                 android:contentDescription="@string/sponsor_logo"
                 />
 
