@@ -1,7 +1,6 @@
 package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 import tigerhacks.android.tigerhacksapp.models.Sponsor
+import tigerhacks.android.tigerhacksapp.sponsors.details.SponsorDetailActivity
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorHeader
 
@@ -47,7 +47,11 @@ class SponsorsFragment : RecyclerFragment<Sponsor>() {
                 card?.setSponsor(item)
                 card?.setOnClickListener {
                     val context = context ?: return@setOnClickListener
-                    startActivity(SponsorDetailActivity.newInstance(context, item))
+                    if (item.name.contains(Sponsor.ALL_MENTORS_KEY)) {
+                        startActivity(AllMentorsActivity.newInstance(context))
+                    } else {
+                        startActivity(SponsorDetailActivity.newInstance(context, item))
+                    }
                 }
             }
         }

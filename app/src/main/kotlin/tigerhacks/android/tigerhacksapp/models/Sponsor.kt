@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import se.ansman.kotshi.JsonSerializable
@@ -40,7 +41,7 @@ data class SponsorList(
 
 @Entity
 @Parcelize
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class Sponsor(
     @PrimaryKey val name: String = "",
     val description: String = "",

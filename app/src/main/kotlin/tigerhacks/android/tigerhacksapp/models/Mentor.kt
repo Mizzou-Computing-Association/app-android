@@ -1,6 +1,7 @@
 package tigerhacks.android.tigerhacksapp.models
 
 import android.os.Parcelable
+import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
@@ -18,4 +19,11 @@ data class Mentor(
     @PrimaryKey val name: String = "",
     val skills: String = "",
     val contact: String = ""
-) : Parcelable
+) : Parcelable {
+    companion object {
+        val diff = object : DiffUtil.ItemCallback<Mentor>() {
+            override fun areItemsTheSame(oldItem: Mentor, newItem: Mentor) = oldItem.name == newItem.name
+            override fun areContentsTheSame(oldItem: Mentor, newItem: Mentor) = oldItem == newItem
+        }
+    }
+}

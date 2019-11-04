@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+    <TextView
+        android:id="@+id/informationTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="@dimen/margin_top_large"
+        android:layout_marginStart="@dimen/margin_start_large"
+        android:layout_marginEnd="@dimen/margin_start_large"
+
+        android:textAppearance="@style/AppTheme.TitlePrimary"
+        android:text="@string/information"
+        android:visibility="visible"
+        />
+
+    <ImageView
+        android:id="@+id/internetImageView"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+
+        app:layout_constraintTop_toBottomOf="@id/informationTitleTextView"
+        app:layout_constraintStart_toStartOf="@id/informationTitleTextView"
+
+        android:layout_marginTop="@dimen/margin_top"
+
+        android:contentDescription="@string/internet_icon_desc"
+        style="@style/AppTheme.IconAppearance"
+        app:srcCompat="@drawable/link_icon"
+        />
+
+    <TextView
+        android:id="@+id/linkText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toEndOf="@id/internetImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/internetImageView"
+        app:layout_constraintHorizontal_bias="0"
+
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginEnd="@dimen/margin_start_large"
+
+        tools:text="link"
+        android:textAppearance="@style/AppTheme.TextPrimary"
+        android:textColor="@color/linkColor"
+        />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/linkText"
+
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginStart="@dimen/margin_start_large"
+        android:layout_marginEnd="@dimen/margin_start_large"
+
+        android:textAppearance="@style/AppTheme.TextPrimary"
+        tools:text="We are Panera bread. And we believe that good food, food you can feel good about, can bring out the best in all of us."
+        />
+
+    <View
+        android:id="@+id/informationTitleDivider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+
+        app:layout_constraintTop_toBottomOf="@id/descriptionText"
+
+        android:layout_marginTop="@dimen/margin_top_large"
+        android:background="@color/divider"
+        />
+</merge>

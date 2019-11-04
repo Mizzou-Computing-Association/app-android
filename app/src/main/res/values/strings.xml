@@ -60,5 +60,6 @@
     <string name="all_mentors">All Mentors</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="internet_icon_desc">Internet Icon Description</string>
     <string name="firebase_web_host" translatable="false">177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com</string>
 </resources>

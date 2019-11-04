@@ -1,24 +1,13 @@
-package tigerhacks.android.tigerhacksapp.sponsors
+package tigerhacks.android.tigerhacksapp.sponsors.details
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.TypedValue
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_sponsor_detail.appBarLayout
-import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionText
-import kotlinx.android.synthetic.main.activity_sponsor_detail.descriptionTitleTextView
-import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitle
-import kotlinx.android.synthetic.main.activity_sponsor_detail.informationTitleDivider
-import kotlinx.android.synthetic.main.activity_sponsor_detail.internetImageView
-import kotlinx.android.synthetic.main.activity_sponsor_detail.linkText
 import kotlinx.android.synthetic.main.activity_sponsor_detail.mainImage
-import kotlinx.android.synthetic.main.activity_sponsor_detail.mentorDivider
-import kotlinx.android.synthetic.main.activity_sponsor_detail.mentorLayout
+import kotlinx.android.synthetic.main.activity_sponsor_detail.sponsorRecyclerView
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbar
 import kotlinx.android.synthetic.main.activity_sponsor_detail.toolbarLayout
 import tigerhacks.android.tigerhacksapp.R
@@ -32,11 +21,11 @@ import tigerhacks.android.tigerhacksapp.models.Sponsor
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-private const val SPONSOR_KEY = "sponsor_key"
-
 class SponsorDetailActivity : AppCompatActivity() {
 
     companion object {
+        private const val SPONSOR_KEY = "sponsor_key"
+
         fun newInstance(context: Context, sponsor: Sponsor): Intent = Intent(context, SponsorDetailActivity::class.java).putExtra(SPONSOR_KEY, sponsor)
     }
 
@@ -54,43 +43,13 @@ class SponsorDetailActivity : AppCompatActivity() {
         toolbar.title = sponsor.name
         if (sponsor.image.isNotEmpty()) Glide.with(mainImage).load(sponsor.image).into(mainImage)
 
-        if (sponsor.website.isNotEmpty()) {
-            linkText.text = sponsor.website
-            val typedValue = TypedValue()
-            theme.resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
-            linkText.setBackgroundResource(typedValue.resourceId)
-        } else {
-            informationTitleDivider.visibility = View.GONE
-            internetImageView.visibility = View.GONE
-            informationTitle.visibility = View.GONE
-            linkText.visibility = View.GONE
-            appBarLayout.setExpanded(false, false)
-        }
-
-        if (sponsor.description.isEmpty()) {
-            descriptionTitleTextView.visibility = View.GONE
-            descriptionText.visibility = View.GONE
-            informationTitleDivider.visibility = View.GONE
-        } else {
-            descriptionText.text = sponsor.description
-        }
-
-        linkText.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(sponsor.website))
-            startActivity(browserIntent)
-        }
-
         db = TigerHacksDatabase.getDatabase(applicationContext)
-        val liveData = if (sponsor.name == Sponsor.ALL_MENTORS_KEY) {
-            mentorDivider.visibility = View.GONE
-            db.sponsorsDAO().getAllMentors()
-        } else {
-            db.sponsorsDAO().getMentorsForSponsor(sponsor.name)
-        }
+        val liveData = db.sponsorsDAO().getMentorsForSponsor(sponsor.name)
 
-        observer = liveData.observeNotNull(this) {
-            mentorLayout.mentors = it
-        }
+        val adapter = SponsorAdapter(sponsor)
+        sponsorRecyclerView.adapter = adapter
+
+        observer = liveData.observeNotNull(this, adapter::submitList)
 
         //Toolbar Setup
         val sponsorColor = sponsor.getSponsorLevelColorRes()

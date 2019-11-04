@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.sponsors.views
+package tigerhacks.android.tigerhacksapp.sponsors.details
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -9,46 +9,21 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
-import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.view_mentor.view.contactTextView
 import kotlinx.android.synthetic.main.view_mentor.view.nameTextView
 import kotlinx.android.synthetic.main.view_mentor.view.skillsTextView
-import kotlinx.android.synthetic.main.view_mentor_list.view.mentorsEmptyTextView
-import kotlinx.android.synthetic.main.view_mentor_list.view.mentorsLayout
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Mentor
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-class MentorListView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
-    init {
-        LayoutInflater.from(context).inflate(R.layout.view_mentor_list, this, true)
-    }
-
-    var mentors: List<Mentor>? = null
-        set(value) {
-            if (field == value) return
-            field = value
-            redraw()
-        }
-
-    private fun redraw() {
-        mentorsLayout.removeAllViews()
-        mentors?.forEach { mentor ->
-            val mentorView = MentorView(context).setup(mentor)
-            mentorsLayout.addView(mentorView)
-        }
-
-        mentorsEmptyTextView.visibility = if (mentors == null || mentors?.size == 0) View.VISIBLE else View.GONE
-    }
-}
-
 class MentorView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
     init {
         val typedValue = TypedValue()
         getContext().theme.resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
+        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         LayoutInflater.from(context).inflate(R.layout.view_mentor, this, true)
         contactTextView.setBackgroundResource(typedValue.resourceId)
     }

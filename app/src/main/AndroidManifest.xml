@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sponsors.SponsorDetailActivity" />
+        <activity android:name=".sponsors.details.SponsorDetailActivity" />
         <activity
             android:name=".HomeScreenActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -33,6 +33,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             />
+        <activity android:name=".sponsors.AllMentorsActivity" />
 
         <service
             android:name=".service.TigerHacksMessagingService"
