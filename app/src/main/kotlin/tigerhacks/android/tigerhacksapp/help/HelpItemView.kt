@@ -24,13 +24,11 @@ class HelpItemView @JvmOverloads constructor(context: Context, attrs: AttributeS
         val attr = context.obtainStyledAttributes(attrs, R.styleable.HelpItemView, defStyleAttr, 0)
         val iconRes = attr.getResourceId(R.styleable.HelpItemView_titleIcon, -1)
         val titleRes = attr.getResourceId(R.styleable.HelpItemView_titleRes, -1)
-        val autoTint = attr.getBoolean(R.styleable.HelpItemView_autoTint, true)
         attr.recycle()
 
         if (iconRes != -1) {
             iconImageView.setImageResource(iconRes)
             iconImageView.visibility = View.VISIBLE
-            if (!autoTint) iconImageView.imageTintList = null
         }
 
         if (titleRes != -1) titleTextView.setText(titleRes)

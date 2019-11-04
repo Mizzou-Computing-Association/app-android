@@ -22,7 +22,6 @@
 
         android:layout_marginEnd="@dimen/margin_start_large"
 
-        style="@style/AppTheme.IconAppearance"
         android:scaleType="fitCenter"
         tools:src="@mipmap/ic_launcher_round"
         android:visibility="gone"

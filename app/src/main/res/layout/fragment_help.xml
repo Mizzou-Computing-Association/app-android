@@ -21,14 +21,13 @@
             android:text="@string/tiger_talks"
             android:textAppearance="@style/AppTheme.TitlePrimary"
             />
-
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
-            android:id="@+id/introiOSCardView"
+            android:id="@+id/introDataSci"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             app:layout_constraintTop_toBottomOf="@id/tigerTalksTextView"
-            app:layout_constraintBottom_toTopOf="@id/introWebDevCardView"
+            app:layout_constraintBottom_toTopOf="@id/introPython"
 
             android:layout_marginTop="@dimen/margin_top"
             android:paddingTop="@dimen/margin_top"
@@ -36,8 +35,59 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
+            app:titleRes="@string/intro_to_data_sci"
+            app:titleIcon="@drawable/youtube_icon"
+            />
+
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
+            android:id="@+id/introPython"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/introDataSci"
+            app:layout_constraintBottom_toTopOf="@id/introGithub"
+
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
+            app:titleRes="@string/intro_to_python"
+            app:titleIcon="@drawable/youtube_icon"
+            />
+
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
+            android:id="@+id/introGithub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/introPython"
+            app:layout_constraintBottom_toTopOf="@id/introiOSCardView"
+
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
+            app:titleRes="@string/intro_to_github"
+            app:titleIcon="@drawable/youtube_icon"
+            />
+
+        <tigerhacks.android.tigerhacksapp.help.HelpItemView
+            android:id="@+id/introiOSCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/introGithub"
+            app:layout_constraintBottom_toTopOf="@id/introWebDevCardView"
+
+            android:paddingTop="@dimen/margin_top"
+            android:paddingBottom="@dimen/margin_top"
+            android:paddingStart="@dimen/margin_start_large"
+            android:paddingEnd="@dimen/margin_start_large"
+
             app:titleRes="@string/intro_to_ios"
-            app:titleIcon="@drawable/play_icon"
+            app:titleIcon="@drawable/youtube_icon"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
@@ -52,7 +102,7 @@
             android:paddingEnd="@dimen/margin_start_large"
 
             app:titleRes="@string/intro_to_web"
-            app:titleIcon="@drawable/play_icon"
+            app:titleIcon="@drawable/youtube_icon"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
@@ -67,7 +117,7 @@
             android:paddingEnd="@dimen/margin_start_large"
 
             app:titleRes="@string/intro_to_flask"
-            app:titleIcon="@drawable/play_icon"
+            app:titleIcon="@drawable/youtube_icon"
             />
 
         <View
@@ -109,8 +159,7 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
-            app:autoTint="false"
-            app:titleIcon="@mipmap/ic_launcher_round"
+            app:titleIcon="@drawable/ic_launcher_round"
             app:titleRes="@string/tiger_hacks_website"
             />
 
@@ -125,7 +174,6 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
-            app:autoTint="false"
             app:titleIcon="@drawable/slack_icon"
             app:titleRes="@string/mca_slack"
             />
@@ -141,8 +189,8 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
-            app:autoTint="false"
             app:titleRes="@string/devpost"
+            app:titleIcon="@drawable/devpost_icon"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
@@ -156,8 +204,8 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
-            app:autoTint="false"
             app:titleRes="@string/twitter"
+            app:titleIcon="@drawable/twitter_icon"
             />
 
         <tigerhacks.android.tigerhacksapp.help.HelpItemView
@@ -171,7 +219,6 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
-            app:autoTint="false"
             app:titleRes="@string/instagram"
             />
 
@@ -186,7 +233,6 @@
             android:paddingStart="@dimen/margin_start_large"
             android:paddingEnd="@dimen/margin_start_large"
 
-            app:autoTint="false"
             app:titleRes="@string/facebook"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,10 @@ class HelpFragment : BaseFragment(R.layout.fragment_help) {
             IdLink(R.id.devPostCardView, "https://th19.devpost.com/"),
             IdLink(R.id.twitterCardView, "https://twitter.com/TigerHacksHD"),
             IdLink(R.id.instagramCardView, "https://instagram.com/tigerhacks"),
-            IdLink(R.id.facebookCardView, "https://facebook.com/TigerHacks")
+            IdLink(R.id.facebookCardView, "https://facebook.com/TigerHacks"),
+            IdLink(R.id.introGithub, "https://www.youtube.com/watch?v=-k8B2w5X7qQ"),
+            IdLink(R.id.introPython, "https://www.youtube.com/watch?v=HSq9JpflYiw"),
+            IdLink(R.id.introDataSci, "https://www.youtube.com/watch?v=iWFpKD3VGsE")
         ).forEach { idLink ->
             //For Every IdLink register a click listener to the view id
             layoutView.findViewById<HelpItemView>(idLink.id).setOnClickListener {
