@@ -16,7 +16,7 @@
     <color name="colorWindowBackground">#FFFFFF</color>
 
     <color name="colorIconTint">@color/colorTextPrimary</color>
-    <color name="colorSponsorsBackground">@color/white</color>
+    <color name="colorSponsorsBackground">#F1F1F1</color>
 
     <color name="colorNavBarBackground">@color/white</color>
     <color name="colorNavBarTintSelected">#000</color>

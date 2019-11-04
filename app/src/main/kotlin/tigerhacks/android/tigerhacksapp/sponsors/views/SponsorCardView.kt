@@ -5,14 +5,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintSet
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.view_sponsor_card.view.allMentorsTextView
-import kotlinx.android.synthetic.main.view_sponsor_card.view.sponsorContainer
+import kotlinx.android.synthetic.main.view_sponsor_card.view.divider
+import kotlinx.android.synthetic.main.view_sponsor_card.view.sponsorCardView
+import kotlinx.android.synthetic.main.view_sponsor_card.view.sponsorImageView
+import kotlinx.android.synthetic.main.view_sponsor_card.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.models.Sponsor
+import tigerhacks.android.tigerhacksapp.sponsors.details.SponsorDetailActivity
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -23,39 +23,39 @@ class SponsorCardView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-    private val sponsorImageView: ImageView
-    lateinit var sponsorData: Sponsor
-
     init {
-        val height = context.dpToPx(130)
-        layoutParams = MarginLayoutParams(MarginLayoutParams.MATCH_PARENT, height)
+        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         LayoutInflater.from(context).inflate(R.layout.view_sponsor_card, this, true)
-        sponsorImageView = findViewById(R.id.sponsorImageView)
-        val tenDp = context.dpToPx(10)
-        setPadding(tenDp, 0, tenDp, tenDp)
-        clipToPadding = false
-        clipChildren = false
     }
 
-    fun setSponsor(sponsor: Sponsor) {
-        sponsorData = sponsor
-        if (sponsor.name == Sponsor.ALL_MENTORS_KEY) {
-            allMentorsTextView.visibility = View.VISIBLE
-            val constraintSet = ConstraintSet()
-            constraintSet.clone(sponsorContainer)
-            constraintSet.setHorizontalBias(R.id.sponsorImageView, 0f)
+    fun setSponsor(sponsor: Sponsor, hasHeader: Boolean) {
+        Glide.with(sponsorImageView).load(sponsor.image).into(sponsorImageView)
+        sponsorCardView.setOnClickListener { context.startActivity(SponsorDetailActivity.newInstance(context, sponsor)) }
 
-            val width = sponsorImageView.height - (resources.getDimension(R.dimen.margin_start_large))
-            sponsorImageView.minimumWidth = width.toInt()
-            sponsorImageView.maxWidth = width.toInt()
-            sponsorImageView.setImageResource(R.mipmap.ic_launcher_round)
-        } else {
-            val constraintSet = ConstraintSet()
-            constraintSet.clone(sponsorContainer)
-            constraintSet.setHorizontalBias(R.id.sponsorImageView, 0.5f)
+        setSponsorLevel(sponsor.level)
 
-            allMentorsTextView.visibility = View.GONE
-            Glide.with(sponsorImageView).load(sponsor.image).into(sponsorImageView)
+        val vis = if (hasHeader) View.VISIBLE else View.GONE
+        titleTextView.visibility = vis
+        divider.visibility = vis
+    }
+
+    private fun setSponsorLevel(sponsorLevel: Int) {
+        val textRes = when (sponsorLevel) {
+            0 -> R.string.platinum_sponsors
+            1 -> R.string.gold_sponsors
+            2 -> R.string.silver_sponsors
+            else -> R.string.bronze_sponsors
         }
+
+        val colorRes = when (sponsorLevel) {
+            0 -> R.color.platinum
+            1 -> R.color.gold
+            2 -> R.color.silver
+            else -> R.color.bronze
+        }
+
+        titleTextView.text = context.getText(textRes)
+        @Suppress("DEPRECATION")
+        titleTextView.setTextColor(context.resources.getColor(colorRes))
     }
 }

@@ -1,9 +1,7 @@
 package tigerhacks.android.tigerhacksapp.service
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
@@ -97,6 +95,8 @@ abstract class RecyclerFragment<T> : BaseFragment(R.layout.vertical_recycler_vie
 
     private fun setupObserver() {
         observer = liveData?.observeNotNull(this) {
+            swipeRefreshLayout.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
             swipeRefreshLayout.isRefreshing = false
             isUserSwipe = false
             adapter.submitList(it)

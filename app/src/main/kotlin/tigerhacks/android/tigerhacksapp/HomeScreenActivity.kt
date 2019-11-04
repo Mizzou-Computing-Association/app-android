@@ -14,10 +14,8 @@ import androidx.core.view.GravityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home_screen.drawerLayout
-import kotlinx.android.synthetic.main.activity_home_screen.navFrameLayout
 import kotlinx.android.synthetic.main.activity_home_screen.toolbar
 import tigerhacks.android.tigerhacksapp.help.HelpFragment
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
@@ -92,9 +90,7 @@ class HomeScreenActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val fragments = supportFragmentManager.fragments
-        val menuId = (fragments[fragments.size - 1] as? BaseFragment)?.navId ?: return
-        outState.putInt(FRAGMENT_ID_KEY, menuId)
+        outState.putInt(FRAGMENT_ID_KEY, currentFragment.navId)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -139,8 +135,6 @@ class HomeScreenActivity : AppCompatActivity() {
                 val navId = simpleBackStack.pop()
                 navigateTo(navId, false)
             }
-        } else {
-            Snackbar.make(navFrameLayout, "Nothing else to go back to!", Snackbar.LENGTH_SHORT).show()
         }
     }
 

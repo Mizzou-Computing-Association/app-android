@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.RecyclerFragment
 import tigerhacks.android.tigerhacksapp.models.Sponsor
-import tigerhacks.android.tigerhacksapp.sponsors.details.SponsorDetailActivity
+import tigerhacks.android.tigerhacksapp.sponsors.views.AllMentorsCardView
 import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorCardView
-import tigerhacks.android.tigerhacksapp.sponsors.views.SponsorHeader
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -28,39 +27,33 @@ class SponsorsFragment : RecyclerFragment<Sponsor>() {
     override val onRefresh
         get() = viewModel::refreshSponsors
 
-    override val adapter = object : ListAdapter<Sponsor, RecyclerView.ViewHolder>(Sponsor.diff) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            return if (viewType == 0) { //Header
-                object : RecyclerView.ViewHolder(SponsorHeader(parent.context)) {}
-            } else {
-                object : RecyclerView.ViewHolder(SponsorCardView(parent.context)) {}
-            }
-        }
+    override val adapter = SponsorAdapter()
+}
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val itemView = holder.itemView
+class SponsorAdapter: ListAdapter<Sponsor, RecyclerView.ViewHolder>(Sponsor.diff) {
+
+    override fun getItemCount() = if (super.getItemCount() > 0) super.getItemCount() + 1 else 0
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(
+        if(viewType == 0) {
+            SponsorCardView(parent.context)
+        } else {
+            AllMentorsCardView(parent.context)
+        }
+    ) {}
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val itemView = holder.itemView
+        if (itemView is SponsorCardView) {
             val item = getItem(position)
-            if (itemView is SponsorHeader) {
-                itemView.setSponsorLevel(item.level)
-            } else {
-                val card = (itemView as? SponsorCardView)
-                card?.setSponsor(item)
-                card?.setOnClickListener {
-                    val context = context ?: return@setOnClickListener
-                    if (item.name.contains(Sponsor.ALL_MENTORS_KEY)) {
-                        startActivity(AllMentorsActivity.newInstance(context))
-                    } else {
-                        startActivity(SponsorDetailActivity.newInstance(context, item))
-                    }
-                }
-            }
-        }
+            val hasHeader = position == 0 || getItem(position - 1).level != item.level
 
-        override fun getItemViewType(position: Int): Int {
-            return when (getItem(position).name) {
-                "${Sponsor.HEADER_KEY}0", "${Sponsor.HEADER_KEY}1", "${Sponsor.HEADER_KEY}2", "${Sponsor.HEADER_KEY}3" -> 0
-                else -> 1
-            }
+            itemView.setSponsor(item, hasHeader)
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (position == itemCount - 1) return 1
+        return super.getItemViewType(position)
     }
 }

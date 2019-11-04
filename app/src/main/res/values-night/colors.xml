@@ -12,7 +12,7 @@
     <color name="colorSelectorSelected">#F99A3A</color>
     <color name="colorSelectorUnselected">#80FFFFFF</color>
 
-    <color name="colorSponsorsBackground">#F2FFFFFF</color>
+    <color name="colorSponsorsBackground">#E6FFFFFF</color>
     <color name="toolBarColor">@color/darkBlue</color>
 
     <!--Night Colors-->
