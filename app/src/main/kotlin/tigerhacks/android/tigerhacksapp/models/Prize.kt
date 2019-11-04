@@ -22,19 +22,12 @@ data class PrizeList(
 ) {
     fun combine(): List<Prize> {
         val total = arrayListOf<Prize>()
-        total.add(Prize(id = "${HEADER_KEY}0", prizeType = "Developer"))
         total.addAll(Developer)
-        total.add(Prize(id = "${HEADER_KEY}1", prizeType = "Beginner"))
         total.addAll(Beginner)
-        total.add(Prize(id = "${HEADER_KEY}2", prizeType = "Sponsored"))
         total.addAll(Sponsored)
-        total.add(Prize(id = "${HEADER_KEY}3", prizeType = "StartUp"))
         total.addAll(StartUp)
-        total.add(Prize(id = "${HEADER_KEY}4", prizeType = "Visuals"))
         total.addAll(Visuals)
-        total.add(Prize(id = "${HEADER_KEY}5", prizeType = "Audio"))
         total.addAll(Audio)
-        total.add(Prize(id = "${HEADER_KEY}6", prizeType = "Hardware"))
         total.addAll(Hardware)
         return total
     }

@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.sponsors.views
+package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout

@@ -26,27 +26,12 @@ class PrizesFragment : RecyclerFragment<Prize>() {
     }
 
     override val adapter = object : ListAdapter<Prize, RecyclerView.ViewHolder>(Prize.diff) {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val itemView = if (viewType == 0) {
-                PrizeHeaderView(parent.context)
-            } else {
-                PrizeView(parent.context)
-            }
-            return object : RecyclerView.ViewHolder(itemView) {}
-        }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(PrizeView(parent.context)) {}
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val itemView = holder.itemView
-            if (itemView is PrizeView) {
-                itemView.setup(getItem(position))
-            } else {
-                (itemView as? PrizeHeaderView)?.setPrizeCategory(getItem(position).prizeType)
-            }
-        }
-
-        override fun getItemViewType(position: Int): Int {
-            val item = getItem(position) ?: return 1
-            return if (item.id.contains(Prize.HEADER_KEY)) 0 else 1
+            val item = getItem(position)
+            val hasHeader = position == 0 || getItem(position - 1).prizeType != item.prizeType
+            (holder.itemView as PrizeView).setup(item, hasHeader)
         }
     }
 }

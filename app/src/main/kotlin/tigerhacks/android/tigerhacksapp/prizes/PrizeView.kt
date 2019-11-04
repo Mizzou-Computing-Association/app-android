@@ -1,10 +1,14 @@
 package tigerhacks.android.tigerhacksapp.prizes
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlinx.android.synthetic.main.view_prize.view.categoryTitleView
 import kotlinx.android.synthetic.main.view_prize.view.descriptionTextView
+import kotlinx.android.synthetic.main.view_prize.view.divider
 import kotlinx.android.synthetic.main.view_prize.view.prizeListTextView
 import kotlinx.android.synthetic.main.view_prize.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
@@ -24,9 +28,16 @@ class PrizeView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         setPadding(0, 0, 0, dimen)
     }
 
-    fun setup(prize: Prize) {
+    @SuppressLint("SetTextI18n")
+    fun setup(prize: Prize, hasHeader: Boolean) {
         titleTextView.text = prize.title
         descriptionTextView.text = prize.description
         prizeListTextView.text = prize.reward
+
+        if (hasHeader) categoryTitleView.text = "${prize.prizeType} Prizes"
+
+        val vis = if (hasHeader) View.VISIBLE else View.GONE
+        categoryTitleView.visibility = vis
+        divider.visibility = vis
     }
 }

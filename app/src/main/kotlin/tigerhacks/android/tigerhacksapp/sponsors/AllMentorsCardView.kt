@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.sponsors.views
+package tigerhacks.android.tigerhacksapp.sponsors
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import com.google.android.material.card.MaterialCardView
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
-import tigerhacks.android.tigerhacksapp.sponsors.AllMentorsActivity
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

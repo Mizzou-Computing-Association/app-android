@@ -9,11 +9,34 @@
     >
 
     <TextView
+        android:id="@+id/categoryTitleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:gravity="center"
+        android:padding="10dp"
+        android:textAppearance="@style/AppTheme.TitleSecondary"
+        tools:text="Developer Prizes"
+        android:visibility="gone"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+
+        app:layout_constraintTop_toBottomOf="@id/categoryTitleView"
+
+        android:background="@color/divider"
+        android:visibility="gone"
+        />
+
+    <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintStart_toStartOf="parent"
 
         android:layout_marginTop="@dimen/margin_top"
