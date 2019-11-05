@@ -1,15 +1,27 @@
 package tigerhacks.android.tigerhacksapp.models
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.squareup.moshi.JsonClass
 import se.ansman.kotshi.JsonSerializable
-import tigerhacks.android.tigerhacksapp.models.Prize.Companion.HEADER_KEY
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
+
+class FavoritablePrize {
+    companion object {
+        val diff = object : DiffUtil.ItemCallback<FavoritablePrize>() {
+            override fun areItemsTheSame(oldItem: FavoritablePrize, newItem: FavoritablePrize) = oldItem.prize.id == newItem.prize.id
+            override fun areContentsTheSame(oldItem: FavoritablePrize, newItem: FavoritablePrize) = oldItem.prize == newItem.prize && oldItem.favoritable.isFavorited == newItem.favoritable.isFavorited
+        }
+    }
+
+    @Embedded lateinit var prize: Prize
+    @Embedded lateinit var favoritable: FavoriteItem
+}
+
 @JsonSerializable
 data class PrizeList(
     val Developer: List<Prize> = emptyList(),
@@ -42,13 +54,4 @@ data class Prize(
     val reward: String = "",
     val description: String = "",
     val prizeType: String = ""
-) {
-    companion object {
-        const val HEADER_KEY = "HEADER"
-
-        val diff = object : DiffUtil.ItemCallback<Prize>() {
-            override fun areContentsTheSame(oldItem: Prize, newItem: Prize) = oldItem.sponsor == newItem.sponsor && oldItem.title == newItem.title
-            override fun areItemsTheSame(oldItem: Prize, newItem: Prize) = oldItem == newItem
-        }
-    }
-}
+)

@@ -1,5 +1,6 @@
 package tigerhacks.android.tigerhacksapp
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +20,6 @@ import java.io.IOException
 import com.squareup.moshi.Types
 import tigerhacks.android.tigerhacksapp.models.ApplicationJsonAdapterFactory
 import tigerhacks.android.tigerhacksapp.models.EventTimeAdapter
-
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -41,7 +41,7 @@ enum class NetworkStatus {
     LOADING, FAILURE, SUCCESS
 }
 
-class HomeScreenViewModel(val database: TigerHacksDatabase) : ViewModel() {
+class HomeScreenViewModel(applicationContext: Context) : ViewModel() {
     companion object {
         val FACTORY = singleArgViewModelFactory(::HomeScreenViewModel)
     }
@@ -59,6 +59,7 @@ class HomeScreenViewModel(val database: TigerHacksDatabase) : ViewModel() {
 
     private val service = tigerHacksRetrofit.create(TigerHacksService::class.java)
 
+    val database = TigerHacksDatabase.getDatabase(applicationContext)
     val sponsorListLiveData = database.sponsorsDAO().getSponsors()
     val sponsorStatusLiveData = MutableLiveData<NetworkStatus>()
 
@@ -170,5 +171,13 @@ class HomeScreenViewModel(val database: TigerHacksDatabase) : ViewModel() {
         } catch (e: IOException) {
             profileStatusLiveData.postValue(NetworkStatus.FAILURE)
         }
+    }
+
+    suspend fun favoritePrize(itemId: String, state: Boolean) = withContext(Dispatchers.IO) {
+        database.prizeDAO().updateItem(itemId, state)
+    }
+
+    suspend fun favoriteEvent(itemId: String, state: Boolean) = withContext(Dispatchers.IO) {
+        database.scheduleDAO().updateItem(itemId, state)
     }
 }

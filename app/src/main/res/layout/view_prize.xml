@@ -33,20 +33,30 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/favoriteButton"
 
         android:layout_marginTop="@dimen/margin_top"
         android:layout_marginStart="@dimen/margin_start_large"
+        android:layout_marginEnd="@dimen/margin_start_large"
 
         tools:text="Tech Company Prize"
         android:textAppearance="@style/AppTheme.TitlePrimary"
         />
 
+    <tigerhacks.android.tigerhacksapp.service.FavoriteButton
+        android:id="@+id/favoriteButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
 
+        app:layout_constraintStart_toEndOf="@id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
         android:id="@+id/descriptionTextView"
@@ -90,6 +100,7 @@
 
         style="@style/AppTheme.IconAppearance"
         android:src="@drawable/star_icon"
+        android:visibility="gone"
         />
 
     <TextView
@@ -97,11 +108,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toTopOf="@id/starIcon"
-        app:layout_constraintStart_toEndOf="@id/starIcon"
+        app:layout_constraintTop_toBottomOf="@id/prizesTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginStart="@dimen/margin_start_large"
+        android:layout_marginTop="@dimen/margin_top"
         android:layout_marginEnd="@dimen/margin_start_large"
 
         tools:text="Here's a prize"

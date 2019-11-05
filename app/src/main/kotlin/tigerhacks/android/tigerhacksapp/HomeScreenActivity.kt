@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_home_screen.navigationView
-import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import android.os.Build
 import android.view.Menu
 import androidx.core.view.GravityCompat
@@ -63,8 +62,7 @@ class HomeScreenActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        val db = TigerHacksDatabase.getDatabase(applicationContext)
-        viewModel = ViewModelProviders.of(this, HomeScreenViewModel.FACTORY(db)).get(HomeScreenViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, HomeScreenViewModel.FACTORY(applicationContext)).get(HomeScreenViewModel::class.java)
 
         profileFragment = TigerPassFragment()
         scheduleFragment = ScheduleFragment()

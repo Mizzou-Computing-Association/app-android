@@ -9,9 +9,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_prize.view.categoryTitleView
 import kotlinx.android.synthetic.main.view_prize.view.descriptionTextView
 import kotlinx.android.synthetic.main.view_prize.view.divider
+import kotlinx.android.synthetic.main.view_prize.view.favoriteButton
 import kotlinx.android.synthetic.main.view_prize.view.prizeListTextView
 import kotlinx.android.synthetic.main.view_prize.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.models.FavoritablePrize
 import tigerhacks.android.tigerhacksapp.models.Prize
 
 /**
@@ -29,7 +31,9 @@ class PrizeView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     @SuppressLint("SetTextI18n")
-    fun setup(prize: Prize, hasHeader: Boolean) {
+    fun setup(favoritablePrize: FavoritablePrize, hasHeader: Boolean) {
+        val prize = favoritablePrize.prize
+        favoriteButton.isChecked = favoritablePrize.favoritable.isFavorited
         titleTextView.text = prize.title
         descriptionTextView.text = prize.description
         prizeListTextView.text = prize.reward

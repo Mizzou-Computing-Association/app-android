@@ -6,6 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import tigerhacks.android.tigerhacksapp.models.FavoritablePrize
+import tigerhacks.android.tigerhacksapp.models.FavoriteItem
 import tigerhacks.android.tigerhacksapp.models.Prize
 
 /**
@@ -13,9 +15,12 @@ import tigerhacks.android.tigerhacksapp.models.Prize
  */
 
 @Dao
-interface PrizesDAO {
+interface PrizesDAO : FavoritesDAO {
+    @Query("SELECT Prize.*, FavoriteItem.* FROM prize INNER JOIN favoriteitem ON id = itemId")
+    fun getAllPrizes(): LiveData<List<FavoritablePrize>>
+
     @Query("SELECT * FROM prize")
-    fun getAllPrizes(): LiveData<List<Prize>>
+    fun getAllBasicPrizes(): List<Prize>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(prizes: List<Prize>)
@@ -25,6 +30,11 @@ interface PrizesDAO {
 
     @Transaction
     suspend fun updatePrizes(prizes: List<Prize>) {
+        val oldPrizes = getAllBasicPrizes()
+        val addedItems = prizes.filter { !oldPrizes.contains(it) }.map { FavoriteItem(it.id) }
+        val removedItems = oldPrizes.filter { !prizes.contains(it) }.map { it.id }
+        insertFavoriteItems(addedItems)
+        deleteFavoriteItems(removedItems)
         deleteAll()
         insertAll(prizes)
     }

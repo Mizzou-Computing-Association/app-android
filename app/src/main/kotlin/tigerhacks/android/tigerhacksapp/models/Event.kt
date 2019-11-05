@@ -1,10 +1,10 @@
 package tigerhacks.android.tigerhacksapp.models
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.FromJson
-import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
 import java.util.regex.Pattern
 import com.squareup.moshi.JsonQualifier
@@ -16,6 +16,18 @@ import se.ansman.kotshi.JsonSerializable
 @Retention(AnnotationRetention.RUNTIME)
 @JsonQualifier
 annotation class EventTime
+
+class FavoritableEvent {
+    companion object {
+        val diff = object : DiffUtil.ItemCallback<FavoritableEvent>() {
+            override fun areItemsTheSame(oldItem: FavoritableEvent, newItem: FavoritableEvent) = oldItem.event.id == newItem.event.id
+            override fun areContentsTheSame(oldItem: FavoritableEvent, newItem: FavoritableEvent) = oldItem.event == newItem.event && oldItem.favoritable.isFavorited == newItem.favoritable.isFavorited
+        }
+    }
+
+    @Embedded lateinit var event: Event
+    @Embedded lateinit var favoritable: FavoriteItem
+}
 
 class EventTimeAdapter {
     @ToJson fun toJson(@EventTime time: String) = ""
@@ -53,15 +65,4 @@ data class Event (
     val title: String = "",
     val description: String = "",
     val day: Int = 0
-) {
-    companion object {
-        val diff = object : DiffUtil.ItemCallback<Event>() {
-            override fun areItemsTheSame(oldItem: Event, newItem: Event) = oldItem.time == newItem.time && oldItem.location == newItem.location
-            override fun areContentsTheSame(oldItem: Event, newItem: Event) = oldItem == newItem
-        }
-    }
-
-    enum class Day {
-        FRIDAY, SATURDAY, SUNDAY
-    }
-}
+)

@@ -90,6 +90,8 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
     override fun onStop() {
         super.onStop()
         observer?.let { home.viewModel.profileLiveData.removeObserver(it) }
+        emailEditTextLayout.clearFocus()
+        passwordEditTextLayout.clearFocus()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

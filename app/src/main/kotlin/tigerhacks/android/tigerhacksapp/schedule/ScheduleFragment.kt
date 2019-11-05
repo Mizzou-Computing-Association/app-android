@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.HomeScreenViewModel
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.models.FavoritableEvent
 import tigerhacks.android.tigerhacksapp.service.BaseFragment
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -50,6 +50,11 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
                     }
                 }
 
+                dayView.onFavorite = { item: FavoritableEvent, state: Boolean ->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        viewModel?.favoriteEvent(item.event.id, state)
+                    }
+                }
                 dayView.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout).setOnRefreshListener(::refresh)
                 container.addView(dayView)
                 return dayView

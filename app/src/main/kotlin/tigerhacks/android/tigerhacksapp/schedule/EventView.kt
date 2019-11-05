@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.view_event.view.*
 import kotlinx.android.synthetic.main.view_event.view.descriptionTextView
 import kotlinx.android.synthetic.main.view_event.view.titleTextView
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.models.Event
+import tigerhacks.android.tigerhacksapp.models.FavoritableEvent
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -22,7 +22,9 @@ class EventView @JvmOverloads constructor (context: Context, attrs: AttributeSet
         LayoutInflater.from(context).inflate(R.layout.view_event, this)
     }
 
-    fun setup(event: Event, isFirstItem: Boolean, isLastItem: Boolean) {
+    fun setup(favoritableEvent: FavoritableEvent, isFirstItem: Boolean, isLastItem: Boolean) {
+        val event = favoritableEvent.event
+        favoriteButton.isChecked = favoritableEvent.favoritable.isFavorited
         titleTextView.text = event.title
         locationTextView.text = event.location
         descriptionTextView.text = event.description

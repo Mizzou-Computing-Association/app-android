@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.vertical_recycler_view.view.progressBar
 import kotlinx.android.synthetic.main.vertical_recycler_view.view.recyclerView
 import kotlinx.android.synthetic.main.vertical_recycler_view.view.swipeRefreshLayout
+import kotlinx.android.synthetic.main.view_event.view.favoriteButton
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.models.Event
+import tigerhacks.android.tigerhacksapp.models.FavoritableEvent
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 
 /**
@@ -25,16 +26,21 @@ class DayView @JvmOverloads constructor (
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
-    private val adapter = object : ListAdapter<Event, RecyclerView.ViewHolder>(Event.diff) {
+    private val adapter = object : ListAdapter<FavoritableEvent, RecyclerView.ViewHolder>(FavoritableEvent.diff) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = object : RecyclerView.ViewHolder(EventView(parent.context)) {}
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val eventCardView = (holder.itemView as? EventView) ?: return
-            eventCardView.setup(getItem(position), position == 0, position == itemCount - 1)
+            val item = getItem(position)
+            eventCardView.setup(item, position == 0, position == itemCount - 1)
+            eventCardView.favoriteButton.onToggle = {
+                onFavorite?.invoke(item, it)
+            }
         }
     }
 
-    private var liveData: LiveData<List<Event>>? = null
+    private var liveData: LiveData<List<FavoritableEvent>>? = null
+    var onFavorite: ((FavoritableEvent, Boolean) -> Unit)? = null
 
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -43,7 +49,7 @@ class DayView @JvmOverloads constructor (
         recyclerView.adapter = adapter
     }
 
-    fun setDay(fragment: Fragment, liveData: LiveData<List<Event>>) {
+    fun setDay(fragment: Fragment, liveData: LiveData<List<FavoritableEvent>>) {
         this.liveData?.removeObservers(fragment)
         liveData.observeNotNull(fragment) {
             progressBar.visibility = View.GONE
