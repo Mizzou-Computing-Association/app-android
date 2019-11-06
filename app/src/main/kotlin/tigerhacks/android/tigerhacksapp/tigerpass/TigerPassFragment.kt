@@ -39,6 +39,7 @@ import tigerhacks.android.tigerhacksapp.models.Profile
 import tigerhacks.android.tigerhacksapp.service.BaseFragment
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
 import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
+import tigerhacks.android.tigerhacksapp.service.extensions.setOnClickListener
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -162,7 +163,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         }
     }
 
-    private fun login(v: View) {
+    private fun login() {
         if (emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
             val email = emailEditText.text.toString()
             val pass = passwordEditText.text.toString()
@@ -180,7 +181,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         }
     }
 
-    private fun loginWithGithub(v: View) {
+    private fun loginWithGithub() {
         auth.startActivityForSignInWithProvider(home, githubProvider)
             .addOnSuccessListener { loginComplete() }
             .addOnFailureListener {
@@ -190,7 +191,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
             }
     }
 
-    private fun loginWithGoogle(v: View) {
+    private fun loginWithGoogle() {
         val logInIntent = home.googleSignInClient.signInIntent
         startActivityForResult(logInIntent, RC_SIGN_IN)
     }
@@ -219,7 +220,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         Snackbar.make(loginContainer, message, Snackbar.LENGTH_LONG).show()
     }
 
-    private fun logout(v: View) {
+    private fun logout() {
         CoroutineScope(Dispatchers.IO).launch {
             home.viewModel.database.profileDAO().deleteAll()
         }
