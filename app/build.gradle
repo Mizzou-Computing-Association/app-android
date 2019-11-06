@@ -65,11 +65,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //Android Support Libraries
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.cardview:cardview:1.0.0'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -99,12 +99,7 @@ dependencies {
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.1'
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.1")
 
-    //Kotlin Moshi Adapters
-    implementation 'se.ansman.kotshi:api:2.0.2'
-    kapt 'se.ansman.kotshi:compiler:2.0.2'
-
     def room_version = "2.2.1"
-
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"

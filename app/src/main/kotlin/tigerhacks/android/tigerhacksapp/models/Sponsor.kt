@@ -9,13 +9,12 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
-import se.ansman.kotshi.JsonSerializable
 import tigerhacks.android.tigerhacksapp.R
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
  */
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class SponsorList(
     val Gold: List<Sponsor> = emptyList(),
     val Bronze: List<Sponsor> = emptyList(),

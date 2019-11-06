@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import se.ansman.kotshi.JsonSerializable
+import com.squareup.moshi.JsonClass
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -22,7 +22,7 @@ class FavoritablePrize {
     @Embedded lateinit var favoritable: FavoriteItem
 }
 
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class PrizeList(
     val Developer: List<Prize> = emptyList(),
     val Sponsored: List<Prize> = emptyList(),
@@ -46,7 +46,7 @@ data class PrizeList(
 }
 
 @Entity
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class Prize(
     @PrimaryKey val id: String = "",
     val sponsor: String = "",

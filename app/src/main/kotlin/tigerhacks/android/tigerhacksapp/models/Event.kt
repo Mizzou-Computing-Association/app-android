@@ -5,10 +5,10 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.FromJson
+import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
 import java.util.regex.Pattern
 import com.squareup.moshi.JsonQualifier
-import se.ansman.kotshi.JsonSerializable
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -56,7 +56,7 @@ class EventTimeAdapter {
 }
 
 @Entity
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class Event (
     @PrimaryKey val id: String = "",
     @EventTime val time: String = "",
