@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "177120544304",
+    "firebase_url": "https://tigerhacks.firebaseio.com",
+    "project_id": "tigerhacks",
+    "storage_bucket": "tigerhacks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177120544304:android:6b9cf90dcd8bccfa844ff5",
+        "android_client_info": {
+          "package_name": "tigerhacks.android.tigerhacksapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177120544304-mk0lnv04153emj1iarejtd655i335gkb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tigerhacks.android.tigerhacksapp",
+            "certificate_hash": "92f21b27fb05c321cf210f565675dcf5f1fec1e5"
+          }
+        },
+        {
+          "client_id": "177120544304-5o7ci1eqneenchsbjpfl5jqf0n639bic.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tigerhacks.android.tigerhacksapp",
+            "certificate_hash": "f591fa3700c0d03f30d66e6a9b17d188e7e7c5bf"
+          }
+        },
+        {
+          "client_id": "177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU-I_oO05XshGQoKmUZc2AulfiKV40rHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "177120544304-vmhutqbh8g0csn6ksqashr8192aos3rk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "edu.missouri.TigerHacks-App"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177120544304:android:78455ece6b9d4d87844ff5",
+        "android_client_info": {
+          "package_name": "tigerhacks.android.tigerhacksapp.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177120544304-t81lkjd77udske3d9a6fr8nceb2iou91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tigerhacks.android.tigerhacksapp.debug",
+            "certificate_hash": "219e46ff5bbe0c38a622fe36e986254031c7e4fe"
+          }
+        },
+        {
+          "client_id": "177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU-I_oO05XshGQoKmUZc2AulfiKV40rHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "177120544304-vmhutqbh8g0csn6ksqashr8192aos3rk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "edu.missouri.TigerHacks-App"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
