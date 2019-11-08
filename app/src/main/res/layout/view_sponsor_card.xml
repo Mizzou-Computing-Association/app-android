@@ -19,7 +19,7 @@
 
         android:textAppearance="@style/AppTheme.TitlePrimary"
         tools:text="Developer Prizes"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
     <View
@@ -33,6 +33,7 @@
         android:layout_marginBottom="10dp"
 
         android:background="@color/divider"
+        android:visibility="gone"
         />
 
     <com.google.android.material.card.MaterialCardView

@@ -19,6 +19,9 @@ interface PrizesDAO : FavoritesDAO {
     @Query("SELECT Prize.*, FavoriteItem.* FROM prize INNER JOIN favoriteitem ON id = itemId")
     fun getAllPrizes(): LiveData<List<FavoritablePrize>>
 
+    @Query("SELECT Prize.*, FavoriteItem.* FROM prize INNER JOIN favoriteitem ON id = itemId WHERE isFavorited=1")
+    fun getAllFavoritedPrizes(): LiveData<List<FavoritablePrize>>
+
     @Query("SELECT * FROM prize")
     fun getAllBasicPrizes(): List<Prize>
 

@@ -36,9 +36,8 @@ import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenActivity
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Profile
-import tigerhacks.android.tigerhacksapp.service.BaseFragment
+import tigerhacks.android.tigerhacksapp.shared.fragments.BaseFragment
 import tigerhacks.android.tigerhacksapp.service.extensions.dpToPx
-import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.service.extensions.setOnClickListener
 
 /**
@@ -143,7 +142,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
             setLoginVisibility(View.GONE)
             setProfileVisibility(View.VISIBLE)
 
-            observer = home.viewModel.profileLiveData.observeNotNull(this) {
+            val observer: Observer<Profile> = Observer {
                 registerButton.visibility = if (!it.registered) View.VISIBLE else View.GONE
                 Glide.with(this)
                     .load(it.pass)
@@ -160,6 +159,9 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
                     })
                     .into(qrCodeImageView)
             }
+
+            home.viewModel.profileLiveData.observe(this, observer)
+            this.observer = observer
         }
     }
 

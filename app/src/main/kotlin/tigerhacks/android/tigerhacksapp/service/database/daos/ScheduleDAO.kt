@@ -28,6 +28,15 @@ interface ScheduleDAO : FavoritesDAO{
     @Query("SELECT Event.*, FavoriteItem.* FROM Event INNER JOIN favoriteitem ON id = itemId WHERE day=3")
     fun getSundayEvents(): LiveData<List<FavoritableEvent>>
 
+    @Query("SELECT Event.*, FavoriteItem.* FROM Event INNER JOIN favoriteitem ON id = itemId WHERE day=1 AND isFavorited=1")
+    fun getFavoriteFridayEvents(): LiveData<List<FavoritableEvent>>
+
+    @Query("SELECT Event.*, FavoriteItem.* FROM Event INNER JOIN favoriteitem ON id = itemId WHERE day=2 AND isFavorited=1")
+    fun getFavoriteSaturdayEvents(): LiveData<List<FavoritableEvent>>
+
+    @Query("SELECT Event.*, FavoriteItem.* FROM Event INNER JOIN favoriteitem ON id = itemId WHERE day=3 AND isFavorited=1")
+    fun getFavoriteSundayEvents(): LiveData<List<FavoritableEvent>>
+
     @Query("DELETE FROM event")
     fun deleteAll()
 

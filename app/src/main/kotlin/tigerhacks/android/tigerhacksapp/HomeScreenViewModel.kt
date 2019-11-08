@@ -62,11 +62,15 @@ class HomeScreenViewModel(applicationContext: Context) : ViewModel() {
     val sponsorStatusLiveData = MutableLiveData<NetworkStatus>()
 
     val prizeListLiveData = database.prizeDAO().getAllPrizes()
+    val favoritePrizeListLiveData = database.prizeDAO().getAllFavoritedPrizes()
     val prizeStatusLiveData = MutableLiveData<NetworkStatus>()
 
     val fridayEventListLiveData = database.scheduleDAO().getFridayEvents()
     val saturdayEventListLiveData = database.scheduleDAO().getSaturdayEvents()
     val sundayEventListLiveData = database.scheduleDAO().getSundayEvents()
+    val favoriteFridayEventListLiveData = database.scheduleDAO().getFavoriteFridayEvents()
+    val favoriteSaturdayEventListLiveData = database.scheduleDAO().getFavoriteSaturdayEvents()
+    val favoriteSundayEventListLiveData = database.scheduleDAO().getFavoriteSundayEvents()
     val eventStatusLiveData = MutableLiveData<NetworkStatus>()
 
     val profileLiveData = database.profileDAO().getProfile()

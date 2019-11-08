@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.service
+package tigerhacks.android.tigerhacksapp.shared.views
 
 import android.content.Context
 import android.content.res.ColorStateList

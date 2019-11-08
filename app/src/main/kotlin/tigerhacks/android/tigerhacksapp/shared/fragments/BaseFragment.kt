@@ -1,4 +1,4 @@
-package tigerhacks.android.tigerhacksapp.service
+package tigerhacks.android.tigerhacksapp.shared.fragments
 
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment

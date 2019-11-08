@@ -6,6 +6,23 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/emptyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="@dimen/margin_top_large"
+        android:layout_marginStart="@dimen/margin_start_large"
+        android:layout_marginEnd="@dimen/margin_start_large"
+        android:gravity="center"
+
+        style="@style/AppTheme.TitlePrimary"
+        tools:text="You don't have any favorite events!"
+        android:visibility="gone"
+        />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="100dp"

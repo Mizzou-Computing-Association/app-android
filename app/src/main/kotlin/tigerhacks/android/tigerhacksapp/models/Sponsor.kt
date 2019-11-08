@@ -2,7 +2,6 @@ package tigerhacks.android.tigerhacksapp.models
 
 import android.os.Parcelable
 import androidx.annotation.ColorRes
-import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -10,6 +9,7 @@ import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import tigerhacks.android.tigerhacksapp.R
+import tigerhacks.android.tigerhacksapp.shared.CategoryDiffItemCallback
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -43,9 +43,10 @@ data class Sponsor(
 ) : Parcelable {
 
     companion object {
-        val diff = object : DiffUtil.ItemCallback<Sponsor>() {
-            override fun areItemsTheSame(oldItem: Sponsor, newItem: Sponsor) = oldItem.name == newItem.name
-            override fun areContentsTheSame(oldItem: Sponsor, newItem: Sponsor) = oldItem == newItem
+        val diff = object : CategoryDiffItemCallback<Sponsor>() {
+            override fun areCategoryItemsTheSame(oldItem: Sponsor, newItem: Sponsor) = oldItem.name == newItem.name
+            override fun areCategoryItemContentsTheSame(oldItem: Sponsor, newItem: Sponsor) = oldItem == newItem
+            override fun findCategory(item: Sponsor) = item.level.toString()
         }
     }
 

@@ -1,10 +1,10 @@
 package tigerhacks.android.tigerhacksapp.models
 
-import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.JsonClass
+import tigerhacks.android.tigerhacksapp.shared.CategoryDiffItemCallback
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)
@@ -12,9 +12,10 @@ import com.squareup.moshi.JsonClass
 
 class FavoritablePrize {
     companion object {
-        val diff = object : DiffUtil.ItemCallback<FavoritablePrize>() {
-            override fun areItemsTheSame(oldItem: FavoritablePrize, newItem: FavoritablePrize) = oldItem.prize.id == newItem.prize.id
-            override fun areContentsTheSame(oldItem: FavoritablePrize, newItem: FavoritablePrize) = oldItem.prize == newItem.prize && oldItem.favoritable.isFavorited == newItem.favoritable.isFavorited
+        val diff = object : CategoryDiffItemCallback<FavoritablePrize>() {
+            override fun findCategory(item: FavoritablePrize) = item.prize.prizeType
+            override fun areCategoryItemsTheSame(oldItem: FavoritablePrize, newItem: FavoritablePrize) = oldItem.prize.id == newItem.prize.id
+            override fun areCategoryItemContentsTheSame(oldItem: FavoritablePrize, newItem: FavoritablePrize) = oldItem.prize == newItem.prize && oldItem.favoritable.isFavorited == newItem.favoritable.isFavorited
         }
     }
 

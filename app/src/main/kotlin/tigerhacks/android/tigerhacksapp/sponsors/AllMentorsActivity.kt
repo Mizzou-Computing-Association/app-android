@@ -14,7 +14,6 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Mentor
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
-import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.sponsors.details.MentorView
 
 /**
@@ -51,7 +50,8 @@ class AllMentorsActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         db = TigerHacksDatabase.getDatabase(applicationContext)
-        observer = db?.sponsorsDAO()?.getAllMentors()?.observeNotNull(this, adapter::submitList)
+        observer = Observer { adapter.submitList(it) }
+//        observer = db?.sponsorsDAO()?.getAllMentors()?.observe(this, observer)
     }
 
     override fun onResume() {
