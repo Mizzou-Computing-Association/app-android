@@ -78,6 +78,7 @@ abstract class RecyclerFragment<T> : BaseFragment(R.layout.vertical_recycler_vie
 
     private fun setupObserver() {
         liveData?.observe(this, Observer {
+            if (it == null) return@Observer
             swipeRefreshLayout.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
             swipeRefreshLayout.isRefreshing = false
@@ -91,7 +92,7 @@ abstract class RecyclerFragment<T> : BaseFragment(R.layout.vertical_recycler_vie
 
     private fun setupStatusObserver() {
         statusLiveData?.observe(this, Observer { status ->
-            if (isUserSwipe || adapter.itemCount > 0) return@Observer
+            if (isUserSwipe || adapter.itemCount > 0 || status == null) return@Observer
             when(status) {
                 NetworkStatus.LOADING -> {
                     swipeRefreshLayout.visibility = View.INVISIBLE

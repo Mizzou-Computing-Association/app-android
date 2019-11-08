@@ -77,6 +77,7 @@ class DayView @JvmOverloads constructor (
         )
 
         observer = Observer {
+            if (it == null) return@Observer
             progressBar.visibility = View.GONE
             swipeRefreshLayout.isRefreshing = false
             adapter.submitList(it)

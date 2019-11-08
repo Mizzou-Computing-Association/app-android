@@ -34,6 +34,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tigerhacks.android.tigerhacksapp.HomeScreenActivity
+import tigerhacks.android.tigerhacksapp.NetworkStatus
 import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.models.Profile
 import tigerhacks.android.tigerhacksapp.shared.fragments.BaseFragment
@@ -58,6 +59,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         .build()
     
     private var observer: Observer<Profile>? = null
+    private var statusObserver: Observer<NetworkStatus>? = null
     private lateinit var home: HomeScreenActivity
 
     override fun onViewCreated(layoutView: View, savedInstanceState: Bundle?) {
@@ -82,14 +84,15 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         update()
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         update()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         observer?.let { home.viewModel.profileLiveData.removeObserver(it) }
+        if (statusObserver != null) home.viewModel.profileStatusLiveData.removeObservers(this)
         emailEditTextLayout.clearFocus()
         passwordEditTextLayout.clearFocus()
     }
@@ -128,11 +131,14 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
         logOutButton.visibility = visibility
     }
 
+    private var retryAttempts = 0
+
     private fun update() {
         observer?.let { home.viewModel.profileLiveData.removeObserver(it) }
 
         home.updateTitle()
         requireActivity()
+        retryAttempts = 0
 
         if (auth.currentUser == null) {
             setLoginVisibility(View.VISIBLE)
@@ -143,6 +149,7 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
             setProfileVisibility(View.VISIBLE)
 
             val observer: Observer<Profile> = Observer {
+                if (it == null) return@Observer
                 registerButton.visibility = if (!it.registered) View.VISIBLE else View.GONE
                 Glide.with(this)
                     .load(it.pass)
@@ -159,6 +166,21 @@ class TigerPassFragment : BaseFragment(R.layout.fragment_tiger_pass) {
                     })
                     .into(qrCodeImageView)
             }
+
+            val statusObserver = Observer<NetworkStatus> {
+                if (it == NetworkStatus.FAILURE) {
+                    val curr = auth.currentUser?.uid
+                    if (curr != null) {
+                        if (retryAttempts > 4) return@Observer
+                        retryAttempts++
+                        CoroutineScope(Dispatchers.Main).launch {
+                            home.viewModel.refreshProfile(curr)
+                        }
+                    }
+                }
+            }
+            home.viewModel.profileStatusLiveData.observe(this, statusObserver)
+            this.statusObserver = statusObserver
 
             home.viewModel.profileLiveData.observe(this, observer)
             this.observer = observer
