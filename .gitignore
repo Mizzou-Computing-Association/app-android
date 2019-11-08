@@ -9,3 +9,4 @@
 .externalNativeBuild
 .idea/
 SNSSecrets.kt
+keystore.properties
