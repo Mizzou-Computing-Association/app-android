@@ -7,7 +7,7 @@ import com.davemorrissey.labs.subscaleview.ImageSource
 import kotlinx.android.synthetic.main.fragment_map.mapView
 import kotlinx.android.synthetic.main.fragment_map.tabLayout
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.service.BaseFragment
+import tigerhacks.android.tigerhacksapp.shared.fragments.BaseFragment
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

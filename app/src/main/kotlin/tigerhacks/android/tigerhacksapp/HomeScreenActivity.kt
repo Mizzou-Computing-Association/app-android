@@ -9,6 +9,8 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_home_screen.navigationView
 import android.os.Build
 import android.view.Menu
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -20,7 +22,7 @@ import tigerhacks.android.tigerhacksapp.help.HelpFragment
 import tigerhacks.android.tigerhacksapp.maps.MapFragment
 import tigerhacks.android.tigerhacksapp.prizes.PrizesFragment
 import tigerhacks.android.tigerhacksapp.schedule.ScheduleFragment
-import tigerhacks.android.tigerhacksapp.service.BaseFragment
+import tigerhacks.android.tigerhacksapp.shared.fragments.BaseFragment
 import tigerhacks.android.tigerhacksapp.sponsors.SponsorsFragment
 import tigerhacks.android.tigerhacksapp.tigerpass.TigerPassFragment
 import java.util.Stack
@@ -91,8 +93,11 @@ class HomeScreenActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.options, menu)
+        val favoriteFilterItem = menu.findItem(R.id.favorite_filter)
+        updateFavoriteFilterIcon(favoriteFilterItem)
+        updateFavoriteState(false)
+        super.onCreateOptionsMenu(menu)
 
         val kept = if (Build.VERSION.SDK_INT < 29) R.id.options_battery else R.id.options_system
         val removed = if (Build.VERSION.SDK_INT >= 29) R.id.options_battery else R.id.options_system
@@ -121,7 +126,25 @@ class HomeScreenActivity : AppCompatActivity() {
             TigerApplication.setThemeMode(themeMode)
             return true
         }
+        if (item.itemId == R.id.favorite_filter) {
+            item.isChecked = !item.isChecked
+            updateFavoriteFilterIcon(item)
+            updateFavoriteState(item.isChecked)
+        }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun updateFavoriteState(isChecked: Boolean) {
+        if (currentFragment.navId == R.id.navigation_schedule) {
+            val stringRes = if (isChecked) R.string.title_favorite_schedule else R.string.title_schedule
+            supportActionBar?.title = getString(stringRes)
+            scheduleFragment.onFavoriteFilter(isChecked)
+        }
+        if (currentFragment.navId == R.id.navigation_prizes) {
+            val stringRes = if (isChecked) R.string.title_favorite_prizes else R.string.title_prizes
+            supportActionBar?.title = getString(stringRes)
+            prizesFragment.onFavoriteFilter(isChecked)
+        }
     }
 
     override fun onBackPressed() {
@@ -132,7 +155,16 @@ class HomeScreenActivity : AppCompatActivity() {
                 val navId = simpleBackStack.pop()
                 navigateTo(navId, false)
             }
-        }
+        } else super.onBackPressed()
+    }
+
+    private fun updateFavoriteFilterIcon(item: MenuItem) {
+        item.isVisible = currentFragment.navId == R.id.navigation_schedule || currentFragment.navId == R.id.navigation_prizes
+
+        val iconRes = if (item.isChecked) R.drawable.filled_star_icon else R.drawable.star_icon
+        val iconDrawable = DrawableCompat.wrap(resources.getDrawable(iconRes, theme))
+        DrawableCompat.setTint(iconDrawable, ContextCompat.getColor(this, R.color.colorIconTint))
+        item.icon = iconDrawable
     }
 
     private var prevId = -1
@@ -166,6 +198,8 @@ class HomeScreenActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
             actionBarDrawerToggle.syncState()
         }
+
+        invalidateOptionsMenu()
 
         supportFragmentManager
             .beginTransaction()

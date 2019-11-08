@@ -48,7 +48,7 @@
         android:textAppearance="@style/AppTheme.TitlePrimary"
         />
 
-    <tigerhacks.android.tigerhacksapp.service.FavoriteButton
+    <tigerhacks.android.tigerhacksapp.shared.views.FavoriteButton
         android:id="@+id/favoriteButton"
         android:layout_width="70dp"
         android:layout_height="70dp"

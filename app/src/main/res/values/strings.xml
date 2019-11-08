@@ -1,7 +1,9 @@
 <resources>
     <string name="title_map">Map</string>
     <string name="title_prizes">Prizes</string>
+    <string name="title_favorite_prizes">Favorite Prizes</string>
     <string name="title_schedule">Schedule</string>
+    <string name="title_favorite_schedule">Favorite Events</string>
     <string name="title_help">Help</string>
     <string name="title_sponsors">Sponsors</string>
     <string name="title_profile">Profile</string>
@@ -64,5 +66,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="internet_icon_desc">Internet Icon Description</string>
+    <string name="empty_favorite_events">You don\'t have any favorite events!</string>
+    <string name="empty_favorite_prizes">You don\'t have any favorite prizes!</string>
     <string name="firebase_web_host" translatable="false">177120544304-612rr8ls584b08jef73jdl0aag63vhkm.apps.googleusercontent.com</string>
 </resources>

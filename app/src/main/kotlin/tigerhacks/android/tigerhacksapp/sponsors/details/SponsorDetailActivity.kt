@@ -14,7 +14,6 @@ import tigerhacks.android.tigerhacksapp.R
 import tigerhacks.android.tigerhacksapp.service.database.TigerHacksDatabase
 import tigerhacks.android.tigerhacksapp.service.extensions.darkenColor
 import tigerhacks.android.tigerhacksapp.service.extensions.getColorRes
-import tigerhacks.android.tigerhacksapp.service.extensions.observeNotNull
 import tigerhacks.android.tigerhacksapp.models.Mentor
 import tigerhacks.android.tigerhacksapp.models.Sponsor
 
@@ -49,7 +48,9 @@ class SponsorDetailActivity : AppCompatActivity() {
         val adapter = SponsorAdapter(sponsor)
         sponsorRecyclerView.adapter = adapter
 
-        observer = liveData.observeNotNull(this, adapter::submitList)
+        val observer: Observer<List<Mentor>> = Observer { adapter.submitList(it) }
+        liveData.observe(this, observer)
+        this.observer = observer
 
         //Toolbar Setup
         val sponsorColor = sponsor.getSponsorLevelColorRes()

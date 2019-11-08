@@ -28,15 +28,15 @@ class SponsorCardView @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.view_sponsor_card, this, true)
     }
 
-    fun setSponsor(sponsor: Sponsor, hasHeader: Boolean) {
+    fun setSponsor(sponsor: Sponsor) {
         Glide.with(sponsorImageView).load(sponsor.image).into(sponsorImageView)
         sponsorCardView.setOnClickListener { context.startActivity(SponsorDetailActivity.newInstance(context, sponsor)) }
 
-        setSponsorLevel(sponsor.level)
+//        setSponsorLevel(sponsor.level)
 
-        val vis = if (hasHeader) View.VISIBLE else View.GONE
-        titleTextView.visibility = vis
-        divider.visibility = vis
+//        val vis = if (hasHeader) View.VISIBLE else View.GONE
+//        titleTextView.visibility = vis
+//        divider.visibility = vis
     }
 
     private fun setSponsorLevel(sponsorLevel: Int) {

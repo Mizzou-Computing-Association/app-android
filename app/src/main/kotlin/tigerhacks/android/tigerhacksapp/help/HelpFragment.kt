@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import tigerhacks.android.tigerhacksapp.R
-import tigerhacks.android.tigerhacksapp.service.BaseFragment
+import tigerhacks.android.tigerhacksapp.shared.fragments.BaseFragment
 
 /**
  * @author pauldg7@gmail.com (Paul Gillis)

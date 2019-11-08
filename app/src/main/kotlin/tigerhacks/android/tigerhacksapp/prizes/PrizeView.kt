@@ -31,17 +31,17 @@ class PrizeView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     @SuppressLint("SetTextI18n")
-    fun setup(favoritablePrize: FavoritablePrize, hasHeader: Boolean) {
+    fun setup(favoritablePrize: FavoritablePrize) {
         val prize = favoritablePrize.prize
         favoriteButton.isChecked = favoritablePrize.favoritable.isFavorited
         titleTextView.text = prize.title
         descriptionTextView.text = prize.description
         prizeListTextView.text = prize.reward
 
-        if (hasHeader) categoryTitleView.text = "${prize.prizeType} Prizes"
-
-        val vis = if (hasHeader) View.VISIBLE else View.GONE
-        categoryTitleView.visibility = vis
-        divider.visibility = vis
+//        if (hasHeader) categoryTitleView.text = "${prize.prizeType} Prizes"
+//
+//        val vis = if (hasHeader) View.VISIBLE else View.GONE
+//        categoryTitleView.visibility = vis
+//        divider.visibility = vis
     }
 }
